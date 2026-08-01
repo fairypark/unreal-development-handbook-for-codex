@@ -1,0 +1,36 @@
+{
+  "name": "unreal-development-handbook-for-codex",
+  "version": "0.2.0",
+  "description": "Teach durable Unreal Engine development reasoning from intent and architecture through validation and production readiness.",
+  "author": {
+    "name": "Community Maintainers"
+  },
+  "homepage": "https://github.com/fairypark/unreal-development-handbook-for-codex",
+  "repository": "https://github.com/fairypark/unreal-development-handbook-for-codex",
+  "license": "MIT",
+  "keywords": [
+    "unreal-engine",
+    "architecture",
+    "level-design",
+    "validation",
+    "production",
+    "handbook",
+    "ai-assisted-development"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Unreal Development Handbook for Codex",
+    "shortDescription": "Design and validate Unreal projects before implementation.",
+    "longDescription": "Bundles a 17-chapter, progressively loaded handbook plus intent-first, design-first, and validation-first skills for Unreal gameplay, worlds, content, Blueprint and C++, automation and procedural systems, production quality, AI-assisted development, and evidence-backed case analysis. It complements Unreal Editor Skills for Codex without bundling editor control or MCP operations.",
+    "developerName": "Community Maintainers",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read"
+    ],
+    "defaultPrompt": [
+      "Turn an Unreal feature request into a decision-ready design and validation plan.",
+      "Review an Unreal architecture for ownership, lifecycle, and production risks.",
+      "Define evidence and quality gates before implementing an Unreal workflow."
+    ]
+  }
+}

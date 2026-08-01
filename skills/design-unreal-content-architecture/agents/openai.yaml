@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Unreal Content Architecture"
+  short_description: "Design asset ownership, dependencies, and lifecycle"
+  default_prompt: "Use $design-unreal-content-architecture to design the ownership, dependency, reuse, and migration strategy for these assets."

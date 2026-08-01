@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Unreal Automation and PCG"
+  short_description: "Design repeatable automation and procedural systems"
+  default_prompt: "Use $design-unreal-automation-and-pcg to design this automation or procedural workflow with determinism and validation."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Unreal Blueprint and C++"
+  short_description: "Choose and design maintainable Blueprint and C++ systems"
+  default_prompt: "Use $design-unreal-blueprint-and-cpp to choose responsibility boundaries and integration patterns for this Unreal system."

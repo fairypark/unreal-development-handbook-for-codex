@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reason About Unreal Development"
+  short_description: "Plan Unreal work from intent through verification"
+  default_prompt: "Use $reason-about-unreal-development to turn this Unreal request into a decision-ready plan with success criteria."

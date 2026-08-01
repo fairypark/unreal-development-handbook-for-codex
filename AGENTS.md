@@ -29,6 +29,8 @@ Organize handbook content under the canonical structure published in [README.md]
 4. **Quality and Production** — Rendering; Performance & Scalability; Validation, Testing & Debugging; Production Pipeline; Team Collaboration & Source Control; AI-Assisted Development.
 5. **Applied Reasoning** — Case Studies.
 
+Store each canonical chapter in the `references/` directory of the Skill that owns that chapter, and link it from both the owning `SKILL.md` and the root `README.md`. This is the plugin's progressive-disclosure contract: the installed Skill must load only the chapters needed for the request. Do not create a second copy of a chapter in a separate documentation tree.
+
 Treat performance, validation, collaboration, production readiness, and responsible AI use as cross-cutting concerns. Their dedicated chapters define shared principles and systems; every relevant chapter must apply them in its own context. Do not create a detached **Best Practices** catch-all chapter. Place each practice with the decision it governs, explain its trade-offs, and reinforce it through design considerations, validation checklists, implementation examples, and common mistakes.
 
 Keep chapter boundaries conceptual rather than tool-defined. In particular:

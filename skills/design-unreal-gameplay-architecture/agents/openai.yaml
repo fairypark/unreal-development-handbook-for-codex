@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Unreal Gameplay Architecture"
+  short_description: "Design gameplay responsibilities and system boundaries"
+  default_prompt: "Use $design-unreal-gameplay-architecture to clarify responsibilities, state, data flow, and validation for this gameplay system."
