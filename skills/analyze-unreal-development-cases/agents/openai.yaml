@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze Unreal Development Cases"
+  short_description: "Extract durable lessons from Unreal project outcomes"
+  default_prompt: "Use $analyze-unreal-development-cases to analyze this Unreal outcome as an evidence-backed case study."

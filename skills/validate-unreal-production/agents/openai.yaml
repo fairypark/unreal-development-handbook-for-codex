@@ -1,0 +1,4 @@
+interface:
+  display_name: "Validate Unreal Production"
+  short_description: "Validate rendering, performance, testing, and delivery"
+  default_prompt: "Use $validate-unreal-production to define evidence, quality gates, failure handling, and release readiness for this Unreal work."

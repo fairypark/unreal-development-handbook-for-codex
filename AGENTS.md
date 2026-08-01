@@ -21,6 +21,26 @@ Before acting, identify missing goals, assumptions, constraints, success criteri
 
 The handbook teaches durable professional Unreal Engine development reasoning, not prompts, command collections, or a single tool stack. It may cover architecture, level design, content creation, Blueprint, C++, Python, PCG, Gameplay Framework, asset organization, performance, optimization, validation, teamwork, source control, production pipelines, and AI-assisted development.
 
+Organize handbook content under the canonical structure published in [README.md](README.md):
+
+1. **Foundations** — Philosophy; Development Process; Project & System Architecture.
+2. **Game and World Design** — Gameplay Architecture; World & Level Design; Content & Asset Architecture.
+3. **Implementation Technologies** — Blueprint; C++; Automation & Python; Procedural Systems & PCG.
+4. **Quality and Production** — Rendering; Performance & Scalability; Validation, Testing & Debugging; Production Pipeline; Team Collaboration & Source Control; AI-Assisted Development.
+5. **Applied Reasoning** — Case Studies.
+
+Store each canonical chapter in the `references/` directory of the Skill that owns that chapter, and link it from both the owning `SKILL.md` and the root `README.md`. This is the plugin's progressive-disclosure contract: the installed Skill must load only the chapters needed for the request. Do not create a second copy of a chapter in a separate documentation tree.
+
+Treat performance, validation, collaboration, production readiness, and responsible AI use as cross-cutting concerns. Their dedicated chapters define shared principles and systems; every relevant chapter must apply them in its own context. Do not create a detached **Best Practices** catch-all chapter. Place each practice with the decision it governs, explain its trade-offs, and reinforce it through design considerations, validation checklists, implementation examples, and common mistakes.
+
+Keep chapter boundaries conceptual rather than tool-defined. In particular:
+
+- **Gameplay Architecture** owns responsibility, lifecycle, state, data, input, persistence, networking boundaries, and system interaction; it is broader than a Gameplay Framework class reference.
+- **Automation & Python** owns automation reasoning and pipeline design; Python is an implementation technology, not the subject's durable center.
+- **Procedural Systems & PCG** owns procedural design principles; Unreal PCG is a major application rather than the only possible implementation.
+- **Validation, Testing & Debugging** owns the shared quality system but does not replace topic-specific success criteria and verification.
+- **Case Studies** must connect decisions to alternatives, evidence, trade-offs, failures, and production outcomes rather than present isolated tutorials.
+
 For each topic, use this order where applicable:
 
 1. Purpose
