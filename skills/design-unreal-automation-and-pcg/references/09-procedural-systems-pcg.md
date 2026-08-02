@@ -54,6 +54,20 @@ Build canopy, understory, shrubs, ground cover, deadfall, and contact debris as 
 
 Expose one candidate at a time. Disable superseded generations and verify which components contribute to the frame before comparison. Overlapping candidates invalidate the result even when every graph reports success.
 
+## Procedural exceptions and override provenance
+
+Keep the procedural base and manual exceptions as separate layers with one declared authority. Use an exception for a focal composition, sightline, traversal requirement, story beat, ecological transition, or other approved design intent—not to hide a broken rule or an unvalidated source asset.
+
+For every accepted exception, record the source generation identity, seed or input snapshot, graph version, target scope, intent, owner, approval, priority, expiration or revalidation condition, and rollback action. A manual change that cannot be traced back to the generated baseline is a future regeneration failure waiting to happen.
+
+Regeneration must preserve valid overrides, report orphaned or conflicting overrides, and never silently erase or duplicate them. A graph change, asset replacement, World Partition change, or changed exclusion rule reopens validation for affected exceptions. Keep temporary exploration visibly distinct from a promoted exception, and review exceptions as a growing maintenance budget rather than allowing them to become a second hidden generator.
+
+| Layer | Responsibility | Failure if missing |
+| --- | --- | --- |
+| Procedural base | Repeatable rule, broad coverage, deterministic inputs, and regeneration. | Manual edits become the only undocumented source of truth. |
+| Exception record | Intentional deviation, owner, scope, provenance, precedence, and revalidation condition. | Regeneration silently breaks composition or gameplay. |
+| Promotion and rollback | Decide when an exception is accepted, how it is compared, and how it is removed. | Temporary experiments accumulate as permanent technical debt. |
+
 ## Validation checklist
 
 - Deterministic regeneration under recorded inputs.
@@ -62,12 +76,22 @@ Expose one candidate at a time. Disable superseded generations and verify which 
 - Counts, coverage, contact, collision, navigation, warnings, and regeneration time.
 - Instancing, LOD or Nanite, HLOD, streaming, memory, and frame-budget viability.
 - Generation mode, partition grid, Data Layer and HLOD ownership, source radii, cleanup behavior, scheduler limits, and cache or pooling behavior are documented.
+- Procedural output and manual overrides are separate, with precedence and ownership documented.
+- Each promoted override has scope, intent, source generation identity, graph version, approval, and rollback or revalidation conditions.
+- Regeneration detects orphaned or conflicting overrides and preserves accepted exceptions without silently duplicating them.
 - Runtime generation is tested while moving, stopping, turning, and teleporting, including time-to-screen, cleanup, popping, and recovery after a failed or interrupted generation.
 - Player-height, reverse, elevated, and contact evidence as appropriate.
 - No visible tiling, equal spacing, repeated hero assemblies, or impossible ecological placement.
 - No generated result is evaluated as a route, playable surface, or approval evidence unless that responsibility was explicitly implemented and validated.
 - Active, unapproved, hidden-recoverable, and retired outputs are reported separately during comparison and blocker audits.
 - Revalidation after reuse in a new context.
+
+## Common mistakes
+
+- Baking manual changes into generated output and losing their provenance.
+- Treating every exception as proof that the graph is wrong, or every graph failure as something to conceal with overrides.
+- Allowing overrides to accumulate until they form a second, undocumented generator.
+- Regenerating after a graph or asset change without checking orphaned, conflicting, or stale exceptions.
 
 ## Research basis and further reading
 
@@ -77,6 +101,11 @@ The following sources document current Unreal Engine applications of these durab
 - [Epic Games: Using PCG with World Partition](https://dev.epicgames.com/documentation/en-us/unreal-engine/using-pcg-with-world-partition-in-unreal-engine?lang=en-US) — Data Layer and HLOD assignment for generated actors.
 - [Epic Games: PCG Runtime Generation Debugging](https://dev.epicgames.com/documentation/en-us/unreal-engine/pcg-runtime-generation-debugging) — runtime inspection, partition actors, and cache-related diagnostics.
 - [Epic Games: World Partition](https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition-in-unreal-engine?lang=en-US) — streaming sources, actor loading policy, HLOD, and builder-oriented large-world workflows.
+
+Additional current context:
+
+- [Epic Games: PCG Development Guides](https://dev.epicgames.com/documentation/en-us/unreal-engine/pcg-development-guides) — current PCG authoring and workflow context; verify feature names and maturity against the target engine version.
+- [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-8-release-notes) — dated evidence for the Manual Edit tool, Data Overrides Panel, and experimental Data Override System; use these as implementations of the override contract, not as the durable principle itself.
 
 ## Related topics
 
