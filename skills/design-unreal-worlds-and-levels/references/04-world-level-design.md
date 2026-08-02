@@ -77,7 +77,7 @@ Record the fun thesis, core verbs, intended emotional rhythm, POI hierarchy, exp
 
 Keep two related loops distinct:
 
-- **Exploration:** use disposable primitives, rough terrain, temporary materials, and placeholder cues to discover whether the space is fun, readable, and in scope. Diverge from the plan when playtest evidence disproves an assumption.
+- **Exploration:** use disposable primitives, temporary materials, and placeholder cues to discover whether the space is fun, readable, and in scope. For an **outdoor map level-design prototype**, make a minimal **Landscape terrain** the actual playable floor by default, even when buildings, cover, route furniture, and other masses remain primitive. Do not replace it with a flat cube or plane merely to move faster: the early prototype must expose elevation, slopes, drainage, terrain transitions, grounding, and terrain contacts. Use another floor only when a specific user or stakeholder request explicitly overrides this default. Diverge from the plan when playtest evidence disproves an assumption.
 - **Production:** use explicit review gates, approved asset and material rules, owned dependencies, representative performance conditions, and retained evidence to scale a pattern that has already been proved.
 
 The transition is not triggered by an attractive screenshot or personal confidence. Promote only when a representative slice demonstrates that the intended experience, visual language, asset families, production method, and technical budget can work together. A short segment can be production-ready while the rest of the level remains exploratory.
@@ -171,6 +171,8 @@ Pause for user or designated approver feedback after the unit has runtime eviden
 
 Build the terrain and large spatial masses first: height bands, ridges, valleys, terraces, drainage, route transitions, skyline, boundaries, and major volumes. Use simple materials or semantic colors only when they communicate function, threat, ownership, or navigation. Do not use final props to compensate for a weak macro structure.
 
+For an outdoor map level-design prototype, the ground in this stage is a minimal Landscape terrain by default, not a flat cube or plane. Keep its extent, resolution, material, and detail deliberately cheap, but use it as the source of truth for the playable height field, route elevation, slopes, grounding, and terrain contacts. Place temporary architecture and other blockout volumes on top of it. Use another floor only when a specific user or stakeholder request explicitly overrides the default, and record the reason in the brief.
+
 Check the result from runtime arrival, route, reverse, elevated, and contact views. A level that works only from the intended beauty camera has not passed macro validation.
 
 ### 4a. Route authority and corridor contract (blocking sub-gate)
@@ -190,11 +192,12 @@ Validate a route as a continuous corridor rather than only at its endpoints. Sam
 
 ### 5. Playable blockout and feedback gate
 
-Replace the plan with a playable rough draft made from simple boxes, terrain, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller, camera, gravity, speed, and collision. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
+Replace the plan with a playable rough draft made from a minimal Landscape terrain as the ground, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller, camera, gravity, speed, and collision. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
 
 Play in the runtime, not only by flying an editor camera. Test at least:
 
 - scale, capsule and camera clearance, slopes, jumps, climbs, cover, and traversal transitions;
+- movement, grounding, collision, route grade, and terrain contacts on the Landscape surface that will carry the prototype's outdoor traversal;
 - primary route, optional loops, wrong turns, objective readability, pacing, and recovery after failure;
 - landmark recognition, sightlines, occlusion, reveal timing, boundaries, unreachable shortcuts, and reverse views;
 - POI-unit flow from approach and question through reveal or refusal, player choice, interaction, outcome or reward, and the next hook;
@@ -308,6 +311,7 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Approving a route because its endpoints match terrain height, its AABBs do not overlap, or its debug visualization is visible.
 - Adding routes after architecture is already treated as fixed, then moving unrelated props to hide a structural conflict.
 - Treating a spline, semantic strip, or PCG exclusion mask as interchangeable with a complete playable route.
+- Replacing the default Landscape floor in an outdoor map level-design prototype without a specific user or stakeholder request; a flat cube or plane defers the highest-risk spatial assumptions until production.
 - Treating concept art as a complete level specification or treating user approval as a substitute for runtime evidence.
 - Choosing a concept that available assets cannot support.
 - Scaling a weak representative slice.

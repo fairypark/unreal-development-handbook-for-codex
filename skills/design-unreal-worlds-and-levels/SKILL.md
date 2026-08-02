@@ -34,6 +34,7 @@ For every AI-led level, world, environment, terrain, route, POI, or map-wide dre
 - Confirm that available assets and systems can support the selected direction at final scale.
 - Prove a representative playable slice before broad duplication or dressing.
 - Validate terrain and route structure before using architecture or props to hide spatial weakness.
+- For outdoor map level-design prototypes, use a minimal Landscape terrain as the actual playable floor by default; use another floor only when a specific user or stakeholder request explicitly overrides that default.
 - Treat the 40-second interval as a calibrated open-world exploration heuristic, never as a universal spacing law or a reason to fill intentional quiet with low-value content.
 - Use functional audio and collision proxies early when they affect navigation or interaction; reserve final authoring and full collision auditing for the later integration and polish passes.
 - Scale approved systems and decision patterns, not merely Actor counts.
