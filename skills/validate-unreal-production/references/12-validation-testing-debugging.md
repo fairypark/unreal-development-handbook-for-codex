@@ -42,7 +42,7 @@ When a gate fails:
 1. Name the weakest observable outcome and the evidence that shows it.
 2. Identify the earliest responsible assumption or system.
 3. Preserve the accepted baseline and failed candidate.
-4. Change one major variable or reopen the documented gate.
+4. Change one major variable or one coherent cause family, or reopen the documented gate.
 5. Repeat the same test conditions before judging the repair.
 
 Do not spend a later-stage budget to defend an earlier-stage decision. If the visual feasibility slice fails, repair the kit or visual rules before dressing the map. If dressing reveals a route problem, return to the blockout instead of accumulating decorative exceptions.
@@ -74,6 +74,8 @@ Hard failures include a POI with no discernible purpose or payoff, repeated iden
 - PIE or runtime scenarios for representative behavior and traversal.
 - Experience and playtest evidence for the fun thesis, POI flow, meaningful-change timing, player choice, tension, and payoff.
 - Visual evidence for rendering, composition, contact, and continuity.
+- Iteration records distinguish symptoms, causes or hypotheses, false assumptions, changed invariants, new checks, same-condition evidence, and recurrence status.
+- Spatial audits classify active, unapproved, hidden-recoverable, and retired content separately rather than merging their results.
 - Performance and scalability measurements under representative load.
 - Cook, package, clean-environment, migration, and recovery checks.
 
@@ -85,7 +87,22 @@ When independent acceptance matters, keep the evaluator read-only and withhold t
 
 ## Cause-based debugging
 
-Name the weakest observable system, form a testable cause hypothesis, change one major variable, repeat the same test, and keep or revert based on evidence. Fix invalid evidence before changing the product. After repeated failure of one architecture or composition, require a documented reset rather than cosmetic iteration.
+Name the weakest observable system, form a testable cause hypothesis, change one major variable or one coherent cause family, repeat the same test, and keep or revert based on evidence. Fix invalid evidence before changing the product. After repeated failure of one architecture or composition, require a documented reset rather than cosmetic iteration. A cause family may require coordinated changes—for example, moving several blockers that share one route-clearance failure—but unrelated systems should not be changed in the same iteration.
+
+### Iteration learning record
+
+Every non-trivial iteration should leave a short, comparable record:
+
+- observed symptom and its measurable evidence;
+- confirmed root cause, or a clearly labelled hypothesis with confidence;
+- the previous assumption that proved false or incomplete;
+- the system and observable invariant changed;
+- the new detection rule, validation query, or automation postcondition added;
+- the same-condition recheck method and evidence;
+- whether the symptom recurred, did not recur, or was not yet tested;
+- the next prevention rule, remaining risk, and whether the lesson is a project rule or a handbook candidate.
+
+“Did not recur” is valid only when the same relevant camera, runtime, data, and validator conditions were repeated. “Not yet tested” must remain distinct from success. If the same failure signature survives two iterations without a new cause hypothesis, invariant, or validation rule, pause the loop and reset or replace the responsible system instead of repeating cosmetic changes.
 
 ## Definition of done
 
@@ -100,8 +117,11 @@ Require functional correctness, maintainability, production readiness, performan
 - Averaging away a failed category.
 - Using new camera or test conditions to hide regression.
 - Treating test transport success as test outcome success.
+- Treating a command, graph, or batch completion message as proof that the intended state and postconditions exist.
+- Repeating a failed iteration without recording a changed cause hypothesis, invariant, or detection rule.
+- Reporting “not observed” as “not reproducible” when the same test conditions were not repeated.
 - Overwriting failed audits or evidence.
 
 ## Related topics
 
-Development Process; Rendering; Performance & Scalability; Production Pipeline; AI-Assisted Development.
+Development Process; Rendering; Performance & Scalability; Production Pipeline; AI-Assisted Development; Case Studies.

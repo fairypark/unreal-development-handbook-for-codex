@@ -18,6 +18,14 @@ Automate when the responsibility is repeated, the inputs and outputs are defined
 - Log enough factual evidence to diagnose failure without storing private prompts, credentials, or unrelated user data.
 - Use the narrowest execution surface that exposes the required engine capability.
 
+## Postconditions for spatial and Editor automation
+
+Treat a successful tool call as transport evidence, not as proof that the intended Unreal state exists. Any mutation that creates or changes spatial content should have explicit postconditions for the object count or identity, transform or topology, semantic tags or ownership, visibility and collision state, save persistence, and downstream compatibility. For route or procedural work, also verify representative points, named connections, the derived exclusion or review output, and the absence or classification of blockers.
+
+An empty result, a missing Actor, an unexpected point count, or a partial batch is a failed postcondition even when the command returned without an error. Stop and inspect the input schema, ownership, and partial state before retrying. Retrying a timed-out or ambiguous mutation without a state audit can create duplicates, overlapping candidates, or a false comparison baseline.
+
+Record whether a postcondition is confirmed, contradicted, or not yet tested. That distinction prevents an unobserved state from being reported as a successful iteration and makes interruption and recovery part of the automation contract.
+
 ## Python as an option
 
 Prefer Python when the required Unreal API is exposed, rapid iteration matters, and deployment can reliably load and reload the package. Prefer C++ or another supported surface when coverage, lifecycle, performance, distribution, or testing requirements are not met. Stop and report an API gap rather than emulating unsupported behavior unsafely.
@@ -32,11 +40,15 @@ Prefer Python when the required Unreal API is exposed, rapid iteration matters, 
 6. Verify save persistence and downstream compatibility.
 7. Measure authoring and setup time separately from repeat execution time.
 
+For a spatial batch, keep the iteration's observable invariant separate from the implementation command. For example, “the approved corridor remains clear under the recorded clearance envelope” is a useful postcondition; “the script completed” is not.
+
 ## Common mistakes
 
 - Automating an unstable design.
 - Retrying after timeout without checking partial results and creating duplicates.
 - Treating a script exit code as proof of asset or level correctness.
+- Treating a non-empty tool response or a successful graph invocation as proof that the intended scene state was created.
+- Re-running an ambiguous spatial mutation before classifying active, hidden, recoverable, retired, and unapproved state.
 - Executing arbitrary in-editor Python without treating it as privileged code.
 - Hard-coding private paths or current Tool names into durable knowledge.
 

@@ -136,6 +136,21 @@ Build the terrain and large spatial masses first: height bands, ridges, valleys,
 
 Check the result from runtime arrival, route, reverse, elevated, and contact views. A level that works only from the intended beauty camera has not passed macro validation.
 
+### Route authority and corridor contract
+
+Treat a route as a spatial contract, not as a collection of visual strips, cubes, or debug lines. Before architecture and dressing are approved, define:
+
+- named origins, destinations, branches, and optional loops;
+- an ordered centerline represented by a spline, a typed segment graph, or another inspectable source of truth;
+- intended width, slope limits, head and capsule clearance, surface provider, grade transitions, stairs or landings, and ownership;
+- the objects and systems that must consume the route, such as review visualization, playable ground, collision or navigation, and procedural exclusion masks.
+
+A spline is useful for continuous centerlines, bends, and branching relationships, but it is not a universal replacement for authored stair, landing, or terrain-transition modules. Choose the representation that preserves topology and the relevant traversal semantics. Derive route previews, exclusion masks, and automated corridor checks from the same authoritative source whenever possible.
+
+Keep three responsibilities distinct: route intent data, review visualization, and the actual playable or walkable surface. A `NoCollision` semantic strip or a spline debug line can communicate intent, but neither proves that a player can traverse the route or that the production scene visually carries it. A route gate must state which of these responsibilities has been approved.
+
+Validate a route as a continuous corridor rather than only at its endpoints. Sample intermediate surfaces and grade, test an expanded corridor or representative capsule against architecture, boundaries, props, and headroom, and report blockers by ownership and lifecycle state. Use simple bounds as an early filter, not as the sole proof of traversal.
+
 ### 5. Playable blockout and feedback gate
 
 Replace the plan with a playable rough draft made from simple boxes, terrain, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller, camera, gravity, speed, and collision. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
@@ -230,6 +245,7 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Meaningful-change intervals are intentional and calibrated to the actual movement and camera context; no mechanical 40-second filler.
 - Refusal and reward are legible, tension and release have an intended rhythm, and optional deferral or return works where promised.
 - Traversable terrain, route width, slopes, stairs, capsule clearance, boundaries, and spawn intent.
+- Route topology, named connections, authoritative surface ownership, intermediate grade samples, continuous corridor clearance, headroom, and the distinction between intent visualization and playable surface.
 - Coherent foreground, midground, and background from representative directions.
 - Architecture-ground, wall-terrain, water-bank, vegetation-hardscape, and assembly contact.
 - No world voids, exposed reserve edges, placeholders, uniform scatter, or unfinished reverse sides.
@@ -249,6 +265,9 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Confusing visual spectacle, traversal completion, or difficulty with the project's intended fun.
 - Using arbitrary obstruction to create refusal without anticipation, player choice, or a worthwhile payoff.
 - Using buildings, rocks, fog, or foliage to hide a flat spatial structure.
+- Approving a route because its endpoints match terrain height, its AABBs do not overlap, or its debug visualization is visible.
+- Adding routes after architecture is already treated as fixed, then moving unrelated props to hide a structural conflict.
+- Treating a spline, semantic strip, or PCG exclusion mask as interchangeable with a complete playable route.
 - Treating concept art as a complete level specification or treating user approval as a substitute for runtime evidence.
 - Choosing a concept that available assets cannot support.
 - Scaling a weak representative slice.

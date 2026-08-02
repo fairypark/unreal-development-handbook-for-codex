@@ -23,6 +23,12 @@ Use procedural generation for repeatable distribution, density gradients, ecolog
 7. Expose deterministic seeds, masks, density, scale, slope, height, distance, and platform constraints.
 8. Validate the isolated pattern, contact, unchanged scene context, and final role before broad promotion.
 
+### Spatial authority and route-coupled generation
+
+When a generator depends on circulation, boundaries, or buildable space, identify the authoritative spatial source before generating content. A route graph or spline may drive review geometry, playable-surface planning, and exclusion masks, but those outputs remain separate responsibilities with separate validation. Do not let a debug line, semantic strip, or exclusion mask stand in for a complete traversable route.
+
+Derive route-related masks from the same versioned source used by corridor validation. Record the width, clearance envelope, surface provider, branch identity, and lifecycle state that the generator consumed. Regenerate after a route or terrain change, then recheck both the route and every generator that depends on its mask. If a route is still exploratory, keep generated ecology and construction candidates clearly unapproved rather than allowing them to become hidden blockers.
+
 ## Generation modes and the World Partition contract
 
 Choose a PCG generation mode from the content scale, ownership, streaming behavior, and time-to-screen requirement. The modes are different production contracts, not interchangeable switches:
@@ -52,12 +58,15 @@ Expose one candidate at a time. Disable superseded generations and verify which 
 
 - Deterministic regeneration under recorded inputs.
 - Clear responsibility, hierarchy, exclusions, and ownership.
+- A single declared spatial authority for route-coupled masks, with route version, width or clearance inputs, branch ownership, and regeneration dependencies recorded.
 - Counts, coverage, contact, collision, navigation, warnings, and regeneration time.
 - Instancing, LOD or Nanite, HLOD, streaming, memory, and frame-budget viability.
 - Generation mode, partition grid, Data Layer and HLOD ownership, source radii, cleanup behavior, scheduler limits, and cache or pooling behavior are documented.
 - Runtime generation is tested while moving, stopping, turning, and teleporting, including time-to-screen, cleanup, popping, and recovery after a failed or interrupted generation.
 - Player-height, reverse, elevated, and contact evidence as appropriate.
 - No visible tiling, equal spacing, repeated hero assemblies, or impossible ecological placement.
+- No generated result is evaluated as a route, playable surface, or approval evidence unless that responsibility was explicitly implemented and validated.
+- Active, unapproved, hidden-recoverable, and retired outputs are reported separately during comparison and blocker audits.
 - Revalidation after reuse in a new context.
 
 ## Research basis and further reading
