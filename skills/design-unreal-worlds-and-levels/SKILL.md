@@ -11,6 +11,10 @@ Design a playable place rather than a camera-facing diorama. Convert the request
 
 Read [04-world-level-design.md](references/04-world-level-design.md) for every world, level, or environment design or review. Use its brief, representative-slice, terrain, contact, 360-degree continuity, and validation guidance before handing work to an Editor execution layer.
 
+## Enforce the staged workflow
+
+For every AI-led level, world, environment, terrain, route, POI, or map-wide dressing task, treat the chapter's **Mandatory AI execution contract** and numbered concept-to-production workflow as binding. Before any Editor or coding handoff, create or update an inspectable workflow record, identify the current stage and predecessor evidence, and define the stage's postconditions, approver, and rollback target. Work only within the current stage, record `PASS`, `FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE`, and advance only after `PASS` plus the required promotion decision. Stop on missing or failed evidence; do not silently skip or combine stages, and reopen an earlier stage when a later change invalidates its assumptions. For small or disposable work, adjacent stages may be combined only when declared before mutation and each stage's question and evidence remains explicit.
+
 ## Create the level brief
 
 1. Define player fantasy, emotional tone, setting, scale, route, and target platform.

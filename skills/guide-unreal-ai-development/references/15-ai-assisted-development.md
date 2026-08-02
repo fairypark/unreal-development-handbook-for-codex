@@ -18,6 +18,14 @@ Provide goals, project state, requirements, assumptions, constraints, success cr
 
 Keep reusable principles free of private paths, map coordinates, asset-pack anecdotes, credentials, model-specific orchestration, and temporary workarounds.
 
+## Domain workflow compliance
+
+A domain chapter's explicit workflow is part of the AI's execution contract. For level, world, environment, terrain, route, POI, or map-wide dressing work, load Chapter 04 and follow its **Mandatory AI execution contract** and numbered concept-to-production stages in order. Do not substitute a Tool sequence, screenshot, generated asset, or post-hoc summary for a stage's required evidence.
+
+Before mutation, classify the work as a disposable experiment or production-intended change, identify the current stage and approved predecessor artifact, and record the stage objective, allowed mutations, postconditions, approver, and rollback target. During execution, keep mutations within the current stage and report its status as `PASS`, `FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE`. Advance only when the evidence is complete and promotion is explicitly recorded. Missing evidence, failed tests, absent feedback, or transport-only success blocks promotion and requires a stop, a return to the responsible stage, or an explicit request for what is missing.
+
+Small or disposable level work may combine adjacent Chapter 04 stages in one reversible pass only when the combination is declared before mutation and every stage's decision question, evidence, and recovery path remains inspectable. A combined stage is not a skipped stage. If a later change invalidates an accepted level assumption, reopen the affected stage, retain the previous baseline, and re-run dependent stages before continuing.
+
 ## Mutation boundary and promotion
 
 Treat an agent-driven project change as a promotion pipeline, not as a successful tool call. An agent may be capable of changing the project without having the authority to approve that change. Make the boundary between observation, mutation, evaluation, and promotion explicit:
@@ -62,6 +70,8 @@ Expose small typed composable operations rather than mirroring Unreal internals.
 - Each mutation batch has observable postconditions; tool or transport success is not used as the verdict.
 - Stateful editor mutations are serialized and verified before the next dependent mutation.
 - The builder cannot rewrite or self-approve required evidence.
+- The applicable domain workflow is loaded, the current stage is explicit, and no downstream stage began before its predecessor gate passed.
+- Combined or reopened stages are documented with their evidence, approval, baseline, and recovery path.
 - Inputs, outputs, and Tool results are inspectable.
 - Reproduction does not depend on private hidden context.
 - Failure and recovery paths have been exercised.
@@ -70,6 +80,7 @@ Expose small typed composable operations rather than mirroring Unreal internals.
 ## Common mistakes
 
 - Letting an agent explore by mutating the main project or shared world.
+- Treating a level-design workflow as optional guidance, or using a successful tool call as permission to skip a stage.
 - Treating a sandbox as approval, or treating a successful tool response as proof of the intended result.
 - Allowing overlapping stateful editor mutations that make ordering and recovery ambiguous.
 - Merging generated assets or configuration without preserving their source, version, owner, and validation evidence.
@@ -82,4 +93,4 @@ Expose small typed composable operations rather than mirroring Unreal internals.
 
 ## Related topics
 
-Philosophy; Automation & Python; Validation, Testing & Debugging; Production Pipeline; Team Collaboration & Source Control.
+Philosophy; World & Level Design; Automation & Python; Validation, Testing & Debugging; Production Pipeline; Team Collaboration & Source Control.

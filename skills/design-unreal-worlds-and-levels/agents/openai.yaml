@@ -1,4 +1,4 @@
 interface:
   display_name: "Design Unreal Worlds and Levels"
   short_description: "Design playable worlds, levels, and environments"
-  default_prompt: "Use $design-unreal-worlds-and-levels to define the spatial intent, production constraints, and validation plan for this level."
+  default_prompt: "Use $design-unreal-worlds-and-levels to follow the mandatory staged workflow and define the spatial intent, production constraints, and validation plan for this level."

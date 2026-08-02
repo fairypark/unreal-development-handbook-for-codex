@@ -63,11 +63,11 @@ The cheapest credible playtest unit is usually not a whole world or a hero scree
 
 ## When to use
 
-Use this workflow when a level, mission space, environment, or terrain change is expected to become production content. For a disposable experiment, several gates may be collapsed; for a level whose failure would strand significant art, audio, or technical work, keep the pauses explicit and evidence-based.
+Use this workflow when a level, mission space, environment, or terrain change is expected to become production content. When an AI agent performs the work, the workflow record and stage order are mandatory even for a small level. A disposable experiment may combine adjacent gates in one reversible pass only when that choice is declared before mutation and every gate's question and evidence remains visible; combined is not skipped. For a level whose failure would strand significant art, audio, or technical work, keep the pauses explicit and evidence-based.
 
 ## When NOT to use
 
-Do not treat the sequence as a universal linear recipe. Audio-first, vehicle, multiplayer, VR, systemic, and highly procedural experiences may need their defining risks in the first playable prototype. The rule is to move the expensive or experience-defining uncertainty earlier, not to force every project into the same number of passes.
+Do not interpret the sequence as a rigid one-pass waterfall or a fixed number of passes, and do not replace it with a tool-first sequence or retrospective checklist. Audio-first, vehicle, multiplayer, VR, systemic, and highly procedural experiences may need their defining risks in the first playable prototype. The rule is to move the expensive or experience-defining uncertainty earlier; for AI work, this flexibility changes how stages are combined, not the obligation to record and evaluate each stage.
 
 ## Decision-ready brief
 
@@ -97,6 +97,43 @@ Then analyze real production workflows for the control points they solve—brief
 ## Concept-to-production workflow
 
 The following sequence turns the proposed pauses into scoped decisions. A gate freezes only the assumptions it names; later evidence may reopen an earlier gate when those assumptions change.
+
+### Mandatory AI execution contract
+
+When an AI agent creates or materially changes a level, world, environment, terrain, route, POI, or map-wide dressing, it **MUST** execute the stages below as an ordered sequence of evidence gates. This is an execution contract, not a retrospective checklist. Tool success, a rendered screenshot, or agent confidence never authorizes the next stage by itself.
+
+Before the first mutation, the agent must create or update an inspectable workflow record containing:
+
+- the work class (`DISPOSABLE_EXPERIMENT` or `PRODUCTION_INTENDED`) and scope;
+- the current stage, the approved predecessor artifact or baseline, and the stage objective;
+- required artifacts, evidence conditions, hard failures, owner or approver, and rollback target;
+- allowed mutations and the exact version or change set that the next gate will review.
+
+The agent must start at Stage 1, or resume at a later stage only when an existing artifact and approval record prove that every predecessor gate passed. Existing level content without stage evidence is not proof of completion and must be audited or reconstructed before further promotion.
+
+At every stage, the agent must:
+
+1. state the stage it is executing and the decision it is trying to prove;
+2. perform only the mutations needed for that stage;
+3. verify the stage's required evidence under the stated test conditions;
+4. record `PASS`, `FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE`;
+5. advance only on `PASS` and an explicit promotion decision; otherwise stop, revise the responsible earlier stage, or request the missing approval or evidence;
+6. preserve the baseline, failed attempts, generated outputs, and factual change scope so the gate can be reopened or rolled back.
+
+The numbered stages are always represented in the record. A small or disposable level may combine adjacent stages in one reversible pass, but it may not silently skip a stage or promote downstream work while one of its questions is unanswered. When a later change invalidates an accepted assumption, reopen the affected stage, preserve the previously accepted version, and re-run the dependent evidence. At the feedback pauses named below, absence of the required user or designated-approver response remains `PENDING_EVIDENCE`; it is not permission to continue.
+
+| Order | Required handoff before promotion |
+| --- | --- |
+| 1. Concept and intent review | Decision-ready brief, non-goals, constraints, unresolved questions, and recorded intent feedback. |
+| 2. Spatial plan review | Annotated spatial plan with responsibilities, routes, POI roles, views, boundaries, and blockout risks. |
+| 3. Experience prototype | Runtime evidence for one POI or encounter unit, including approach, player question, choice or verb, payoff, and next hook. |
+| 4. Terrain and macro blockout | Runtime arrival, route, reverse, elevated, and contact views that prove the macro structure. |
+| 4a. Route authority and corridor contract | Inspectable route source of truth, ownership, surface provider, clearance, grade, and corridor validation. |
+| 5. Playable blockout and feedback gate | Playtest evidence for traversal, readability, pacing, collision, boundaries, POI flow, and recovery. |
+| 6. Visual feasibility slice | Representative visual and experience slice with asset, material, lighting, collision, streaming, and budget evidence. |
+| 7. Production meshing and dressing | Approved asset-family substitutions, preserved spatial contracts, chunk evidence, and deviation records. |
+| 8. Layered lighting and audio integration | Functional and final integration evidence for navigation, mood, interaction feedback, and propagation or occlusion risks. |
+| 9. Collision, polish, and release validation | Final runtime, collision, performance, streaming, persistence, packaging, accessibility, and recovery evidence. |
 
 ### 1. Concept and intent review
 
@@ -136,7 +173,7 @@ Build the terrain and large spatial masses first: height bands, ridges, valleys,
 
 Check the result from runtime arrival, route, reverse, elevated, and contact views. A level that works only from the intended beauty camera has not passed macro validation.
 
-### Route authority and corridor contract
+### 4a. Route authority and corridor contract (blocking sub-gate)
 
 Treat a route as a spatial contract, not as a collection of visual strips, cubes, or debug lines. Before architecture and dressing are approved, define:
 
@@ -251,6 +288,9 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - No world voids, exposed reserve edges, placeholders, uniform scatter, or unfinished reverse sides.
 - Material scale, lighting hierarchy, cultural and biome coherence.
 - Concept, plan, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets.
+- AI workflow records identify the current stage, predecessor evidence, allowed mutations, promotion authority, and rollback target.
+- Every numbered stage and the route sub-gate has a recorded status; no downstream work is promoted from `PENDING_EVIDENCE`, `INVALID_EVIDENCE`, or an unrecorded gate.
+- Combined stages are declared before mutation, and reopened stages preserve the accepted baseline and re-run dependent evidence.
 - Functional audio and collision are tested early when they affect play, while final authoring and full audits are verified after integration.
 - Streaming, persistence, warnings, and performance viability.
 - World Partition is justified by the project scale, with documented streaming sources, grid/cell budgets, Data Layer ownership, HLOD intent, and teleport or fast-travel behavior.
@@ -272,6 +312,8 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Choosing a concept that available assets cannot support.
 - Scaling a weak representative slice.
 - Waiting until the end to discover that audio, collision, lighting, or streaming changes the player experience.
+- Letting an AI agent begin a downstream level stage because a Tool call succeeded, a screenshot looks convincing, or the agent feels confident.
+- Treating a small-level combined pass as permission to omit a stage's decision question, evidence, approval, or rollback target.
 - Enabling World Partition because a template exposes it, without defining cell budgets, ownership, streaming sources, or a recovery plan.
 - Treating a fully loaded editor view as evidence that a partitioned world works at runtime.
 - Deleting visually appropriate content instead of repairing collision.
@@ -301,4 +343,4 @@ The following sources inform the experience-design additions without implying th
 
 ## Related topics
 
-Development Process; Content & Asset Architecture; Procedural Systems & PCG; Rendering; Performance & Scalability; Validation, Testing & Debugging; Production Pipeline; Team Collaboration & Source Control.
+Development Process; Content & Asset Architecture; Procedural Systems & PCG; Rendering; Performance & Scalability; Validation, Testing & Debugging; Production Pipeline; Team Collaboration & Source Control; AI-Assisted Development.
