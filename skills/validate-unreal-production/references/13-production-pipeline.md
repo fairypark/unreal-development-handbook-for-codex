@@ -25,10 +25,11 @@ Keep one current version matrix with the release evidence rather than scattering
 
 ### UE 5.8 snapshot — 2026-08-01
 
-Epic's current UE 5.8 material reports MegaLights, Iris, and Movie Render Graph as Production Ready; Lumen Lite as Beta; and Mesh Terrain as Experimental. It also describes shader-compilation, shader-deduplication, and PSO pre-caching improvements. Treat this as a dated snapshot, not a timeless handbook rule:
+Epic's UE 5.8 release notes describe Iris as Production Ready for licensees, while the public Iris documentation presents it as an opt-in system and labels the feature Experimental. Record the audience, license or distribution context, engine version, and project validation state instead of treating either label as universal. The same UE 5.8 material reports MegaLights and Movie Render Graph as Production Ready; Lumen Lite as Beta; and Mesh Terrain as Experimental. It also describes shader-compilation, shader-deduplication, and PSO pre-caching improvements. Treat this as a dated snapshot, not a timeless handbook rule:
 
 - adopt a Production Ready feature only after target-platform and project-level evidence passes;
 - prototype Beta or Experimental features behind a reversible boundary and name the fallback before production content depends on them;
+- for Iris, reconcile the licensee release-note status with the public opt-in or Experimental documentation, then validate the selected replication driver and migration path in the project;
 - after engine or feature changes, re-run cold and warm startup, shader or PSO behavior, representative runtime, capture, package, and recovery checks;
 - for Movie Render Graph, compare output, automation, and recovery behavior with the existing Movie Render Queue path before changing the release pipeline.
 
@@ -80,6 +81,7 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - Promotion state, evidence, approver, retention, and rollback target are recorded for each major level milestone.
 - Fun thesis, POI inventory, experience-unit evidence, density/tension rationale, and intentional quiet sections are recorded for level milestones.
 - Engine, plugin, feature-maturity, target-platform, fallback, and migration state are recorded for release-relevant changes.
+- Audience, license or distribution scope, and source date are recorded when different official materials assign different maturity labels.
 - Clean-environment installation and startup.
 - Representative runtime, performance, persistence, and recovery checks.
 - Engine or feature changes include cold/warm, capture, packaging, and rollback evidence where relevant.
@@ -90,6 +92,7 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - Treating `Production Ready` as a substitute for project-level acceptance.
 - Updating the engine or a render/capture path without preserving a comparable baseline and a rollback target.
 - Recording a feature name without its engine version, maturity, target platform, fallback, or evidence date.
+- Copying an upstream maturity label without recording its audience, license or distribution scope, and compatibility constraints.
 
 ## Research basis and further reading
 
@@ -97,6 +100,11 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-8-release-notes) — version-specific release and production-status details.
 - [Epic Games: Transitioning to Movie Render Graph from Movie Render Queue](https://dev.epicgames.com/documentation/en-us/unreal-engine/transitioning-to-the-movie-render-graph-from-movie-render-queue-in-unreal-engine) — migration considerations for the capture pipeline.
 
+Additional current context:
+
+- [Epic Games: Introduction to Iris](https://dev.epicgames.com/documentation/unreal-engine/introduction-to-iris-in-unreal-engine) — public opt-in and feature-status context for Iris; confirm the wording against the target engine and distribution.
+- [Epic Games: Migrate to Iris](https://dev.epicgames.com/documentation/en-us/unreal-engine/migrate-to-iris-in-unreal-engine) — migration scope and compatibility considerations that belong in the project release contract.
+
 ## Related topics
 
-Content & Asset Architecture; Automation & Python; Rendering; Performance & Scalability; Validation, Testing & Debugging; Team Collaboration & Source Control.
+Content & Asset Architecture; Gameplay Architecture; Automation & Python; Rendering; Performance & Scalability; Validation, Testing & Debugging; Team Collaboration & Source Control.
