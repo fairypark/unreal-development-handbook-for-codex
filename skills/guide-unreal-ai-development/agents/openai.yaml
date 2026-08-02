@@ -1,4 +1,4 @@
 interface:
   display_name: "Guide Unreal AI Development"
   short_description: "Apply evidence-based AI roles and oversight"
-  default_prompt: "Use $guide-unreal-ai-development to define safe AI roles, evidence, oversight, and failure containment for this Unreal workflow."
+  default_prompt: "Use $guide-unreal-ai-development to enforce the applicable staged workflow and define safe AI roles, evidence, oversight, and failure containment for this Unreal workflow."

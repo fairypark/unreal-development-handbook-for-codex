@@ -11,6 +11,10 @@ Use AI as a bounded development participant whose decisions and outputs remain i
 
 Read [15-ai-assisted-development.md](references/15-ai-assisted-development.md) before defining agent roles, context, mutation authority, evidence, evaluation, approval, or failure containment.
 
+## Enforce domain workflows
+
+When the relevant Handbook chapter defines an explicit workflow, treat its stages and gates as part of the mutation contract. For level or world creation, load Chapter 04 and require its ordered workflow record, stage evidence, promotion decision, stop conditions, and rollback behavior; never let a Tool result or agent confidence replace a required gate.
+
 ## Define AI responsibilities
 
 1. State the agent's role, allowed mutations, decision authority, and stop conditions.
