@@ -65,9 +65,25 @@ The cheapest credible playtest unit is usually not a whole world or a hero scree
 
 Use this workflow when a level, mission space, environment, or terrain change is expected to become production content. When an AI agent performs the work, the workflow record and stage order are mandatory even for a small level. A disposable experiment may combine adjacent gates in one reversible pass only when that choice is declared before mutation and every gate's question and evidence remains visible; combined is not skipped. For a level whose failure would strand significant art, audio, or technical work, keep the pauses explicit and evidence-based.
 
+When the request is a local edit to an already accepted prototype baseline,
+classify it as `BOUNDED_PROTO_EDIT` before invoking the broad level gates. This
+mode reuses the current stage and its accepted predecessor evidence when the
+plan-owned assumptions are unchanged; it does not promote the level or erase
+the numbered stages. It is appropriate for explicit existing-Actor
+Transform/scale edits and named existing-Actor deletions, not for creating,
+regenerating, or redesigning spatial systems.
+
 ## When NOT to use
 
 Do not interpret the sequence as a rigid one-pass waterfall or a fixed number of passes, and do not replace it with a tool-first sequence or retrospective checklist. Audio-first, vehicle, multiplayer, VR, systemic, and highly procedural experiences may need their defining risks in the first playable prototype. The rule is to move the expensive or experience-defining uncertainty earlier; for AI work, this flexibility changes how stages are combined, not the obligation to record and evaluate each stage.
+
+Do not use the fast path when target ownership, route authority, protected
+scope, baseline revision, or save state is ambiguous. Direct Landscape,
+water/stream, bridge, zone-marker, fixed-camera, streaming, authoritative
+route, Navigation/collision-source, or broad generated-content changes remain
+on the relevant staged path. A local building move may use target-specific
+grounding evidence, but inability to prove all required support corners is an
+exit condition rather than permission to lower the grounding contract.
 
 ## Decision-ready brief
 
@@ -92,22 +108,70 @@ allowed Actor or data scope, change and time budget, preconditions,
 postconditions, save policy, and rollback target. Use a project-equivalent set
 of explicit modes:
 
-- **Bounded edit:** modify existing, uniquely identified prototype content in one small
-  batch; do not silently spawn, delete, rebuild, or save the map;
+- **Bounded edit / `BOUNDED_PROTO_EDIT`:** modify existing, uniquely identified
+  prototype content in one small batch. Explicit deletion of named existing
+  prototype Actors is allowed only when the contract proves that the targets
+  are not protected, generated, shared, or route-authoritative; do not
+  silently spawn, wildcard-delete, rebuild, or save the map;
 - **Diagnostic audit:** collect one batched structural snapshot and report diagnostics only;
 - **Promotion review:** evaluate explicit structural, runtime, visual, and independent
   review evidence; do not recapture or rebuild to hide an evidence failure;
 - **Maintenance rebuild:** run a broad reset or reconstruction only as a separate,
   explicitly confirmed operation with a checkpoint and recovery path.
 
+#### `BOUNDED_PROTO_EDIT` entry and exit contract
+
+Enter this mode only when the current world/level and accepted baseline are
+known, the user has supplied an explicit target allowlist and save intent, the
+targets have stable IDs/classes/ownership and expected pre-state, and a
+compact protected snapshot can prove the identity of Landscape, water or
+stream, bridges, zone markers, authoritative route/collision/navigation
+sources, and relevant camera or streaming boundaries. The initial project
+default may cap the batch at one level and eight existing Actors; project
+policy may choose another bound, but semantic scope is more important than
+Actor count.
+
+The contract must state the local zone or envelope, allowed operation kinds,
+wall-clock budget, rollback target, and whether a moved structure requires a
+target-specific four-corner grounding check. A dirty level with unrelated
+changes, an unresolved parent/child relationship, a wildcard or broad query,
+an unknown route role, or a missing protected snapshot blocks entry.
+
+Use one task-scoped context and this observable order:
+
+`compact inspect → preconditions → serialized mutation → in-memory postcondition → save → persistence re-read`
+
+The in-memory check must precede save unless the execution surface supplies an
+atomic transaction with equivalent rollback semantics. The compact result
+must identify changed/deleted targets, before/after Transforms, protected
+snapshot comparison, save state, warnings, elapsed/call counts, and checks
+not run. Do not capture a viewport or run PIE merely because the edit is
+complete.
+
+The operation result is separate from promotion. `operation_verdict` may be
+`PASS`, `FAIL`, or `PENDING_EVIDENCE`; `promotion_verdict` remains unchanged.
+Visual review, fixed-camera capture, independent review, PIE, full Landscape
+inventory, and broad Area Composition Plan/Translation review are
+`NOT_RUN_BY_CONTRACT` when they are outside scope—not evidence that the level
+passed those gates.
+
+Reuse the Area Composition Plan, Stage 2a Translation Contract, and current
+stage only while their assumptions remain unchanged. Reopen the earliest
+responsible gate when the edit changes terrain, water, a bridge approach,
+authoritative route topology, zone-marker identity, typology-critical axis,
+fixed-camera coverage, runtime collision/navigation, or a recorded
+composition tolerance. If the operation times out or returns an empty,
+ambiguous, or partial result, stop and audit the state before retrying.
+
 Use one task-scoped Editor execution context, one inventory read, local request
-validation, one serialized mutation transaction, and one postcondition audit
-where the engine surface permits it. Per-item discovery and repeated retries
-are process failures to diagnose, not normal prototype behavior. On timeout or
-ambiguous transport, audit the current level before continuing; never infer
-that the level is unchanged or complete from a missing response. A diagnostic
-result can be healthy while the level remains `PENDING_EVIDENCE`; it does not
-authorize the next broad placement batch or production promotion.
+validation, one serialized mutation transaction, one in-memory postcondition
+audit, and one persistence re-read where the engine surface permits it.
+Per-item discovery and repeated retries are process failures to diagnose, not
+normal prototype behavior. On timeout or ambiguous transport, audit the
+current level before continuing; never infer that the level is unchanged or
+complete from a missing response. A diagnostic or bounded-edit result can be
+healthy while the level remains `PENDING_EVIDENCE`; it does not authorize the
+next broad placement batch or production promotion.
 
 ## Readiness for a production workflow
 

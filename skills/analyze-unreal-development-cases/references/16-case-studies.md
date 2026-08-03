@@ -134,6 +134,136 @@ execution surface, and recovery evidence are explicit. Background shader or
 cache maintenance may remain a separate environment bottleneck and should be
 measured rather than misattributed to the mutation itself.
 
+## Investigation note: gate narrowing for a bounded edit on an accepted prototype
+
+**Status:** evidence-backed process note based on an operator-reported local
+prototype edit; the level outcome has no independent visual or runtime
+promotion evidence. The note proposes a reusable operation contract and does
+not claim that the affected level passed production promotion.
+
+### Problem and intent
+
+An already accepted environment prototype required a small local change: remove
+four existing prototype Actors near a stair landing, move one existing mass to
+the landing, and save. The request explicitly preserved the Landscape,
+waterway, bridge connections, zone markers, and the rest of the accepted
+layout. The intended outcome was an immediately usable next prototype state,
+not a new layout review or a production-quality decision.
+
+### Context and initial state
+
+The current stage and prototype baseline were already accepted for the user's
+ongoing iteration. The requested changes were limited to existing named
+content, but the execution path inherited broad level-design responsibilities:
+re-reading long guidance, interpreting an Area Composition Plan gate,
+discovering and describing execution capabilities repeatedly, collecting a
+large viewport and label inventory, and performing broad Landscape/grounding
+preservation checks. The reported edit itself took roughly ten minutes to
+complete; the precise contribution of each orchestration step was not
+independently measured.
+
+The semantic role of the two roads was an important unresolved boundary. If
+they were visual prototype masses, they could belong to a local edit. If they
+were the authoritative route graph, traversal surface, or bridge connection,
+their deletion would change a plan-owned responsibility and require gate
+reopening.
+
+### Alternatives and trade-offs
+
+- **Replay the full level workflow:** preserved the strongest broad evidence,
+  but spent a disproportionate amount of time on risks the request explicitly
+  excluded and delayed the next experiment.
+- **Skip all gates and mutate by visual selection:** minimized latency, but
+  could delete a route, marker, bridge, or terrain-dependent building without
+  proving ownership or recovery.
+- **Classify a `BOUNDED_PROTO_EDIT`:** reuse the accepted stage while its
+  assumptions remain unchanged; inspect explicit targets and protected
+  references once, apply one bounded transaction, verify local postconditions,
+  save, and keep promotion unchanged. This was selected because it preserves
+  scope-specific safety while removing unrelated evidence work.
+
+### Decision and implementation scope
+
+The durable correction is an explicit operation mode inside the staged
+workflow, not a new stage. Entry requires a known baseline, an exact target
+allowlist, a declared local envelope, a time and change budget, a save and
+rollback policy, and a compact protected snapshot. Explicit deletion is
+allowed only for named existing targets; wildcard cleanup, spawning,
+regeneration, shared-source changes, and broad layout mutation remain outside
+the mode.
+
+The hot path is:
+
+`classify → compact inspect → preconditions → serialized mutation → in-memory postcondition → save → persistence re-read`
+
+Landscape, water/stream, bridge, zone-marker, fixed-camera, streaming,
+authoritative-route, and Navigation/collision-source mutation exits the mode.
+A building moved over Landscape may use a target-specific four-corner support
+check, but a center trace or partial grounding result cannot substitute for
+the existing grounding contract.
+
+### Validation and outcome
+
+The minimum evidence package contains the exact target identity and expected
+pre-state, the unchanged protected snapshot, exact deleted/changed IDs,
+before/after Transform, warnings, save persistence, and the list of checks not
+run. For the reported edit this corresponds to four explicit deletions, one
+mass Transform, a saved level, and a key Transform re-read.
+
+The full visual review, fixed-camera capture, PIE, independent visual review,
+and broad plan/translation reconsideration remain outside the operation unless
+the user requests promotion or the semantic impact triggers reclassification.
+The correct result is therefore `operation_verdict: PASS` only for the local
+postconditions, with `promotion_verdict: unchanged`; it is not a level-wide
+visual or runtime approval.
+
+### Recovery and follow-up
+
+If target identity, route role, protected scope, dirty save state, grounding
+support, or schema capability is ambiguous, exit before mutation. If the
+operation times out or returns an empty or partial result, audit the current
+state before retrying and classify it as complete, partial, duplicated,
+unchanged, recoverable, or unknown. Preserve the accepted baseline and failed
+candidate. Measure classification, discovery, wait, mutation, verification,
+save, background, call-count, redundancy, capture, and rollback time
+separately.
+
+### Transferable lessons
+
+1. A short request needs an operation classifier before it needs a broader
+   evidence package; otherwise valid production gates become accidental
+   latency.
+2. Gate reuse is conditional on unchanged assumptions. It does not turn an
+   unknown baseline into `PASS` and does not grant promotion.
+3. Explicit existing-Actor deletion can be bounded, but only with stable
+   identity, ownership, protected-scope checks, and an exact changed-ID
+   postcondition. A count or visual selection is not enough.
+4. Direct protection and local contact validation have different scopes:
+   preserving Landscape does not require a whole-map grounding inventory, but
+   moving a building still requires its applicable four-corner support proof.
+5. Compact structural evidence and deferred capture make a small edit faster;
+   they do not replace visual, runtime, or independent evidence when those
+   decisions are in scope.
+
+### Applicability and limits
+
+This rule applies to explicit local edits of existing prototype content when
+the spatial responsibilities and protected references are inspectable. It
+does not apply to a route-authority change, terrain or water/bridge mutation,
+zone-marker lifecycle change, cross-zone composition change, generated-system
+regeneration, shared-asset replacement, or a request to promote a level.
+Project-specific budgets and item caps may differ; the semantic boundary and
+fail-closed behavior must remain.
+
+### Evidence gaps and follow-up research
+
+The source report did not include a per-call timing trace, a machine-readable
+protected snapshot, a target grounding receipt, or independent visual/runtime
+evidence. Implement the contract against a synthetic fixture and verify that
+the same target edit completes within the project budget, that protected
+mutations exit before saving, that timeout recovery creates no duplicate, and
+that omitted visual/PIE checks cannot be interpreted as promotion evidence.
+
 ## Investigation note: route-first blockout and spline pilot
 
 **Status:** candidate case; the level was paused before the spline-backed route received its final independent visual gate. The note is useful for decision learning, but it is not a claim that the final route or level was approved.

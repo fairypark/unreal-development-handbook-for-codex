@@ -1,6 +1,6 @@
 {
   "name": "unreal-development-handbook-for-codex",
-  "version": "0.2.7+codex.20260804003513",
+  "version": "0.2.8",
   "description": "Teach durable Unreal Engine development reasoning from intent and architecture through validation and production readiness.",
   "author": {
     "name": "Community Maintainers"

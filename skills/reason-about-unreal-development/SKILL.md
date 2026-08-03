@@ -29,6 +29,8 @@ Work in this order:
 
 Ask a focused question only when a missing choice would materially change the design. Otherwise state a reversible assumption and continue.
 
+For a local change to an already accepted prototype, classify the request as `BOUNDED_PROTO_EDIT` before reopening a new design review. Apply the bounded contract in [01-development-process.md](references/01-development-process.md) and the world-specific entry/exit contract in [04-world-level-design.md](../design-unreal-worlds-and-levels/references/04-world-level-design.md): reuse stable predecessor evidence, keep operation and promotion verdicts separate, and return to the full workflow when protected scope or plan assumptions change. This classification reduces scope-matched gates; it does not authorize Editor mutation or production promotion.
+
 ## Route to the relevant reasoning domain
 
 - Use gameplay architecture guidance for responsibility, state, input, persistence, networking, and system interaction.

@@ -42,9 +42,42 @@ wait, mutation, verification, and background-maintenance time separately; if
 the same task repeatedly spends more time in orchestration than in the named
 change, change the workflow boundary before changing the content.
 
+### Local operation verdict versus promotion verdict
+
+Every bounded prototype operation records two independent results. The
+`operation_verdict` answers whether the declared target allowlist, protected
+scope, target postconditions, and save persistence passed. The
+`promotion_verdict` answers whether a separately requested stage or production
+promotion passed; it remains `unchanged` for an ordinary local edit. A
+successful local operation therefore cannot silently become a level approval.
+
+For `BOUNDED_PROTO_EDIT`, use a compact structural evidence package: exact
+changed/deleted IDs, before/after Transforms, protected references or digests,
+warnings, save state, elapsed/call counts, rollback status, and checks not run.
+Visual capture, PIE, independent review, full Landscape inventory, and broad
+Area Composition Plan or Translation review may be
+`NOT_RUN_BY_CONTRACT` when their questions are outside the declared scope.
+That state is neither `PASS` nor an operational failure; it is a truthful
+boundary on what the operation did not attempt to prove.
+
+Direct mutation of Landscape, water/stream, bridges, zone markers/registry,
+fixed cameras, streaming boundaries, authoritative routes, or
+Navigation/collision sources exits the fast path. A building move over
+Landscape may remain local only when the target-specific four-corner grounding
+postcondition is available and passes; a center trace, average, or incomplete
+corner result is not sufficient.
+
 ## Gate contract for level work
 
 For a level or environment, make the promotion sequence explicit rather than treating approval as a single late event:
+
+`BOUNDED_PROTO_EDIT` is an operation envelope within the current stage, not an
+additional promotion gate. Reuse the current Area Composition Plan,
+Reference-to-Prototype Translation, and stage evidence only while their
+assumptions remain unchanged. Reopen the earliest responsible gate when the
+edit changes a plan-owned route, terrain, water/bridge relationship, zone
+marker, typology-critical hierarchy, fixed-camera coverage, runtime
+collision/navigation behavior, or recorded composition tolerance.
 
 | Gate | What it must prove | Typical hard failures |
 | --- | --- | --- |
@@ -76,6 +109,15 @@ When a gate fails:
 5. Repeat the same test conditions before judging the repair.
 
 Do not spend a later-stage budget to defend an earlier-stage decision. If the visual feasibility slice fails, repair the kit or visual rules before dressing the map. If dressing reveals a route problem, return to the blockout instead of accumulating decorative exceptions.
+
+For a `BOUNDED_PROTO_EDIT` that does not change those plan-owned assumptions,
+use the cheapest credible local checks: one compact target/protected snapshot,
+one bounded mutation, target and protected postconditions, and saved-state
+persistence. Do not attach a fixed-camera capture, full visual review, PIE, or
+independent review merely because the level contains visual content. If the
+target changes route, collision, navigation, bridge approach, water bank,
+playable surface, or building support, reclassify the operation and run the
+relevant higher-cost evidence instead of using the time budget to waive it.
 
 For a composition-changing prototype batch, set the translation contract to `POST_MUTATION_AUDIT` and withhold the next broad batch until reference/plan/prototype deviations are recorded. Compare fixed overviews under the same transform, crop, projection, resolution, and measurement basis for their assigned macro metrics. Beginning at Playable Blockout, separately compare route samples through the actual runtime rig for perceived distance, enclosure, occlusion and reveal, route continuity, hierarchy, clearance, and recovery. An out-of-tolerance zone, lost shaded or empty space, hierarchy reversal, path discontinuity, or prohibited silhouette reopens the earliest responsible gate even when the total Actor count matches.
 
@@ -158,6 +200,9 @@ Require functional correctness, maintainability, production readiness, performan
 - Treating an early static player-height/FOV proxy as an exact runtime rig, fine-tuning prototype detail to it, or carrying its approval authority into Stage 5 or the Visual Feasibility Slice.
 - Treating test transport success as test outcome success.
 - Treating a command, graph, or batch completion message as proof that the intended state and postconditions exist.
+- Treating `operation_verdict: PASS` as `promotion_verdict: PASS`, or treating `NOT_RUN_BY_CONTRACT` as hidden evidence.
+- Replaying the Area Composition Plan, fixed-camera, or PIE gates for an unchanged local prototype edit while failing to detect a route, bridge, zone, or Landscape touch.
+- Allowing an explicit target delete to expand into wildcard cleanup or a broad rebuild.
 - Repeating a failed iteration without recording a changed cause hypothesis, invariant, or detection rule.
 - Reporting “not observed” as “not reproducible” when the same test conditions were not repeated.
 - Overwriting failed audits or evidence.
