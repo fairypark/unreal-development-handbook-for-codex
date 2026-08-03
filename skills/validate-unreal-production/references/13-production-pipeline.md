@@ -43,6 +43,24 @@ Each transition should identify the versioned source, the evidence package, the 
 
 Keep prototypes and production content distinguishable through naming, folders, metadata, or source-control policy. Do not silently replace an accepted blockout with final assets in a way that removes the comparable baseline. If a production asset, generated result, or integration change invalidates route, readability, collision, or budget assumptions, reopen the affected state instead of papering over the difference with local fixes.
 
+## Workflow release versus content promotion
+
+Release the repeatable workflow separately from the content it operates on.
+The workflow release record should identify its version, scope, default
+operation mode, allowed mutation boundary, test results, known limitations,
+rollback path, and whether it changed level content. A status such as
+the workflow-release state means that the guardrails and execution contract
+are available; it does not mean that the map has passed its spatial, runtime,
+visual, performance, or production gates.
+
+This separation allows a project to improve its prototype loop without
+pretending that invalid visual evidence or missing runtime review has been
+resolved. Keep the level or system's promotion state independently recorded as
+`PASS`, `FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE`. If the workflow
+release itself cannot execute on the available Editor surface, mark live
+execution as untested and do not claim that an offline compile or manifest
+check proves an in-Editor mutation.
+
 ## POI-first production and density planning
 
 For open-world or exploration-heavy levels, organize the content plan around experience units and their relationships, not around uniformly filling terrain. A POI record should include its scale, player question, approach and reveal or refusal, interaction or repeated verb, risk, reward or outcome, next hook, expected time or distance, dependencies, owner, and production cost.

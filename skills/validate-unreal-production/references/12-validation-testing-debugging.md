@@ -17,6 +17,31 @@ Make success falsifiable before implementation. Diagnose failures by cause and p
 5. Define gate states such as `PASS`, `FAIL`, `PENDING_EVIDENCE`, and `INVALID_EVIDENCE`.
 6. Require topic-specific checks in addition to the shared validation system.
 
+## Operation health and gate-state semantics
+
+Content correctness and workflow health are separate dimensions. A batch may
+leave valid content while still failing its operational contract because it
+used an unbounded number of calls, exceeded its time budget, lost its session
+state, or cannot prove what happened. Record both verdicts and do not convert a
+transport success into a content or promotion pass.
+
+Use gate states consistently:
+
+| State | Meaning | Required action |
+| --- | --- | --- |
+| `PASS` | The named criteria and evidence are complete under the stated conditions. | Continue only to the explicitly authorized next gate. |
+| `FAIL` | A criterion or hard failure is contradicted. | Preserve the result, repair the responsible cause, or roll back. |
+| `PENDING_EVIDENCE` | The result may be valid, but required evidence, review, or persistence has not yet been supplied. | Stop promotion; collect the named evidence or request the missing decision. |
+| `INVALID_EVIDENCE` | The evidence cannot be used because its condition, authority, comparison, or capture integrity is invalid. | Repair the evidence condition before changing the product or repeating capture. |
+| `PENDING_APPROVAL` | Required evidence exists, but the designated reviewer or approver has not completed the decision. | Keep mutation and promotion locked. |
+
+For prototype automation, treat a time-budget breach, ambiguous response, or
+unclassified partial batch as an operational `FAIL` until a read-only audit
+proves a narrower state. Do not issue a blind retry. Record setup, discovery,
+wait, mutation, verification, and background-maintenance time separately; if
+the same task repeatedly spends more time in orchestration than in the named
+change, change the workflow boundary before changing the content.
+
 ## Gate contract for level work
 
 For a level or environment, make the promotion sequence explicit rather than treating approval as a single late event:

@@ -15,6 +15,15 @@ Read [04-world-level-design.md](references/04-world-level-design.md) for every w
 
 For every AI-led level, world, environment, terrain, route, POI, or map-wide dressing task, treat the chapter's **Mandatory AI execution contract** and numbered concept-to-production workflow as binding. Before any Editor or coding handoff, create or update an inspectable workflow record, identify the current stage and predecessor evidence, and define the stage's postconditions, approver, and rollback target. Work only within the current stage, record `PASS`, `FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE`, and advance only after `PASS` plus the required promotion decision. Stop on missing or failed evidence; do not silently skip or combine stages, and reopen an earlier stage when a later change invalidates its assumptions. In particular, Stage 2 `PASS` does not authorize prototype placement by itself: Stage 2a **Reference-to-Prototype Translation Gate** must have a machine-readable source registry, zone-level quantitative contract, planned traceability entries, and an explicit placement decision before the first content-bearing prototype mutation. When dependent strata such as rocks or hardscape plus grass or ground cover are in scope, Stage 2a must also carry a `Dependent-Strata Strategy Gate` decision before the first relevant generator or foliage mutation; invoke the PCG design Skill for that decision and do not infer a method from tool success. For small or disposable work, adjacent stages may be combined only when declared before mutation and each stage's question and evidence remains explicit.
 
+Before any prototype mutation, also apply the chapter's bounded iteration
+contract: classify the operation as a bounded edit, read-only diagnostic audit,
+explicit promotion review, or separately confirmed maintenance rebuild; set a
+change and wall-clock budget; batch discovery and validation; and define
+preconditions, postconditions, save policy, and rollback. A short level request
+must not silently invoke a broad builder, per-item dispatch chain, or blind
+evidence retry. On timeout or ambiguous transport, stop for a read-only state
+audit before resuming or rolling back.
+
 ## Create the level brief
 
 1. Define player fantasy, emotional tone, setting, scale, route, and target platform.

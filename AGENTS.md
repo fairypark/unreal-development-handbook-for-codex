@@ -17,6 +17,34 @@ Think before implementing. Work in this order:
 
 Before acting, identify missing goals, assumptions, constraints, success criteria, validation requirements, and production concerns. Ask focused questions only when a missing choice would materially change the result; otherwise state reasonable assumptions explicitly. Define success criteria before implementation and never optimize implementation before validating the design.
 
+For prototype or live Editor work, classify the request as a bounded edit, a
+read-only diagnostic audit, an explicit promotion review, or a separately
+authorized maintenance rebuild before mutation. Default ordinary prototype
+edits to the smallest reversible mode, record a change/time budget and
+preconditions, batch discovery and verification, and stop for a state audit
+after timeout or ambiguous transport. The canonical reasoning for this
+contract lives in Chapter 01 and the domain chapters; do not let a small
+request silently become a map-wide rebuild.
+
+## Release semantics
+
+When the user says **release**, the completion target is a public GitHub
+release, not only a local file update, plugin cachebuster, or local reinstall.
+Unless the user explicitly narrows the scope, a release task must:
+
+1. verify the exact changed-file and artifact scope;
+2. run the applicable tests, validators, and configured secret checks;
+3. create the required commit and release metadata or tag;
+4. push the approved branch and tag to the configured GitHub repository; and
+5. create or update the public GitHub Release with truthful notes, validation
+   results, limitations, and links to the released artifacts.
+
+Do not report release completion when the repository, remote, credentials,
+branch, tests, or publication step is unavailable. Distinguish local
+development, plugin installation, GitHub publication, and a public release in
+the final report. A later local reinstall may be useful for testing, but it is
+not a substitute for GitHub publication.
+
 ## Handbook content standard
 
 The handbook teaches durable professional Unreal Engine development reasoning, not prompts, command collections, or a single tool stack. It may cover architecture, level design, content creation, Blueprint, C++, Python, PCG, Gameplay Framework, asset organization, performance, optimization, validation, teamwork, source control, production pipelines, and AI-assisted development.

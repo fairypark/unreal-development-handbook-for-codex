@@ -84,6 +84,31 @@ Keep two related loops distinct:
 
 The transition is not triggered by an attractive screenshot or personal confidence. Promote only when a representative slice demonstrates that the intended experience, visual language, asset families, production method, and technical budget can work together. A short segment can be production-ready while the rest of the level remains exploratory.
 
+### Bounded level-prototype iteration
+
+Within the exploration loop, keep ordinary edits on a fast, reversible path.
+Before a mutation, record the current stage, target world, unknown being tested,
+allowed Actor or data scope, change and time budget, preconditions,
+postconditions, save policy, and rollback target. Use a project-equivalent set
+of explicit modes:
+
+- **Bounded edit:** modify existing, uniquely identified prototype content in one small
+  batch; do not silently spawn, delete, rebuild, or save the map;
+- **Diagnostic audit:** collect one batched structural snapshot and report diagnostics only;
+- **Promotion review:** evaluate explicit structural, runtime, visual, and independent
+  review evidence; do not recapture or rebuild to hide an evidence failure;
+- **Maintenance rebuild:** run a broad reset or reconstruction only as a separate,
+  explicitly confirmed operation with a checkpoint and recovery path.
+
+Use one task-scoped Editor execution context, one inventory read, local request
+validation, one serialized mutation transaction, and one postcondition audit
+where the engine surface permits it. Per-item discovery and repeated retries
+are process failures to diagnose, not normal prototype behavior. On timeout or
+ambiguous transport, audit the current level before continuing; never infer
+that the level is unchanged or complete from a missing response. A diagnostic
+result can be healthy while the level remains `PENDING_EVIDENCE`; it does not
+authorize the next broad placement batch or production promotion.
+
 ## Readiness for a production workflow
 
 Treat consistent visual output as a measurable readiness threshold. Before adopting a heavier studio-style workflow, demonstrate that:

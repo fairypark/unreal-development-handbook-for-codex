@@ -18,6 +18,32 @@ Provide goals, project state, requirements, assumptions, constraints, success cr
 
 Keep reusable principles free of private paths, map coordinates, asset-pack anecdotes, credentials, model-specific orchestration, and temporary workarounds.
 
+## Bounded AI task contract and latency guard
+
+Before a prototype or Editor mutation, the agent must write down a compact
+task contract: intent, current stage, target world or system, operation mode,
+allowed mutation scope, change and wall-clock budgets, preconditions,
+postconditions, save policy, evidence class, rollback target, and stop
+conditions. For ordinary prototype work, default to a bounded edit; use a
+read-only diagnostic audit, an explicit promotion review, and a separately
+confirmed maintenance mode for broad rebuilds. Project-specific names may
+differ, but the boundaries must remain visible.
+
+The agent should discover the required execution surface once per bounded task,
+batch inventory and validation work, serialize stateful mutations, and verify
+the resulting state before starting a dependent operation. It must track
+setup, tool discovery, wait, mutation, verification, and background time. A
+short user request must not silently expand into a map-wide builder, per-item
+round trips, repeated tool discovery, or blind evidence retries.
+
+When a task times out or returns an ambiguous result, the agent must stop and
+perform a read-only state audit. It may then resume from a verified checkpoint,
+roll back the verified target, or report the task as blocked; it may not infer
+that no mutation occurred and immediately repeat the same request. If the
+available execution surface cannot invoke the proposed adapter, report that
+live execution is untested rather than treating compilation, static schema
+validation, or a successful transport call as equivalent evidence.
+
 ## Domain workflow compliance
 
 A domain chapter's explicit workflow is part of the AI's execution contract. For level, world, environment, terrain, route, POI, or map-wide dressing work, load Chapter 04 and follow its **Mandatory AI execution contract** and numbered concept-to-production stages in order. Do not substitute a Tool sequence, screenshot, generated asset, or post-hoc summary for a stage's required evidence.

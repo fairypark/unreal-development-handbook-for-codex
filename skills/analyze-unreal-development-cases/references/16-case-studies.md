@@ -44,6 +44,96 @@ The migrated Editor guidance suggests useful future cases, but these remain cand
 - Fog or lighting polish failing to solve missing midground composition.
 - A reused production asset requiring revalidation in a new project context.
 
+## Investigation note: unbounded prototype loops and dispatch amplification
+
+**Status:** evidence-backed workflow case; the workflow was released, but the
+level itself remained `PENDING_EVIDENCE`. The case records a transferable
+process correction, not a claim that the level passed production promotion.
+
+### Problem and intent
+
+In a small level-design prototype, a seemingly narrow instruction could take
+approximately thirty minutes to reach a trustworthy result. The intent was to
+make the next spatial experiment cheap enough to repeat: a designer should be
+able to test one hypothesis, inspect the result, and decide whether to keep,
+repair, or discard it without triggering a full rebuild or an evidence loop.
+
+### Context and initial state
+
+The project combined a live Unreal Editor, a remote or in-process execution
+boundary, a large existing level, a destructive blockout builder, fixed-camera
+evidence, and background Derived Data Cache maintenance. The initial
+interaction pattern
+mixed tool discovery, per-item inspection, broad mutation, structural checks,
+capture attempts, and retries in one task. A representative log window
+contained dozens of individual dispatches, repeated tool descriptions, and a
+long gap without a trustworthy state transition. Map saves themselves were
+short, while background cache scanning and evidence settling were separate
+sources of delay.
+
+### Cause analysis and alternatives
+
+The dominant process causes were dispatch amplification, an unbounded mutation
+boundary, and failure to distinguish diagnosis from promotion. A full rebuild
+was too destructive for ordinary prototype iteration; repeated per-item calls
+were too expensive for a bounded batch; and retrying unsettled evidence could
+not repair the evidence condition. Background cache work was a secondary
+environment cost, not a reason to rerun the content mutation.
+
+The alternatives were to increase timeouts, retry the existing sequence, or
+make the editor faster. Those options would have hidden partial state and
+preserved the same failure mode. The selected alternative was to redesign the
+loop around bounded edit, diagnostic audit, promotion review, and separately
+confirmed maintenance-rebuild responsibilities.
+
+### Decision and implementation scope
+
+The corrective design introduced a machine-readable iteration contract,
+bounded mutation and diagnostic responsibilities, explicit preconditions and
+postconditions, transactional or checkpoint-based recovery, and a separate
+confirmation path for broad reconstruction. Tool discovery and diagnostics
+were batched where the execution surface allowed it. The workflow record also
+captured elapsed time, call-count, redundancy, rollback, persistence, and
+evidence states so that process health and content correctness could be judged
+separately.
+
+### Validation and outcome
+
+The corrective workflow passed its policy, contract, and regression checks,
+and a live read-only audit confirmed that the target state was not mutated by
+the workflow release. Content promotion remained `PENDING_EVIDENCE` because
+fixed-condition visual evidence and the designated review were incomplete.
+The workflow was not claimed as live-executed when the available execution
+surface could not invoke the proposed adapter.
+
+### Transferable lessons
+
+1. Prototype speed is a property of the whole decision loop, not the setter or
+   builder alone. Bound discovery, mutation, verification, and recovery before
+   optimizing code.
+2. A default patch path must be structurally incapable of becoming a broad
+   rebuild. Destructive maintenance operations need a separate confirmation and
+   checkpoint.
+3. One scoped inventory plus local validation and one postcondition audit is
+   usually more reliable than a chain of per-item calls, provided the batch is
+   bounded and reversible.
+4. A diagnostic audit can report a healthy structure without granting visual or
+   production approval. Workflow release and content promotion are separate
+   decisions.
+5. A timeout is a state-classification event. Audit before retrying, preserve
+   the baseline, and record whether the lesson belongs to the project or is a
+   durable handbook rule.
+
+### Applicability and limits
+
+These rules apply to editor automation, procedural blockouts, asset-placement
+experiments, and other stateful prototype loops. They do not prescribe MCP,
+Python, a fixed Actor count, or a universal time limit. Large intentional
+rebuilds may still be appropriate when their design gate, checkpoint,
+execution surface, and recovery evidence are explicit. Background shader or
+cache maintenance may remain a separate environment bottleneck and should be
+measured rather than misattributed to the mutation itself.
+
 ## Investigation note: route-first blockout and spline pilot
 
 **Status:** candidate case; the level was paused before the spline-backed route received its final independent visual gate. The note is useful for decision learning, but it is not a claim that the final route or level was approved.
