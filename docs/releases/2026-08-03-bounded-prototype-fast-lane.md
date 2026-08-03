@@ -24,7 +24,7 @@ Editor-control operations.
 
 - Handbook test suite: 20 tests passed.
 - Reference-to-Prototype contract template: valid.
-- Plugin cachebuster updated to `0.2.6+codex.20260803151536`.
+- Plugin cachebuster updated to `0.2.7+codex.20260804003513`.
 - `git diff --check` passed with only existing line-ending normalization
   warnings.
 
