@@ -39,6 +39,8 @@ Include relevant layers:
 
 For level work, validate the fun thesis and at least one POI or encounter unit alongside spatial, runtime, visual, performance, and delivery evidence. Treat experience density, tension and release, player choice, and payoff as design-specific criteria; do not replace them with a universal score or a fixed spacing rule.
 
+Before accepting level prototype evidence, require a recorded Area Composition Plan that predates the first geometry mutation. It must define a stable-ID set of fixed overview cameras whose risk-based coverage includes arrival, reverse, lateral, waterway/axis, elevation, and project-specific relationships; a single hero overview or an arbitrary fixed count is insufficient. Treat every overview as `DIAGNOSTIC_ONLY`: the set may be the primary macro-composition diagnostic but never approves player visibility, scale, readability, or typology. During Stages 2–4, allow recorded player-height/FOV proxies only to reject gross scale, width, slope, or occlusion failures. Require the actual runtime camera rig at Stage 5 Playable Blockout, and use it for readability, asset-density, and visual-composition evidence from the Visual Feasibility Slice onward.
+
 ## Preserve evidence integrity
 
 Do not let the builder silently lower the acceptance bar. Keep failed and superseded results, compare from equivalent conditions, and require independent read-only review when the risk or policy warrants it. A focused repair pass closes only its named target; it does not imply full production acceptance.

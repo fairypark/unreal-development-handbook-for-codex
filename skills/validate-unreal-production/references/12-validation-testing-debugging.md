@@ -24,14 +24,16 @@ For a level or environment, make the promotion sequence explicit rather than tre
 | Gate | What it must prove | Typical hard failures |
 | --- | --- | --- |
 | Direction | The concept and written brief preserve the intended player experience, priorities, and non-goals. | Contradictory intent, missing decision owner, or unresolved scope that would change the layout. |
-| Spatial plan | The floor plan or node map assigns roles, routes, landmarks, boundaries, and major risks coherently. | Unreadable relationships, missing primary route, impossible scale assumption, or an unowned critical dependency. |
+| Area Composition Plan | Before the first cube or broad asset placement, a versioned record assigns zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, and a stable-ID `DIAGNOSTIC_ONLY` overview-camera set. Its coverage matrix closes arrival, reverse, lateral, waterway/axis, elevation, and project-specific spatial risks with the smallest sufficient set, and records auxiliary player-height/FOV proxies plus the planned runtime-rig source. | Missing or retrospective plan; unreadable relationships; absent route, elevation, water crossing, footprint, camera authority, or coverage; reliance on one hero overview or an arbitrary camera count; typology approved by size alone; or an unowned critical dependency. |
 | Experience prototype | A cheap POI or encounter unit demonstrates the fun thesis through approach, reveal or refusal, player choice or verb, outcome or reward, and a next hook. | The player can traverse the unit but has no meaningful question, choice, payoff, or reason to continue; repeated beats are uninteresting or obstruction feels arbitrary. |
-| Playable blockout | Runtime movement through the rough space is readable, traversable, and representative of the intended pacing. | Broken traversal, misleading landmarks, camera or capsule failure, inaccessible objective, boundary leak, or unacceptable wrong-turn pattern. |
-| Visual feasibility | A small representative slice can meet the target visual language, asset quality, and technical budget together. | Hero-only success, inconsistent materials or scale, unusable asset kit, unverified contacts or collision, or budget failure. |
+| Playable blockout | Runtime movement through the rough space is readable, traversable, and representative of the intended pacing through the representative player controller and actual runtime camera rig, including project-relevant boom, offset, pitch, collision, and retraction behavior. | Static height/FOV proxy offered as authoritative evidence; broken traversal; misleading landmarks; camera-rig or capsule failure; inaccessible objective; boundary leak; or unacceptable wrong-turn pattern. |
+| Visual feasibility | A small representative slice can meet the target visual language, asset quality, asset density, player-facing composition, and technical budget together when judged through the Stage 5-approved runtime camera rig. | Overview- or proxy-camera approval; hero-only success; inconsistent materials or scale; unusable asset kit; unverified contacts or collision; or budget failure. |
 | Production | The approved pattern scales across ordinary and focal areas without silently changing the design contract. | Repeated contact or readability failures, untracked deviations, missing ownership, or dependency and integration failure. |
 | Release | The complete level satisfies functional, visual, audio, collision, performance, persistence, packaging, and recovery requirements. | Any blocking hard failure, stale or invalid evidence, unrecoverable build state, or unresolved production blocker. |
 
-The exact gate names may differ by project. The invariant is that each gate retires the risk that would become more expensive at the next stage. User or stakeholder approval records product intent; it does not waive runtime, performance, dependency, or recovery evidence.
+The exact gate names may differ by project, but the Area Composition Plan must remain a distinct, recorded gate between concept direction and prototype geometry. The invariant is that each gate retires the risk that would become more expensive at the next stage. User or stakeholder approval records product intent; it does not waive runtime, performance, dependency, or recovery evidence.
+
+For typology-critical spaces, define hard failures before blockout. A palace is not approved by approximate building size: its gate -> outer court -> middle gate -> central courtyard -> main hall axis and courtyard hierarchy must read from gameplay views. A fortress- or castle-like silhouette is a hard failure. Use zone markers with a numeric ID plus ASCII fallback throughout prototype and production placement so missing localized glyphs cannot erase the evidence label.
 
 ## Cost-aware validation
 
@@ -81,7 +83,7 @@ Hard failures include a POI with no discernible purpose or payoff, repeated iden
 
 ## Evidence integrity
 
-Use stable, comparable conditions and preserve baseline, candidate, and accepted evidence separately. Bind evidence to the relevant world, configuration, viewpoint, time, and version. Reject stale, undersized, overlay-contaminated, unsettled, mismatched, or silently overwritten evidence.
+Use stable, comparable conditions and preserve baseline, candidate, and accepted evidence separately. Bind evidence to the relevant world, configuration, viewpoint, time, version, camera ID, evidence class, and stage authority. For Stages 2–4, preserve the overview-set coverage matrix and bind auxiliary player-height checks to the recorded height above local ground and FOV; accept those static proxies only as gross plausibility checks. At Stage 5 and later, bind gameplay-camera evidence to the representative player controller, actual runtime camera-rig asset or class, configuration version, and project-relevant boom, offset, pitch, collision, and retraction state. From Visual Feasibility onward, accept player readability, asset-density, and visual-composition decisions only from that runtime rig. Reject stale, undersized, overlay-contaminated, unsettled, mismatched, silently overwritten, or authority-mismatched evidence. Overview-only evidence is always invalid as player visibility, scale, readability, or typology proof, even though the overview set is the primary macro-composition diagnostic during prototyping.
 
 When independent acceptance matters, keep the evaluator read-only and withhold the builder's intended verdict or persuasive self-assessment. A focused target pass closes only that target; unresolved hard failures continue to block full acceptance.
 
@@ -116,6 +118,9 @@ Require functional correctness, maintainability, production readiness, performan
 - Testing the whole map while skipping the smaller POI or encounter unit that actually produces the proposed fun.
 - Averaging away a failed category.
 - Using new camera or test conditions to hide regression.
+- Using a high overview camera to approve player visibility or spatial readability.
+- Using one attractive overview instead of a stable-ID set that covers the macro relationships and risks named by the plan.
+- Treating an early static player-height/FOV proxy as an exact runtime rig, fine-tuning prototype detail to it, or carrying its approval authority into Stage 5 or the Visual Feasibility Slice.
 - Treating test transport success as test outcome success.
 - Treating a command, graph, or batch completion message as proof that the intended state and postconditions exist.
 - Repeating a failed iteration without recording a changed cause hypothesis, invariant, or detection rule.
