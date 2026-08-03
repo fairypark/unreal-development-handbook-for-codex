@@ -71,7 +71,9 @@ Do not interpret the sequence as a rigid one-pass waterfall or a fixed number of
 
 ## Decision-ready brief
 
-Record the fun thesis, core verbs, intended emotional rhythm, POI hierarchy, experience-density hypothesis, and curiosity/reward pattern alongside player fantasy, setting, scale, biome, era, weather, time, route length, target platform, performance budget, expansion directions, and construction provenance. Define arrival, hero, route, reverse, elevated, and contact views as needed. For each important view, identify focal anchors, depth layers, value hierarchy, horizon intent, spatial relationships, and prohibited failure imagery.
+Record the fun thesis, core verbs, intended emotional rhythm, POI hierarchy, experience-density hypothesis, and curiosity/reward pattern alongside player fantasy, setting, scale, biome, era, weather, time, route length, target platform, performance budget, expansion directions, and construction provenance. Define the arrival, reverse, lateral, waterway/axis, elevation, route, and contact relationships that must be inspected, then assign the smallest set of fixed overview cameras that covers those relationships and the project's specific spatial risks; one hero overview is not a coverage plan. For each important view, identify focal anchors, depth layers, value hierarchy, horizon intent, spatial relationships, and prohibited failure imagery.
+
+Record the actual height above local ground and FOV of the project's player tracking camera in the initial brief, and identify the intended runtime camera rig and configuration source when known. The height/FOV record supports a comparable static player-height proxy during early prototyping; it does not claim that boom length, socket or shoulder offset, pitch, SpringArm collision or retraction, or other runtime behavior has been matched. Exact rig authority begins at Stage 5 Playable Blockout. Do not substitute a convenient editor or overview camera for evidence reserved to the player camera.
 
 ## Exploration and production modes
 
@@ -125,13 +127,13 @@ The numbered stages are always represented in the record. A small or disposable 
 | Order | Required handoff before promotion |
 | --- | --- |
 | 1. Concept and intent review | Decision-ready brief, non-goals, constraints, unresolved questions, and recorded intent feedback. |
-| 2. Spatial plan review | Annotated spatial plan with responsibilities, routes, POI roles, views, boundaries, and blockout risks. |
-| 3. Experience prototype | Runtime evidence for one POI or encounter unit, including approach, player question, choice or verb, payoff, and next hook. |
-| 4. Terrain and macro blockout | Runtime arrival, route, reverse, elevated, and contact views that prove the macro structure. |
+| 2. Area Composition Plan review | A versioned, recorded area plan with zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, and a risk-covering set of fixed `DIAGNOSTIC_ONLY` overview cameras with stable IDs. The set covers required arrival, reverse, lateral, waterway/axis, elevation, and project-specific relationships without imposing a universal count. It also records the player-camera height/FOV proxy and planned runtime-rig source. No prototype geometry or broad asset placement is authorized before this gate passes. |
+| 3. Experience prototype | Runtime evidence for one POI or encounter unit, including approach, player question, choice or verb, payoff, next hook, and the live zone marker that identifies its area. |
+| 4. Terrain and macro blockout | The fixed overview set proves whole-area composition, terrain relief, axes, water/bridge relationships, and risk coverage; auxiliary static player-height/FOV views reject gross scale, width, slope, and occlusion failures without claiming exact runtime-rig or fine-composition authority. |
 | 4a. Route authority and corridor contract | Inspectable route source of truth, ownership, surface provider, clearance, grade, and corridor validation. |
-| 5. Playable blockout and feedback gate | Playtest evidence for traversal, readability, pacing, collision, boundaries, POI flow, and recovery. |
-| 6. Visual feasibility slice | Representative visual and experience slice with asset, material, lighting, collision, streaming, and budget evidence. |
-| 7. Production meshing and dressing | Approved asset-family substitutions, preserved spatial contracts, chunk evidence, and deviation records. |
+| 5. Playable blockout and feedback gate | Playtest evidence from the representative player controller and actual runtime camera rig for traversal, authoritative camera behavior, scale, readability, pacing, collision, boundaries, POI flow, and recovery. |
+| 6. Visual feasibility slice | Representative visual and experience evidence captured through the actual runtime camera rig, with asset density, composition, material, lighting, collision, streaming, and budget evidence. |
+| 7. Production meshing and dressing | Approved asset-family substitutions, preserved spatial contracts, chunk evidence, deviation records, and a complete zone-marker inventory proving every production area remained identifiable through final placement. |
 | 8. Layered lighting and audio integration | Functional and final integration evidence for navigation, mood, interaction feedback, and propagation or occlusion risks. |
 | 9. Collision, polish, and release validation | Final runtime, collision, performance, streaming, persistence, packaging, accessibility, and recovery evidence. |
 
@@ -147,21 +149,49 @@ Treat concept art as a direction hypothesis and an intent contract, not as a com
 
 Pause for user or stakeholder feedback here. The review question is not merely “is the image beautiful?” but “does this written interpretation preserve the intended experience, priorities, and limits?” Record corrections before layout work begins.
 
-### 2. Spatial plan review
+### 2. Area Composition Plan review
 
-Create a floor plan, node map, top-down diagram, and side or elevation profile as appropriate. Assign responsibilities to spaces before decorating them:
+Between the concept view and the first cube prototype, create a versioned **Area Composition Plan** as a floor plan, node map, annotated top-down diagram, and side or elevation profile as appropriate. Record its artifact path or identifier, version, status, reviewer, and source concept in the workflow record. The plan must make these contracts inspectable before decorating or building:
 
-- arrival, primary route, optional loops, objectives, player verbs, encounter or rest roles;
+- zone boundaries, stable IDs, anchors or bounds, roles, and semantic colors;
+- terrain height bands, absolute or relative elevations, terraces, slopes, steps, drainage, and other vertical transitions;
+- arrival, primary circulation, optional loops, objectives, player verbs, encounter or rest roles;
+- rivers, creeks, water boundaries, bridge locations, crossing roles, banks, and approach transitions;
 - landmarks, reveals, sightlines, occlusion, readable openings, gates, and recovery paths;
 - POI hierarchy, player questions, approach/reveal/payoff beats, optional deferral or return, and the experience-density hypothesis;
-- terrain height bands, drainage or water logic, foundations, boundaries, streaming cells, and expansion directions;
+- building footprints, entrances, orientation, negative space, courtyard or street relationships, and a named typology hierarchy from primary landmark to supporting structures;
+- a fixed overview-camera set whose members have stable IDs, roles, `DIAGNOSTIC_ONLY` authority, and a coverage matrix for arrival, reverse, lateral, waterway/axis, elevation, and project-specific spatial risks; use the smallest set that closes the identified blind spots rather than one hero overview or an arbitrary fixed count;
+- auxiliary fixed player-height cameras bound to the recorded height above local ground and FOV for gross scale, route-width, slope, and occlusion checks, plus the intended runtime camera rig and its Stage 5 configuration source when known;
+- foundations, boundaries, streaming cells, and expansion directions;
 - approximate scale, route timing, content cost hotspots, and the assumptions that the blockout must test.
 
-Pause again for feedback. The plan should be understandable to someone who did not author it, and it should make the whole-space role allocation visible before construction cost rises. If the role or placement of a major area is unclear in two dimensions, more detail in three dimensions will usually hide rather than solve the problem.
+Pause again for feedback. The plan should be understandable to someone who did not author it, and it should make the whole-space role allocation visible before construction cost rises. If the role or placement of a major area is unclear in two dimensions, more detail in three dimensions will usually hide rather than solve the problem. Treat a missing, unrecorded, or `PENDING_EVIDENCE` plan as a mutation lock: do not create the first cube or graybox volume and do not start broad final-asset placement. This gate may be lightweight for a disposable experiment, but it may not be reconstructed retrospectively from geometry that already exists.
+
+For a typology-critical precinct, state the required reading as a sequence, hierarchy, negative-space pattern, and prohibited silhouette. Building envelopes that merely match approximate size do not pass. For a palace, require the legible gate -> outer court -> middle gate -> central courtyard -> main hall axis, with the courts and supporting halls reinforcing the ceremonial hierarchy. If the composition reads as a fortress or castle because of a dominant keep, tower-like blocks, a monolithic plinth, or continuous high defensive walls, record a hard failure and return to the Area Composition Plan before adding detail.
+
+### Persistent zone identification contract
+
+Define the zone registry in the Area Composition Plan, before prototyping begins. Give every major area a stable machine-readable ID, numeric review ID, reviewer-facing name, ASCII fallback, gameplay or production role, bounds or anchor, semantic color, and marker owner. The IDs must survive proxy replacement, asset renaming, streaming changes, and production chunking.
+
+Create the live zone markers before the first prototype geometry mutation. Use obvious editor/debug-only labels, billboards, text, TargetPoints, volumes, or a dedicated debug Data Layer that cannot be mistaken for production geometry. Store them in a dedicated folder or layer, tag them consistently, and exclude them from shipping visuals and performance evidence unless the project explicitly needs runtime wayfinding. Format every visible marker with the numeric ID plus the ASCII fallback, for example `03 PALACE PRECINCT`; a localized name may be added but never replaces the fallback. Empty glyphs, clipped labels, or locale-dependent text without the numeric ASCII form fail the marker gate.
+
+Keep every marker visible and inspectable throughout experience prototyping, terrain and macro blockout, playable blockout, the visual feasibility slice, and all production meshing and dressing. Proxy replacement or asset-placement batches must not delete, hide, rename, or move the markers. Overview or arrival evidence must identify all zones; zone-local evidence must show the active zone name, and scale-sensitive building evidence should also include an agreed player-scale reference.
+
+Do not retire zone markers merely because production assets make the areas look recognizable. They may be removed or disabled only after Stage 7 asset placement is complete, the zone inventory matches the approved plan, every zone has placement and reverse-view evidence, and an explicit cleanup decision is recorded. Default to retaining inexpensive editor-only markers through final release validation when their presence does not interfere with evidence.
+
+### Staged camera-evidence contract
+
+Record every fixed validation camera in the Area Composition Plan and keep its stable ID, role, evidence class, transform source, height above local ground, FOV, and covered spatial relationships inspectable. Camera evidence has three distinct authority levels:
+
+- **Overview diagnostic set, Stages 2–4:** use multiple fixed overview or bird's-eye cameras as the primary evidence for whole-area composition, terrain high/low structure, axes, circulation, water crossings and bridge approaches, footprint overlap, and marker coverage. The minimum set is risk-based: it must cover arrival, reverse, lateral, waterway/axis, elevation, and any project-specific relationship that another view leaves ambiguous. One camera may cover several roles when the coverage matrix proves it; a single hero overview fails whenever it leaves a required relationship untested. Label every overview `DIAGNOSTIC_ONLY`.
+- **Static player-height proxy, Stages 2–4:** bind auxiliary fixed views to the brief's player tracking-camera height above local ground and FOV; where terrain height changes, preserve the same local-ground relationship rather than a convenient world Z. Use these views to reject grossly implausible building scale, route width, slope presentation, or occlusion. They are minimum plausibility checks, not an exact simulation of a runtime rig, and they do not authorize detailed player-view composition, final readability, final scale, or typology approval.
+- **Actual runtime camera rig, Stage 5 onward:** at Playable Blockout, use the representative player controller and the real runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—as the authority for player-camera evidence. Record the rig asset or class, configuration version, boom length, socket or shoulder offset, pitch behavior, SpringArm collision and retraction, and other project-relevant behavior. From the Visual Feasibility Slice onward, judge player readability, asset density, and visual composition through this rig under representative movement and camera states. A fixed player-height proxy may support comparison but cannot substitute for runtime capture.
+
+Overview evidence can find a macro problem and is the principal way to review prototype-wide spatial relationships, but it can never prove what the player sees or understands. `DIAGNOSTIC_ONLY` does not make the overview set non-gating: it may pass or fail the Stage 2–4 macro relationships assigned to it, while remaining unauthorized for player-camera claims. At every stage, exclude overview cameras from player-visibility, landmark-readability, scale, or typology approval; promotion of those questions requires the stage-authorized player-camera evidence. During Stages 2–4, do not spend prototype effort precisely composing scenery or detail to a player proxy whose runtime offsets, pitch, collision, and retraction have not yet been validated.
 
 ### 3. Experience prototype before full blockout
 
-Select one representative POI or encounter and build only the cheapest playable version of its experience unit: approach, question or reveal, refusal or occlusion, player choice or repeated verb, interaction, outcome or reward, and exit or next hook. Use boxes, semantic materials, temporary effects, and placeholder behavior.
+Only after the recorded Area Composition Plan passes, select one representative POI or encounter and build the cheapest playable version of its experience unit: approach, question or reveal, refusal or occlusion, player choice or repeated verb, interaction, outcome or reward, and exit or next hook. Use boxes, semantic materials, temporary effects, and placeholder behavior. Create or verify the persistent zone marker before adding the first prototype geometry, and keep it visible in the review evidence.
 
 Test the fun thesis, not only the geometry. Observe whether players understand what they are curious about, choose to approach or defer, experience anticipation or tension, receive a worthwhile payoff, and know what to do next. Record time to meaningful change and the role of any intentional quiet section. If the unit is weak, revise the thesis or spatial plan before building the whole route. For a small level, this gate may be combined with the next blockout step, but its evidence and approval question should remain explicit.
 
@@ -173,7 +203,9 @@ Build the terrain and large spatial masses first: height bands, ridges, valleys,
 
 For an outdoor map level-design prototype, the ground in this stage is a minimal Landscape terrain by default, not a flat cube or plane. Keep its extent, resolution, material, and detail deliberately cheap, but use it as the source of truth for the playable height field, route elevation, slopes, grounding, and terrain contacts. Place temporary architecture and other blockout volumes on top of it. Use another floor only when a specific user or stakeholder request explicitly overrides the default, and record the reason in the brief.
 
-Check the result from runtime arrival, route, reverse, elevated, and contact views. A level that works only from the intended beauty camera has not passed macro validation.
+Use the fixed overview set as the primary Stage 4 evidence. Compare its stable arrival, reverse, lateral, waterway/axis, elevation, and project-specific views to verify the whole-area arrangement, terrain relief, route hierarchy, bridge and water relationships, major occlusion, and risk coverage. Add or reposition a camera when the coverage matrix exposes a blind spot; do not force a fixed camera count, and do not accept a single hero overview merely because it is attractive.
+
+Then use auxiliary fixed views at the recorded player-camera height above local ground and FOV to reject building scale, route width, slope presentation, or occlusion that is obviously implausible. These checks are intentionally coarse. Do not fine-tune scene composition or detail to the player proxy, and do not claim exact gameplay-camera, final readability, final scale, or typology approval before Stage 5. A level that works only from an intended beauty camera has not passed macro validation, and every overview remains `DIAGNOSTIC_ONLY` even though the overview set is the primary macro-composition diagnostic.
 
 ### 4a. Route authority and corridor contract (blocking sub-gate)
 
@@ -192,11 +224,12 @@ Validate a route as a continuous corridor rather than only at its endpoints. Sam
 
 ### 5. Playable blockout and feedback gate
 
-Replace the plan with a playable rough draft made from a minimal Landscape terrain as the ground, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller, camera, gravity, speed, and collision. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
+Translate the approved Area Composition Plan into a playable rough draft made from a minimal Landscape terrain as the ground, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the scale, visibility, readability, and typology observations that depend on it. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
 
 Play in the runtime, not only by flying an editor camera. Test at least:
 
 - scale, capsule and camera clearance, slopes, jumps, climbs, cover, and traversal transitions;
+- runtime camera distance and offsets, pitch behavior, SpringArm collision or retraction, shoulder-side assumptions, and representative near-wall, doorway, slope, and occlusion cases;
 - movement, grounding, collision, route grade, and terrain contacts on the Landscape surface that will carry the prototype's outdoor traversal;
 - primary route, optional loops, wrong turns, objective readability, pacing, and recovery after failure;
 - landmark recognition, sightlines, occlusion, reveal timing, boundaries, unreachable shortcuts, and reverse views;
@@ -208,17 +241,19 @@ Use self-playtests for fast correction, informed critique for design diagnosis, 
 
 ### 6. Visual feasibility slice before map-wide assets
 
-Before committing the broad asset budget, build a small **visual feasibility slice** (also called a golden or representative slice). It should contain the route transition, focal landmark, foreground/midground/background structure, boundary or reverse view, contact conditions, and the asset families that will dominate the final level. Use real or representative meshes, materials, lighting, collision, and target platform settings. Include enough repetition to expose kit weakness, not only a hero asset.
+Before committing the broad asset budget, build a small **visual feasibility slice** (also called a golden or representative slice). It should contain the route transition, focal landmark, foreground/midground/background structure, boundary or reverse view, contact conditions, and the asset families that will dominate the final level. Use real or representative meshes, materials, lighting, collision, target platform settings, and the Stage 5-approved runtime camera rig. Include enough repetition to expose kit weakness, not only a hero asset.
 
 The slice must also preserve one representative experience unit: an approach, a question or reveal, a player verb or choice, an outcome or reward, and a next hook. A slice that looks convincing but does not demonstrate the fun thesis has only retired visual risk, not level-design risk.
 
-This slice answers a different question from the graybox: can the team reproduce the intended visual quality consistently, at an acceptable cost, with viable pivots, scale, materials, LOD or Nanite behavior, collision, streaming, and frame-time or memory budgets? Validate more than one required view and at least one ordinary, non-hero area. If the slice fails, repair the visual language, asset kit, material rules, or pipeline before scaling. Do not spend map-wide art effort to defend an unproven direction.
+This slice answers a different question from the graybox: can the team reproduce the intended visual quality consistently, at an acceptable cost, with viable pivots, scale, materials, LOD or Nanite behavior, collision, streaming, and frame-time or memory budgets? Judge readability, asset density, foreground/midground/background balance, and player-facing visual composition through the actual runtime rig under representative camera states. Validate more than one required gameplay view and at least one ordinary, non-hero area. The overview set may still diagnose macro drift but cannot approve these player-facing qualities. If the slice fails, repair the visual language, asset kit, material rules, or pipeline before scaling. Do not spend map-wide art effort to defend an unproven direction.
 
 ### 7. Production meshing and dressing
 
 Replace approved proxies with approved asset families while preserving the spatial contract: route width, floor height, sightlines, landmark position, camera clearance, collision intent, and boundary behavior. Record deliberate deviations instead of allowing them to accumulate invisibly. Use procedural systems for repeatable placement and hand authorship for hero composition, transitions, exceptions, and story detail.
 
 Promote in zones or representative chunks. Place large POIs and their route relationships first, then medium and small POIs according to the approved beat sheet and density hypothesis. Each chunk should be checked for contacts, repetition, reverse views, route readability, meaningful-change timing, and POI payoffs before the next chunk multiplies the same pattern. When a real asset reveals a structural problem, return to the blockout or kit rule instead of hiding it with local props.
+
+Keep the persistent zone markers and stable zone IDs throughout every replacement and placement batch. Stage 7 cannot pass while a planned zone lacks its marker, a marker no longer matches its approved anchor or bounds, or the zone cannot be identified in overview and local evidence. Marker retirement is a separate recorded cleanup action after asset placement completion; it is never an implicit side effect of deleting blockout Actors.
 
 ### 8. Layered lighting and audio integration
 
@@ -290,8 +325,16 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Architecture-ground, wall-terrain, water-bank, vegetation-hardscape, and assembly contact.
 - No world voids, exposed reserve edges, placeholders, uniform scatter, or unfinished reverse sides.
 - Material scale, lighting hierarchy, cultural and biome coherence.
-- Concept, plan, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets.
+- Concept, Area Composition Plan, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets; the plan existed and was recorded before the first cube or broad asset-placement mutation.
+- The Area Composition Plan records zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, a stable-ID `DIAGNOSTIC_ONLY` overview-camera set, its relationship/risk coverage matrix, auxiliary player-height/FOV proxies, and the planned runtime-rig source.
+- Typology-critical areas pass their required sequence, hierarchy, negative-space, and silhouette rules; palace approval includes the gate -> outer court -> middle gate -> central courtyard -> main hall axis, and any fortress- or castle-like reading is a hard failure.
 - AI workflow records identify the current stage, predecessor evidence, allowed mutations, promotion authority, and rollback target.
+- Stable zone IDs, numeric review IDs, names, ASCII fallbacks, roles, anchors or bounds, semantic colors, marker Actors or debug-layer entries, and marker ownership are recorded before prototype geometry begins.
+- Zone markers remain present and readable in overview and local evidence through the completed production-asset placement gate; any retirement has an explicit Stage 7-or-later cleanup record.
+- The overview-camera set covers arrival, reverse, lateral, waterway/axis, elevation, and project-specific blind spots with the smallest sufficient number of cameras; no single hero overview or arbitrary fixed count substitutes for coverage.
+- During Stages 2–4, overview evidence is the primary macro-composition diagnostic, every overview is labeled `DIAGNOSTIC_ONLY`, and auxiliary player-height/FOV proxies are limited to rejecting gross scale, width, slope, and occlusion failures without fine player-view composition.
+- Stage 5 evidence records and uses the representative player controller and actual runtime camera rig, including project-relevant boom, offset, pitch, collision, and retraction behavior; Stage 6 and later player readability, asset density, and visual composition are judged through that rig.
+- Overview evidence never approves player visibility, landmark readability, scale, or typology, regardless of stage.
 - Every numbered stage and the route sub-gate has a recorded status; no downstream work is promoted from `PENDING_EVIDENCE`, `INVALID_EVIDENCE`, or an unrecorded gate.
 - Combined stages are declared before mutation, and reopened stages preserve the accepted baseline and re-run dependent evidence.
 - Functional audio and collision are tested early when they affect play, while final authoring and full audits are verified after integration.
@@ -311,7 +354,15 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Approving a route because its endpoints match terrain height, its AABBs do not overlap, or its debug visualization is visible.
 - Adding routes after architecture is already treated as fixed, then moving unrelated props to hide a structural conflict.
 - Treating a spline, semantic strip, or PCG exclusion mask as interchangeable with a complete playable route.
+- Building the first cube or placing broad asset batches before a versioned Area Composition Plan and its gate status are recorded.
+- Using one hero overview instead of a stable-ID set that covers arrival, reverse, lateral, waterway/axis, elevation, and identified spatial risks.
+- Approving a palace from building size alone while its ceremonial axis or courtyard hierarchy is missing, or accepting a fortress- or castle-like silhouette.
+- Using localized zone text without an always-visible numeric ID and ASCII fallback, allowing missing glyphs or clipping to erase the area's identity.
+- Using a high overview camera to approve player visibility, typology, landmark readability, or scale instead of the actual player tracking-camera height and FOV.
+- Precisely tuning player-view composition or detail during Stages 2–4 to a static height/FOV proxy, or treating that proxy as proof of boom, shoulder offset, pitch, SpringArm collision, or retraction behavior.
+- Reaching Stage 5 without the actual runtime camera rig, or judging Golden/Visual Feasibility Slice readability, asset density, or visual composition from a fixed proxy instead of that rig.
 - Replacing the default Landscape floor in an outdoor map level-design prototype without a specific user or stakeholder request; a flat cube or plane defers the highest-risk spatial assumptions until production.
+- Relying on visual memory, Outliner browsing, or production art alone to identify zones, or deleting zone markers as part of proxy replacement before the asset-placement gate passes.
 - Treating concept art as a complete level specification or treating user approval as a substitute for runtime evidence.
 - Choosing a concept that available assets cannot support.
 - Scaling a weak representative slice.
