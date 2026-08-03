@@ -18,6 +18,34 @@ Automate when the responsibility is repeated, the inputs and outputs are defined
 - Log enough factual evidence to diagnose failure without storing private prompts, credentials, or unrelated user data.
 - Use the narrowest execution surface that exposes the required engine capability.
 
+## Round-trip economics and batch boundaries
+
+For Editor automation, latency is often dominated by orchestration and state
+coordination rather than by the individual property assignment. A design that
+performs one remote call per Actor, repeatedly discovers the same tools, or
+revalidates the whole world after every small change can turn a cheap prototype
+edit into an unbounded wait. Prefer a task-scoped execution context with one
+tool discovery phase, one scoped inventory read, local validation, one
+serialized mutation batch, and one postcondition read. Keep the batch small
+enough to roll back and compare, but large enough to avoid per-item dispatch
+overhead.
+
+Expose the operation boundary in the contract. A normal prototype mutation
+should be transform- or data-bounded and should not inherit spawn, delete,
+terrain rewrite, asset replacement, or full-rebuild behavior. Read-only
+diagnostics should return one structured snapshot. Promotion should consume
+evidence and approval state rather than silently invoking more mutation or
+capture work. Broad rebuilds belong to a separately confirmed maintenance
+operation.
+
+Measure `setup_seconds`, `discovery_seconds`, `wait_seconds`,
+`mutation_seconds`, `verification_seconds`, `background_seconds`,
+`tool_calls`, `redundant_calls`, affected-item count, and rollback status. Set a
+wall-clock budget for the complete operation. If the budget or call-count
+bound is exceeded, stop, audit state read-only, and classify the result before
+retrying. A retry without a state audit is a second mutation hypothesis, not a
+recovery strategy.
+
 ## Postconditions for spatial and Editor automation
 
 Treat a successful tool call as transport evidence, not as proof that the intended Unreal state exists. Any mutation that creates or changes spatial content should have explicit postconditions for the object count or identity, transform or topology, semantic tags or ownership, visibility and collision state, save persistence, and downstream compatibility. For route or procedural work, also verify representative points, named connections, the derived exclusion or review output, and the absence or classification of blockers.

@@ -46,6 +46,53 @@ Treat Data Layer and HLOD assignment as part of the output contract. Each spawn 
 
 Runtime generation also needs a source and cleanup policy: identify which players, editor views, World Partition sources, or explicit components can trigger generation; define increasing generation radii by grid scale; set a cleanup radius that prevents thrashing; and measure scheduler work, pooling, cache use, and frame-time contribution under movement and teleportation. Validate the transitions, not only the final generated image.
 
+### Dependent-strata strategy gate
+
+When a placement request contains a source stratum and a dependent stratum—for example, rocks or stone hardscape followed by grass or other ground cover—run this conditional sub-gate of Stage 2a before the first content-bearing generator, Foliage, or batch-placement mutation. The gate is required even when the final choice is manual placement. Its purpose is to prove that the AI considered the video-style distance/exclusion method and selected a method for stated spatial reasons rather than inheriting an implementation from a tutorial or from the first tool that happens to be available.
+
+Always record the following in the workflow or translation contract:
+
+- `applicability`: `APPLICABLE` or `NOT_APPLICABLE`;
+- `consideration_status`: `CONSIDERED`;
+- `selected_mode`: `VIDEO_DISTANCE_EXCLUSION`, `MASK_OTHER`, `DIRECT_AUTHORED`, or `PENDING_EVIDENCE`;
+- the decision reason, source authority, dependency order, units, clearance, transition band, validation method, and gate status;
+- the source mesh or footprint version, generation/graph version, target platform, and evidence IDs when the mode is applicable.
+
+Use the following decision order:
+
+1. Select `VIDEO_DISTANCE_EXCLUSION` when the hardscape output has a stable final footprint or a declared conservative footprint, the dependent layer should clear or approach that footprint, and the project can validate final transformed mesh separation. Generate the source first, publish its footprint, then derive the dependent candidates and inner exclusion or outer transition band from that authority.
+2. Select `MASK_OTHER` when a route, Landscape region, volume, Data Layer, or another spatial rule is the real authority and a hardscape-distance relationship would be misleading or redundant. Record why that authority owns the exclusion.
+3. Select `DIRECT_AUTHORED` when the source is exploratory, hero-specific, irregular in a way that the declared bounds cannot represent, or intentionally composed by hand. Keep any procedural broad layer separate from the authored exception and record its provenance.
+4. Select `PENDING_EVIDENCE` when source bounds, scale, units, ownership, engine support, target-platform budget, or the intended contact relationship is unresolved. Keep dependent placement read-only until the missing evidence is resolved.
+
+`CONSIDERED` is not the same as `VIDEO_DISTANCE_EXCLUSION`: the record must preserve the rejected alternatives and the reason for the final selection. A `PASS` strategy gate authorizes only the selected responsibility; it does not approve visual quality or map-wide duplication. Reopen it when the source mesh, footprint, transforms, graph version, generation mode, terrain, exclusion rule, or target platform changes.
+
+### Hardscape-to-ground-cover exclusion
+
+A common multi-stratum pattern is to generate a hardscape assembly such as stone tiles, rocks, a curb, or a constructed edge, then generate ground cover in the remaining surface and in a controlled contact or transition band. This is a spatial dependency contract, not a universal graph recipe.
+
+Use this pattern when the source assembly has a stable spatial footprint and the dependent layer must remain clear of, or intentionally approach, that footprint. Prefer direct authorship or a different mask when the source is still exploratory, its bounds are not trustworthy, or the visual result depends on hero-specific placement.
+
+Design the contract as follows:
+
+1. Author and validate the hardscape assembly first. Give it a semantic root and one published output that downstream generators can consume.
+2. Treat the final hardscape footprint as the exclusion authority. Use conservative transformed bounds or another declared spatial representation; center-to-center distance alone can under-exclude large, rotated, or irregular meshes.
+3. Generate ground-cover candidates from the authoritative terrain or surface provider, then calculate the nearest source distance. A distance operation such as a PCG Distance node may provide the attribute, but the durable contract is the declared footprint and its validation, not a particular node. Convert that distance into an inner exclusion radius and, when useful, an outer transition band whose density or scale changes gradually.
+4. Keep the exclusion and final composition in one orchestrator. A missing, stale, or failed hardscape source should fail closed or remain visibly unapproved rather than silently allowing a second generator to fill the gap.
+5. Expose the clearance, transition width, sample spacing, density, variation, seed, source/target representation, and platform constraints. Record units and do not promote a tutorial's numeric default across different asset scales.
+6. Recompute and validate the minimum source-to-target separation after final translation, rotation, scale, projection, and mesh selection. A point attribute or center sample is diagnostic; it is not proof that the rendered mesh clears the hardscape.
+7. Reopen validation when the source mesh, source bounds, transforms, graph version, terrain, exclusion rule, or generation mode changes.
+
+The trade-off is between cost and fidelity. Conservative bounds are cheap and safe but can create gaps that are wider than the art direction intends. More precise mesh or distance-field representations can improve contact bands but add authoring, memory, or generation cost. Choose the representation from the visual and collision responsibility, then measure the result at representative scale and viewing distance.
+
+### Version-sensitive rendering and culling decisions
+
+Nanite detail streaming, PCG generation, traditional distance culling, and HLOD solve different problems. Do not treat enabling Nanite as evidence that a distance-cull policy is active, or treat a low visible instance count as proof that generation and memory cost are acceptable.
+
+For any version-sensitive rendering or visibility feature, record the engine build, target hardware, feature maturity, prerequisites, fallback, and evidence date. At the time of this chapter, Epic's Unreal Engine 5.8 Nanite documentation lists view-specific distance culling as unsupported; verify the current target version rather than carrying that limitation forward or assuming it has changed. If distance-based visibility is required, choose a supported representation or generation/streaming policy and validate the actual behavior, popping, frame time, memory, and packaging result.
+
+For broad PCG coverage, choose non-partitioned, partitioned, hierarchical, or runtime generation from ownership and time-to-screen requirements. Validate grid ownership, source and cleanup radii, Data Layer and HLOD behavior, scheduler work, and transitions while moving or teleporting. The choice is a production contract, not a post-hoc optimization toggle.
+
 ## Ecology and placement
 
 Build canopy, understory, shrubs, ground cover, deadfall, and contact debris as distinct strata. Use gradients, clusters, transitions, and intentional gaps rather than uniform scatter or perimeter rings. Validate broad assets across their visual footprint; a center hit or grounded point count does not prove believable support.
@@ -72,9 +119,11 @@ Regeneration must preserve valid overrides, report orphaned or conflicting overr
 
 - Deterministic regeneration under recorded inputs.
 - Clear responsibility, hierarchy, exclusions, and ownership.
+- For dependent strata, the source footprint authority, clearance or transition band, units, dependency order, and stale-source behavior are recorded.
 - A single declared spatial authority for route-coupled masks, with route version, width or clearance inputs, branch ownership, and regeneration dependencies recorded.
-- Counts, coverage, contact, collision, navigation, warnings, and regeneration time.
+- Counts, coverage, contact, minimum separation after final transforms, collision, navigation, warnings, and regeneration time.
 - Instancing, LOD or Nanite, HLOD, streaming, memory, and frame-budget viability.
+- Version-sensitive culling or rendering claims include engine identity, target platform, fallback, and direct visibility/performance evidence.
 - Generation mode, partition grid, Data Layer and HLOD ownership, source radii, cleanup behavior, scheduler limits, and cache or pooling behavior are documented.
 - Procedural output and manual overrides are separate, with precedence and ownership documented.
 - Each promoted override has scope, intent, source generation identity, graph version, approval, and rollback or revalidation conditions.
@@ -92,6 +141,9 @@ Regeneration must preserve valid overrides, report orphaned or conflicting overr
 - Treating every exception as proof that the graph is wrong, or every graph failure as something to conceal with overrides.
 - Allowing overrides to accumulate until they form a second, undocumented generator.
 - Regenerating after a graph or asset change without checking orphaned, conflicting, or stale exceptions.
+- Copying a distance threshold from a tutorial without recording units, source scale, bounds policy, and target viewing distance.
+- Measuring distance between source centers while the rendered source meshes have materially different bounds or rotations.
+- Assuming Nanite automatically replaces distance culling, streaming policy, instance budgeting, or target-platform profiling.
 
 ## Research basis and further reading
 
@@ -104,6 +156,9 @@ The following sources document current Unreal Engine applications of these durab
 
 Additional current context:
 
+- [Epic Games: PCG Node Reference](https://dev.epicgames.com/documentation/en-us/unreal-engine/procedural-content-generation-framework-node-reference-in-unreal-engine) - Distance, Surface Sampler, Get Landscape Data, and Static Mesh Spawner semantics; verify node options against the target engine version.
+- [Epic Games: Nanite Virtualized Geometry](https://dev.epicgames.com/documentation/en-us/unreal-engine/nanite-virtualized-geometry) - Nanite streaming, supported features, and version-sensitive rendering limitations.
+- [Epic Games: Cull Distance Volumes](https://dev.epicgames.com/documentation/en-us/unreal-engine/cull-distance-volumes-in-unreal-engine) - distance-cull configuration and popping checks for supported actor representations.
 - [Epic Games: PCG Development Guides](https://dev.epicgames.com/documentation/en-us/unreal-engine/pcg-development-guides) — current PCG authoring and workflow context; verify feature names and maturity against the target engine version.
 - [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-8-release-notes) — dated evidence for the Manual Edit tool, Data Overrides Panel, and experimental Data Override System; use these as implementations of the override contract, not as the durable principle itself.
 

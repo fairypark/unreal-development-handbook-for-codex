@@ -31,6 +31,55 @@ Iteration should be fastest where uncertainty is high and changes are reversible
 
 The purpose of a gate is not to prevent change. It is to make the cost and meaning of change explicit. A promotion records what is currently accepted, what remains risky, who can approve the next commitment, and which earlier gate must reopen when a later change invalidates its assumptions.
 
+## Bounded prototype iteration
+
+A prototype request is not a smaller production build. It is an experiment with
+a deliberately narrow change surface. Before any Editor mutation, create a
+task-scoped iteration contract that records the current world or system, the
+unknown being tested, the current stage, the allowed scope, the maximum change
+count or other bounded resource, the wall-clock budget, the save policy,
+preconditions, postconditions, evidence class, owner or approver, and rollback
+target.
+
+Use explicit operation modes so that a short request cannot inherit the
+behavior of a broad builder:
+
+| Mode | Responsibility | Default boundary | What it does not prove |
+| --- | --- | --- | --- |
+| Bounded edit | Apply one small, reversible change to existing named content or state. | Transform or data changes within a declared batch; no implicit spawn, delete, broad rebuild, or save. | It does not prove the whole level, visual quality, or production readiness. |
+| Diagnostic audit | Read one batched snapshot and diagnose the current state. | One scoped inventory and local validation pass; no mutation. | A diagnostic pass does not approve promotion. |
+| Promotion review | Evaluate an explicit evidence package against a gate. | Requires explicit confirmation, structural checks, and the required independent or designated review. | It does not silently rebuild, recapture invalid evidence, or retry until a pass appears. |
+| Maintenance rebuild | Reconstruct or migrate a broad disposable state. | Separate task, explicit confirmation, checkpoint, and recovery plan. | It is never the default implementation of an ordinary prototype edit. |
+
+For a normal prototype iteration, use the bounded-edit mode unless the contract
+shows that a different mode is required. If the request needs creation,
+deletion, terrain rewriting, broad layout regeneration, or production-asset
+replacement, stop and reclassify it rather than expanding a patch implicitly.
+A project may assign local names to these modes, but the names must not change
+their separation of responsibility.
+
+Keep the hot path bounded: initialize or discover the approved execution
+surface once per task, read the relevant inventory once, validate the request
+locally, perform one serialized transaction, re-read the changed state once,
+and save only under the declared save policy. Avoid one tool round-trip per
+Actor or per property when a local batch can establish the same postcondition.
+Record setup, discovery, queue or game-thread wait, mutation, verification, and
+background maintenance time separately. A time budget covers the whole
+operation, not only the final setter call.
+
+When a batch times out, returns an empty or ambiguous result, or exceeds its
+budget, do not retry the same mutation. First run a read-only state audit and
+classify the result as complete, partial, duplicated, unchanged, recoverable,
+retired, or unknown. Then resume from a verified checkpoint, roll back the
+verified target, or reopen the responsible gate. Preserve the baseline and the
+failed attempt so that a later repair remains comparable.
+
+Releasing this bounded workflow is separate from promoting the level or system
+it operates on. A workflow may be released with its tests and guardrails
+passing while the content remains `PENDING_EVIDENCE` or `INVALID_EVIDENCE`.
+Report those states separately instead of calling a fast tool path a successful
+production result.
+
 ## Experience hypothesis before spatial scale
 
 A level can be readable, traversable, and visually consistent yet still fail to hold attention. Treat fun as a design hypothesis that must be made observable before broad layout or final content. The hypothesis is project- and genre-specific: exploration may depend on curiosity and voluntary discovery, while combat, stealth, puzzle, social, or narrative spaces may depend on different verbs and rewards.

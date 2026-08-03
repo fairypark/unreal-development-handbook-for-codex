@@ -28,6 +28,15 @@ This repository is also a Codex plugin. The canonical chapter files live in each
 | `guide-unreal-ai-development` | Chapter 15: AI roles, oversight, evidence, reproducibility, and failure containment. |
 | `analyze-unreal-development-cases` | Chapter 16: evidence-backed cases, failures, outcomes, and transferable lessons. |
 
+World and level workflows also include a machine-readable [Reference-to-Prototype Translation Contract schema](skills/design-unreal-worlds-and-levels/references/reference-to-prototype-translation.schema.json) and [starter template](skills/design-unreal-worlds-and-levels/references/reference-to-prototype-translation.template.json). They implement the blocking Stage 2a handoff between an approved Area Composition Plan and the first content-bearing prototype placement; project-specific formats may replace them only when they preserve the same identifiers, authority, traceability, evidence, and reopening semantics.
+
+Validate the bundled contract assets and semantic gate rules with:
+
+```powershell
+uv run --with jsonschema python -m unittest discover -s tests -v
+uv run --with jsonschema python scripts/validate_reference_to_prototype_contract.py skills/design-unreal-worlds-and-levels/references/reference-to-prototype-translation.template.json
+```
+
 The Skills provide reasoning and validation contracts. They do not bundle MCP servers, Editor hooks, Unreal operations, or implementation-specific tool instructions. When concrete Editor work is requested, use the independently installable **Unreal Editor Skills for Codex** execution layer after the relevant Handbook Skill has established intent, design, constraints, and success criteria.
 
 Installing this plugin is not required to author the handbook inside this repository, where `AGENTS.md` supplies project guidance. Installation makes the Skills discoverable in other Codex projects and tasks.

@@ -1,0 +1,786 @@
+{
+  "schema_version": "1.1.0",
+  "contract_id": "RTP-GENERIC-001",
+  "contract_version": "0.1.0",
+  "work_class": "PRODUCTION_INTENDED",
+  "scope": "Replace this generic one-zone example with the approved project scope and measured source-derived ranges.",
+  "lifecycle_phase": "PRE_PLACEMENT",
+  "dependent_strata_strategy": {
+    "applicability": "NOT_APPLICABLE",
+    "consideration_status": "CONSIDERED",
+    "selected_mode": "NOT_APPLICABLE",
+    "decision_reason": "No dependent procedural strata are in this generic contract; replace this record with APPLICABLE and a selected mode when source and dependent layers enter scope.",
+    "source_authority": "NONE",
+    "dependency_order": [
+      "NOT_APPLICABLE"
+    ],
+    "units": "ENGINE_UNITS",
+    "clearance": 0,
+    "transition_band": 0,
+    "validation_method": "NOT_APPLICABLE",
+    "source_version": "NOT_APPLICABLE",
+    "generation_version": "NOT_APPLICABLE",
+    "target_platform": "NOT_APPLICABLE",
+    "evidence_ids": [],
+    "rejected_modes": [
+      "VIDEO_DISTANCE_EXCLUSION",
+      "MASK_OTHER",
+      "DIRECT_AUTHORED"
+    ],
+    "status": "PASS"
+  },
+  "gate": {
+    "stage": "2a_REFERENCE_TO_PROTOTYPE_TRANSLATION",
+    "status": "PENDING_EVIDENCE",
+    "stage2_plan_status": "PASS",
+    "broad_placement_authorized": false,
+    "approver": null,
+    "decision_at": null,
+    "rollback_target": "Approved Area Composition Plan baseline before content-bearing prototype placement",
+    "blocked_reasons": [
+      "Replace the generic example values, validate the contract, and obtain the recorded Stage 2a promotion decision."
+    ]
+  },
+  "area_composition_plan": {
+    "artifact_id": "PLAN-GENERIC-001",
+    "version": "1.0.0",
+    "status": "PASS",
+    "approved_by": "DESIGNATED_APPROVER",
+    "approval_record": "APPROVAL-PLAN-GENERIC-001",
+    "zone_registry_version": "1.0.0",
+    "camera_registry_version": "1.0.0"
+  },
+  "source_artifacts": [
+    {
+      "source_id": "SRC-CONCEPT-001",
+      "media_type": "CONCEPT_IMAGE",
+      "locator": "artifacts/reference/concept-image.png",
+      "exact_selection": "Full approved frame; record a crop identifier here when only part of the image controls the requirement.",
+      "version": "1.0.0",
+      "approval_status": "APPROVED",
+      "approved_by": "DESIGNATED_APPROVER",
+      "authority": [
+        {
+          "scope": "TYPOLOGY_HIERARCHY",
+          "zone_ids": [
+            "ZONE-ALPHA"
+          ],
+          "priority": 1,
+          "controlling": true
+        },
+        {
+          "scope": "SILHOUETTE",
+          "zone_ids": [
+            "ZONE-ALPHA"
+          ],
+          "priority": 1,
+          "controlling": true
+        },
+        {
+          "scope": "SHADE_ATMOSPHERE",
+          "zone_ids": [
+            "ZONE-ALPHA"
+          ],
+          "priority": 1,
+          "controlling": true
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-PLAN-001",
+      "media_type": "TOP_DOWN_PLAN",
+      "locator": "artifacts/reference/annotated-top-down-plan.png",
+      "exact_selection": "Approved plan layer and legend.",
+      "version": "1.0.0",
+      "approval_status": "APPROVED",
+      "approved_by": "DESIGNATED_APPROVER",
+      "authority": [
+        {
+          "scope": "FOOTPRINT_DENSITY",
+          "zone_ids": [
+            "ZONE-ALPHA"
+          ],
+          "priority": 1,
+          "controlling": true
+        },
+        {
+          "scope": "CIRCULATION",
+          "zone_ids": [
+            "ZONE-ALPHA"
+          ],
+          "priority": 1,
+          "controlling": true
+        },
+        {
+          "scope": "WATER_BRIDGES",
+          "zone_ids": [
+            "ZONE-ALPHA"
+          ],
+          "priority": 1,
+          "controlling": true
+        },
+        {
+          "scope": "ELEVATION",
+          "zone_ids": [
+            "ZONE-ALPHA"
+          ],
+          "priority": 2,
+          "controlling": false
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-ELEVATION-001",
+      "media_type": "SIDE_ELEVATION",
+      "locator": "artifacts/reference/side-elevation.png",
+      "exact_selection": "Approved elevation profile through Zone Alpha.",
+      "version": "1.0.0",
+      "approval_status": "APPROVED",
+      "approved_by": "DESIGNATED_APPROVER",
+      "authority": [
+        {
+          "scope": "ELEVATION",
+          "zone_ids": [
+            "ZONE-ALPHA"
+          ],
+          "priority": 1,
+          "controlling": true
+        }
+      ]
+    }
+  ],
+  "source_requirements": [
+    {
+      "requirement_id": "REQ-DENSITY-001",
+      "source_artifact_ids": [
+        "SRC-PLAN-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-FOOTPRINTS"
+      ],
+      "category": "DENSITY_OCCUPANCY",
+      "statement": "Zone Alpha maintains the approved built-footprint occupancy range across its buildable area.",
+      "measurement_basis": "Union of building proxy footprints divided by buildable zone area, excluding recorded route and intentional-void reservations.",
+      "confidence": "HIGH",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-MASS-001",
+      "source_artifact_ids": [
+        "SRC-CONCEPT-001",
+        "SRC-PLAN-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-FOOTPRINTS"
+      ],
+      "category": "MASS_COUNTS",
+      "statement": "Building and roof masses remain within the approved ranges without collapsing several visually separate masses into one Actor count.",
+      "measurement_basis": "A mass is counted when its footprint or roof ridge reads as a separate compositional unit from the assigned overview set.",
+      "confidence": "MEDIUM",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-TYPOLOGY-001",
+      "source_artifact_ids": [
+        "SRC-CONCEPT-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-TYPOLOGY"
+      ],
+      "category": "TYPOLOGY_MIX",
+      "statement": "One primary mass is supported by a larger family of subordinate masses.",
+      "measurement_basis": "Count and visible share by named typology in the approved plan and overview coverage.",
+      "confidence": "MEDIUM",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-FRONTAGE-001",
+      "source_artifact_ids": [
+        "SRC-PLAN-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-FRONTAGE"
+      ],
+      "category": "FRONTAGE_CONTINUITY",
+      "statement": "Built frontage creates sustained enclosure while preserving the intentional openings recorded in the plan.",
+      "measurement_basis": "Length of occupied frontage divided by the eligible route-facing frontage segment.",
+      "confidence": "HIGH",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-GAPS-001",
+      "source_artifact_ids": [
+        "SRC-PLAN-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-FRONTAGE"
+      ],
+      "category": "BUILDING_GAPS",
+      "statement": "Ordinary building gaps remain within the planned range while named openings remain exempt and traceable.",
+      "measurement_basis": "Shortest horizontal separation between adjacent eligible building envelopes.",
+      "confidence": "HIGH",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-ROUTE-001",
+      "source_artifact_ids": [
+        "SRC-PLAN-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-ROUTE-MAIN",
+        "PLAN-FEATURE-ALLEY-001"
+      ],
+      "category": "ROUTE_WIDTH_CONTINUITY",
+      "statement": "The primary route and alley retain their width ranges and continuous connection through the zone.",
+      "measurement_basis": "Continuous corridor width sampled along the authoritative centerline and validated against the representative capsule.",
+      "confidence": "HIGH",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-ELEVATION-001",
+      "source_artifact_ids": [
+        "SRC-ELEVATION-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-TERRACE-001"
+      ],
+      "category": "ELEVATION_TRANSITION",
+      "statement": "The upper platform reads above the arrival band through a traversable Landscape transition.",
+      "measurement_basis": "Difference between sampled Landscape height bands at the approved profile anchors.",
+      "confidence": "HIGH",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-WATER-NONE",
+      "source_artifact_ids": [
+        "SRC-PLAN-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-WATER-NONE"
+      ],
+      "category": "WATER_BRIDGE",
+      "statement": "No water body or bridge belongs inside Zone Alpha; downstream changes must not introduce one without reopening the plan.",
+      "measurement_basis": "Explicit not-applicable declaration in the controlling top-down plan.",
+      "confidence": "HIGH",
+      "trace_policy": "VALIDATION_ONLY"
+    },
+    {
+      "requirement_id": "REQ-SHADE-001",
+      "source_artifact_ids": [
+        "SRC-CONCEPT-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-SHADE-001"
+      ],
+      "category": "SHADED_SPACE",
+      "statement": "The covered edge remains a legible shaded or enclosed spatial beat rather than being filled with unrelated proxy mass.",
+      "measurement_basis": "Retained plan footprint and enclosure relation of the named shaded-space reservation.",
+      "confidence": "MEDIUM",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-VOID-001",
+      "source_artifact_ids": [
+        "SRC-PLAN-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-VOID-001"
+      ],
+      "category": "INTENTIONAL_VOID",
+      "statement": "The central open space remains unbuilt and continues to separate the primary and supporting masses.",
+      "measurement_basis": "Retained unoccupied area inside the approved void polygon.",
+      "confidence": "HIGH",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-HIERARCHY-001",
+      "source_artifact_ids": [
+        "SRC-CONCEPT-001",
+        "SRC-PLAN-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-TYPOLOGY"
+      ],
+      "category": "HIERARCHY",
+      "statement": "The primary hall remains the dominant focal mass, supported by subordinate buildings and the central void.",
+      "measurement_basis": "Ranked mass, roof, position, approach-axis, and negative-space relationship in assigned overview and player-route samples.",
+      "confidence": "MEDIUM",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    },
+    {
+      "requirement_id": "REQ-SILHOUETTE-001",
+      "source_artifact_ids": [
+        "SRC-CONCEPT-001",
+        "SRC-ELEVATION-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-SKYLINE"
+      ],
+      "category": "PROHIBITED_SILHOUETTE",
+      "statement": "No unintended tower, monolithic wall, or single keep-like mass may dominate the zone silhouette.",
+      "measurement_basis": "Binary review from the assigned overview set and Stage 5 runtime approach samples.",
+      "confidence": "HIGH",
+      "trace_policy": "IMPLEMENTATION_AND_VALIDATION"
+    }
+  ],
+  "source_conflicts": [],
+  "zones": [
+    {
+      "zone_id": "ZONE-ALPHA",
+      "numeric_review_id": 1,
+      "display_name": "Generic Zone Alpha",
+      "ascii_fallback": "ZONE ALPHA",
+      "role": "Example mixed architecture zone with a primary focal mass, supporting frontage, an alley, a terrace, a shaded edge, and an intentional central void.",
+      "built_footprint_occupancy": {
+        "requirement_ids": [
+          "REQ-DENSITY-001"
+        ],
+        "measurement_basis": "Building proxy footprint union divided by buildable zone area after subtracting the named route and void reservations.",
+        "target": {
+          "min": 0.35,
+          "max": 0.5
+        },
+        "allowed_absolute_deviation": 0.05
+      },
+      "mass_counts": {
+        "requirement_ids": [
+          "REQ-MASS-001"
+        ],
+        "counting_rule": "Count visually separate building envelopes and roof ridges, not Actor instances or primitive components.",
+        "building_masses": {
+          "min": 8,
+          "max": 12
+        },
+        "roof_masses": {
+          "min": 10,
+          "max": 16
+        }
+      },
+      "typology_mix": [
+        {
+          "typology_id": "TYPOLOGY-PRIMARY-HALL",
+          "requirement_ids": [
+            "REQ-TYPOLOGY-001",
+            "REQ-HIERARCHY-001"
+          ],
+          "hierarchy_role": "PRIMARY",
+          "count_range": {
+            "min": 1,
+            "max": 1
+          },
+          "share_range": {
+            "min": 0.08,
+            "max": 0.2
+          }
+        },
+        {
+          "typology_id": "TYPOLOGY-SUPPORTING-BUILDING",
+          "requirement_ids": [
+            "REQ-TYPOLOGY-001"
+          ],
+          "hierarchy_role": "SUPPORTING",
+          "count_range": {
+            "min": 7,
+            "max": 11
+          },
+          "share_range": {
+            "min": 0.8,
+            "max": 0.92
+          }
+        }
+      ],
+      "frontage_continuity": {
+        "requirement_ids": [
+          "REQ-FRONTAGE-001"
+        ],
+        "measurement_basis": "Occupied route-facing frontage length divided by eligible frontage length, excluding the named central opening.",
+        "target": {
+          "min": 0.6,
+          "max": 0.85
+        },
+        "allowed_absolute_deviation": 0.05
+      },
+      "building_gaps": {
+        "requirement_ids": [
+          "REQ-GAPS-001"
+        ],
+        "measurement_basis": "Shortest horizontal separation between adjacent ordinary envelopes; named gates and the central void are excluded.",
+        "target": {
+          "min": 1.5,
+          "max": 4.0
+        },
+        "unit": "METERS",
+        "allowed_absolute_deviation": 0.5
+      },
+      "route_widths": [
+        {
+          "route_id": "ROUTE-MAIN-001",
+          "requirement_ids": [
+            "REQ-ROUTE-001"
+          ],
+          "route_class": "PRIMARY",
+          "width_range": {
+            "min": 4.0,
+            "max": 6.0
+          },
+          "unit": "METERS",
+          "continuity_required": true,
+          "minimum_clearance": 4.0
+        },
+        {
+          "route_id": "ROUTE-ALLEY-001",
+          "requirement_ids": [
+            "REQ-ROUTE-001"
+          ],
+          "route_class": "ALLEY",
+          "width_range": {
+            "min": 1.5,
+            "max": 2.5
+          },
+          "unit": "METERS",
+          "continuity_required": true,
+          "minimum_clearance": 1.5
+        }
+      ],
+      "elevation_transitions": [
+        {
+          "transition_id": "ELEVATION-TERRACE-001",
+          "requirement_ids": [
+            "REQ-ELEVATION-001"
+          ],
+          "from_band": "ARRIVAL_LOW",
+          "to_band": "PRIMARY_PLATFORM_HIGH",
+          "delta_range": {
+            "min": 2.0,
+            "max": 5.0
+          },
+          "unit": "METERS",
+          "transition_rule": "Use a traversable Landscape grade or authored steps and landing; do not fake the height change with a floating architecture plinth."
+        }
+      ],
+      "water_and_bridges": {
+        "requirement_ids": [
+          "REQ-WATER-NONE"
+        ],
+        "applicability": "NOT_APPLICABLE",
+        "not_applicable_reason": "The controlling top-down plan places no water body, bank, crossing, or bridge in Zone Alpha.",
+        "features": []
+      },
+      "shaded_spaces": {
+        "applicability": "APPLICABLE",
+        "not_applicable_reason": null,
+        "spaces": [
+          {
+            "space_id": "SHADE-EDGE-001",
+            "requirement_ids": [
+              "REQ-SHADE-001"
+            ],
+            "role": "Covered transition that compresses the approach before the central open space.",
+            "preservation_rule": "Keep the reservation visibly enclosed on one side and free of unrelated proxy fill.",
+            "minimum_retained_ratio": 0.8,
+            "hard_failure_if_lost": true
+          }
+        ]
+      },
+      "intentional_voids": {
+        "applicability": "APPLICABLE",
+        "not_applicable_reason": null,
+        "spaces": [
+          {
+            "space_id": "VOID-CENTRAL-001",
+            "requirement_ids": [
+              "REQ-VOID-001"
+            ],
+            "role": "Central open space that separates and reveals the primary mass.",
+            "preservation_rule": "No architecture proxy may occupy the approved void polygon except explicitly traced temporary gameplay probes.",
+            "minimum_retained_ratio": 0.9,
+            "hard_failure_if_lost": true
+          }
+        ]
+      },
+      "hierarchy": {
+        "requirement_ids": [
+          "REQ-HIERARCHY-001"
+        ],
+        "focal_order": [
+          "TYPOLOGY-PRIMARY-HALL",
+          "TYPOLOGY-SUPPORTING-BUILDING"
+        ],
+        "required_relations": [
+          "The primary mass terminates the main approach without erasing the supporting frontage.",
+          "The central void separates the primary mass from the supporting mass family."
+        ]
+      },
+      "prohibited_silhouettes": [
+        {
+          "rule_id": "SILHOUETTE-NO-KEEP",
+          "requirement_ids": [
+            "REQ-SILHOUETTE-001"
+          ],
+          "description": "Reject any single tower, keep-like block, or continuous high wall that collapses the intended distributed roofscape.",
+          "hard_failure": true
+        }
+      ]
+    }
+  ],
+  "prototype_elements": [
+    {
+      "prototype_element_id": "PROTO-ARCH-ALPHA",
+      "element_kind": "ARCHITECTURE_PROXY_GROUP",
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "requirement_ids": [
+        "REQ-DENSITY-001",
+        "REQ-MASS-001",
+        "REQ-TYPOLOGY-001",
+        "REQ-FRONTAGE-001",
+        "REQ-GAPS-001",
+        "REQ-HIERARCHY-001",
+        "REQ-SILHOUETTE-001"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-FOOTPRINTS",
+        "PLAN-FEATURE-FRONTAGE",
+        "PLAN-FEATURE-TYPOLOGY",
+        "PLAN-FEATURE-SKYLINE"
+      ],
+      "planned_bounds_or_anchor": "Zone Alpha approved buildable polygon excluding route, shade, and void reservations.",
+      "implementation_rule": "Use cube-only building and roof masses grouped by stable member keys; preserve the Landscape as the playable floor.",
+      "owner": "LEVEL_BLOCKOUT_OWNER",
+      "lifecycle_state": "PLANNED",
+      "realization": {
+        "system": null,
+        "identifiers": [],
+        "member_keys": [],
+        "member_count": null,
+        "generation_version": null,
+        "inventory_digest": null
+      }
+    },
+    {
+      "prototype_element_id": "PROTO-ROUTES-ALPHA",
+      "element_kind": "ROUTE",
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "requirement_ids": [
+        "REQ-ROUTE-001"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-ROUTE-MAIN",
+        "PLAN-FEATURE-ALLEY-001"
+      ],
+      "planned_bounds_or_anchor": "Approved route centerlines and corridor reservations through Zone Alpha.",
+      "implementation_rule": "Keep route intent, review visualization, and Landscape playable surface ownership distinct and traceable.",
+      "owner": "ROUTE_OWNER",
+      "lifecycle_state": "PLANNED",
+      "realization": {
+        "system": null,
+        "identifiers": [],
+        "member_keys": [],
+        "member_count": null,
+        "generation_version": null,
+        "inventory_digest": null
+      }
+    },
+    {
+      "prototype_element_id": "PROTO-TERRAIN-TERRACE",
+      "element_kind": "TERRAIN_CHANGE",
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "requirement_ids": [
+        "REQ-ELEVATION-001"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-TERRACE-001"
+      ],
+      "planned_bounds_or_anchor": "Landscape profile anchors for arrival and primary platform bands.",
+      "implementation_rule": "Modify the minimal Landscape height field and retain the approved traversable transition.",
+      "owner": "TERRAIN_OWNER",
+      "lifecycle_state": "PLANNED",
+      "realization": {
+        "system": null,
+        "identifiers": [],
+        "member_keys": [],
+        "member_count": null,
+        "generation_version": null,
+        "inventory_digest": null
+      }
+    },
+    {
+      "prototype_element_id": "PROTO-SHADE-RESERVATION",
+      "element_kind": "SHADE_RESERVATION",
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "requirement_ids": [
+        "REQ-SHADE-001"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-SHADE-001"
+      ],
+      "planned_bounds_or_anchor": "Approved shaded-edge reservation polygon.",
+      "implementation_rule": "Represent the reserved relationship with an inspectable debug volume or semantic proxy until the enclosing architecture exists.",
+      "owner": "LEVEL_BLOCKOUT_OWNER",
+      "lifecycle_state": "PLANNED",
+      "realization": {
+        "system": null,
+        "identifiers": [],
+        "member_keys": [],
+        "member_count": null,
+        "generation_version": null,
+        "inventory_digest": null
+      }
+    },
+    {
+      "prototype_element_id": "PROTO-VOID-RESERVATION",
+      "element_kind": "VOID_RESERVATION",
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "requirement_ids": [
+        "REQ-VOID-001"
+      ],
+      "plan_feature_ids": [
+        "PLAN-FEATURE-VOID-001"
+      ],
+      "planned_bounds_or_anchor": "Approved central-void polygon.",
+      "implementation_rule": "Keep an inspectable exclusion volume and reject untraced architecture overlap.",
+      "owner": "LEVEL_BLOCKOUT_OWNER",
+      "lifecycle_state": "PLANNED",
+      "realization": {
+        "system": null,
+        "identifiers": [],
+        "member_keys": [],
+        "member_count": null,
+        "generation_version": null,
+        "inventory_digest": null
+      }
+    }
+  ],
+  "camera_contract": {
+    "overview_cameras": [
+      {
+        "camera_id": "CAM-OVERVIEW-001",
+        "authority": "DIAGNOSTIC_ONLY",
+        "transform_source": "Approved fixed Camera Actor or serialized transform record",
+        "projection": "ORTHOGRAPHIC",
+        "resolution": [
+          1920,
+          1080
+        ],
+        "crop": "Full Zone Alpha coverage with stable margins and no adaptive framing.",
+        "fixed_condition_id": "COND-OVERVIEW-001",
+        "covered_metrics": [
+          "BUILT_FOOTPRINT_OCCUPANCY",
+          "ZONE_DENSITY_DISTRIBUTION",
+          "BUILDING_MASS_COUNT",
+          "ROOF_MASS_COUNT",
+          "TYPOLOGY_MIX",
+          "FRONTAGE_CONTINUITY",
+          "BUILDING_GAPS",
+          "HEIGHT_BANDS",
+          "WATER_BRIDGE_RELATIONSHIP",
+          "SHADE_PRESERVATION",
+          "VOID_PRESERVATION",
+          "HIERARCHY",
+          "PATH_CONTINUITY",
+          "PROHIBITED_SILHOUETTE"
+        ]
+      }
+    ],
+    "static_player_height_proxies": [
+      {
+        "camera_id": "CAM-PLAYER-PROXY-001",
+        "authority": "GROSS_PLAUSIBILITY_ONLY",
+        "height_above_local_ground": 1.7,
+        "height_unit": "METERS",
+        "fov_degrees": 80.0,
+        "allowed_claims": [
+          "GROSS_SCALE_REJECTION",
+          "GROSS_WIDTH_REJECTION",
+          "GROSS_SLOPE_REJECTION",
+          "GROSS_OCCLUSION_REJECTION"
+        ]
+      }
+    ],
+    "runtime_player_camera": {
+      "camera_id": "CAM-RUNTIME-PLAYER-001",
+      "required_stage": 5,
+      "authority": "PLAYER_EXPERIENCE_AUTHORITY",
+      "rig_source": "Record the representative player controller and runtime camera-rig asset or class before Stage 5 evidence.",
+      "configuration_version": "PLANNED-0.1.0",
+      "route_sample_ids": [
+        "SAMPLE-ARRIVAL-001",
+        "SAMPLE-ALLEY-001",
+        "SAMPLE-PRIMARY-APPROACH"
+      ],
+      "required_metrics": [
+        "PERCEIVED_DISTANCE",
+        "ENCLOSURE",
+        "OCCLUSION_REVEAL",
+        "ROUTE_CONTINUITY",
+        "LANDMARK_HIERARCHY",
+        "CLEARANCE",
+        "RECOVERY",
+        "PLAYER_SCALE_READABILITY"
+      ]
+    },
+    "same_condition_rule": "Preserve each assigned transform or route sample, projection, crop, resolution, runtime rig version and state, and measurement basis across reference, plan, baseline prototype, candidate prototype, and accepted evidence."
+  },
+  "post_mutation_audit": {
+    "batch_id": null,
+    "prototype_version": null,
+    "changed_prototype_element_ids": [],
+    "required_requirement_ids": [],
+    "audit_status": "NOT_STARTED"
+  },
+  "deviation_records": [],
+  "integrity": {
+    "all_sources_resolved": true,
+    "all_zone_contracts_complete": true,
+    "all_implementation_requirements_traced": true,
+    "all_placement_groups_mapped": true,
+    "post_mutation_audit_state": "NOT_STARTED",
+    "orphan_requirement_ids": [],
+    "unmapped_prototype_element_ids": []
+  }
+}

@@ -1,0 +1,1791 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fairypark.dev/schemas/unreal/reference-to-prototype-translation-1.1.0.schema.json",
+  "title": "Reference-to-Prototype Translation Contract",
+  "description": "Blocking Stage 2a contract between an approved Area Composition Plan and content-bearing Unreal level prototype placement.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "contract_version",
+    "work_class",
+    "scope",
+    "lifecycle_phase",
+    "gate",
+    "dependent_strata_strategy",
+    "area_composition_plan",
+    "source_artifacts",
+    "source_requirements",
+    "source_conflicts",
+    "zones",
+    "prototype_elements",
+    "camera_contract",
+    "post_mutation_audit",
+    "deviation_records",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.1.0"
+    },
+    "contract_id": {
+      "$ref": "#/$defs/stableId"
+    },
+    "contract_version": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "work_class": {
+      "enum": [
+        "DISPOSABLE_EXPERIMENT",
+        "PRODUCTION_INTENDED"
+      ]
+    },
+    "scope": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "lifecycle_phase": {
+      "enum": [
+        "PRE_PLACEMENT",
+        "POST_MUTATION_AUDIT"
+      ]
+    },
+    "gate": {
+      "$ref": "#/$defs/gate"
+    },
+    "dependent_strata_strategy": {
+      "$ref": "#/$defs/dependentStrataStrategy"
+    },
+    "area_composition_plan": {
+      "$ref": "#/$defs/areaCompositionPlan"
+    },
+    "source_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/sourceArtifact"
+      }
+    },
+    "source_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/sourceRequirement"
+      }
+    },
+    "source_conflicts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/sourceConflict"
+      }
+    },
+    "zones": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/zoneContract"
+      }
+    },
+    "prototype_elements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/prototypeElement"
+      }
+    },
+    "camera_contract": {
+      "$ref": "#/$defs/cameraContract"
+    },
+    "post_mutation_audit": {
+      "$ref": "#/$defs/postMutationAudit"
+    },
+    "deviation_records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/deviationRecord"
+      }
+    },
+    "integrity": {
+      "$ref": "#/$defs/integrity"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "gate": {
+            "properties": {
+              "broad_placement_authorized": {
+                "const": true
+              }
+            },
+            "required": [
+              "broad_placement_authorized"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "gate": {
+            "properties": {
+              "status": {
+                "const": "PASS"
+              },
+              "approver": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "decision_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "blocked_reasons": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lifecycle_phase": {
+            "const": "POST_MUTATION_AUDIT"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "deviation_records": {
+            "minItems": 1
+          },
+          "post_mutation_audit": {
+            "properties": {
+              "batch_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "prototype_version": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "changed_prototype_element_ids": {
+                "minItems": 1
+              },
+              "required_requirement_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stableId": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{2,127}$"
+    },
+    "idArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/stableId"
+      }
+    },
+    "numericRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max"
+      ],
+      "properties": {
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      }
+    },
+    "integerRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max"
+      ],
+      "properties": {
+        "min": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "approvalStatus": {
+      "enum": [
+        "DRAFT",
+        "PENDING_EVIDENCE",
+        "APPROVED",
+        "REJECTED",
+        "SUPERSEDED"
+      ]
+    },
+    "authorityScope": {
+      "enum": [
+        "FOOTPRINT_DENSITY",
+        "CIRCULATION",
+        "ELEVATION",
+        "WATER_BRIDGES",
+        "TYPOLOGY_HIERARCHY",
+        "SILHOUETTE",
+        "SHADE_ATMOSPHERE"
+      ]
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "status",
+        "stage2_plan_status",
+        "broad_placement_authorized",
+        "approver",
+        "decision_at",
+        "rollback_target",
+        "blocked_reasons"
+      ],
+      "properties": {
+        "stage": {
+          "const": "2a_REFERENCE_TO_PROTOTYPE_TRANSLATION"
+        },
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "PENDING_EVIDENCE",
+            "INVALID_EVIDENCE"
+          ]
+        },
+        "stage2_plan_status": {
+          "const": "PASS"
+        },
+        "broad_placement_authorized": {
+          "type": "boolean"
+        },
+        "approver": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decision_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "rollback_target": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "blocked_reasons": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        }
+      }
+    },
+    "dependentStrataStrategy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicability",
+        "consideration_status",
+        "selected_mode",
+        "decision_reason",
+        "source_authority",
+        "dependency_order",
+        "units",
+        "clearance",
+        "transition_band",
+        "validation_method",
+        "source_version",
+        "generation_version",
+        "target_platform",
+        "evidence_ids",
+        "rejected_modes",
+        "status"
+      ],
+      "properties": {
+        "applicability": {
+          "enum": [
+            "APPLICABLE",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "consideration_status": {
+          "const": "CONSIDERED"
+        },
+        "selected_mode": {
+          "enum": [
+            "VIDEO_DISTANCE_EXCLUSION",
+            "MASK_OTHER",
+            "DIRECT_AUTHORED",
+            "PENDING_EVIDENCE",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "decision_reason": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "source_authority": {
+          "enum": [
+            "FINAL_HARDSCAPE_BOUNDS",
+            "RECORDED_CONSERVATIVE_FOOTPRINT",
+            "DECLARED_SPATIAL_MASK",
+            "NONE"
+          ]
+        },
+        "dependency_order": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "units": {
+          "enum": [
+            "CENTIMETERS",
+            "METERS",
+            "ENGINE_UNITS"
+          ]
+        },
+        "clearance": {
+          "type": "number",
+          "minimum": 0
+        },
+        "transition_band": {
+          "type": "number",
+          "minimum": 0
+        },
+        "validation_method": {
+          "enum": [
+            "FINAL_MESH_BOUNDS_GAP",
+            "MASK_COVERAGE_AND_FINAL_OVERLAP",
+            "AUTHORED_REVIEW_AND_CONTACT",
+            "PENDING_EVIDENCE",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "source_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "generation_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "target_platform": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableId"
+          }
+        },
+        "rejected_modes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "VIDEO_DISTANCE_EXCLUSION",
+              "MASK_OTHER",
+              "DIRECT_AUTHORED",
+              "PENDING_EVIDENCE",
+              "NOT_APPLICABLE"
+            ]
+          }
+        },
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "PENDING_EVIDENCE",
+            "INVALID_EVIDENCE"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "applicability": {
+                "const": "NOT_APPLICABLE"
+              }
+            },
+            "required": [
+              "applicability"
+            ]
+          },
+          "then": {
+            "properties": {
+              "selected_mode": {
+                "const": "NOT_APPLICABLE"
+              },
+              "source_authority": {
+                "const": "NONE"
+              },
+              "validation_method": {
+                "const": "NOT_APPLICABLE"
+              },
+              "status": {
+                "const": "PASS"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "applicability": {
+                "const": "APPLICABLE"
+              }
+            },
+            "required": [
+              "applicability"
+            ]
+          },
+          "then": {
+            "properties": {
+              "selected_mode": {
+                "not": {
+                  "const": "NOT_APPLICABLE"
+                }
+              },
+              "validation_method": {
+                "not": {
+                  "const": "NOT_APPLICABLE"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "selected_mode": {
+                "const": "VIDEO_DISTANCE_EXCLUSION"
+              }
+            },
+            "required": [
+              "selected_mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "source_authority": {
+                "enum": [
+                  "FINAL_HARDSCAPE_BOUNDS",
+                  "RECORDED_CONSERVATIVE_FOOTPRINT"
+                ]
+              },
+              "validation_method": {
+                "const": "FINAL_MESH_BOUNDS_GAP"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "areaCompositionPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "version",
+        "status",
+        "approved_by",
+        "approval_record",
+        "zone_registry_version",
+        "camera_registry_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "status": {
+          "const": "PASS"
+        },
+        "approved_by": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "approval_record": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "zone_registry_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "camera_registry_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "sourceArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "media_type",
+        "locator",
+        "exact_selection",
+        "version",
+        "approval_status",
+        "approved_by",
+        "authority"
+      ],
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "media_type": {
+          "enum": [
+            "CONCEPT_IMAGE",
+            "TOP_DOWN_PLAN",
+            "FLOOR_PLAN",
+            "SIDE_ELEVATION",
+            "SECTION",
+            "COMPOSITION_REFERENCE",
+            "WRITTEN_DIRECTION",
+            "OTHER"
+          ]
+        },
+        "locator": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "exact_selection": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "approval_status": {
+          "$ref": "#/$defs/approvalStatus"
+        },
+        "approved_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "authority": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "scope",
+              "zone_ids",
+              "priority",
+              "controlling"
+            ],
+            "properties": {
+              "scope": {
+                "$ref": "#/$defs/authorityScope"
+              },
+              "zone_ids": {
+                "$ref": "#/$defs/idArray"
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "controlling": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "sourceRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement_id",
+        "source_artifact_ids",
+        "zone_ids",
+        "plan_feature_ids",
+        "category",
+        "statement",
+        "measurement_basis",
+        "confidence",
+        "trace_policy"
+      ],
+      "properties": {
+        "requirement_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "source_artifact_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "zone_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "plan_feature_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "category": {
+          "enum": [
+            "DENSITY_OCCUPANCY",
+            "MASS_COUNTS",
+            "TYPOLOGY_MIX",
+            "FRONTAGE_CONTINUITY",
+            "BUILDING_GAPS",
+            "ROUTE_WIDTH_CONTINUITY",
+            "ELEVATION_TRANSITION",
+            "WATER_BRIDGE",
+            "SHADED_SPACE",
+            "INTENTIONAL_VOID",
+            "HIERARCHY",
+            "PROHIBITED_SILHOUETTE"
+          ]
+        },
+        "statement": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "measurement_basis": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "confidence": {
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW_APPROVED_ESTIMATE"
+          ]
+        },
+        "trace_policy": {
+          "enum": [
+            "IMPLEMENTATION_AND_VALIDATION",
+            "VALIDATION_ONLY"
+          ]
+        }
+      }
+    },
+    "sourceConflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conflict_id",
+        "scope",
+        "source_ids",
+        "status",
+        "controlling_source_id",
+        "decision_owner",
+        "resolution"
+      ],
+      "properties": {
+        "conflict_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "scope": {
+          "$ref": "#/$defs/authorityScope"
+        },
+        "source_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "status": {
+          "enum": [
+            "RESOLVED",
+            "UNRESOLVED"
+          ]
+        },
+        "controlling_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decision_owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "resolution": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "requirementBoundRatio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement_ids",
+        "measurement_basis",
+        "target",
+        "allowed_absolute_deviation"
+      ],
+      "properties": {
+        "requirement_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "measurement_basis": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "target": {
+          "$ref": "#/$defs/numericRange"
+        },
+        "allowed_absolute_deviation": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "spaceSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicability",
+        "not_applicable_reason",
+        "spaces"
+      ],
+      "properties": {
+        "applicability": {
+          "enum": [
+            "APPLICABLE",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "not_applicable_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "spaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "space_id",
+              "requirement_ids",
+              "role",
+              "preservation_rule",
+              "minimum_retained_ratio",
+              "hard_failure_if_lost"
+            ],
+            "properties": {
+              "space_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "requirement_ids": {
+                "$ref": "#/$defs/idArray"
+              },
+              "role": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "preservation_rule": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "minimum_retained_ratio": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "hard_failure_if_lost": {
+                "const": true
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "applicability": {
+                "const": "APPLICABLE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "not_applicable_reason": {
+                "type": "null"
+              },
+              "spaces": {
+                "minItems": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "not_applicable_reason": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "spaces": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "zoneContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "zone_id",
+        "numeric_review_id",
+        "display_name",
+        "ascii_fallback",
+        "role",
+        "built_footprint_occupancy",
+        "mass_counts",
+        "typology_mix",
+        "frontage_continuity",
+        "building_gaps",
+        "route_widths",
+        "elevation_transitions",
+        "water_and_bridges",
+        "shaded_spaces",
+        "intentional_voids",
+        "hierarchy",
+        "prohibited_silhouettes"
+      ],
+      "properties": {
+        "zone_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "numeric_review_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "display_name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "ascii_fallback": {
+          "type": "string",
+          "pattern": "^[ -~]+$"
+        },
+        "role": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "built_footprint_occupancy": {
+          "$ref": "#/$defs/requirementBoundRatio"
+        },
+        "mass_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requirement_ids",
+            "counting_rule",
+            "building_masses",
+            "roof_masses"
+          ],
+          "properties": {
+            "requirement_ids": {
+              "$ref": "#/$defs/idArray"
+            },
+            "counting_rule": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "building_masses": {
+              "$ref": "#/$defs/integerRange"
+            },
+            "roof_masses": {
+              "$ref": "#/$defs/integerRange"
+            }
+          }
+        },
+        "typology_mix": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "typology_id",
+              "requirement_ids",
+              "hierarchy_role",
+              "count_range",
+              "share_range"
+            ],
+            "properties": {
+              "typology_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "requirement_ids": {
+                "$ref": "#/$defs/idArray"
+              },
+              "hierarchy_role": {
+                "enum": [
+                  "PRIMARY",
+                  "SECONDARY",
+                  "SUPPORTING"
+                ]
+              },
+              "count_range": {
+                "$ref": "#/$defs/integerRange"
+              },
+              "share_range": {
+                "$ref": "#/$defs/numericRange"
+              }
+            }
+          }
+        },
+        "frontage_continuity": {
+          "$ref": "#/$defs/requirementBoundRatio"
+        },
+        "building_gaps": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requirement_ids",
+            "measurement_basis",
+            "target",
+            "unit",
+            "allowed_absolute_deviation"
+          ],
+          "properties": {
+            "requirement_ids": {
+              "$ref": "#/$defs/idArray"
+            },
+            "measurement_basis": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "target": {
+              "$ref": "#/$defs/numericRange"
+            },
+            "unit": {
+              "enum": [
+                "METERS",
+                "CENTIMETERS"
+              ]
+            },
+            "allowed_absolute_deviation": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "route_widths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "route_id",
+              "requirement_ids",
+              "route_class",
+              "width_range",
+              "unit",
+              "continuity_required",
+              "minimum_clearance"
+            ],
+            "properties": {
+              "route_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "requirement_ids": {
+                "$ref": "#/$defs/idArray"
+              },
+              "route_class": {
+                "enum": [
+                  "PRIMARY",
+                  "SECONDARY",
+                  "ALLEY"
+                ]
+              },
+              "width_range": {
+                "$ref": "#/$defs/numericRange"
+              },
+              "unit": {
+                "enum": [
+                  "METERS",
+                  "CENTIMETERS"
+                ]
+              },
+              "continuity_required": {
+                "type": "boolean"
+              },
+              "minimum_clearance": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "elevation_transitions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "transition_id",
+              "requirement_ids",
+              "from_band",
+              "to_band",
+              "delta_range",
+              "unit",
+              "transition_rule"
+            ],
+            "properties": {
+              "transition_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "requirement_ids": {
+                "$ref": "#/$defs/idArray"
+              },
+              "from_band": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "to_band": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "delta_range": {
+                "$ref": "#/$defs/numericRange"
+              },
+              "unit": {
+                "enum": [
+                  "METERS",
+                  "CENTIMETERS"
+                ]
+              },
+              "transition_rule": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "water_and_bridges": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requirement_ids",
+            "applicability",
+            "not_applicable_reason",
+            "features"
+          ],
+          "properties": {
+            "requirement_ids": {
+              "$ref": "#/$defs/idArray"
+            },
+            "applicability": {
+              "enum": [
+                "APPLICABLE",
+                "NOT_APPLICABLE"
+              ]
+            },
+            "not_applicable_reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "feature_id",
+                  "requirement_ids",
+                  "feature_type",
+                  "role",
+                  "continuity_rule"
+                ],
+                "properties": {
+                  "feature_id": {
+                    "$ref": "#/$defs/stableId"
+                  },
+                  "requirement_ids": {
+                    "$ref": "#/$defs/idArray"
+                  },
+                  "feature_type": {
+                    "enum": [
+                      "WATER_BODY",
+                      "BANK",
+                      "CROSSING",
+                      "BRIDGE",
+                      "APPROACH"
+                    ]
+                  },
+                  "role": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "continuity_rule": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  }
+                }
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "applicability": {
+                    "const": "APPLICABLE"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "not_applicable_reason": {
+                    "type": "null"
+                  },
+                  "features": {
+                    "minItems": 1
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "not_applicable_reason": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "features": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "shaded_spaces": {
+          "$ref": "#/$defs/spaceSet"
+        },
+        "intentional_voids": {
+          "$ref": "#/$defs/spaceSet"
+        },
+        "hierarchy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requirement_ids",
+            "focal_order",
+            "required_relations"
+          ],
+          "properties": {
+            "requirement_ids": {
+              "$ref": "#/$defs/idArray"
+            },
+            "focal_order": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/stableId"
+              }
+            },
+            "required_relations": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "prohibited_silhouettes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "rule_id",
+              "requirement_ids",
+              "description",
+              "hard_failure"
+            ],
+            "properties": {
+              "rule_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "requirement_ids": {
+                "$ref": "#/$defs/idArray"
+              },
+              "description": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "hard_failure": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "prototypeElement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prototype_element_id",
+        "element_kind",
+        "zone_ids",
+        "requirement_ids",
+        "plan_feature_ids",
+        "planned_bounds_or_anchor",
+        "implementation_rule",
+        "owner",
+        "lifecycle_state",
+        "realization"
+      ],
+      "properties": {
+        "prototype_element_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "element_kind": {
+          "enum": [
+            "ARCHITECTURE_PROXY_GROUP",
+            "REPEATED_ARRAY",
+            "ROUTE",
+            "TERRAIN_CHANGE",
+            "WATER_PROXY",
+            "BRIDGE_PROXY",
+            "SHADE_RESERVATION",
+            "VOID_RESERVATION",
+            "OTHER"
+          ]
+        },
+        "zone_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "requirement_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "plan_feature_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "planned_bounds_or_anchor": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "implementation_rule": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "lifecycle_state": {
+          "enum": [
+            "PLANNED",
+            "REALIZED",
+            "RETIRED"
+          ]
+        },
+        "realization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "system",
+            "identifiers",
+            "member_keys",
+            "member_count",
+            "generation_version",
+            "inventory_digest"
+          ],
+          "properties": {
+            "system": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "identifiers": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            },
+            "member_keys": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            },
+            "member_count": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "generation_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "inventory_digest": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "cameraContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overview_cameras",
+        "static_player_height_proxies",
+        "runtime_player_camera",
+        "same_condition_rule"
+      ],
+      "properties": {
+        "overview_cameras": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "camera_id",
+              "authority",
+              "transform_source",
+              "projection",
+              "resolution",
+              "crop",
+              "fixed_condition_id",
+              "covered_metrics"
+            ],
+            "properties": {
+              "camera_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "authority": {
+                "const": "DIAGNOSTIC_ONLY"
+              },
+              "transform_source": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "projection": {
+                "enum": [
+                  "PERSPECTIVE",
+                  "ORTHOGRAPHIC"
+                ]
+              },
+              "resolution": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "crop": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "fixed_condition_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "covered_metrics": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/$defs/overviewMetric"
+                }
+              }
+            }
+          }
+        },
+        "static_player_height_proxies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "camera_id",
+              "authority",
+              "height_above_local_ground",
+              "height_unit",
+              "fov_degrees",
+              "allowed_claims"
+            ],
+            "properties": {
+              "camera_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "authority": {
+                "const": "GROSS_PLAUSIBILITY_ONLY"
+              },
+              "height_above_local_ground": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "height_unit": {
+                "enum": [
+                  "METERS",
+                  "CENTIMETERS"
+                ]
+              },
+              "fov_degrees": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "exclusiveMaximum": 180
+              },
+              "allowed_claims": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "GROSS_SCALE_REJECTION",
+                    "GROSS_WIDTH_REJECTION",
+                    "GROSS_SLOPE_REJECTION",
+                    "GROSS_OCCLUSION_REJECTION"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "runtime_player_camera": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "camera_id",
+            "required_stage",
+            "authority",
+            "rig_source",
+            "configuration_version",
+            "route_sample_ids",
+            "required_metrics"
+          ],
+          "properties": {
+            "camera_id": {
+              "$ref": "#/$defs/stableId"
+            },
+            "required_stage": {
+              "const": 5
+            },
+            "authority": {
+              "const": "PLAYER_EXPERIENCE_AUTHORITY"
+            },
+            "rig_source": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "configuration_version": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "route_sample_ids": {
+              "$ref": "#/$defs/idArray"
+            },
+            "required_metrics": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/playerMetric"
+              }
+            }
+          }
+        },
+        "same_condition_rule": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "overviewMetric": {
+      "enum": [
+        "BUILT_FOOTPRINT_OCCUPANCY",
+        "ZONE_DENSITY_DISTRIBUTION",
+        "BUILDING_MASS_COUNT",
+        "ROOF_MASS_COUNT",
+        "TYPOLOGY_MIX",
+        "FRONTAGE_CONTINUITY",
+        "BUILDING_GAPS",
+        "HEIGHT_BANDS",
+        "WATER_BRIDGE_RELATIONSHIP",
+        "SHADE_PRESERVATION",
+        "VOID_PRESERVATION",
+        "HIERARCHY",
+        "PATH_CONTINUITY",
+        "PROHIBITED_SILHOUETTE"
+      ]
+    },
+    "playerMetric": {
+      "enum": [
+        "PERCEIVED_DISTANCE",
+        "ENCLOSURE",
+        "OCCLUSION_REVEAL",
+        "ROUTE_CONTINUITY",
+        "LANDMARK_HIERARCHY",
+        "CLEARANCE",
+        "RECOVERY",
+        "PLAYER_SCALE_READABILITY"
+      ]
+    },
+    "postMutationAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "batch_id",
+        "prototype_version",
+        "changed_prototype_element_ids",
+        "required_requirement_ids",
+        "audit_status"
+      ],
+      "properties": {
+        "batch_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prototype_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "changed_prototype_element_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableId"
+          }
+        },
+        "required_requirement_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableId"
+          }
+        },
+        "audit_status": {
+          "enum": [
+            "NOT_STARTED",
+            "PENDING_EVIDENCE",
+            "PASS",
+            "FAIL",
+            "INVALID_EVIDENCE"
+          ]
+        }
+      }
+    },
+    "requirementResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement_id",
+        "zone_ids",
+        "metric",
+        "planned",
+        "observed",
+        "allowed_deviation",
+        "evidence_ids",
+        "verdict",
+        "reviewer"
+      ],
+      "properties": {
+        "requirement_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "zone_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "metric": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/overviewMetric"
+            },
+            {
+              "$ref": "#/$defs/playerMetric"
+            }
+          ]
+        },
+        "planned": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "observed": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "allowed_deviation": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "verdict": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "PENDING_EVIDENCE",
+            "INVALID_EVIDENCE"
+          ]
+        },
+        "reviewer": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "deviationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deviation_id",
+        "comparison_class",
+        "camera_id",
+        "fixed_condition_id",
+        "source_artifact_ids",
+        "plan_version",
+        "contract_version",
+        "prototype_version",
+        "reference_evidence_id",
+        "plan_evidence_id",
+        "prototype_evidence_id",
+        "requirement_results",
+        "overall_status",
+        "baseline_deviation_id",
+        "reopens_stage"
+      ],
+      "properties": {
+        "deviation_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "comparison_class": {
+          "enum": [
+            "OVERVIEW_MACRO",
+            "RUNTIME_PLAYER"
+          ]
+        },
+        "camera_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "fixed_condition_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "source_artifact_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "plan_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "contract_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "prototype_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "reference_evidence_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "plan_evidence_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "prototype_evidence_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "requirement_results": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/requirementResult"
+          }
+        },
+        "overall_status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "PENDING_EVIDENCE",
+            "INVALID_EVIDENCE"
+          ]
+        },
+        "baseline_deviation_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reopens_stage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "all_sources_resolved",
+        "all_zone_contracts_complete",
+        "all_implementation_requirements_traced",
+        "all_placement_groups_mapped",
+        "post_mutation_audit_state",
+        "orphan_requirement_ids",
+        "unmapped_prototype_element_ids"
+      ],
+      "properties": {
+        "all_sources_resolved": {
+          "type": "boolean"
+        },
+        "all_zone_contracts_complete": {
+          "type": "boolean"
+        },
+        "all_implementation_requirements_traced": {
+          "type": "boolean"
+        },
+        "all_placement_groups_mapped": {
+          "type": "boolean"
+        },
+        "post_mutation_audit_state": {
+          "enum": [
+            "NOT_STARTED",
+            "PENDING_EVIDENCE",
+            "PASS",
+            "FAIL",
+            "INVALID_EVIDENCE"
+          ]
+        },
+        "orphan_requirement_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableId"
+          }
+        },
+        "unmapped_prototype_element_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableId"
+          }
+        }
+      }
+    }
+  }
+}

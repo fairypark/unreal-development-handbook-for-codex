@@ -18,11 +18,39 @@ Provide goals, project state, requirements, assumptions, constraints, success cr
 
 Keep reusable principles free of private paths, map coordinates, asset-pack anecdotes, credentials, model-specific orchestration, and temporary workarounds.
 
+## Bounded AI task contract and latency guard
+
+Before a prototype or Editor mutation, the agent must write down a compact
+task contract: intent, current stage, target world or system, operation mode,
+allowed mutation scope, change and wall-clock budgets, preconditions,
+postconditions, save policy, evidence class, rollback target, and stop
+conditions. For ordinary prototype work, default to a bounded edit; use a
+read-only diagnostic audit, an explicit promotion review, and a separately
+confirmed maintenance mode for broad rebuilds. Project-specific names may
+differ, but the boundaries must remain visible.
+
+The agent should discover the required execution surface once per bounded task,
+batch inventory and validation work, serialize stateful mutations, and verify
+the resulting state before starting a dependent operation. It must track
+setup, tool discovery, wait, mutation, verification, and background time. A
+short user request must not silently expand into a map-wide builder, per-item
+round trips, repeated tool discovery, or blind evidence retries.
+
+When a task times out or returns an ambiguous result, the agent must stop and
+perform a read-only state audit. It may then resume from a verified checkpoint,
+roll back the verified target, or report the task as blocked; it may not infer
+that no mutation occurred and immediately repeat the same request. If the
+available execution surface cannot invoke the proposed adapter, report that
+live execution is untested rather than treating compilation, static schema
+validation, or a successful transport call as equivalent evidence.
+
 ## Domain workflow compliance
 
 A domain chapter's explicit workflow is part of the AI's execution contract. For level, world, environment, terrain, route, POI, or map-wide dressing work, load Chapter 04 and follow its **Mandatory AI execution contract** and numbered concept-to-production stages in order. Do not substitute a Tool sequence, screenshot, generated asset, or post-hoc summary for a stage's required evidence.
 
-Before mutation, classify the work as a disposable experiment or production-intended change, identify the current stage and approved predecessor artifact, and record the stage objective, allowed mutations, postconditions, approver, and rollback target. During execution, keep mutations within the current stage and report its status as `PASS`, `FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE`. Advance only when the evidence is complete and promotion is explicitly recorded. Missing evidence, failed tests, absent feedback, or transport-only success blocks promotion and requires a stop, a return to the responsible stage, or an explicit request for what is missing.
+Before mutation, classify the work as a disposable experiment or production-intended change, identify the current stage and approved predecessor artifact, and record the stage objective, allowed mutations, postconditions, approver, and rollback target. For composition work, Area Composition Plan `PASS` advances only to Stage 2a Reference-to-Prototype Translation. The agent must not place content-bearing prototype geometry until a machine-readable source and authority registry, zone-level quantitative contract, traceability map for every planned array/proxy group/path/terrain change, camera-specific tolerances, and explicit broad-placement decision pass. During execution, keep mutations within the current stage and report its status as `PASS`, `FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE`. Advance only when the evidence is complete and promotion is explicitly recorded. Missing evidence, failed tests, absent feedback, or transport-only success blocks promotion and requires a stop, a return to the responsible stage, or an explicit request for what is missing.
+
+After each composition-changing prototype batch, treat the translation contract as a live audit rather than a one-time permit. Preserve fixed-condition reference/plan/prototype comparisons, keep overview macro diagnostics separate from actual runtime player-camera distance, enclosure, occlusion, route, scale, and readability evidence, and lock the next broad batch while the audit is pending or failed. If any zone distribution, shade or intentional void, hierarchy, frontage, path continuity, or prohibited silhouette leaves tolerance, preserve the failed candidate and reopen the earliest responsible stage; matching total Actor count does not authorize promotion.
 
 Small or disposable level work may combine adjacent Chapter 04 stages in one reversible pass only when the combination is declared before mutation and every stage's decision question, evidence, and recovery path remains inspectable. A combined stage is not a skipped stage. If a later change invalidates an accepted level assumption, reopen the affected stage, retain the previous baseline, and re-run dependent stages before continuing.
 
@@ -71,6 +99,8 @@ Expose small typed composable operations rather than mirroring Unreal internals.
 - Stateful editor mutations are serialized and verified before the next dependent mutation.
 - The builder cannot rewrite or self-approve required evidence.
 - The applicable domain workflow is loaded, the current stage is explicit, and no downstream stage began before its predecessor gate passed.
+- For level composition, Stage 2a passed before the first content-bearing prototype mutation; source authority, quantitative zone contracts, prototype trace IDs, comparison conditions, tolerances, and the placement decision are machine-readable and versioned.
+- Each composition-changing batch has a same-condition deviation audit, and the builder cannot use aggregate Actor count or overview-only player claims to self-approve drift.
 - Combined or reopened stages are documented with their evidence, approval, baseline, and recovery path.
 - Inputs, outputs, and Tool results are inspectable.
 - Reproduction does not depend on private hidden context.
@@ -81,6 +111,7 @@ Expose small typed composable operations rather than mirroring Unreal internals.
 
 - Letting an agent explore by mutating the main project or shared world.
 - Treating a level-design workflow as optional guidance, or using a successful tool call as permission to skip a stage.
+- Treating Area Composition Plan approval as prototype-placement authority, or reconstructing the missing Stage 2a translation contract after broad placement.
 - Treating a sandbox as approval, or treating a successful tool response as proof of the intended result.
 - Allowing overlapping stateful editor mutations that make ordering and recovery ambiguous.
 - Merging generated assets or configuration without preserving their source, version, owner, and validation evidence.
