@@ -25,6 +25,8 @@ Automate an approved responsibility and validation contract, not an unclear desi
 
 - Author one coherent source assembly or spatial rule before proceduralizing it.
 - Give each generator a distinct responsibility and use one authority for exclusions and final composition.
+- When a request contains spatially dependent strata such as rocks or hardscape plus grass or ground cover, run the **Dependent-Strata Strategy Gate** before the first content-bearing generator mutation. Always record `CONSIDERED`, the selected mode (`VIDEO_DISTANCE_EXCLUSION`, `MASK_OTHER`, `DIRECT_AUTHORED`, or `PENDING_EVIDENCE`), the reason, source authority, dependency order, units, clearance, transition band, and validation status. Do not silently skip the video-style distance/exclusion option; select it when the source footprint is stable and the dependent layer should clear or approach that footprint, and select another mode when the source is exploratory, hero-specific, or not spatially trustworthy.
+- For dependent strata such as ground cover around hardscape, make the source footprint, clearance band, and dependency order part of the data contract.
 - Preserve hierarchy and dependent-child relationships.
 - Expose seeds, masks, density, scale, and platform constraints for reviewable change.
 - Compare one procedural candidate at a time; overlapping active generations invalidate the comparison.
@@ -32,6 +34,6 @@ Automate an approved responsibility and validation contract, not an unclear desi
 
 ## Validate beyond successful generation
 
-Measure authoring and setup time separately from regeneration time. Verify determinism, counts, coverage, grounding, hierarchy, collision intent, performance, warnings, save persistence, and representative visual or gameplay evidence. Treat these technical checks as diagnostic; they do not grant aesthetic or production approval by themselves.
+Measure authoring and setup time separately from regeneration time. Verify determinism, counts, coverage, grounding, hierarchy, minimum separation after final transforms, collision intent, performance, warnings, save persistence, and representative visual or gameplay evidence. Treat these technical checks as diagnostic; they do not grant aesthetic or production approval by themselves.
 
 Use Python, PCG Graph, Blueprint, C++, Commandlet, or Editor-tool execution only after this contract is explicit.

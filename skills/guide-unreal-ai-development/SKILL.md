@@ -13,7 +13,7 @@ Read [15-ai-assisted-development.md](references/15-ai-assisted-development.md) b
 
 ## Enforce domain workflows
 
-When the relevant Handbook chapter defines an explicit workflow, treat its stages and gates as part of the mutation contract. For level or world creation, load Chapter 04 and require its ordered workflow record, stage evidence, promotion decision, stop conditions, and rollback behavior; never let a Tool result or agent confidence replace a required gate.
+When the relevant Handbook chapter defines an explicit workflow, treat its stages and gates as part of the mutation contract. For level or world creation, load Chapter 04 and require its ordered workflow record, stage evidence, promotion decision, stop conditions, and rollback behavior; never let a Tool result or agent confidence replace a required gate. Area Composition Plan `PASS` advances only to Stage 2a Reference-to-Prototype Translation. Do not authorize content-bearing prototype placement until the machine-readable source registry, quantitative zone contracts, traceability map, comparison tolerances, and explicit placement decision pass.
 
 ## Define AI responsibilities
 
@@ -27,6 +27,7 @@ When the relevant Handbook chapter defines an explicit workflow, treat its stage
 
 - Treat Tool and transport success as evidence of execution only.
 - Require postconditions for project state, assets, behavior, performance, persistence, and recovery.
+- After every composition-changing level batch, lock the next broad batch until the Stage 2a contract records same-condition reference/plan/prototype deviations and resolves every out-of-tolerance result or reopens the responsible stage.
 - Preserve failed attempts and factual change scope.
 - Prevent the builder from manufacturing or rewriting approval evidence.
 - Use deterministic scripts for fragile repeated mechanics while keeping contextual judgment explicit.

@@ -109,7 +109,8 @@ Before the first mutation, the agent must create or update an inspectable workfl
 - the work class (`DISPOSABLE_EXPERIMENT` or `PRODUCTION_INTENDED`) and scope;
 - the current stage, the approved predecessor artifact or baseline, and the stage objective;
 - required artifacts, evidence conditions, hard failures, owner or approver, and rollback target;
-- allowed mutations and the exact version or change set that the next gate will review.
+- allowed mutations and the exact version or change set that the next gate will review;
+- for level composition work, the Stage 2a translation-contract identifier and version, its broad-placement lock state, the conditional dependent-strata strategy decision when source and dependent layers are in scope, and the source, plan, prototype, camera, and deviation-record versions currently in force.
 
 The agent must start at Stage 1, or resume at a later stage only when an existing artifact and approval record prove that every predecessor gate passed. Existing level content without stage evidence is not proof of completion and must be audited or reconstructed before further promotion.
 
@@ -128,6 +129,7 @@ The numbered stages are always represented in the record. A small or disposable 
 | --- | --- |
 | 1. Concept and intent review | Decision-ready brief, non-goals, constraints, unresolved questions, and recorded intent feedback. |
 | 2. Area Composition Plan review | A versioned, recorded area plan with zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, and a risk-covering set of fixed `DIAGNOSTIC_ONLY` overview cameras with stable IDs. The set covers required arrival, reverse, lateral, waterway/axis, elevation, and project-specific relationships without imposing a universal count. It also records the player-camera height/FOV proxy and planned runtime-rig source. No prototype geometry or broad asset placement is authorized before this gate passes. |
+| 2a. Reference-to-Prototype Translation Gate | A machine-readable source registry and authority order, zone-level quantitative composition contracts, a planned traceability map for every prototype array/proxy group/route/terrain or water change, camera-specific comparison rules, tolerance and hard-failure rules, and an explicit broad-placement decision. Stage 2 `PASS` alone never authorizes prototype placement. |
 | 3. Experience prototype | Runtime evidence for one POI or encounter unit, including approach, player question, choice or verb, payoff, next hook, and the live zone marker that identifies its area. |
 | 4. Terrain and macro blockout | The fixed overview set proves whole-area composition, terrain relief, axes, water/bridge relationships, and risk coverage; auxiliary static player-height/FOV views reject gross scale, width, slope, and occlusion failures without claiming exact runtime-rig or fine-composition authority. |
 | 4a. Route authority and corridor contract | Inspectable route source of truth, ownership, surface provider, clearance, grade, and corridor validation. |
@@ -160,12 +162,13 @@ Between the concept view and the first cube prototype, create a versioned **Area
 - landmarks, reveals, sightlines, occlusion, readable openings, gates, and recovery paths;
 - POI hierarchy, player questions, approach/reveal/payoff beats, optional deferral or return, and the experience-density hypothesis;
 - building footprints, entrances, orientation, negative space, courtyard or street relationships, and a named typology hierarchy from primary landmark to supporting structures;
+- a source-artifact inventory covering the concept images, top-down plans, side or elevation views, and composition references that govern the plan, with stable IDs, versions, approval states, authority scopes, priority, and any unresolved conflict;
 - a fixed overview-camera set whose members have stable IDs, roles, `DIAGNOSTIC_ONLY` authority, and a coverage matrix for arrival, reverse, lateral, waterway/axis, elevation, and project-specific spatial risks; use the smallest set that closes the identified blind spots rather than one hero overview or an arbitrary fixed count;
 - auxiliary fixed player-height cameras bound to the recorded height above local ground and FOV for gross scale, route-width, slope, and occlusion checks, plus the intended runtime camera rig and its Stage 5 configuration source when known;
 - foundations, boundaries, streaming cells, and expansion directions;
 - approximate scale, route timing, content cost hotspots, and the assumptions that the blockout must test.
 
-Pause again for feedback. The plan should be understandable to someone who did not author it, and it should make the whole-space role allocation visible before construction cost rises. If the role or placement of a major area is unclear in two dimensions, more detail in three dimensions will usually hide rather than solve the problem. Treat a missing, unrecorded, or `PENDING_EVIDENCE` plan as a mutation lock: do not create the first cube or graybox volume and do not start broad final-asset placement. This gate may be lightweight for a disposable experiment, but it may not be reconstructed retrospectively from geometry that already exists.
+Pause again for feedback. The plan should be understandable to someone who did not author it, and it should make the whole-space role allocation visible before construction cost rises. If the role or placement of a major area is unclear in two dimensions, more detail in three dimensions will usually hide rather than solve the problem. Treat a missing, unrecorded, or `PENDING_EVIDENCE` plan as a mutation lock: do not create the first cube or graybox volume and do not start broad final-asset placement. A plan `PASS` releases work only to Stage 2a; it does not release content-bearing prototype geometry. This gate may be lightweight for a disposable experiment, but it may not be reconstructed retrospectively from geometry that already exists.
 
 For a typology-critical precinct, state the required reading as a sequence, hierarchy, negative-space pattern, and prohibited silhouette. Building envelopes that merely match approximate size do not pass. For a palace, require the legible gate -> outer court -> middle gate -> central courtyard -> main hall axis, with the courts and supporting halls reinforcing the ceremonial hierarchy. If the composition reads as a fortress or castle because of a dominant keep, tower-like blocks, a monolithic plinth, or continuous high defensive walls, record a hard failure and return to the Area Composition Plan before adding detail.
 
@@ -189,9 +192,84 @@ Record every fixed validation camera in the Area Composition Plan and keep its s
 
 Overview evidence can find a macro problem and is the principal way to review prototype-wide spatial relationships, but it can never prove what the player sees or understands. `DIAGNOSTIC_ONLY` does not make the overview set non-gating: it may pass or fail the Stage 2–4 macro relationships assigned to it, while remaining unauthorized for player-camera claims. At every stage, exclude overview cameras from player-visibility, landmark-readability, scale, or typology approval; promotion of those questions requires the stage-authorized player-camera evidence. During Stages 2–4, do not spend prototype effort precisely composing scenery or detail to a player proxy whose runtime offsets, pitch, collision, and retraction have not yet been validated.
 
+### 2a. Reference-to-Prototype Translation Gate (blocking)
+
+An approved Area Composition Plan describes intent, but it does not by itself define what a builder must place. Before the first content-bearing prototype mutation, translate the approved references and plan into an inspectable **Reference-to-Prototype Translation Contract**. Use the bundled [JSON Schema](reference-to-prototype-translation.schema.json) and [template](reference-to-prototype-translation.template.json), or a project-owned equivalent that preserves the same fields, identifiers, gate semantics, and validation rules. The contract has two lifecycle phases: `PRE_PLACEMENT`, which authorizes or blocks broad placement, and `POST_MUTATION_AUDIT`, which compares the realized prototype with the same approved contract after a composition-changing batch.
+
+#### Source registry and authority
+
+Inventory every concept image, annotated plan, floor plan, side or elevation view, composition reference, and written direction used to control the prototype. Each source record must include a stable ID, artifact path or external identifier, media type, version, approval state, approving authority, authority scopes and applicable zone IDs, priority within each scope and zone, and the exact crop, page, layer, or annotation used. Authority scopes should distinguish at least footprint and density, circulation, elevation, water and bridges, typology and hierarchy, silhouette, and atmosphere or shade when relevant.
+
+Do not silently average contradictory sources. Record the conflict, the controlling source and scope, the overridden source, the decision owner, and the resolution. Only approved sources may control a placement decision. An unapproved source may remain as context, but its non-authoritative status must be explicit. If the controlling source, version, crop, approval, or priority changes, mark the translation evidence stale and reopen Stage 2 or Stage 2a before continuing.
+
+#### Zone-level quantitative composition contract
+
+For every stable zone ID, extract bounded targets from the controlling sources and state the measurement basis, estimate confidence, and allowed deviation. Use ranges where an image supports only an estimate; do not invent false precision. Every zone contract must cover:
+
+- built-footprint occupancy relative to a declared denominator such as buildable zone area;
+- building-mass and roof-mass count ranges, including the rule for what constitutes one mass;
+- typology composition and primary/supporting hierarchy, expressed as count or share ranges;
+- street or courtyard frontage continuity, building-gap ranges or distributions, and intentional breaks;
+- primary-route, secondary-route, and alley widths, corridor continuity, junctions, and reserved clearances;
+- relative or absolute height bands, terraces, steps, grade transitions, and skyline order;
+- water bodies, banks, crossings, bridge count or role, approach geometry, and continuity, or an explicit `NOT_APPLICABLE` reason;
+- important shaded or enclosed spaces that must remain spatially legible, intentional open or empty spaces that must remain unbuilt, and the relationship each serves;
+- required focal hierarchy, reveal or occlusion relationships, negative-space patterns, and prohibited silhouettes.
+
+Aggregate Actor count is only a supporting diagnostic. It cannot pass this gate when zone distribution, footprint, frontage, gaps, preserved shade or voids, hierarchy, route continuity, or a prohibited silhouette fails. Counts that fall within range also fail when they are concentrated in the wrong zone or arranged with the wrong spatial rhythm.
+
+#### Prototype traceability map
+
+Create a planned trace entry before mutation for every prototype array, repeated placement set, architecture proxy group, route or alley, water or bridge proxy, reserved void or shade volume, and Landscape height or surface change. Each entry needs a stable prototype element ID, element kind, owning zone IDs, implemented source-requirement IDs, planned bounds or anchor, implementation rule, owner, lifecycle state, and later the realized Actor, spline, Landscape layer, component, folder, Data Layer, or generated-member inventory. A grouped trace entry may cover a deterministic array only when its member count, ordering or keys, bounds, and generation version are inspectable; an opaque folder label is not traceability.
+
+The traceability map connects the source artifact to a normalized requirement, the requirement to the Area Composition Plan feature, and the plan feature to the realized prototype element:
+
+`source artifact -> source requirement -> zone/plan feature -> prototype element -> evidence and deviation record`
+
+For outdoor prototypes, keep the minimal Landscape as the playable floor and trace terrain height, terrace, bank, and route-surface changes to their source requirements. A cube-only architecture-proxy policy applies to building and roof masses, not to the ground: it does not authorize replacing the Landscape with a cube plane. Persistent zone markers are evidence infrastructure, not architecture proxies; retain their stable IDs and lifecycle independently and never consume or delete them during array replacement.
+
+#### Conditional dependent-strata strategy gate
+
+When the approved scope includes two spatially dependent strata, such as rocks or hardscape plus grass or ground cover, complete a `Dependent-Strata Strategy Gate` as part of Stage 2a before the first relevant generator, Foliage, or batch-placement mutation. The gate must record `CONSIDERED`, the selected mode (`VIDEO_DISTANCE_EXCLUSION`, `MASK_OTHER`, `DIRECT_AUTHORED`, or `PENDING_EVIDENCE`), the decision reason, source authority, dependency order, units, clearance, transition band, validation method, and status. If the strata are not in scope, record `NOT_APPLICABLE` rather than silently omitting the consideration.
+
+`VIDEO_DISTANCE_EXCLUSION` is appropriate when the source hardscape has a stable final or conservative footprint and the dependent layer should clear or approach it. `MASK_OTHER` is appropriate when a route, Landscape region, volume, or another declared spatial rule is the real authority. `DIRECT_AUTHORED` is appropriate for exploratory, hero-specific, or intentionally hand-composed placement. Use `PENDING_EVIDENCE` when bounds, scale, ownership, units, or platform constraints are unresolved. A missing, unrecorded, or non-passing applicable strategy gate keeps the relevant generator and dependent placement locked, even when the general Stage 2a gate has otherwise passed. Reopen the strategy gate when the source mesh, footprint, transforms, graph, generation mode, terrain, or exclusion rule changes.
+
+#### Placement lock and promotion decision
+
+Before Stage 2a `PASS`, allowed mutations are limited to evidence infrastructure that cannot be mistaken for layout content: fixed cameras, persistent zone markers, measurement aids, empty organizational containers, and reversible test probes that are explicitly excluded from the prototype inventory. Content-bearing prototype placement remains locked.
+
+Set `broad_placement_authorized` to true only when all of the following are true:
+
+- Stage 2 passed against the exact recorded Area Composition Plan version;
+- the source registry is complete, controlling authority is approved, and every relevant conflict is resolved;
+- every zone has a complete quantitative contract and project-specific tolerance or hard-failure rule;
+- all planned arrays, proxy groups, paths, water or bridge features, voids, and terrain changes have trace entries with no orphan requirement or unmapped placement group;
+- every applicable dependent-strata strategy has `CONSIDERED`, a selected mode and reason, a declared source authority and dependency order, and a `PASS` status;
+- overview and player-camera evidence responsibilities are separated and their fixed comparison conditions are recorded;
+- the Stage 2a status is `PASS`, the approver and decision time are recorded, and the rollback target is recoverable.
+
+A missing trace table, a qualitative-only density direction, an unapproved reference, an unresolved source conflict, an empty tolerance record, or a contract/schema error leaves the stage `PENDING_EVIDENCE`, `INVALID_EVIDENCE`, or `FAIL` and keeps broad cube placement blocked. Do not reconstruct a passing contract from a dense prototype after the fact.
+
+#### Same-condition deviation audit and reopening
+
+After every composition-changing prototype batch, update the same contract to `POST_MUTATION_AUDIT` and record the source, plan, translation-contract, prototype, and camera versions. Preserve a reference/plan/prototype comparison rather than replacing the previous capture:
+
+- **Fixed overview comparison:** from each assigned `DIAGNOSTIC_ONLY` camera, compare an identified reference crop or diagram, the aligned plan view, and the prototype capture under the same camera transform, crop, projection, resolution, and measurement basis. Use this evidence only for assigned macro questions such as footprint, zone density and distribution, frontage, gaps, hierarchy, terrain bands, axes, water and bridges, shade and void preservation, and silhouette. When a perspective concept cannot be geometrically aligned, state which qualitative relation it controls rather than claiming pixel equivalence.
+- **Actual player-camera comparison:** beginning at Stage 5, capture the representative player controller and runtime rig at stable route samples and states. Compare perceived distance, enclosure, occlusion and reveal, route and alley continuity, landmark hierarchy, clearance, and recovery. Record rig class or asset, configuration version, transform or route sample, boom, offset, pitch, and collision or retraction state. Overview evidence cannot substitute for these claims.
+
+For every measured or binary requirement, record planned value or relation, observed value or verdict, allowed deviation, evidence IDs, result, and reviewer. Reuse the same relevant camera and test conditions for pre-change and post-change evidence. A changed composition remains `PENDING_EVIDENCE` until this audit is complete. Any out-of-tolerance metric, lost shade or intentional void, hierarchy reversal, route discontinuity, or prohibited silhouette is a hard failure even when total Actor count matches.
+
+When the audit fails, set `broad_placement_authorized` to false, preserve the last accepted baseline and failed candidate, and reopen the earliest responsible stage. Reopen Stage 1 or 2 when reference intent or the plan is wrong, Stage 2a when extraction, authority, tolerance, or mapping is wrong, and the relevant prototype stage when implementation drifted from a correct contract. Re-run every dependent camera and zone check before restoring `PASS`; a local repair capture cannot silently promote the whole level.
+
+#### Compatibility and migration
+
+This gate adds evidence; it does not replace the existing Landscape, route-authority, persistent-zone-marker, or staged-camera contracts. A project may serialize the same semantics in JSON, YAML, a Data Asset, a database, or another typed system, but it must retain stable IDs, versions, authority, quantitative ranges, traces, comparison conditions, gate states, and reopening behavior. Record the project format and schema version in the workflow record.
+
+For a legacy prototype that already contains geometry, do not claim that a reconstructed contract predates placement. Freeze further broad placement, preserve the existing prototype as a `LEGACY_UNVERIFIED` candidate outside the accepted baseline, rebuild the source registry and zone contracts from approved artifacts, map the existing proxy groups and terrain or route changes, and run the same-condition deviation audit. Keep the gate `INVALID_EVIDENCE` or `PENDING_EVIDENCE` until the reconstruction and audit are explicitly approved. If controlling sources, plan versions, or comparable cameras cannot be recovered, return to Stage 1 or 2 rather than promoting the legacy geometry by appearance.
+
 ### 3. Experience prototype before full blockout
 
-Only after the recorded Area Composition Plan passes, select one representative POI or encounter and build the cheapest playable version of its experience unit: approach, question or reveal, refusal or occlusion, player choice or repeated verb, interaction, outcome or reward, and exit or next hook. Use boxes, semantic materials, temporary effects, and placeholder behavior. Create or verify the persistent zone marker before adding the first prototype geometry, and keep it visible in the review evidence.
+Only after both the recorded Area Composition Plan and Stage 2a translation gate pass, select one representative POI or encounter and build the cheapest playable version of its experience unit: approach, question or reveal, refusal or occlusion, player choice or repeated verb, interaction, outcome or reward, and exit or next hook. Use boxes, semantic materials, temporary effects, and placeholder behavior. Create or verify the persistent zone marker before adding the first prototype geometry, keep it visible in the review evidence, and bind every new proxy group, path, or terrain change to its planned trace entry.
 
 Test the fun thesis, not only the geometry. Observe whether players understand what they are curious about, choose to approach or defer, experience anticipation or tension, receive a worthwhile payoff, and know what to do next. Record time to meaningful change and the role of any intentional quiet section. If the unit is weak, revise the thesis or spatial plan before building the whole route. For a small level, this gate may be combined with the next blockout step, but its evidence and approval question should remain explicit.
 
@@ -200,6 +278,8 @@ Pause for user or designated approver feedback after the unit has runtime eviden
 ### 4. Terrain and macro blockout
 
 Build the terrain and large spatial masses first: height bands, ridges, valleys, terraces, drainage, route transitions, skyline, boundaries, and major volumes. Use simple materials or semantic colors only when they communicate function, threat, ownership, or navigation. Do not use final props to compensate for a weak macro structure.
+
+After each composition-changing batch, complete the Stage 2a post-mutation audit before the next broad batch. Verify realized member inventories against the traceability map and compare zone distribution, density, footprint, frontage, gaps, height bands, routes, water and bridge relationships, preserved shade and voids, hierarchy, and prohibited silhouettes against the recorded tolerances. A whole-map Actor total or an attractive overview cannot close this audit.
 
 For an outdoor map level-design prototype, the ground in this stage is a minimal Landscape terrain by default, not a flat cube or plane. Keep its extent, resolution, material, and detail deliberately cheap, but use it as the source of truth for the playable height field, route elevation, slopes, grounding, and terrain contacts. Place temporary architecture and other blockout volumes on top of it. Use another floor only when a specific user or stakeholder request explicitly overrides the default, and record the reason in the brief.
 
@@ -224,7 +304,7 @@ Validate a route as a continuous corridor rather than only at its endpoints. Sam
 
 ### 5. Playable blockout and feedback gate
 
-Translate the approved Area Composition Plan into a playable rough draft made from a minimal Landscape terrain as the ground, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the scale, visibility, readability, and typology observations that depend on it. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
+Translate the approved Area Composition Plan and Stage 2a translation contract into a playable rough draft made from a minimal Landscape terrain as the ground, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the perceived distance, enclosure, occlusion, route continuity, scale, visibility, readability, and typology observations that depend on it. Add these runtime results to the translation contract's post-mutation deviation records; overview metrics remain macro diagnostics. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
 
 Play in the runtime, not only by flying an editor camera. Test at least:
 
@@ -249,7 +329,7 @@ This slice answers a different question from the graybox: can the team reproduce
 
 ### 7. Production meshing and dressing
 
-Replace approved proxies with approved asset families while preserving the spatial contract: route width, floor height, sightlines, landmark position, camera clearance, collision intent, and boundary behavior. Record deliberate deviations instead of allowing them to accumulate invisibly. Use procedural systems for repeatable placement and hand authorship for hero composition, transitions, exceptions, and story detail.
+Replace approved proxies with approved asset families while preserving the spatial contract: zone distribution, footprint, density ranges, frontage and gaps, shade and intentional voids, hierarchy, route width and continuity, floor height, sightlines, landmark position, camera clearance, collision intent, and boundary behavior. Keep the Stage 2a traceability IDs through substitution and record deliberate deviations instead of allowing them to accumulate invisibly. Use procedural systems for repeatable placement and hand authorship for hero composition, transitions, exceptions, and story detail.
 
 Promote in zones or representative chunks. Place large POIs and their route relationships first, then medium and small POIs according to the approved beat sheet and density hypothesis. Each chunk should be checked for contacts, repetition, reverse views, route readability, meaningful-change timing, and POI payoffs before the next chunk multiplies the same pattern. When a real asset reveals a structural problem, return to the blockout or kit rule instead of hiding it with local props.
 
@@ -306,6 +386,7 @@ User feedback is most useful when the question is narrow enough to answer and th
 
 - **Concept pause:** Is the player fantasy, emotional tone, visual priority, and non-goal correctly understood?
 - **Plan pause:** Are the fun thesis, POI roles, player questions, routes, landmarks, beats, density, and boundaries arranged as intended?
+- **Translation pause:** Have the approved references been converted into zone-level ranges, hierarchy and negative-space rules, traceable prototype groups, fixed comparison conditions, and an explicit placement decision without unresolved authority conflicts?
 - **Experience pause:** Does a cheap POI unit produce the intended question, choice, tension, payoff, and next hook with placeholders?
 - **Blockout pause:** Does movement through the space produce the intended direction, pacing, recognition, choice, and interaction?
 - **Visual-slice pause:** Does the representative quality bar and POI experience match the intended target, and is the production method affordable and repeatable?
@@ -325,8 +406,12 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Architecture-ground, wall-terrain, water-bank, vegetation-hardscape, and assembly contact.
 - No world voids, exposed reserve edges, placeholders, uniform scatter, or unfinished reverse sides.
 - Material scale, lighting hierarchy, cultural and biome coherence.
-- Concept, Area Composition Plan, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets; the plan existed and was recorded before the first cube or broad asset-placement mutation.
-- The Area Composition Plan records zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, a stable-ID `DIAGNOSTIC_ONLY` overview-camera set, its relationship/risk coverage matrix, auxiliary player-height/FOV proxies, and the planned runtime-rig source.
+- Concept, Area Composition Plan, Reference-to-Prototype Translation, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets; both the plan and the translation contract existed and passed before the first content-bearing cube or broad asset-placement mutation.
+- The Area Composition Plan records zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, the source-artifact inventory and authority order, a stable-ID `DIAGNOSTIC_ONLY` overview-camera set, its relationship/risk coverage matrix, auxiliary player-height/FOV proxies, and the planned runtime-rig source.
+- The Stage 2a contract validates against the bundled schema or a documented equivalent and records source IDs, versions, approval and authority scopes; the dependent-strata strategy consideration and selection when applicable; zone-level density, mass-count, typology, occupancy, frontage, gap, route-width, elevation, water/bridge, shade/void, hierarchy, and prohibited-silhouette requirements; measurement bases; tolerances; and hard failures.
+- Every prototype array, repeated set, architecture proxy group, route, water or bridge proxy, reserved shade or void, and Landscape change has a stable trace from source requirement through plan feature to realized inventory; no orphan requirement or unmapped broad placement exists.
+- After each composition-changing batch, same-condition reference/plan/prototype deviation records exist. Fixed overviews test assigned footprint, density, distribution, hierarchy, path, terrain, water, shade/void, and silhouette questions only; Stage 5-or-later runtime-rig evidence separately tests distance, enclosure, occlusion, reveal, route continuity, scale, and player readability.
+- Gate approval is not based on aggregate Actor count: zone distribution, preserved shade and intentional voids, focal hierarchy, frontage and gaps, route continuity, and prohibited silhouettes each meet their own contract.
 - Typology-critical areas pass their required sequence, hierarchy, negative-space, and silhouette rules; palace approval includes the gate -> outer court -> middle gate -> central courtyard -> main hall axis, and any fortress- or castle-like reading is a hard failure.
 - AI workflow records identify the current stage, predecessor evidence, allowed mutations, promotion authority, and rollback target.
 - Stable zone IDs, numeric review IDs, names, ASCII fallbacks, roles, anchors or bounds, semantic colors, marker Actors or debug-layer entries, and marker ownership are recorded before prototype geometry begins.
@@ -354,7 +439,12 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Approving a route because its endpoints match terrain height, its AABBs do not overlap, or its debug visualization is visible.
 - Adding routes after architecture is already treated as fixed, then moving unrelated props to hide a structural conflict.
 - Treating a spline, semantic strip, or PCG exclusion mask as interchangeable with a complete playable route.
+- Beginning rock and ground-cover generation without a `CONSIDERED` dependent-strata strategy decision, or treating the first available PCG graph as that decision.
 - Building the first cube or placing broad asset batches before a versioned Area Composition Plan and its gate status are recorded.
+- Treating Area Composition Plan `PASS` as permission to place prototype geometry before the Stage 2a source registry, quantitative zone contract, traceability map, tolerances, and explicit placement decision pass.
+- Translating visual references by memory, silently averaging conflicting sources, or recording only qualitative phrases such as “dense” without a bounded target and measurement basis.
+- Mapping only a folder or total Actor count while leaving arrays, proxy groups, paths, reserved voids, or Landscape changes without source-requirement trace IDs.
+- Capturing a new convenient camera after a change, overwriting the previous comparison, or accepting an in-range total count while zone distribution, shade, hierarchy, frontage, or path continuity has drifted.
 - Using one hero overview instead of a stable-ID set that covers arrival, reverse, lateral, waterway/axis, elevation, and identified spatial risks.
 - Approving a palace from building size alone while its ceremonial axis or courtyard hierarchy is missing, or accepting a fortress- or castle-like silhouette.
 - Using localized zone text without an always-visible numeric ID and ASCII fallback, allowing missing glyphs or clipping to erase the area's identity.
