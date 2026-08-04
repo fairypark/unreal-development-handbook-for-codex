@@ -1,0 +1,263 @@
+{
+  "schema_version": "0.1.0",
+  "contract_id": "ASSET-READINESS-EXAMPLE",
+  "contract_version": "0.1.0",
+  "project_id": "PROJECT-EXAMPLE",
+  "work_class": "PRODUCTION_INTENDED",
+  "source_context": {
+    "concept_artifact_ids": [
+      "CONCEPT-ENVIRONMENT-001"
+    ],
+    "area_composition_plan_id": "PLAN-AREA-001",
+    "area_composition_plan_version": "1.0.0",
+    "translation_contract_id": "TRANSLATION-AREA-001",
+    "translation_contract_version": "1.0.0",
+    "source_requirement_ids": [
+      "REQ-STRUCTURAL-KIT-001"
+    ],
+    "zone_ids": [
+      "ZONE-ALPHA"
+    ]
+  },
+  "target_context": {
+    "engine_version": "DECLARE_PROJECT_ENGINE_VERSION",
+    "target_platforms": [
+      "PC"
+    ],
+    "rendering_context": "DECLARE_RENDERER_AND_QUALITY_TIER",
+    "runtime_camera_id": "CAM-RUNTIME-001",
+    "performance_budget_id": "BUDGET-ENVIRONMENT-001",
+    "staging_policy": "Evaluate external or unapproved content in a recoverable staging boundary before project-wide integration.",
+    "content_root_policy": "Keep source packages, project adaptations, generated outputs, and production-approved content distinguishable.",
+    "currency": "DECLARE_PROJECT_CURRENCY"
+  },
+  "asset_demands": [
+    {
+      "demand_id": "DEMAND-STRUCTURAL-KIT-001",
+      "name": "Primary structural architecture family",
+      "source_requirement_ids": [
+        "REQ-STRUCTURAL-KIT-001"
+      ],
+      "zone_ids": [
+        "ZONE-ALPHA"
+      ],
+      "role": "STRUCTURAL_KIT",
+      "priority": "BLOCKING",
+      "required_for_visual_slice": true,
+      "required_for_production_dressing": true,
+      "production_function": "Carry the approved silhouette, frontage rhythm, entrances, roof hierarchy, and ordinary repeated buildings.",
+      "scale_range": "Derive from the approved plan and runtime-camera evidence.",
+      "quantity_model": {
+        "minimum_distinct_variants": 3,
+        "expected_instances": {
+          "min": 8,
+          "max": 24
+        },
+        "modular_pieces_required": [
+          "Straight wall or bay",
+          "Inside and outside corners",
+          "Opening or entrance",
+          "Roof and end cap",
+          "Foundation or support"
+        ],
+        "transition_pieces_required": [
+          "Terrain or terrace transition",
+          "Height or roof transition"
+        ],
+        "reverse_side_required": true,
+        "contact_solution_required": true
+      },
+      "required_capabilities": [
+        "Readable at the approved runtime-camera distance",
+        "Supports hero and ordinary repetition without changing the typology"
+      ],
+      "visual_constraints": [
+        "Preserve the approved roof and frontage hierarchy",
+        "Do not introduce a fortress-like silhouette"
+      ],
+      "technical_constraints": [
+        "Compatible with the declared engine, platform, rendering, collision, and performance context",
+        "Dependencies and required plugins must be declared"
+      ],
+      "hard_exclusions": [
+        "Missing reverse sides in reachable views",
+        "No viable foundation or slope-contact solution"
+      ],
+      "acceptance_evidence": [
+        "Project inventory record",
+        "Representative runtime-camera capture",
+        "Kit completeness and dependency audit",
+        "Performance and cook evidence before production approval"
+      ],
+      "sourcing_strategy": {
+        "mode": "REUSE_PROJECT",
+        "owner": "CONTENT-OWNER",
+        "budget_reference": "BUDGET-ENVIRONMENT-001",
+        "due_before_gate": "VISUAL_SLICE_READY",
+        "fallback": "Evaluate an ownership-confirmed library family, custom transitions, or reopen the concept and Area Composition Plan."
+      },
+      "status": "ACTIVE"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "CANDIDATE-PROJECT-KIT-001",
+      "title": "Existing project architecture kit candidate",
+      "demand_ids": [
+        "DEMAND-STRUCTURAL-KIT-001"
+      ],
+      "provider_type": "PROJECT_CONTENT",
+      "locator": "/Game/DECLARE_EXISTING_PROJECT_CANDIDATE",
+      "exact_version": "UNVALIDATED-PROJECT-BASELINE",
+      "provenance": "Existing project content; verify owner, source, adaptations, and dependencies.",
+      "entitlement": {
+        "status": "PROJECT_OWNED",
+        "evidence_id": "EVIDENCE-PROJECT-INVENTORY-001",
+        "checked_at": "2026-01-01T00:00:00Z"
+      },
+      "acquisition": {
+        "status": "NOT_REQUIRED",
+        "authorization_reference": null,
+        "acquired_at": null,
+        "staging_locator": "/Game/DECLARE_EXISTING_PROJECT_CANDIDATE"
+      },
+      "license": {
+        "status": "PENDING",
+        "license_name_or_id": "PENDING-PROVENANCE-REVIEW",
+        "terms_version_or_acquired_at": null,
+        "intended_scope": "Use only within the declared project until provenance review says otherwise.",
+        "restrictions": [],
+        "evidence_id": null
+      },
+      "compatibility": {
+        "status": "PENDING",
+        "engine_versions": [],
+        "target_platforms": [],
+        "required_plugins": [],
+        "dependency_ids": [],
+        "integration_risks": [
+          "Exact dependency and required-plugin inventory is pending."
+        ],
+        "evidence_ids": []
+      },
+      "evaluation": {
+        "status": "PENDING",
+        "visual_fit": "PENDING",
+        "scale_and_pivot": "PENDING",
+        "family_completeness": "PENDING",
+        "materials": "PENDING",
+        "collision_and_navigation": "PENDING",
+        "lod_nanite_and_performance": "PENDING",
+        "reverse_side_and_contacts": "PENDING",
+        "ordinary_repetition": "PENDING",
+        "evidence_ids": []
+      },
+      "total_cost": {
+        "purchase_amount": 0,
+        "integration_effort": "UNKNOWN",
+        "storage_and_source_control": "Measure exact selected package and derived-data impact.",
+        "shader_and_derived_data": "Measure representative compile and cache impact.",
+        "maintenance_and_replacement_risk": "UNKNOWN"
+      },
+      "readiness_state": "DISCOVERED",
+      "production_evidence_ids": [],
+      "rejection_reason": null
+    }
+  ],
+  "demand_coverage": [
+    {
+      "demand_id": "DEMAND-STRUCTURAL-KIT-001",
+      "selected_candidate_ids": [
+        "CANDIDATE-PROJECT-KIT-001"
+      ],
+      "status": "CANDIDATE_IDENTIFIED",
+      "gap_reason": "Family completeness, compatibility, representative visual fit, and production cost remain unverified.",
+      "fallback": "Search ownership-confirmed libraries, author missing transitions, or reopen the concept and plan.",
+      "evidence_ids": [
+        "EVIDENCE-PROJECT-INVENTORY-001"
+      ],
+      "owner": "CONTENT-OWNER",
+      "waiver": null
+    }
+  ],
+  "acquisition_actions": [
+    {
+      "action_id": "ACTION-EVALUATE-KIT-001",
+      "demand_ids": [
+        "DEMAND-STRUCTURAL-KIT-001"
+      ],
+      "candidate_id": "CANDIDATE-PROJECT-KIT-001",
+      "action_type": "EVALUATE_CANDIDATE",
+      "due_before_gate": "VISUAL_SLICE_READY",
+      "authority": "CONTENT-OWNER",
+      "budget_reference": "BUDGET-ENVIRONMENT-001",
+      "status": "NOT_STARTED",
+      "rollback": "Keep the candidate unmodified and outside production placement until representative approval.",
+      "evidence_ids": []
+    }
+  ],
+  "gates": {
+    "asset_plan_ready": {
+      "status": "PENDING_EVIDENCE",
+      "authorized": false,
+      "scope_demand_ids": [
+        "DEMAND-STRUCTURAL-KIT-001"
+      ],
+      "scope_candidate_ids": [
+        "CANDIDATE-PROJECT-KIT-001"
+      ],
+      "approver": null,
+      "decision_at": null,
+      "blocked_reasons": [
+        "Replace template placeholders and confirm the complete demand registry, owners, budget boundaries, due stages, and fallbacks."
+      ],
+      "rollback_target": "Approved Stage 2a contract and unmodified project inventory baseline."
+    },
+    "visual_slice_ready": {
+      "status": "PENDING_EVIDENCE",
+      "authorized": false,
+      "scope_demand_ids": [
+        "DEMAND-STRUCTURAL-KIT-001"
+      ],
+      "scope_candidate_ids": [
+        "CANDIDATE-PROJECT-KIT-001"
+      ],
+      "approver": null,
+      "decision_at": null,
+      "blocked_reasons": [
+        "The selected candidate is not REPRESENTATIVE_APPROVED."
+      ],
+      "rollback_target": "Last accepted playable blockout and unstaged candidate baseline."
+    },
+    "production_dressing_ready": {
+      "status": "PENDING_EVIDENCE",
+      "authorized": false,
+      "scope_demand_ids": [
+        "DEMAND-STRUCTURAL-KIT-001"
+      ],
+      "scope_candidate_ids": [
+        "CANDIDATE-PROJECT-KIT-001"
+      ],
+      "approver": null,
+      "decision_at": null,
+      "blocked_reasons": [
+        "The production demand and selected candidate are not production-ready."
+      ],
+      "rollback_target": "Last accepted Visual Feasibility Slice and production content baseline."
+    }
+  },
+  "integrity": {
+    "orphan_candidate_ids": [],
+    "uncovered_demand_ids": [],
+    "unresolved_license_candidate_ids": [
+      "CANDIDATE-PROJECT-KIT-001"
+    ],
+    "unresolved_compatibility_candidate_ids": [
+      "CANDIDATE-PROJECT-KIT-001"
+    ],
+    "unauthorized_external_candidate_ids": [],
+    "non_production_ready_demand_ids": [
+      "DEMAND-STRUCTURAL-KIT-001"
+    ]
+  }
+}

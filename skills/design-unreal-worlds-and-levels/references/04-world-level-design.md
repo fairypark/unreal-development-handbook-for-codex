@@ -65,9 +65,25 @@ The cheapest credible playtest unit is usually not a whole world or a hero scree
 
 Use this workflow when a level, mission space, environment, or terrain change is expected to become production content. When an AI agent performs the work, the workflow record and stage order are mandatory even for a small level. A disposable experiment may combine adjacent gates in one reversible pass only when that choice is declared before mutation and every gate's question and evidence remains visible; combined is not skipped. For a level whose failure would strand significant art, audio, or technical work, keep the pauses explicit and evidence-based.
 
+When the request is a local edit to an already accepted prototype baseline,
+classify it as `BOUNDED_PROTO_EDIT` before invoking the broad level gates. This
+mode reuses the current stage and its accepted predecessor evidence when the
+plan-owned assumptions are unchanged; it does not promote the level or erase
+the numbered stages. It is appropriate for explicit existing-Actor
+Transform/scale edits and named existing-Actor deletions, not for creating,
+regenerating, or redesigning spatial systems.
+
 ## When NOT to use
 
 Do not interpret the sequence as a rigid one-pass waterfall or a fixed number of passes, and do not replace it with a tool-first sequence or retrospective checklist. Audio-first, vehicle, multiplayer, VR, systemic, and highly procedural experiences may need their defining risks in the first playable prototype. The rule is to move the expensive or experience-defining uncertainty earlier; for AI work, this flexibility changes how stages are combined, not the obligation to record and evaluate each stage.
+
+Do not use the fast path when target ownership, route authority, protected
+scope, baseline revision, or save state is ambiguous. Direct Landscape,
+water/stream, bridge, zone-marker, fixed-camera, streaming, authoritative
+route, Navigation/collision-source, or broad generated-content changes remain
+on the relevant staged path. A local building move may use target-specific
+grounding evidence, but inability to prove all required support corners is an
+exit condition rather than permission to lower the grounding contract.
 
 ## Decision-ready brief
 
@@ -92,22 +108,70 @@ allowed Actor or data scope, change and time budget, preconditions,
 postconditions, save policy, and rollback target. Use a project-equivalent set
 of explicit modes:
 
-- **Bounded edit:** modify existing, uniquely identified prototype content in one small
-  batch; do not silently spawn, delete, rebuild, or save the map;
+- **Bounded edit / `BOUNDED_PROTO_EDIT`:** modify existing, uniquely identified
+  prototype content in one small batch. Explicit deletion of named existing
+  prototype Actors is allowed only when the contract proves that the targets
+  are not protected, generated, shared, or route-authoritative; do not
+  silently spawn, wildcard-delete, rebuild, or save the map;
 - **Diagnostic audit:** collect one batched structural snapshot and report diagnostics only;
 - **Promotion review:** evaluate explicit structural, runtime, visual, and independent
   review evidence; do not recapture or rebuild to hide an evidence failure;
 - **Maintenance rebuild:** run a broad reset or reconstruction only as a separate,
   explicitly confirmed operation with a checkpoint and recovery path.
 
+#### `BOUNDED_PROTO_EDIT` entry and exit contract
+
+Enter this mode only when the current world/level and accepted baseline are
+known, the user has supplied an explicit target allowlist and save intent, the
+targets have stable IDs/classes/ownership and expected pre-state, and a
+compact protected snapshot can prove the identity of Landscape, water or
+stream, bridges, zone markers, authoritative route/collision/navigation
+sources, and relevant camera or streaming boundaries. The initial project
+default may cap the batch at one level and eight existing Actors; project
+policy may choose another bound, but semantic scope is more important than
+Actor count.
+
+The contract must state the local zone or envelope, allowed operation kinds,
+wall-clock budget, rollback target, and whether a moved structure requires a
+target-specific four-corner grounding check. A dirty level with unrelated
+changes, an unresolved parent/child relationship, a wildcard or broad query,
+an unknown route role, or a missing protected snapshot blocks entry.
+
+Use one task-scoped context and this observable order:
+
+`compact inspect → preconditions → serialized mutation → in-memory postcondition → save → persistence re-read`
+
+The in-memory check must precede save unless the execution surface supplies an
+atomic transaction with equivalent rollback semantics. The compact result
+must identify changed/deleted targets, before/after Transforms, protected
+snapshot comparison, save state, warnings, elapsed/call counts, and checks
+not run. Do not capture a viewport or run PIE merely because the edit is
+complete.
+
+The operation result is separate from promotion. `operation_verdict` may be
+`PASS`, `FAIL`, or `PENDING_EVIDENCE`; `promotion_verdict` remains unchanged.
+Visual review, fixed-camera capture, independent review, PIE, full Landscape
+inventory, and broad Area Composition Plan/Translation review are
+`NOT_RUN_BY_CONTRACT` when they are outside scope—not evidence that the level
+passed those gates.
+
+Reuse the Area Composition Plan, Stage 2a Translation Contract, and current
+stage only while their assumptions remain unchanged. Reopen the earliest
+responsible gate when the edit changes terrain, water, a bridge approach,
+authoritative route topology, zone-marker identity, typology-critical axis,
+fixed-camera coverage, runtime collision/navigation, or a recorded
+composition tolerance. If the operation times out or returns an empty,
+ambiguous, or partial result, stop and audit the state before retrying.
+
 Use one task-scoped Editor execution context, one inventory read, local request
-validation, one serialized mutation transaction, and one postcondition audit
-where the engine surface permits it. Per-item discovery and repeated retries
-are process failures to diagnose, not normal prototype behavior. On timeout or
-ambiguous transport, audit the current level before continuing; never infer
-that the level is unchanged or complete from a missing response. A diagnostic
-result can be healthy while the level remains `PENDING_EVIDENCE`; it does not
-authorize the next broad placement batch or production promotion.
+validation, one serialized mutation transaction, one in-memory postcondition
+audit, and one persistence re-read where the engine surface permits it.
+Per-item discovery and repeated retries are process failures to diagnose, not
+normal prototype behavior. On timeout or ambiguous transport, audit the
+current level before continuing; never infer that the level is unchanged or
+complete from a missing response. A diagnostic or bounded-edit result can be
+healthy while the level remains `PENDING_EVIDENCE`; it does not authorize the
+next broad placement batch or production promotion.
 
 ## Readiness for a production workflow
 
@@ -135,7 +199,8 @@ Before the first mutation, the agent must create or update an inspectable workfl
 - the current stage, the approved predecessor artifact or baseline, and the stage objective;
 - required artifacts, evidence conditions, hard failures, owner or approver, and rollback target;
 - allowed mutations and the exact version or change set that the next gate will review;
-- for level composition work, the Stage 2a translation-contract identifier and version, its broad-placement lock state, the conditional dependent-strata strategy decision when source and dependent layers are in scope, and the source, plan, prototype, camera, and deviation-record versions currently in force.
+- for level composition work, the Stage 2a translation-contract identifier and version, its broad-placement lock state, the conditional dependent-strata strategy decision when source and dependent layers are in scope, and the source, plan, prototype, camera, and deviation-record versions currently in force;
+- for concept-led content work, the Stage 2b Concept-to-Asset Readiness Contract identifier and version, the `ASSET_PLAN_READY`, `VISUAL_SLICE_READY`, and `PRODUCTION_DRESSING_READY` lock states, unresolved blocking demands, acquisition authority, and the exact selected candidate versions currently in force.
 
 The agent must start at Stage 1, or resume at a later stage only when an existing artifact and approval record prove that every predecessor gate passed. Existing level content without stage evidence is not proof of completion and must be audited or reconstructed before further promotion.
 
@@ -155,12 +220,13 @@ The numbered stages are always represented in the record. A small or disposable 
 | 1. Concept and intent review | Decision-ready brief, non-goals, constraints, unresolved questions, and recorded intent feedback. |
 | 2. Area Composition Plan review | A versioned, recorded area plan with zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, and a risk-covering set of fixed `DIAGNOSTIC_ONLY` overview cameras with stable IDs. The set covers required arrival, reverse, lateral, waterway/axis, elevation, and project-specific relationships without imposing a universal count. It also records the player-camera height/FOV proxy and planned runtime-rig source. No prototype geometry or broad asset placement is authorized before this gate passes. |
 | 2a. Reference-to-Prototype Translation Gate | A machine-readable source registry and authority order, zone-level quantitative composition contracts, a planned traceability map for every prototype array/proxy group/route/terrain or water change, camera-specific comparison rules, tolerance and hard-failure rules, and an explicit broad-placement decision. Stage 2 `PASS` alone never authorizes prototype placement. |
+| 2b. Concept-to-Asset Readiness Plan | A machine-readable demand registry traced to the approved concept, zones, and Stage 2a requirements; project and ownership-confirmed inventory findings; candidate, acquisition, authoring, procedural, outsourcing, fallback, and concept-revision routes; license, compatibility, dependency, cost, and authority risks; and an `ASSET_PLAN_READY` decision. This plan may release cheap prototype work, but it never authorizes a purchase, download, install, migration, Visual Slice, or production dressing. |
 | 3. Experience prototype | Runtime evidence for one POI or encounter unit, including approach, player question, choice or verb, payoff, next hook, and the live zone marker that identifies its area. |
 | 4. Terrain and macro blockout | The fixed overview set proves whole-area composition, terrain relief, axes, water/bridge relationships, and risk coverage; auxiliary static player-height/FOV views reject gross scale, width, slope, and occlusion failures without claiming exact runtime-rig or fine-composition authority. |
 | 4a. Route authority and corridor contract | Inspectable route source of truth, ownership, surface provider, clearance, grade, and corridor validation. |
 | 5. Playable blockout and feedback gate | Playtest evidence from the representative player controller and actual runtime camera rig for traversal, authoritative camera behavior, scale, readability, pacing, collision, boundaries, POI flow, and recovery. |
-| 6. Visual feasibility slice | Representative visual and experience evidence captured through the actual runtime camera rig, with asset density, composition, material, lighting, collision, streaming, and budget evidence. |
-| 7. Production meshing and dressing | Approved asset-family substitutions, preserved spatial contracts, chunk evidence, deviation records, and a complete zone-marker inventory proving every production area remained identifiable through final placement. |
+| 6. Visual feasibility slice | A `VISUAL_SLICE_READY` decision plus representative visual and experience evidence captured through the actual runtime camera rig, with the exact staged or project-native asset versions, asset density, composition, material, lighting, collision, streaming, and budget evidence. |
+| 7. Production meshing and dressing | A `PRODUCTION_DRESSING_READY` decision for the exact zones and asset families, approved substitutions, preserved spatial contracts, chunk evidence, deviation records, and a complete zone-marker inventory proving every production area remained identifiable through final placement. |
 | 8. Layered lighting and audio integration | Functional and final integration evidence for navigation, mood, interaction feedback, and propagation or occlusion risks. |
 | 9. Collision, polish, and release validation | Final runtime, collision, performance, streaming, persistence, packaging, accessibility, and recovery evidence. |
 
@@ -292,9 +358,31 @@ This gate adds evidence; it does not replace the existing Landscape, route-autho
 
 For a legacy prototype that already contains geometry, do not claim that a reconstructed contract predates placement. Freeze further broad placement, preserve the existing prototype as a `LEGACY_UNVERIFIED` candidate outside the accepted baseline, rebuild the source registry and zone contracts from approved artifacts, map the existing proxy groups and terrain or route changes, and run the same-condition deviation audit. Keep the gate `INVALID_EVIDENCE` or `PENDING_EVIDENCE` until the reconstruction and audit are explicitly approved. If controlling sources, plan versions, or comparable cameras cannot be recovered, return to Stage 1 or 2 rather than promoting the legacy geometry by appearance.
 
+### 2b. Concept-to-Asset Readiness Plan (staged lock)
+
+Stage 2a defines **what the level must express and where**. Stage 2b defines **which asset families and supply routes can express it credibly at production scale**. Create a machine-readable **Concept-to-Asset Readiness Contract** using the Content & Asset Architecture chapter's [JSON Schema](../../design-unreal-content-architecture/references/concept-to-asset-readiness.schema.json) and [starter template](../../design-unreal-content-architecture/references/concept-to-asset-readiness.template.json), or a project-equivalent format that preserves the same demand, candidate, authority, license, dependency, readiness, and reopening semantics.
+
+Extract demand from the approved source requirements by production function rather than by copying every visible object name. Cover the families needed for hero silhouettes; structural and roof kits; entrances, corners, endings, foundations, stairs, and elevation transitions; routes, bridges, banks, and water edges; boundaries, traversal and gameplay affordances; terrain contacts; ecology layers and hardscape; materials and surface variation; ordinary set dressing and narrative signals; and lighting, VFX, audio, animation, or interaction content when they carry the intended experience. For every demand, record stable demand, source-requirement, and zone IDs; role and priority; scale and expected use; minimum useful variation; modular, reverse-side, contact, and transition requirements; visual and technical constraints; acceptance evidence; owner; due stage; and fallback.
+
+Search project-native content and ownership-confirmed team or marketplace libraries before proposing a new purchase. A public listing, search result, remembered entitlement, or available download button is only candidate evidence. Keep these states distinct:
+
+`DISCOVERED -> OWNERSHIP_VERIFIED -> ACQUIRED_TO_STAGING -> REPRESENTATIVE_APPROVED -> PRODUCTION_APPROVED`
+
+Record `REJECTED` or `BLOCKED` candidates and their reasons. An owned asset may still fail the engine, platform, renderer, material, scale, modularity, collision, navigation, skeleton or rig, LOD or Nanite, memory, streaming, plugin, dependency, license, cook, reverse-view, or integration-cost requirements. A large pack does not pass by advertised asset count; inspect how many required production functions and variants it actually covers.
+
+Give every unresolved demand an explicit route: reuse project content, use an ownership-confirmed library candidate, request a new acquisition, author or kitbash, build procedurally, outsource, approve a substitute, or reopen the concept and plan. Record price only as one part of total cost alongside integration, cleanup, storage, shader or derived-data, validation, maintenance, dependency, and replacement effort. Never store account secrets, cookies, payment data, or credentials in the contract.
+
+Use three separate decisions so asset uncertainty is retired at the right cost:
+
+- **`ASSET_PLAN_READY`:** required before Stage 3. Every approved demand has a coverage record, sourcing route, owner, budget boundary, due stage, acceptance evidence, and fallback. Candidates or exact files may still be missing when their acquisition or authoring path is explicit and does not invalidate the concept. This decision allows cheap experience prototype and blockout work only.
+- **`VISUAL_SLICE_READY`:** required before Stage 6. Every family needed by the representative slice is project-native or acquired to a recoverable staging boundary, has resolved entitlement or provenance, license and compatibility, and has passed the declared representative checks. Authorize only the named slice, demand IDs, candidate versions, and zones.
+- **`PRODUCTION_DRESSING_READY`:** required before Stage 7. Every production-blocking demand is `PRODUCTION_READY` or has an approved concept or scope waiver; selected candidates are production-approved; acquisition and authoring actions due for production are authorized and complete; dependency, performance, storage, cook, collaboration, replacement, and rollback evidence passes. Authorize only the exact contract version, zones, and asset families.
+
+Approval of a plan is not approval to purchase, download, install, migrate, enable a plugin, outsource work, or upload content. Those external or state-changing actions require separate explicit authority and recovery conditions. Likewise, `VISUAL_SLICE_READY` does not imply map-wide dressing. Reopen Stage 2b when the concept, plan, source authority, target platform, engine or rendering context, selected candidate version, license, dependency graph, acquisition authority, budget, or representative evidence changes. If no viable family can preserve a blocking concept requirement, return to Stage 1 or 2 rather than accepting an immediately available but structurally wrong substitute.
+
 ### 3. Experience prototype before full blockout
 
-Only after both the recorded Area Composition Plan and Stage 2a translation gate pass, select one representative POI or encounter and build the cheapest playable version of its experience unit: approach, question or reveal, refusal or occlusion, player choice or repeated verb, interaction, outcome or reward, and exit or next hook. Use boxes, semantic materials, temporary effects, and placeholder behavior. Create or verify the persistent zone marker before adding the first prototype geometry, keep it visible in the review evidence, and bind every new proxy group, path, or terrain change to its planned trace entry.
+Only after the recorded Area Composition Plan, Stage 2a translation gate, and Stage 2b `ASSET_PLAN_READY` decision pass, select one representative POI or encounter and build the cheapest playable version of its experience unit: approach, question or reveal, refusal or occlusion, player choice or repeated verb, interaction, outcome or reward, and exit or next hook. Use boxes, semantic materials, temporary effects, and placeholder behavior. Create or verify the persistent zone marker before adding the first prototype geometry, keep it visible in the review evidence, and bind every new proxy group, path, or terrain change to its planned trace entry. Asset-plan approval does not require final assets here; unresolved supply work remains visible while the prototype tests experience and space cheaply.
 
 Test the fun thesis, not only the geometry. Observe whether players understand what they are curious about, choose to approach or defer, experience anticipation or tension, receive a worthwhile payoff, and know what to do next. Record time to meaningful change and the role of any intentional quiet section. If the unit is weak, revise the thesis or spatial plan before building the whole route. For a small level, this gate may be combined with the next blockout step, but its evidence and approval question should remain explicit.
 
@@ -346,17 +434,17 @@ Use self-playtests for fast correction, informed critique for design diagnosis, 
 
 ### 6. Visual feasibility slice before map-wide assets
 
-Before committing the broad asset budget, build a small **visual feasibility slice** (also called a golden or representative slice). It should contain the route transition, focal landmark, foreground/midground/background structure, boundary or reverse view, contact conditions, and the asset families that will dominate the final level. Use real or representative meshes, materials, lighting, collision, target platform settings, and the Stage 5-approved runtime camera rig. Include enough repetition to expose kit weakness, not only a hero asset.
+Before committing the broad asset budget, require a Stage 2b `VISUAL_SLICE_READY` decision for the exact demand IDs, candidate versions, and zones that the slice will test. Then build a small **visual feasibility slice** (also called a golden or representative slice). It should contain the route transition, focal landmark, foreground/midground/background structure, boundary or reverse view, contact conditions, and the asset families that will dominate the final level. Use the exact project-native or staged candidate versions named by the readiness contract, real or representative materials, lighting, collision, target platform settings, and the Stage 5-approved runtime camera rig. Include enough repetition to expose kit weakness, not only a hero asset. A placeholder may clarify a remaining boundary, but it cannot supply readiness evidence for the demand it replaces.
 
 The slice must also preserve one representative experience unit: an approach, a question or reveal, a player verb or choice, an outcome or reward, and a next hook. A slice that looks convincing but does not demonstrate the fun thesis has only retired visual risk, not level-design risk.
 
-This slice answers a different question from the graybox: can the team reproduce the intended visual quality consistently, at an acceptable cost, with viable pivots, scale, materials, LOD or Nanite behavior, collision, streaming, and frame-time or memory budgets? Judge readability, asset density, foreground/midground/background balance, and player-facing visual composition through the actual runtime rig under representative camera states. Validate more than one required gameplay view and at least one ordinary, non-hero area. The overview set may still diagnose macro drift but cannot approve these player-facing qualities. If the slice fails, repair the visual language, asset kit, material rules, or pipeline before scaling. Do not spend map-wide art effort to defend an unproven direction.
+This slice answers a different question from the graybox: can the team reproduce the intended visual quality consistently, at an acceptable cost, with viable pivots, scale, kit coverage, transitions, contacts, reverse sides, materials, LOD or Nanite behavior, collision, streaming, dependencies, and frame-time or memory budgets? Judge readability, asset density, foreground/midground/background balance, ordinary repetition, and player-facing visual composition through the actual runtime rig under representative camera states. Validate more than one required gameplay view and at least one ordinary, non-hero area. The overview set may still diagnose macro drift but cannot approve these player-facing qualities. Record which candidates become `REPRESENTATIVE_APPROVED`, which remain conditional, and which are rejected. If the slice fails, repair the visual language, asset kit, material rules, supply route, or pipeline before scaling. Do not spend map-wide art effort to defend an unproven direction.
 
 ### 7. Production meshing and dressing
 
-Replace approved proxies with approved asset families while preserving the spatial contract: zone distribution, footprint, density ranges, frontage and gaps, shade and intentional voids, hierarchy, route width and continuity, floor height, sightlines, landmark position, camera clearance, collision intent, and boundary behavior. Keep the Stage 2a traceability IDs through substitution and record deliberate deviations instead of allowing them to accumulate invisibly. Use procedural systems for repeatable placement and hand authorship for hero composition, transitions, exceptions, and story detail.
+Do not begin production meshing or dressing until Stage 2b records `PRODUCTION_DRESSING_READY` for the exact contract version, zones, demand IDs, and selected candidate versions. Replace approved proxies with those production-approved asset families while preserving the spatial contract: zone distribution, footprint, density ranges, frontage and gaps, shade and intentional voids, hierarchy, route width and continuity, floor height, sightlines, landmark position, camera clearance, collision intent, and boundary behavior. Keep both the Stage 2a traceability IDs and Stage 2b demand/candidate IDs through substitution, and record deliberate deviations instead of allowing them to accumulate invisibly. Use procedural systems for repeatable placement and hand authorship for hero composition, transitions, exceptions, and story detail.
 
-Promote in zones or representative chunks. Place large POIs and their route relationships first, then medium and small POIs according to the approved beat sheet and density hypothesis. Each chunk should be checked for contacts, repetition, reverse views, route readability, meaningful-change timing, and POI payoffs before the next chunk multiplies the same pattern. When a real asset reveals a structural problem, return to the blockout or kit rule instead of hiding it with local props.
+Promote in zones or representative chunks. Place large POIs and their route relationships first, then medium and small POIs according to the approved beat sheet and density hypothesis. Each chunk should be checked for demand coverage, selected candidate versions, contacts, transitions, repetition, reverse views, route readability, meaningful-change timing, POI payoffs, dependencies, and budget drift before the next chunk multiplies the same pattern. When a real asset reveals a structural or supply problem, return to the blockout, kit rule, readiness contract, or source plan instead of hiding it with local props.
 
 Keep the persistent zone markers and stable zone IDs throughout every replacement and placement batch. Stage 7 cannot pass while a planned zone lacks its marker, a marker no longer matches its approved anchor or bounds, or the zone cannot be identified in overview and local evidence. Marker retirement is a separate recorded cleanup action after asset placement completion; it is never an implicit side effect of deleting blockout Actors.
 
@@ -397,9 +485,9 @@ Connect the contract to procedural generation. A PCG graph that emits actors int
 
 ## Asset readiness and representative proof
 
-Inspect final-scale terrain, architecture, vegetation, water-edge, contact, and focal asset families before map-wide production. Judge appearance, pivot, scale, material compatibility, LOD or Nanite behavior, collision intent, and reverse-side quality.
+Use the Stage 2b Concept-to-Asset Readiness Contract as the source of truth for demand coverage and selected candidates. Inspect final-scale terrain, architecture, vegetation, water-edge, transition, contact, ordinary repetition, boundary, and focal asset families before map-wide production. Judge appearance, family completeness, variation, pivot, scale, material compatibility, LOD or Nanite behavior, collision intent, dependencies, streaming and memory cost, integration effort, and reverse-side quality. An owned or downloaded pack is not ready until the exact selected version passes its declared scope.
 
-Prove one representative gameplay segment before scaling. A useful golden slice is often tens of metres rather than an entire district, but its size must represent the actual route, terrain transition, POI approach-to-payoff unit, focal content, contacts, materials, lighting, boundary, reverse view, and ordinary repetition. Do not preserve a fixed number when project scale demands another representative unit.
+Prove one representative gameplay segment before scaling. A useful golden slice is often tens of metres rather than an entire district, but its size must represent the actual route, terrain transition, POI approach-to-payoff unit, focal content, selected asset families, contacts, materials, lighting, boundary, reverse view, and ordinary repetition. Do not preserve a fixed number when project scale demands another representative unit. Promote candidates from `REPRESENTATIVE_APPROVED` to `PRODUCTION_APPROVED` only after the complete production scope, dependency, performance, license, cook, collaboration, maintenance, and rollback risks are resolved.
 
 ## Full layout and ecology
 
@@ -412,10 +500,11 @@ User feedback is most useful when the question is narrow enough to answer and th
 - **Concept pause:** Is the player fantasy, emotional tone, visual priority, and non-goal correctly understood?
 - **Plan pause:** Are the fun thesis, POI roles, player questions, routes, landmarks, beats, density, and boundaries arranged as intended?
 - **Translation pause:** Have the approved references been converted into zone-level ranges, hierarchy and negative-space rules, traceable prototype groups, fixed comparison conditions, and an explicit placement decision without unresolved authority conflicts?
+- **Asset-plan pause:** Have concept requirements been converted into functional asset-family demands, and does every demand have an owned, acquired, authored, procedural, outsourced, fallback, or concept-revision route with explicit authority, risk, owner, and due stage?
 - **Experience pause:** Does a cheap POI unit produce the intended question, choice, tension, payoff, and next hook with placeholders?
 - **Blockout pause:** Does movement through the space produce the intended direction, pacing, recognition, choice, and interaction?
-- **Visual-slice pause:** Does the representative quality bar and POI experience match the intended target, and is the production method affordable and repeatable?
-- **Production review:** Are deviations, dependencies, and remaining risks still within the approved contract?
+- **Visual-slice pause:** Do the exact staged asset candidates reproduce the representative quality bar and POI experience, expose enough ordinary repetition and kit transitions, and remain affordable and repeatable?
+- **Production review:** Are the production-approved asset families, deviations, dependencies, license scope, integration cost, and remaining risks still within the approved contracts?
 
 Do not ask a late visual review to decide an unresolved spatial question. If a later request changes a frozen assumption, explicitly reopen the affected gate and preserve the previous accepted version for comparison.
 
@@ -431,10 +520,13 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Architecture-ground, wall-terrain, water-bank, vegetation-hardscape, and assembly contact.
 - No world voids, exposed reserve edges, placeholders, uniform scatter, or unfinished reverse sides.
 - Material scale, lighting hierarchy, cultural and biome coherence.
-- Concept, Area Composition Plan, Reference-to-Prototype Translation, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets; both the plan and the translation contract existed and passed before the first content-bearing cube or broad asset-placement mutation.
+- Concept, Area Composition Plan, Reference-to-Prototype Translation, Concept-to-Asset Readiness, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets; the spatial plan and translation contract existed and passed before the first content-bearing cube, and the asset plan passed before the Experience Prototype.
 - The Area Composition Plan records zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, the source-artifact inventory and authority order, a stable-ID `DIAGNOSTIC_ONLY` overview-camera set, its relationship/risk coverage matrix, auxiliary player-height/FOV proxies, and the planned runtime-rig source.
 - The Stage 2a contract validates against the bundled schema or a documented equivalent and records source IDs, versions, approval and authority scopes; the dependent-strata strategy consideration and selection when applicable; zone-level density, mass-count, typology, occupancy, frontage, gap, route-width, elevation, water/bridge, shade/void, hierarchy, and prohibited-silhouette requirements; measurement bases; tolerances; and hard failures.
 - Every prototype array, repeated set, architecture proxy group, route, water or bridge proxy, reserved shade or void, and Landscape change has a stable trace from source requirement through plan feature to realized inventory; no orphan requirement or unmapped broad placement exists.
+- Every asset demand traces to approved source-requirement and zone IDs and records role, priority, family completeness, variation, scale, contacts, reverse sides, visual and technical constraints, acceptance evidence, fallback, owner, and due stage.
+- Project-native and ownership-confirmed library content was considered before new acquisition; discovery, entitlement, staging, representative approval, and production approval remain distinct; external purchases, downloads, installs, migrations, plugin enablement, and outsourcing have separate explicit authorization.
+- `VISUAL_SLICE_READY` covers every asset family required by the declared slice, and `PRODUCTION_DRESSING_READY` covers every production-blocking demand with exact selected versions, license, compatibility, dependencies, cost, performance, cook, collaboration, replacement, and rollback evidence or an approved concept/scope waiver.
 - After each composition-changing batch, same-condition reference/plan/prototype deviation records exist. Fixed overviews test assigned footprint, density, distribution, hierarchy, path, terrain, water, shade/void, and silhouette questions only; Stage 5-or-later runtime-rig evidence separately tests distance, enclosure, occlusion, reveal, route continuity, scale, and player readability.
 - Gate approval is not based on aggregate Actor count: zone distribution, preserved shade and intentional voids, focal hierarchy, frontage and gaps, route continuity, and prohibited silhouettes each meet their own contract.
 - Typology-critical areas pass their required sequence, hierarchy, negative-space, and silhouette rules; palace approval includes the gate -> outer court -> middle gate -> central courtyard -> main hall axis, and any fortress- or castle-like reading is a hard failure.
@@ -468,6 +560,10 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Building the first cube or placing broad asset batches before a versioned Area Composition Plan and its gate status are recorded.
 - Treating Area Composition Plan `PASS` as permission to place prototype geometry before the Stage 2a source registry, quantitative zone contract, traceability map, tolerances, and explicit placement decision pass.
 - Translating visual references by memory, silently averaging conflicting sources, or recording only qualitative phrases such as “dense” without a bounded target and measurement basis.
+- Treating the concept as an object shopping list instead of extracting hero, structural, transition, contact, ordinary-repetition, gameplay, and atmosphere asset-family functions.
+- Searching public listings before project-native and ownership-confirmed content, or reporting a listing, search hit, remembered purchase, or download option as proof of ownership.
+- Treating `ASSET_PLAN_READY` as purchase or install authority, `VISUAL_SLICE_READY` as map-wide placement authority, or an acquired pack as production-approved without license, dependency, compatibility, integration, performance, and representative evidence.
+- Approving a pack by advertised mesh count or hero screenshots while corners, caps, foundations, transitions, reverse sides, material control, contacts, and ordinary variation remain missing.
 - Mapping only a folder or total Actor count while leaving arrays, proxy groups, paths, reserved voids, or Landscape changes without source-requirement trace IDs.
 - Capturing a new convenient camera after a change, overwriting the previous comparison, or accepting an in-range total count while zone distribution, shade, hierarchy, frontage, or path continuity has drifted.
 - Using one hero overview instead of a stable-ID set that covers arrival, reverse, lateral, waterway/axis, elevation, and identified spatial risks.

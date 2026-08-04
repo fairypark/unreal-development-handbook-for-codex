@@ -21,6 +21,8 @@ Automate an approved responsibility and validation contract, not an unclear desi
 4. Choose the smallest implementation surface that supports required engine access and reliability.
 5. Define deterministic controls, idempotence, overwrite policy, cancellation, partial failure, recovery, and audit output.
 
+For a small edit on an already accepted prototype, use the Handbook's `BOUNDED_PROTO_EDIT` transaction boundary rather than treating the request as a new batch build. Batch the compact inspect, serialize the declared mutation, verify the in-memory postcondition, save, and perform a persistence re-read. Return separate `operation_verdict` and `promotion_verdict` values; visual capture, PIE, and broad composition review are `NOT_RUN_BY_CONTRACT` unless the scope requires reopening them. Cache task-scoped schema knowledge and make optional/default fields explicit, but never let a compact response or omitted API field weaken target, protected-scope, or save verification.
+
 ## Design procedural systems
 
 - Author one coherent source assembly or spatial rule before proceduralizing it.

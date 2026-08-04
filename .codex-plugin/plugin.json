@@ -1,6 +1,6 @@
 {
   "name": "unreal-development-handbook-for-codex",
-  "version": "0.2.7+codex.20260804003513",
+  "version": "0.2.9",
   "description": "Teach durable Unreal Engine development reasoning from intent and architecture through validation and production readiness.",
   "author": {
     "name": "Community Maintainers"
@@ -14,6 +14,7 @@
     "level-design",
     "validation",
     "production",
+    "asset-sourcing",
     "handbook",
     "ai-assisted-development"
   ],
@@ -21,7 +22,7 @@
   "interface": {
     "displayName": "Unreal Development Handbook for Codex",
     "shortDescription": "Design and validate Unreal projects before implementation.",
-    "longDescription": "Bundles a 17-chapter, progressively loaded handbook plus intent-first, design-first, and validation-first skills for Unreal gameplay, worlds, content, Blueprint and C++, automation and procedural systems, production quality, AI-assisted development, and evidence-backed case analysis. It complements Unreal Editor Skills for Codex without bundling editor control or MCP operations.",
+    "longDescription": "Bundles a 17-chapter, progressively loaded handbook plus intent-first, design-first, and validation-first skills for Unreal gameplay, worlds, concept-led asset demand and acquisition readiness, content architecture, Blueprint and C++, automation and procedural systems, production quality, AI-assisted development, and evidence-backed case analysis. It complements Unreal Editor Skills for Codex without bundling editor control or MCP operations.",
     "developerName": "Community Maintainers",
     "category": "Developer Tools",
     "capabilities": [
@@ -30,6 +31,7 @@
     "defaultPrompt": [
       "Turn an Unreal feature request into a decision-ready design and validation plan.",
       "Review an Unreal architecture for ownership, lifecycle, and production risks.",
+      "Turn an approved environment concept into a traceable asset-demand, sourcing, and readiness plan before level dressing.",
       "Define evidence and quality gates before implementing an Unreal workflow."
     ]
   }

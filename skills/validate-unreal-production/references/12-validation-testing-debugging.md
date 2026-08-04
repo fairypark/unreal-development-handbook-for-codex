@@ -42,24 +42,60 @@ wait, mutation, verification, and background-maintenance time separately; if
 the same task repeatedly spends more time in orchestration than in the named
 change, change the workflow boundary before changing the content.
 
+### Local operation verdict versus promotion verdict
+
+Every bounded prototype operation records two independent results. The
+`operation_verdict` answers whether the declared target allowlist, protected
+scope, target postconditions, and save persistence passed. The
+`promotion_verdict` answers whether a separately requested stage or production
+promotion passed; it remains `unchanged` for an ordinary local edit. A
+successful local operation therefore cannot silently become a level approval.
+
+For `BOUNDED_PROTO_EDIT`, use a compact structural evidence package: exact
+changed/deleted IDs, before/after Transforms, protected references or digests,
+warnings, save state, elapsed/call counts, rollback status, and checks not run.
+Visual capture, PIE, independent review, full Landscape inventory, and broad
+Area Composition Plan or Translation review may be
+`NOT_RUN_BY_CONTRACT` when their questions are outside the declared scope.
+That state is neither `PASS` nor an operational failure; it is a truthful
+boundary on what the operation did not attempt to prove.
+
+Direct mutation of Landscape, water/stream, bridges, zone markers/registry,
+fixed cameras, streaming boundaries, authoritative routes, or
+Navigation/collision sources exits the fast path. A building move over
+Landscape may remain local only when the target-specific four-corner grounding
+postcondition is available and passes; a center trace, average, or incomplete
+corner result is not sufficient.
+
 ## Gate contract for level work
 
 For a level or environment, make the promotion sequence explicit rather than treating approval as a single late event:
+
+`BOUNDED_PROTO_EDIT` is an operation envelope within the current stage, not an
+additional promotion gate. Reuse the current Area Composition Plan,
+Reference-to-Prototype Translation, and stage evidence only while their
+assumptions remain unchanged. Reopen the earliest responsible gate when the
+edit changes a plan-owned route, terrain, water/bridge relationship, zone
+marker, typology-critical hierarchy, fixed-camera coverage, runtime
+collision/navigation behavior, or recorded composition tolerance.
 
 | Gate | What it must prove | Typical hard failures |
 | --- | --- | --- |
 | Direction | The concept and written brief preserve the intended player experience, priorities, and non-goals. | Contradictory intent, missing decision owner, or unresolved scope that would change the layout. |
 | Area Composition Plan | Before the first cube or broad asset placement, a versioned record assigns zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, and a stable-ID `DIAGNOSTIC_ONLY` overview-camera set. Its coverage matrix closes arrival, reverse, lateral, waterway/axis, elevation, and project-specific spatial risks with the smallest sufficient set, and records auxiliary player-height/FOV proxies plus the planned runtime-rig source. | Missing or retrospective plan; unreadable relationships; absent route, elevation, water crossing, footprint, camera authority, or coverage; reliance on one hero overview or an arbitrary camera count; typology approved by size alone; or an unowned critical dependency. |
 | Reference-to-Prototype Translation | After the Area Composition Plan passes and before content-bearing prototype placement, a machine-readable contract records source versions, approval and authority; zone-level density, mass, typology, occupancy, frontage, spacing, route, elevation, water/bridge, shade/void, hierarchy, and silhouette requirements; planned trace entries; camera-specific comparisons; tolerances; hard failures; and an explicit placement decision. | Unresolved source conflict; qualitative-only target; missing or invalid schema; unmapped proxy group, path, void, or terrain change; empty tolerance; Actor-count-only approval; or broad placement without contract `PASS`. |
+| Concept-to-Asset Readiness | After Stage 2a, a machine-readable contract traces functional asset-family demand to approved sources and zones; records project and ownership-confirmed inventory, candidates, supply routes, authorization, license, compatibility, dependencies, total integration cost, evidence, fallback, and exact versions; and separates `ASSET_PLAN_READY`, `VISUAL_SLICE_READY`, and `PRODUCTION_DRESSING_READY`. | Public listing treated as ownership; acquired pack treated as production-ready; missing family coverage or transition pieces; unauthorized external action; unresolved license, compatibility, dependency, or cost; Visual Slice used to authorize map-wide dressing; or an unapproved concept substitution. |
 | Experience prototype | A cheap POI or encounter unit demonstrates the fun thesis through approach, reveal or refusal, player choice or verb, outcome or reward, and a next hook. | The player can traverse the unit but has no meaningful question, choice, payoff, or reason to continue; repeated beats are uninteresting or obstruction feels arbitrary. |
 | Playable blockout | Runtime movement through the rough space is readable, traversable, and representative of the intended pacing through the representative player controller and actual runtime camera rig, including project-relevant boom, offset, pitch, collision, and retraction behavior. | Static height/FOV proxy offered as authoritative evidence; broken traversal; misleading landmarks; camera-rig or capsule failure; inaccessible objective; boundary leak; or unacceptable wrong-turn pattern. |
 | Visual feasibility | A small representative slice can meet the target visual language, asset quality, asset density, player-facing composition, and technical budget together when judged through the Stage 5-approved runtime camera rig. | Overview- or proxy-camera approval; hero-only success; inconsistent materials or scale; unusable asset kit; unverified contacts or collision; or budget failure. |
 | Production | The approved pattern scales across ordinary and focal areas without silently changing the design contract. | Repeated contact or readability failures, untracked deviations, missing ownership, or dependency and integration failure. |
 | Release | The complete level satisfies functional, visual, audio, collision, performance, persistence, packaging, and recovery requirements. | Any blocking hard failure, stale or invalid evidence, unrecoverable build state, or unresolved production blocker. |
 
-The exact gate names may differ by project, but the Area Composition Plan and Reference-to-Prototype Translation Gate must remain distinct, recorded decisions between concept direction and prototype geometry. Plan `PASS` advances only to translation; translation `PASS` plus an explicit placement decision releases content-bearing prototype mutation. The invariant is that each gate retires the risk that would become more expensive at the next stage. User or stakeholder approval records product intent; it does not waive runtime, performance, dependency, or recovery evidence.
+The exact gate names may differ by project, but the Area Composition Plan, Reference-to-Prototype Translation Gate, and Concept-to-Asset Readiness decisions must remain distinct and recorded. Plan `PASS` advances only to translation; translation `PASS` plus an explicit placement decision releases content-bearing prototype mutation. `ASSET_PLAN_READY` permits cheap prototype work with planned supply gaps, while `VISUAL_SLICE_READY` and `PRODUCTION_DRESSING_READY` separately authorize the exact representative and production scopes. The invariant is that each gate retires the risk that would become more expensive at the next stage. User or stakeholder approval records product intent; it does not waive runtime, license, acquisition authority, performance, dependency, or recovery evidence.
 
 Use the [Reference-to-Prototype Translation Contract schema](../../design-unreal-worlds-and-levels/references/reference-to-prototype-translation.schema.json) and [template](../../design-unreal-worlds-and-levels/references/reference-to-prototype-translation.template.json), or validate a project equivalent against the same semantic requirements. The pre-placement contract and every post-mutation audit must remain linked by stable source-requirement, zone, prototype-element, camera, and evidence IDs.
+
+Use the [Concept-to-Asset Readiness Contract schema](../../design-unreal-content-architecture/references/concept-to-asset-readiness.schema.json) and [template](../../design-unreal-content-architecture/references/concept-to-asset-readiness.template.json), or a project equivalent. Validate one coverage decision per demand, demand-to-candidate traceability, entitlement or provenance, external authorization, license, compatibility, dependencies, representative and production evidence, exact selected versions, gate scope, and reopening behavior. Discovery, ownership, acquisition, staging, representative approval, and production approval are different evidence classes.
 
 For typology-critical spaces, define hard failures before blockout. A palace is not approved by approximate building size: its gate -> outer court -> middle gate -> central courtyard -> main hall axis and courtyard hierarchy must read from gameplay views. A fortress- or castle-like silhouette is a hard failure. Use zone markers with a numeric ID plus ASCII fallback throughout prototype and production placement so missing localized glyphs cannot erase the evidence label.
 
@@ -76,6 +112,15 @@ When a gate fails:
 5. Repeat the same test conditions before judging the repair.
 
 Do not spend a later-stage budget to defend an earlier-stage decision. If the visual feasibility slice fails, repair the kit or visual rules before dressing the map. If dressing reveals a route problem, return to the blockout instead of accumulating decorative exceptions.
+
+For a `BOUNDED_PROTO_EDIT` that does not change those plan-owned assumptions,
+use the cheapest credible local checks: one compact target/protected snapshot,
+one bounded mutation, target and protected postconditions, and saved-state
+persistence. Do not attach a fixed-camera capture, full visual review, PIE, or
+independent review merely because the level contains visual content. If the
+target changes route, collision, navigation, bridge approach, water bank,
+playable surface, or building support, reclassify the operation and run the
+relevant higher-cost evidence instead of using the time budget to waive it.
 
 For a composition-changing prototype batch, set the translation contract to `POST_MUTATION_AUDIT` and withhold the next broad batch until reference/plan/prototype deviations are recorded. Compare fixed overviews under the same transform, crop, projection, resolution, and measurement basis for their assigned macro metrics. Beginning at Playable Blockout, separately compare route samples through the actual runtime rig for perceived distance, enclosure, occlusion and reveal, route continuity, hierarchy, clearance, and recovery. An out-of-tolerance zone, lost shaded or empty space, hierarchy reversal, path discontinuity, or prohibited silhouette reopens the earliest responsible gate even when the total Actor count matches.
 
@@ -158,6 +203,9 @@ Require functional correctness, maintainability, production readiness, performan
 - Treating an early static player-height/FOV proxy as an exact runtime rig, fine-tuning prototype detail to it, or carrying its approval authority into Stage 5 or the Visual Feasibility Slice.
 - Treating test transport success as test outcome success.
 - Treating a command, graph, or batch completion message as proof that the intended state and postconditions exist.
+- Treating `operation_verdict: PASS` as `promotion_verdict: PASS`, or treating `NOT_RUN_BY_CONTRACT` as hidden evidence.
+- Replaying the Area Composition Plan, fixed-camera, or PIE gates for an unchanged local prototype edit while failing to detect a route, bridge, zone, or Landscape touch.
+- Allowing an explicit target delete to expand into wildcard cleanup or a broad rebuild.
 - Repeating a failed iteration without recording a changed cause hypothesis, invariant, or detection rule.
 - Reporting “not observed” as “not reproducible” when the same test conditions were not repeated.
 - Overwriting failed audits or evidence.

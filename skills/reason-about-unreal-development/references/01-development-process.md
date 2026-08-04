@@ -23,10 +23,11 @@ Iteration should be fastest where uncertainty is high and changes are reversible
 | --- | --- | --- | --- |
 | Direction brief | Are we making the intended experience? | Player fantasy, fun thesis, core verbs, intended emotional rhythm, references or concept art, non-goals, constraints, and explicit acceptance questions. | Revise the brief or references before building the level. |
 | Spatial plan | Can the space and its responsibilities be understood before construction? | Annotated top-down or node map, zones, primary route, optional loops, focal hierarchy, landmarks, major reveals, boundaries, known risks, and a stable-ID `DIAGNOSTIC_ONLY` overview-camera set whose smallest sufficient coverage spans arrival, reverse, lateral, waterway/axis, elevation, and project-specific relationships. Record player-camera height/FOV for auxiliary early scale checks and identify the planned runtime-rig source. | Revise the plan; do not hide uncertainty with detail or one hero overview. |
+| Concept-to-Asset Readiness | Can the approved concept be supported by coherent asset families and viable supply routes before art commitment rises? | Functional demand traced to source requirements and zones; project and ownership-confirmed inventory; candidate, authoring, procedural, outsourcing, fallback, and concept-revision routes; acquisition authority, license, dependencies, compatibility, total integration cost, owner, due stage, and separate Plan, Visual Slice, and Production Dressing locks. | Revise the demand, sourcing route, concept, plan, budget, or schedule; do not confuse a listing, entitlement, or download with production readiness. |
 | Experience prototype | Does the proposed fun exist in one cheap, playable unit? | A POI or encounter prototype with an approach, reveal, player choice or verb, outcome or reward, and a next hook, tested with placeholders. | Return to the fun thesis or spatial plan; do not build the whole route to discover that the unit is empty. |
 | Playable blockout | Does the space work as a game? | Runtime playtest with the representative player controller and actual runtime camera rig, covering movement, scale, camera behavior, collision, route, sightlines, landmarks, pacing, and boundary behavior. | Return to the plan or blockout and retest from comparable conditions. |
-| Visual feasibility slice | Can the visual target be produced consistently and within budget? | A small representative segment using real or representative asset families, materials, lighting, contacts, collision, audio intent, target performance conditions, and the approved runtime rig for player readability, asset density, and composition. | Repair the visual language, asset kit, or pipeline; do not scale map-wide production. |
-| Production content | Can the approved pattern scale without changing the design? | Content coverage, provenance, repeatable placement, ownership, integration checks, and a deviation log for each zone or chunk. | Stop scaling and reopen the affected design or feasibility gate. |
+| Visual feasibility slice | Can the visual target be produced consistently and within budget? | A `VISUAL_SLICE_READY` decision plus a small representative segment using the exact staged or project-native asset versions, materials, lighting, contacts, collision, audio intent, target performance conditions, and the approved runtime rig for player readability, asset density, and composition. | Repair the visual language, asset family, supply route, or pipeline; do not scale map-wide production. |
+| Production content | Can the approved pattern scale without changing the design? | A `PRODUCTION_DRESSING_READY` decision for exact zones and asset versions, content coverage, provenance and license, repeatable placement, ownership, dependencies, integration and cook checks, rollback, and a deviation log for each zone or chunk. | Stop scaling and reopen the affected design, asset-readiness, or feasibility gate. |
 | Finish and release | Does the complete level meet player, quality, technical, and recovery targets? | Final traversal, visual, audio, collision, performance, persistence, packaging, and recovery evidence. | Return to the failing subsystem rather than applying unrelated polish. |
 
 The purpose of a gate is not to prevent change. It is to make the cost and meaning of change explicit. A promotion records what is currently accepted, what remains risky, who can approve the next commitment, and which earlier gate must reopen when a later change invalidates its assumptions.
@@ -46,23 +47,93 @@ behavior of a broad builder:
 
 | Mode | Responsibility | Default boundary | What it does not prove |
 | --- | --- | --- | --- |
-| Bounded edit | Apply one small, reversible change to existing named content or state. | Transform or data changes within a declared batch; no implicit spawn, delete, broad rebuild, or save. | It does not prove the whole level, visual quality, or production readiness. |
+| Bounded edit | Apply one small, reversible change to existing named content or state. | Transform or data changes within a declared batch; explicit deletion of named existing targets is allowed only under the `BOUNDED_PROTO_EDIT` contract; no implicit spawn, wildcard delete, broad rebuild, or save. | It does not prove the whole level, visual quality, or production readiness. |
 | Diagnostic audit | Read one batched snapshot and diagnose the current state. | One scoped inventory and local validation pass; no mutation. | A diagnostic pass does not approve promotion. |
 | Promotion review | Evaluate an explicit evidence package against a gate. | Requires explicit confirmation, structural checks, and the required independent or designated review. | It does not silently rebuild, recapture invalid evidence, or retry until a pass appears. |
 | Maintenance rebuild | Reconstruct or migrate a broad disposable state. | Separate task, explicit confirmation, checkpoint, and recovery plan. | It is never the default implementation of an ordinary prototype edit. |
 
 For a normal prototype iteration, use the bounded-edit mode unless the contract
-shows that a different mode is required. If the request needs creation,
-deletion, terrain rewriting, broad layout regeneration, or production-asset
-replacement, stop and reclassify it rather than expanding a patch implicitly.
+shows that a different mode is required. An explicit delete of an existing,
+uniquely identified prototype Actor may remain bounded when it is part of the
+user's allowlist, has no protected parent or dependent output, and does not
+change an authoritative route, water/bridge relationship, zone marker,
+Landscape, or other plan-owned responsibility. Creation, wildcard or broad
+deletion, terrain rewriting, broad layout regeneration, and production-asset
+replacement must be reclassified rather than expanding a patch implicitly.
 A project may assign local names to these modes, but the names must not change
 their separation of responsibility.
 
+### `BOUNDED_PROTO_EDIT`: existing approved prototype hot path
+
+`BOUNDED_PROTO_EDIT` is an operation mode inside the current staged workflow,
+not a new production stage and not a promotion shortcut. Use it only for an
+existing prototype baseline when the user names the exact targets and asks for
+a local edit, such as a small Transform change or an explicit deletion of
+existing prototype Actors. The operation must record:
+
+- the current world, level, stage, baseline revision, and allowed target IDs;
+- the allowed operation kinds, local zone or envelope, maximum changed-item
+  count, wall-clock budget, save policy, and rollback target;
+- compact protected references or digests for Landscape, water/stream,
+  bridges, zone markers/registry, authoritative route or Navigation/collision
+  sources, and fixed cameras or streaming boundaries when applicable;
+- preconditions, target postconditions, persistence evidence, and the checks
+  intentionally not run by this operation.
+
+The initial default may target one level and up to eight explicitly named
+existing Actors, but count is only a bound, not proof of safety. The operation
+must fail closed when target ownership, protected scope, route semantics,
+parent/child relationships, or the saved baseline are ambiguous. A building
+move over Landscape may use a target-specific four-corner grounding
+postcondition; it must not trigger a full Landscape inventory, and it must not
+replace the four-corner rule with a center trace or average.
+
+Use 120 seconds as the recommended wall-clock target for this local path when
+the user has not supplied another budget. The user or project may set a
+different explicit budget, but it covers discovery, queue or game-thread wait,
+mutation, verification, save, and persistence re-read as one operation. On
+budget expiry, stop before capture, broad review, or a retry and perform the
+read-only state audit required below.
+
+Use this order where the execution surface permits it:
+
+`classify → compact inspect → local precondition check → one serialized transaction → in-memory postcondition → save → persistence re-read`
+
+Saving before the in-memory postcondition is acceptable only when a compound
+transaction enforces the same preconditions and postconditions and can roll
+back on failure. Keep the game-thread work serialized. Cache the task-scoped
+execution surface and schema rather than rediscovering it for every Actor, and
+return a compact structural result rather than a viewport image for a
+Transform-only edit.
+
+Record two verdicts. `operation_verdict` reports whether the named edit,
+protected-scope comparison, target postconditions, and save persistence passed.
+`promotion_verdict` remains `unchanged` unless a separate promotion review is
+requested and completed. A skipped camera capture, PIE run, independent visual
+review, or broad Area Composition Plan/Translation review is
+`NOT_RUN_BY_CONTRACT`, not a hidden `PASS` and not an operation failure when
+those questions are outside the declared scope.
+
+Reuse an accepted Area Composition Plan, Translation Contract, and current
+stage without rerunning them only when their assumptions remain unchanged and
+the protected snapshot is stable. Reopen the earliest responsible gate when a
+target changes terrain, water, a bridge approach, an authoritative route,
+zone-marker identity, typology-critical hierarchy, fixed-camera coverage,
+runtime collision/navigation, or a declared composition tolerance. Gate reuse
+means “the old decision still governs”; it never turns an unrecorded or
+`UNKNOWN` baseline into `PASS`.
+
+The fast path is a scope-risk reduction, not a safety removal. When its
+preconditions cannot be established, when a protected system is touched, or
+when the budget/transport state becomes ambiguous, exit before further
+mutation, run a read-only state audit, and reclassify the work.
+
 Keep the hot path bounded: initialize or discover the approved execution
 surface once per task, read the relevant inventory once, validate the request
-locally, perform one serialized transaction, re-read the changed state once,
-and save only under the declared save policy. Avoid one tool round-trip per
-Actor or per property when a local batch can establish the same postcondition.
+locally, perform one serialized transaction, verify the in-memory postcondition,
+save only under the declared save policy, and re-read persistence once. Avoid
+one tool round-trip per Actor or per property when a local batch can establish
+the same postcondition.
 Record setup, discovery, queue or game-thread wait, mutation, verification, and
 background maintenance time separately. A time budget covers the whole
 operation, not only the final setter call.
@@ -112,7 +183,7 @@ Switch to a production loop only when the evidence supports the commitment:
 - at least one representative POI or experience unit demonstrates the intended question, choice, tension, payoff, and next hook with cheap content;
 - the playable blockout passes its hard traversal and readability checks;
 - a representative visual slice reproduces the target look across more than one required view;
-- asset families, materials, lighting, collision, audio integration, performance budgets, and ownership have viable rules;
+- every blocking asset demand has a viable, authorized route, and the asset families, materials, lighting, collision, audio integration, performance budgets, ownership, license, dependencies, and rollback have evidence appropriate to the next commitment;
 - the user or designated approver has accepted the evidence package and its known limitations.
 
 Confidence is therefore an outcome of repeatable evidence, not a feeling produced by one attractive screenshot. A short level can be production-ready while a larger level remains exploratory; promote only the smallest unit that has actually been proved.
