@@ -1,0 +1,996 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fairypark.github.io/unreal-development-handbook-for-codex/schemas/concept-to-asset-readiness.schema.json",
+  "title": "Concept-to-Asset Readiness Contract",
+  "description": "A staged, machine-readable contract that traces approved concept requirements to asset-family demand, candidate supply, acquisition authority, validation, and production-dressing readiness.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "contract_version",
+    "project_id",
+    "work_class",
+    "source_context",
+    "target_context",
+    "asset_demands",
+    "candidates",
+    "demand_coverage",
+    "acquisition_actions",
+    "gates",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "contract_id": {
+      "$ref": "#/$defs/id"
+    },
+    "contract_version": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "project_id": {
+      "$ref": "#/$defs/id"
+    },
+    "work_class": {
+      "enum": [
+        "DISPOSABLE_EXPERIMENT",
+        "PRODUCTION_INTENDED"
+      ]
+    },
+    "source_context": {
+      "$ref": "#/$defs/sourceContext"
+    },
+    "target_context": {
+      "$ref": "#/$defs/targetContext"
+    },
+    "asset_demands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/assetDemand"
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/candidate"
+      }
+    },
+    "demand_coverage": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/demandCoverage"
+      }
+    },
+    "acquisition_actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/acquisitionAction"
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_plan_ready",
+        "visual_slice_ready",
+        "production_dressing_ready"
+      ],
+      "properties": {
+        "asset_plan_ready": {
+          "$ref": "#/$defs/gateDecision"
+        },
+        "visual_slice_ready": {
+          "$ref": "#/$defs/gateDecision"
+        },
+        "production_dressing_ready": {
+          "$ref": "#/$defs/gateDecision"
+        }
+      }
+    },
+    "integrity": {
+      "$ref": "#/$defs/integrity"
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nullableString": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9._-]+$"
+    },
+    "idList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "nonEmptyIdList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "evidenceList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "rangeInteger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max"
+      ],
+      "properties": {
+        "min": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "sourceContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "concept_artifact_ids",
+        "area_composition_plan_id",
+        "area_composition_plan_version",
+        "translation_contract_id",
+        "translation_contract_version",
+        "source_requirement_ids",
+        "zone_ids"
+      ],
+      "properties": {
+        "concept_artifact_ids": {
+          "$ref": "#/$defs/nonEmptyIdList"
+        },
+        "area_composition_plan_id": {
+          "$ref": "#/$defs/id"
+        },
+        "area_composition_plan_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "translation_contract_id": {
+          "$ref": "#/$defs/id"
+        },
+        "translation_contract_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "source_requirement_ids": {
+          "$ref": "#/$defs/nonEmptyIdList"
+        },
+        "zone_ids": {
+          "$ref": "#/$defs/nonEmptyIdList"
+        }
+      }
+    },
+    "targetContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engine_version",
+        "target_platforms",
+        "rendering_context",
+        "runtime_camera_id",
+        "performance_budget_id",
+        "staging_policy",
+        "content_root_policy",
+        "currency"
+      ],
+      "properties": {
+        "engine_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "target_platforms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "rendering_context": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "runtime_camera_id": {
+          "$ref": "#/$defs/id"
+        },
+        "performance_budget_id": {
+          "$ref": "#/$defs/id"
+        },
+        "staging_policy": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "content_root_policy": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "currency": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "quantityModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimum_distinct_variants",
+        "expected_instances",
+        "modular_pieces_required",
+        "transition_pieces_required",
+        "reverse_side_required",
+        "contact_solution_required"
+      ],
+      "properties": {
+        "minimum_distinct_variants": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expected_instances": {
+          "$ref": "#/$defs/rangeInteger"
+        },
+        "modular_pieces_required": {
+          "$ref": "#/$defs/stringList"
+        },
+        "transition_pieces_required": {
+          "$ref": "#/$defs/stringList"
+        },
+        "reverse_side_required": {
+          "type": "boolean"
+        },
+        "contact_solution_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sourcingStrategy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "owner",
+        "budget_reference",
+        "due_before_gate",
+        "fallback"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "UNDECIDED",
+            "REUSE_PROJECT",
+            "REUSE_TEAM_LIBRARY",
+            "REUSE_OWNED_MARKETPLACE",
+            "NEW_ACQUISITION",
+            "CUSTOM_AUTHORING",
+            "PROCEDURAL_BUILD",
+            "OUTSOURCE",
+            "CONCEPT_OR_SCOPE_REVISION"
+          ]
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "budget_reference": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "due_before_gate": {
+          "enum": [
+            "ASSET_PLAN_READY",
+            "VISUAL_SLICE_READY",
+            "PRODUCTION_DRESSING_READY"
+          ]
+        },
+        "fallback": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "assetDemand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demand_id",
+        "name",
+        "source_requirement_ids",
+        "zone_ids",
+        "role",
+        "priority",
+        "required_for_visual_slice",
+        "required_for_production_dressing",
+        "production_function",
+        "scale_range",
+        "quantity_model",
+        "required_capabilities",
+        "visual_constraints",
+        "technical_constraints",
+        "hard_exclusions",
+        "acceptance_evidence",
+        "sourcing_strategy",
+        "status"
+      ],
+      "properties": {
+        "demand_id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "source_requirement_ids": {
+          "$ref": "#/$defs/nonEmptyIdList"
+        },
+        "zone_ids": {
+          "$ref": "#/$defs/nonEmptyIdList"
+        },
+        "role": {
+          "enum": [
+            "HERO_FOCAL",
+            "STRUCTURAL_KIT",
+            "ROUTE_OR_TRAVERSAL",
+            "BOUNDARY_OR_OCCLUDER",
+            "TERRAIN_OR_CONTACT",
+            "WATER_OR_TRANSITION",
+            "ECOLOGY_OR_HARDSCAPE",
+            "MATERIAL_OR_SURFACE",
+            "ORDINARY_SET_DRESSING",
+            "NARRATIVE_OR_CULTURAL",
+            "LIGHTING_VFX_AUDIO",
+            "GAMEPLAY_OR_INTERACTION"
+          ]
+        },
+        "priority": {
+          "enum": [
+            "BLOCKING",
+            "IMPORTANT",
+            "OPTIONAL"
+          ]
+        },
+        "required_for_visual_slice": {
+          "type": "boolean"
+        },
+        "required_for_production_dressing": {
+          "type": "boolean"
+        },
+        "production_function": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "scale_range": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "quantity_model": {
+          "$ref": "#/$defs/quantityModel"
+        },
+        "required_capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "visual_constraints": {
+          "$ref": "#/$defs/stringList"
+        },
+        "technical_constraints": {
+          "$ref": "#/$defs/stringList"
+        },
+        "hard_exclusions": {
+          "$ref": "#/$defs/stringList"
+        },
+        "acceptance_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "sourcing_strategy": {
+          "$ref": "#/$defs/sourcingStrategy"
+        },
+        "status": {
+          "enum": [
+            "ACTIVE",
+            "REVISED",
+            "WAIVED"
+          ]
+        }
+      }
+    },
+    "entitlement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "evidence_id",
+        "checked_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PROJECT_OWNED",
+            "CONFIRMED",
+            "UNCONFIRMED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "checked_at": {
+          "$ref": "#/$defs/nullableString"
+        }
+      }
+    },
+    "acquisition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "authorization_reference",
+        "acquired_at",
+        "staging_locator"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "NOT_REQUIRED",
+            "NOT_REQUESTED",
+            "PENDING_AUTHORIZATION",
+            "AUTHORIZED",
+            "ACQUIRED_TO_STAGING",
+            "BLOCKED"
+          ]
+        },
+        "authorization_reference": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "acquired_at": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "staging_locator": {
+          "$ref": "#/$defs/nullableString"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "license_name_or_id",
+        "terms_version_or_acquired_at",
+        "intended_scope",
+        "restrictions",
+        "evidence_id"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "VERIFIED",
+            "PENDING",
+            "NOT_APPLICABLE",
+            "BLOCKED"
+          ]
+        },
+        "license_name_or_id": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "terms_version_or_acquired_at": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "intended_scope": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "restrictions": {
+          "$ref": "#/$defs/stringList"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "engine_versions",
+        "target_platforms",
+        "required_plugins",
+        "dependency_ids",
+        "integration_risks",
+        "evidence_ids"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PASS",
+            "PENDING",
+            "FAIL"
+          ]
+        },
+        "engine_versions": {
+          "$ref": "#/$defs/stringList"
+        },
+        "target_platforms": {
+          "$ref": "#/$defs/stringList"
+        },
+        "required_plugins": {
+          "$ref": "#/$defs/stringList"
+        },
+        "dependency_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "integration_risks": {
+          "$ref": "#/$defs/stringList"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidenceList"
+        }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "visual_fit",
+        "scale_and_pivot",
+        "family_completeness",
+        "materials",
+        "collision_and_navigation",
+        "lod_nanite_and_performance",
+        "reverse_side_and_contacts",
+        "ordinary_repetition",
+        "evidence_ids"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PASS",
+            "PENDING",
+            "FAIL"
+          ]
+        },
+        "visual_fit": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "scale_and_pivot": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "family_completeness": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "materials": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "collision_and_navigation": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "lod_nanite_and_performance": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "reverse_side_and_contacts": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "ordinary_repetition": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidenceList"
+        }
+      }
+    },
+    "checkStatus": {
+      "enum": [
+        "PASS",
+        "PENDING",
+        "FAIL",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "totalCost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purchase_amount",
+        "integration_effort",
+        "storage_and_source_control",
+        "shader_and_derived_data",
+        "maintenance_and_replacement_risk"
+      ],
+      "properties": {
+        "purchase_amount": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "integration_effort": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "UNKNOWN"
+          ]
+        },
+        "storage_and_source_control": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "shader_and_derived_data": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "maintenance_and_replacement_risk": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "title",
+        "demand_ids",
+        "provider_type",
+        "locator",
+        "exact_version",
+        "provenance",
+        "entitlement",
+        "acquisition",
+        "license",
+        "compatibility",
+        "evaluation",
+        "total_cost",
+        "readiness_state",
+        "production_evidence_ids",
+        "rejection_reason"
+      ],
+      "properties": {
+        "candidate_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "demand_ids": {
+          "$ref": "#/$defs/nonEmptyIdList"
+        },
+        "provider_type": {
+          "enum": [
+            "PROJECT_CONTENT",
+            "TEAM_LIBRARY",
+            "OWNED_MARKETPLACE",
+            "NEW_MARKETPLACE",
+            "CUSTOM_AUTHORING",
+            "OUTSOURCE",
+            "PROCEDURAL_SYSTEM",
+            "CONCEPT_SUBSTITUTION"
+          ]
+        },
+        "locator": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "exact_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "provenance": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "entitlement": {
+          "$ref": "#/$defs/entitlement"
+        },
+        "acquisition": {
+          "$ref": "#/$defs/acquisition"
+        },
+        "license": {
+          "$ref": "#/$defs/license"
+        },
+        "compatibility": {
+          "$ref": "#/$defs/compatibility"
+        },
+        "evaluation": {
+          "$ref": "#/$defs/evaluation"
+        },
+        "total_cost": {
+          "$ref": "#/$defs/totalCost"
+        },
+        "readiness_state": {
+          "enum": [
+            "DISCOVERED",
+            "OWNERSHIP_VERIFIED",
+            "ACQUIRED_TO_STAGING",
+            "REPRESENTATIVE_APPROVED",
+            "PRODUCTION_APPROVED",
+            "REJECTED",
+            "BLOCKED"
+          ]
+        },
+        "production_evidence_ids": {
+          "$ref": "#/$defs/evidenceList"
+        },
+        "rejection_reason": {
+          "$ref": "#/$defs/nullableString"
+        }
+      }
+    },
+    "waiver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reason",
+        "source_or_plan_revision_id",
+        "approved_by",
+        "decision_at"
+      ],
+      "properties": {
+        "reason": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "source_or_plan_revision_id": {
+          "$ref": "#/$defs/id"
+        },
+        "approved_by": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "decision_at": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "demandCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demand_id",
+        "selected_candidate_ids",
+        "status",
+        "gap_reason",
+        "fallback",
+        "evidence_ids",
+        "owner",
+        "waiver"
+      ],
+      "properties": {
+        "demand_id": {
+          "$ref": "#/$defs/id"
+        },
+        "selected_candidate_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "status": {
+          "enum": [
+            "UNPLANNED",
+            "PLANNED_GAP",
+            "CANDIDATE_IDENTIFIED",
+            "REPRESENTATIVE_READY",
+            "PRODUCTION_READY",
+            "WAIVED",
+            "BLOCKED"
+          ]
+        },
+        "gap_reason": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "fallback": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidenceList"
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "waiver": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/waiver"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "acquisitionAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action_id",
+        "demand_ids",
+        "candidate_id",
+        "action_type",
+        "due_before_gate",
+        "authority",
+        "budget_reference",
+        "status",
+        "rollback",
+        "evidence_ids"
+      ],
+      "properties": {
+        "action_id": {
+          "$ref": "#/$defs/id"
+        },
+        "demand_ids": {
+          "$ref": "#/$defs/nonEmptyIdList"
+        },
+        "candidate_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "action_type": {
+          "enum": [
+            "DISCOVER_CANDIDATES",
+            "VERIFY_OWNERSHIP",
+            "REQUEST_AUTHORIZATION",
+            "ACQUIRE_TO_STAGING",
+            "AUTHOR_CONTENT",
+            "BUILD_PROCEDURAL_SYSTEM",
+            "OUTSOURCE_CONTENT",
+            "EVALUATE_CANDIDATE",
+            "REJECT_CANDIDATE",
+            "REVISE_CONCEPT_OR_SCOPE"
+          ]
+        },
+        "due_before_gate": {
+          "enum": [
+            "ASSET_PLAN_READY",
+            "VISUAL_SLICE_READY",
+            "PRODUCTION_DRESSING_READY"
+          ]
+        },
+        "authority": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "budget_reference": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "status": {
+          "enum": [
+            "NOT_STARTED",
+            "PENDING_AUTHORIZATION",
+            "IN_PROGRESS",
+            "PASS",
+            "FAIL",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "rollback": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidenceList"
+        }
+      }
+    },
+    "gateDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "authorized",
+        "scope_demand_ids",
+        "scope_candidate_ids",
+        "approver",
+        "decision_at",
+        "blocked_reasons",
+        "rollback_target"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "PENDING_EVIDENCE",
+            "INVALID_EVIDENCE"
+          ]
+        },
+        "authorized": {
+          "type": "boolean"
+        },
+        "scope_demand_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "scope_candidate_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "approver": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "decision_at": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "blocked_reasons": {
+          "$ref": "#/$defs/stringList"
+        },
+        "rollback_target": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "orphan_candidate_ids",
+        "uncovered_demand_ids",
+        "unresolved_license_candidate_ids",
+        "unresolved_compatibility_candidate_ids",
+        "unauthorized_external_candidate_ids",
+        "non_production_ready_demand_ids"
+      ],
+      "properties": {
+        "orphan_candidate_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "uncovered_demand_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "unresolved_license_candidate_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "unresolved_compatibility_candidate_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "unauthorized_external_candidate_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "non_production_ready_demand_ids": {
+          "$ref": "#/$defs/idList"
+        }
+      }
+    }
+  }
+}

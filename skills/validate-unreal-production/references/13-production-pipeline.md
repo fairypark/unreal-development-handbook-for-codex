@@ -79,7 +79,7 @@ Before a POI pattern is promoted to `EXPERIENCE_VALIDATED`, test a cheap unit fr
 6. Verify startup, loading, representative gameplay, assets, performance, logging, save behavior, and deployment assumptions.
 7. Promote artifacts only with evidence and a recovery plan.
 
-For a level, the expensive work begins only after the experience prototype, playable blockout, and representative visual feasibility slice have retired the dominant design and production risks. This does not prohibit early asset experiments; it limits broad, difficult-to-reverse placement until the experience and visual patterns are known to scale.
+For a level, the expensive work begins only after the experience prototype, playable blockout, and representative visual feasibility slice have retired the dominant design and production risks. The Concept-to-Asset Readiness Contract must separately pass `ASSET_PLAN_READY` before the Experience Prototype, `VISUAL_SLICE_READY` for the exact staged candidates used by the representative slice, and `PRODUCTION_DRESSING_READY` for the exact zones and production-approved asset versions before broad meshing or dressing. This does not prohibit early asset experiments; it limits broad, difficult-to-reverse placement until the experience, visual patterns, family coverage, license, dependencies, integration cost, and recovery plan are known to scale.
 
 ## Failure handling
 

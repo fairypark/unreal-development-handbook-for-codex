@@ -20,8 +20,8 @@ This repository is also a Codex plugin. The canonical chapter files live in each
 | --- | --- |
 | `reason-about-unreal-development` | Chapters 00–02: intent, process, architecture, and cross-domain routing. |
 | `design-unreal-gameplay-architecture` | Chapter 03: gameplay responsibilities, state, lifecycle, data flow, persistence, and networking boundaries. |
-| `design-unreal-worlds-and-levels` | Chapter 04: player experience, spatial composition, world structure, gameplay space, and environment production. |
-| `design-unreal-content-architecture` | Chapter 05: asset ownership, dependencies, reuse, migration, and lifecycle. |
+| `design-unreal-worlds-and-levels` | Chapter 04: player experience, spatial composition, world structure, gameplay space, concept-led asset readiness, and environment production. |
+| `design-unreal-content-architecture` | Chapter 05: concept-to-asset demand and sourcing, acquisition readiness, asset ownership, dependencies, reuse, migration, and lifecycle. |
 | `design-unreal-blueprint-and-cpp` | Chapters 06–07: Blueprint and C++ responsibilities, APIs, ownership, lifecycle, and integration. |
 | `design-unreal-automation-and-pcg` | Chapters 08–09: repeatable automation, Python as an option, determinism, authorial control, and procedural systems. |
 | `validate-unreal-production` | Chapters 10–14: rendering, performance, validation, production pipeline, collaboration, and source control. |
@@ -32,11 +32,14 @@ World and level workflows also include a machine-readable [Reference-to-Prototyp
 
 For a local change to an already accepted prototype, use `BOUNDED_PROTO_EDIT` as the non-promotional fast operation mode described in Chapters 01 and 04. It narrows validation to the declared scope while preserving protected-system exit rules and the full promotion gates.
 
+Concept-led asset workflows include a separate machine-readable [Concept-to-Asset Readiness Contract schema](skills/design-unreal-content-architecture/references/concept-to-asset-readiness.schema.json) and [starter template](skills/design-unreal-content-architecture/references/concept-to-asset-readiness.template.json). Stage 2b traces approved concept and zone requirements to functional asset-family demand, project and ownership-confirmed inventory, candidates, acquisition or authoring routes, licenses, dependencies, total integration cost, representative evidence, and exact production-approved versions. Its independent `ASSET_PLAN_READY`, `VISUAL_SLICE_READY`, and `PRODUCTION_DRESSING_READY` locks let blockout proceed with planned gaps while preventing a search result, entitlement, download, or Visual Slice approval from silently authorizing map-wide dressing.
+
 Validate the bundled contract assets and semantic gate rules with:
 
 ```powershell
 uv run --with jsonschema python -m unittest discover -s tests -v
 uv run --with jsonschema python scripts/validate_reference_to_prototype_contract.py skills/design-unreal-worlds-and-levels/references/reference-to-prototype-translation.template.json
+uv run --with jsonschema python scripts/validate_concept_to_asset_readiness.py skills/design-unreal-content-architecture/references/concept-to-asset-readiness.template.json
 ```
 
 The Skills provide reasoning and validation contracts. They do not bundle MCP servers, Editor hooks, Unreal operations, or implementation-specific tool instructions. When concrete Editor work is requested, use the independently installable **Unreal Editor Skills for Codex** execution layer after the relevant Handbook Skill has established intent, design, constraints, and success criteria.
@@ -84,8 +87,8 @@ The handbook progresses from durable reasoning, through game and world design, i
 | No. | Chapter | Responsibility |
 | --- | --- | --- |
 | 03 | [Gameplay Architecture](skills/design-unreal-gameplay-architecture/references/03-gameplay-architecture.md) | Gameplay Framework responsibilities, gameplay systems, state, data, input, persistence, networking boundaries, and system interaction. |
-| 04 | [World & Level Design](skills/design-unreal-worlds-and-levels/references/04-world-level-design.md) | Player experience, spatial composition, world structure, streaming, gameplay space, environmental storytelling, and production constraints. |
-| 05 | [Content & Asset Architecture](skills/design-unreal-content-architecture/references/05-content-asset-architecture.md) | Asset organization, naming, ownership, dependencies, data assets, reuse, migration, and content lifecycle. |
+| 04 | [World & Level Design](skills/design-unreal-worlds-and-levels/references/04-world-level-design.md) | Player experience, spatial composition, world structure, streaming, gameplay space, concept-led asset readiness, environmental storytelling, and production constraints. |
+| 05 | [Content & Asset Architecture](skills/design-unreal-content-architecture/references/05-content-asset-architecture.md) | Concept-to-asset demand and sourcing, acquisition readiness, asset organization, naming, ownership, dependencies, data assets, reuse, migration, and content lifecycle. |
 
 ### Part III — Implementation Technologies
 

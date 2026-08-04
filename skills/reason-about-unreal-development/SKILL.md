@@ -35,7 +35,7 @@ For a local change to an already accepted prototype, classify the request as `BO
 
 - Use gameplay architecture guidance for responsibility, state, input, persistence, networking, and system interaction.
 - Use world and level guidance for spatial experience, routes, terrain, streaming, environmental storytelling, and playable structure.
-- Use content architecture guidance for ownership, dependencies, reuse, migration, and asset lifecycle.
+- Use content architecture guidance for concept-led asset demand, owned-library and sourcing plans, acquisition readiness, ownership, dependencies, reuse, migration, and asset lifecycle.
 - Use Blueprint and C++ guidance for implementation boundaries and maintainability.
 - Use automation and procedural guidance for repeatability, determinism, batch behavior, and PCG.
 - Use production validation guidance for rendering, performance, tests, release readiness, recovery, and collaboration.
