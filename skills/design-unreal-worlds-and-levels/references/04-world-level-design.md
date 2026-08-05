@@ -95,10 +95,54 @@ Record the actual height above local ground and FOV of the project's player trac
 
 Keep two related loops distinct:
 
-- **Exploration:** use disposable primitives, temporary materials, and placeholder cues to discover whether the space is fun, readable, and in scope. For an **outdoor map level-design prototype**, make a minimal **Landscape terrain** the actual playable floor by default, even when buildings, cover, route furniture, and other masses remain primitive. Do not replace it with a flat cube or plane merely to move faster: the early prototype must expose elevation, slopes, drainage, terrain transitions, grounding, and terrain contacts. Use another floor only when a specific user or stakeholder request explicitly overrides this default. Diverge from the plan when playtest evidence disproves an assumption.
+- **Exploration:** use disposable primitives, temporary materials, and placeholder cues to discover whether the space is fun, readable, and in scope. For an **outdoor map level-design prototype**, make a minimal **Landscape terrain** the actual playable floor by default after the terrain-representation review below, even when buildings, cover, route furniture, and other masses remain primitive. Do not replace it with a flat cube or plane merely to move faster: the early prototype must expose elevation, slopes, drainage, terrain transitions, grounding, and terrain contacts. If the target version and project configuration support Mesh Terrain, do not apply Landscape broadly before comparing the two representations and explaining the recommendation to the user or designated approver. If that review finds Mesh Terrain unsupported or unsuitable, Landscape remains the default. Diverge from the plan when playtest evidence disproves an assumption.
 - **Production:** use explicit review gates, approved asset and material rules, owned dependencies, representative performance conditions, and retained evidence to scale a pattern that has already been proved.
 
 The transition is not triggered by an attractive screenshot or personal confidence. Promote only when a representative slice demonstrates that the intended experience, visual language, asset families, production method, and technical budget can work together. A short segment can be production-ready while the rest of the level remains exploratory.
+
+### Terrain representation review before broad terrain mutation
+
+Landscape is a useful design default, not an unexamined mandate. Before a
+broad terrain mutation, determine support in the actual project engine version,
+build, and configuration. “The version supports Mesh Terrain” is not by itself
+evidence that the project can use it: record feature maturity, prerequisites,
+World Partition or streaming assumptions, target platforms, and the evidence
+date. If Mesh Terrain is supported in that target context, the review is a
+blocking sub-gate before broad Landscape application.
+
+Compare the representations against the requirement that the terrain must
+carry:
+
+- topology: a heightfield is sufficient, or overhangs, tunnels, caves, and
+  other genuinely three-dimensional relationships are required;
+- world scale, partitioning, streaming ownership, editing scope, and source-
+  control or collaboration cost;
+- collision, navigation, water and drainage, material, route, and PCG
+  dependencies;
+- target-platform CPU/GPU/memory/streaming budgets, cook and package risk,
+  and runtime evidence;
+- feature maturity, team familiarity, fallback quality, rollback cost, and
+  likely migration cost.
+
+Record a `terrain_representation_review` before the first broad mutation. At
+minimum it contains the engine/build and project configuration, feature status,
+evidence date, terrain requirements, Landscape and Mesh Terrain fit/risk
+findings, the evidence IDs used, the decision owner, the fallback, rollback,
+and revalidation triggers. Use explicit recommendation states:
+`PENDING_EVIDENCE`, `NOT_SUPPORTED`, `LANDSCAPE_RECOMMENDED`,
+`MESH_TERRAIN_RECOMMENDED`, or `USER_DECISION_REQUIRED`.
+Keep the recommendation state separate from the gate status: `PASS` means the
+evidence is complete and the user or designated approver has recorded the
+representation decision; it does not mean that Mesh Terrain was selected.
+
+Support alone never selects Mesh Terrain. When the evidence favors Landscape,
+explain why Mesh Terrain is not appropriate and keep Landscape as the default.
+When the evidence favors Mesh Terrain, propose it and explain the experimental
+or integration risks, the bounded comparison slice, and the fallback; keep
+broad Landscape and Mesh Terrain mutation locked until the user or designated
+approver records the decision. A local `BOUNDED_PROTO_EDIT` on already accepted
+terrain does not reopen this review unless it changes the representation
+assumption or protected terrain scope.
 
 ### Bounded level-prototype iteration
 
@@ -218,8 +262,9 @@ The numbered stages are always represented in the record. A small or disposable 
 | Order | Required handoff before promotion |
 | --- | --- |
 | 1. Concept and intent review | Decision-ready brief, non-goals, constraints, unresolved questions, and recorded intent feedback. |
-| 2. Area Composition Plan review | A versioned, recorded area plan with zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, and a risk-covering set of fixed `DIAGNOSTIC_ONLY` overview cameras with stable IDs. The set covers required arrival, reverse, lateral, waterway/axis, elevation, and project-specific relationships without imposing a universal count. It also records the player-camera height/FOV proxy and planned runtime-rig source. No prototype geometry or broad asset placement is authorized before this gate passes. |
+| 2. Area Composition Plan review | A versioned, recorded plan package exposes floor-plan/footprint, node/connectivity, and annotated top-down functions without requiring one file per view type. Once those plan-view functions are inspectable, but before any side/elevation profile is produced or the package scope is finalized, a recorded `vertical_information_assessment` decides whether top-down evidence is sufficient for terrain relief, multi-level circulation, cliffs/overhangs/tunnels/bridges, sightline occlusion, and architecture-terrain vertical relationships, and communicates the result and basis to the user or designated approver. `INSUFFICIENT` makes named side/elevation profiles required package components; `SUFFICIENT` records the omission reason and alternative evidence; `PENDING_EVIDENCE` keeps the gate locked. The package also records zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, a risk-covering stable-ID `DIAGNOSTIC_ONLY` overview set, the player-camera height/FOV proxy, and the planned runtime-rig source. No prototype geometry or broad asset placement is authorized before this gate passes. |
 | 2a. Reference-to-Prototype Translation Gate | A machine-readable source registry and authority order, zone-level quantitative composition contracts, a planned traceability map for every prototype array/proxy group/route/terrain or water change, camera-specific comparison rules, tolerance and hard-failure rules, and an explicit broad-placement decision. Stage 2 `PASS` alone never authorizes prototype placement. |
+| 2t. Terrain Representation Review | A versioned comparison of Landscape and Mesh Terrain when the target context supports Mesh Terrain, including topology, streaming, collision/navigation, PCG, target-platform, maturity, fallback, rollback, and owner evidence. Broad terrain mutation remains locked until the recommendation and user/designated-approver decision are recorded. |
 | 2b. Concept-to-Asset Readiness Plan | A machine-readable demand registry traced to the approved concept, zones, and Stage 2a requirements; project and ownership-confirmed inventory findings; candidate, acquisition, authoring, procedural, outsourcing, fallback, and concept-revision routes; license, compatibility, dependency, cost, and authority risks; and an `ASSET_PLAN_READY` decision. This plan may release cheap prototype work, but it never authorizes a purchase, download, install, migration, Visual Slice, or production dressing. |
 | 3. Experience prototype | Runtime evidence for one POI or encounter unit, including approach, player question, choice or verb, payoff, next hook, and the live zone marker that identifies its area. |
 | 4. Terrain and macro blockout | The fixed overview set proves whole-area composition, terrain relief, axes, water/bridge relationships, and risk coverage; auxiliary static player-height/FOV views reject gross scale, width, slope, and occlusion failures without claiming exact runtime-rig or fine-composition authority. |
@@ -244,7 +289,29 @@ Pause for user or stakeholder feedback here. The review question is not merely �
 
 ### 2. Area Composition Plan review
 
-Between the concept view and the first cube prototype, create a versioned **Area Composition Plan** as a floor plan, node map, annotated top-down diagram, and side or elevation profile as appropriate. Record its artifact path or identifier, version, status, reviewer, and source concept in the workflow record. The plan must make these contracts inspectable before decorating or building:
+Between the concept view and the first cube prototype, create a versioned **Area Composition Plan** as an inspectable evidence package. The package must expose the footprint/floor-plan, connectivity/node-map, and annotated top-down functions needed to review the area, but it does not require one file per view type. Those functions may share one annotated sheet, occupy separate pages or layers in one artifact, or link separately versioned artifacts. Any required side/elevation profile may likewise be integrated or separate; preserve stable component IDs, versions, and cross-references so a reviewer can identify the evidence for each decision. Record the package path or identifier, component inventory, version, status, reviewer, and source concept in the workflow record.
+
+#### Vertical-information assessment and conditional profiles
+
+After the plan-view functions are inspectable, but before authoring any side/elevation profile or finalizing the plan-package scope, record a `vertical_information_assessment`. Evaluate whether the annotated top-down view and other already approved evidence can verify each material vertical risk without inference:
+
+- terrain high/low relationships, height bands, slopes, terraces, steps, drainage, and grade transitions;
+- multi-level circulation, stacked routes, vertical clearance, and transitions between playable levels;
+- cliffs, overhangs, tunnels, caves, bridges, and other overlapping or concealed three-dimensional relationships;
+- sightline, reveal, and occlusion relationships whose blocking height or vertical overlap controls the experience;
+- foundations, retaining conditions, entrances, floor levels, and the vertical relationship between architecture and terrain.
+
+For each applicable risk, record the controlling source or requirement, the review question, the top-down evidence and measurement basis, remaining ambiguity, and evidence IDs. Set `top_down_sufficiency` to `SUFFICIENT`, `INSUFFICIENT`, or `PENDING_EVIDENCE`, and set `profile_requirement` to `NOT_REQUIRED`, `REQUIRED`, or `PENDING_EVIDENCE` consistently:
+
+- `INSUFFICIENT` requires one or more named side/elevation profiles. Identify the section line, viewing direction, zones and relationships covered, scale or measurement basis, and acceptance question before creating them; the profiles become required Stage 2 package components.
+- `SUFFICIENT` does not require a profile. Record why it would add no material validation value and map every applicable vertical risk to alternative evidence such as contours, spot heights, slope/clearance annotations, and bridge-deck or tunnel-clearance callouts.
+- `PENDING_EVIDENCE` locks side/elevation production, package finalization, and Stage 2 promotion until the missing source, measurement, or decision is supplied. Continue only the plan-view refinement or evidence gathering needed to resolve the assessment. Do not resolve uncertainty by automatically drawing an arbitrary profile or by silently omitting one.
+
+Before any side/elevation production or package-scope finalization begins, explain the assessment result, risk findings, proposed profile scope or omission reason, and alternative evidence coverage to the user or designated approver, and record that communication in the workflow. This pre-production explanation scopes the artifact; it does not replace the later Stage 2 plan feedback or approval. A side/elevation profile is therefore a conditional evidence component, not a universal deliverable and not necessarily a separate file.
+
+This assessment does not select Landscape or Mesh Terrain and does not satisfy or bypass Stage 2t **Terrain Representation Review**. When broad terrain mutation is in scope and the target context supports Mesh Terrain, the representation comparison and user/designated-approver decision remain independently blocking even if the plan package contains profiles.
+
+After the assessment and communication are recorded, the plan package must make these contracts inspectable before decorating or building:
 
 - zone boundaries, stable IDs, anchors or bounds, roles, and semantic colors;
 - terrain height bands, absolute or relative elevations, terraces, slopes, steps, drainage, and other vertical transitions;
@@ -253,13 +320,13 @@ Between the concept view and the first cube prototype, create a versioned **Area
 - landmarks, reveals, sightlines, occlusion, readable openings, gates, and recovery paths;
 - POI hierarchy, player questions, approach/reveal/payoff beats, optional deferral or return, and the experience-density hypothesis;
 - building footprints, entrances, orientation, negative space, courtyard or street relationships, and a named typology hierarchy from primary landmark to supporting structures;
-- a source-artifact inventory covering the concept images, top-down plans, side or elevation views, and composition references that govern the plan, with stable IDs, versions, approval states, authority scopes, priority, and any unresolved conflict;
+- a source-artifact inventory covering the concept images, top-down plans, any side/elevation views required or used by the assessment, and composition references that govern the plan, with stable IDs, versions, approval states, authority scopes, priority, and any unresolved conflict;
 - a fixed overview-camera set whose members have stable IDs, roles, `DIAGNOSTIC_ONLY` authority, and a coverage matrix for arrival, reverse, lateral, waterway/axis, elevation, and project-specific spatial risks; use the smallest set that closes the identified blind spots rather than one hero overview or an arbitrary fixed count;
 - auxiliary fixed player-height cameras bound to the recorded height above local ground and FOV for gross scale, route-width, slope, and occlusion checks, plus the intended runtime camera rig and its Stage 5 configuration source when known;
 - foundations, boundaries, streaming cells, and expansion directions;
 - approximate scale, route timing, content cost hotspots, and the assumptions that the blockout must test.
 
-Pause again for feedback. The plan should be understandable to someone who did not author it, and it should make the whole-space role allocation visible before construction cost rises. If the role or placement of a major area is unclear in two dimensions, more detail in three dimensions will usually hide rather than solve the problem. Treat a missing, unrecorded, or `PENDING_EVIDENCE` plan as a mutation lock: do not create the first cube or graybox volume and do not start broad final-asset placement. A plan `PASS` releases work only to Stage 2a; it does not release content-bearing prototype geometry. This gate may be lightweight for a disposable experiment, but it may not be reconstructed retrospectively from geometry that already exists.
+Pause again for feedback. Ask whether the package makes the whole-space allocation legible, whether the vertical-risk assessment is credible, and whether the required profiles or recorded alternative evidence close every applicable risk. The plan should be understandable to someone who did not author it, and it should make the whole-space role allocation visible before construction cost rises. If the role or placement of a major area is unclear in the plan package, more detail in three dimensions will usually hide rather than solve the problem. Treat a missing, unrecorded, or `PENDING_EVIDENCE` plan, vertical assessment, required profile, or alternative-evidence mapping as a mutation lock: do not create the first cube or graybox volume and do not start broad final-asset placement. A plan `PASS` releases work only to Stage 2a; it does not release content-bearing prototype geometry. This gate may be lightweight for a disposable experiment, but it may not be reconstructed retrospectively from geometry that already exists.
 
 For a typology-critical precinct, state the required reading as a sequence, hierarchy, negative-space pattern, and prohibited silhouette. Building envelopes that merely match approximate size do not pass. For a palace, require the legible gate -> outer court -> middle gate -> central courtyard -> main hall axis, with the courts and supporting halls reinforcing the ceremonial hierarchy. If the composition reads as a fortress or castle because of a dominant keep, tower-like blocks, a monolithic plinth, or continuous high defensive walls, record a hard failure and return to the Area Composition Plan before adding detail.
 
@@ -394,7 +461,16 @@ Build the terrain and large spatial masses first: height bands, ridges, valleys,
 
 After each composition-changing batch, complete the Stage 2a post-mutation audit before the next broad batch. Verify realized member inventories against the traceability map and compare zone distribution, density, footprint, frontage, gaps, height bands, routes, water and bridge relationships, preserved shade and voids, hierarchy, and prohibited silhouettes against the recorded tolerances. A whole-map Actor total or an attractive overview cannot close this audit.
 
-For an outdoor map level-design prototype, the ground in this stage is a minimal Landscape terrain by default, not a flat cube or plane. Keep its extent, resolution, material, and detail deliberately cheap, but use it as the source of truth for the playable height field, route elevation, slopes, grounding, and terrain contacts. Place temporary architecture and other blockout volumes on top of it. Use another floor only when a specific user or stakeholder request explicitly overrides the default, and record the reason in the brief.
+After the `PASS`ed Terrain Representation Review, use the selected terrain
+representation for this stage. If the review selects Landscape, keep its
+extent, resolution, material, and detail deliberately cheap and use it as the
+source of truth for the playable height field, route elevation, slopes,
+grounding, and terrain contacts. If the review selects Mesh Terrain, use the
+approved bounded representation and validate its partition, compiled/runtime
+surface, collision, navigation, and PCG contracts before broad expansion. In
+both cases, place temporary architecture and other blockout volumes on the
+approved surface; a flat cube or plane is not a substitute for the terrain
+assumptions being tested.
 
 Use the fixed overview set as the primary Stage 4 evidence. Compare its stable arrival, reverse, lateral, waterway/axis, elevation, and project-specific views to verify the whole-area arrangement, terrain relief, route hierarchy, bridge and water relationships, major occlusion, and risk coverage. Add or reposition a camera when the coverage matrix exposes a blind spot; do not force a fixed camera count, and do not accept a single hero overview merely because it is attractive.
 
@@ -417,13 +493,13 @@ Validate a route as a continuous corridor rather than only at its endpoints. Sam
 
 ### 5. Playable blockout and feedback gate
 
-Translate the approved Area Composition Plan and Stage 2a translation contract into a playable rough draft made from a minimal Landscape terrain as the ground, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the perceived distance, enclosure, occlusion, route continuity, scale, visibility, readability, and typology observations that depend on it. Add these runtime results to the translation contract's post-mutation deviation records; overview metrics remain macro diagnostics. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
+Translate the approved Area Composition Plan and Stage 2a translation contract into a playable rough draft made from the approved terrain representation, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the perceived distance, enclosure, occlusion, route continuity, scale, visibility, readability, and typology observations that depend on it. Add these runtime results to the translation contract's post-mutation deviation records; overview metrics remain macro diagnostics. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
 
 Play in the runtime, not only by flying an editor camera. Test at least:
 
 - scale, capsule and camera clearance, slopes, jumps, climbs, cover, and traversal transitions;
 - runtime camera distance and offsets, pitch behavior, SpringArm collision or retraction, shoulder-side assumptions, and representative near-wall, doorway, slope, and occlusion cases;
-- movement, grounding, collision, route grade, and terrain contacts on the Landscape surface that will carry the prototype's outdoor traversal;
+- movement, grounding, collision, route grade, and terrain contacts on the approved terrain surface that will carry the prototype's outdoor traversal;
 - primary route, optional loops, wrong turns, objective readability, pacing, and recovery after failure;
 - landmark recognition, sightlines, occlusion, reveal timing, boundaries, unreachable shortcuts, and reverse views;
 - POI-unit flow from approach and question through reveal or refusal, player choice, interaction, outcome or reward, and the next hook;
@@ -498,7 +574,7 @@ Scale validated systems while preserving local variation, route readability, foc
 User feedback is most useful when the question is narrow enough to answer and the artifact is concrete enough to inspect:
 
 - **Concept pause:** Is the player fantasy, emotional tone, visual priority, and non-goal correctly understood?
-- **Plan pause:** Are the fun thesis, POI roles, player questions, routes, landmarks, beats, density, and boundaries arranged as intended?
+- **Plan pause:** Are the fun thesis, POI roles, player questions, routes, landmarks, beats, density, and boundaries arranged as intended, and does the recorded vertical assessment justify either the required side/elevation profiles or their omission with complete alternative evidence?
 - **Translation pause:** Have the approved references been converted into zone-level ranges, hierarchy and negative-space rules, traceable prototype groups, fixed comparison conditions, and an explicit placement decision without unresolved authority conflicts?
 - **Asset-plan pause:** Have concept requirements been converted into functional asset-family demands, and does every demand have an owned, acquired, authored, procedural, outsourced, fallback, or concept-revision route with explicit authority, risk, owner, and due stage?
 - **Experience pause:** Does a cheap POI unit produce the intended question, choice, tension, payoff, and next hook with placeholders?
@@ -521,6 +597,8 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - No world voids, exposed reserve edges, placeholders, uniform scatter, or unfinished reverse sides.
 - Material scale, lighting hierarchy, cultural and biome coherence.
 - Concept, Area Composition Plan, Reference-to-Prototype Translation, Concept-to-Asset Readiness, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets; the spatial plan and translation contract existed and passed before the first content-bearing cube, and the asset plan passed before the Experience Prototype.
+- The Area Composition Plan is a versioned package whose component inventory exposes footprint/floor-plan, node/connectivity, and annotated top-down functions without requiring separate files for each label; each component has a stable identifier or cross-reference.
+- After plan-view evidence is inspectable and before side/elevation production or package-scope finalization, the workflow records and communicates a `vertical_information_assessment` with per-risk sources, questions, measurement bases, ambiguity, and evidence IDs. `INSUFFICIENT` includes the named, scoped side/elevation profiles; `SUFFICIENT` includes an omission reason and alternative-evidence mapping for every applicable vertical risk; `PENDING_EVIDENCE` blocks Stage 2.
 - The Area Composition Plan records zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, the source-artifact inventory and authority order, a stable-ID `DIAGNOSTIC_ONLY` overview-camera set, its relationship/risk coverage matrix, auxiliary player-height/FOV proxies, and the planned runtime-rig source.
 - The Stage 2a contract validates against the bundled schema or a documented equivalent and records source IDs, versions, approval and authority scopes; the dependent-strata strategy consideration and selection when applicable; zone-level density, mass-count, typology, occupancy, frontage, gap, route-width, elevation, water/bridge, shade/void, hierarchy, and prohibited-silhouette requirements; measurement bases; tolerances; and hard failures.
 - Every prototype array, repeated set, architecture proxy group, route, water or bridge proxy, reserved shade or void, and Landscape change has a stable trace from source requirement through plan feature to realized inventory; no orphan requirement or unmapped broad placement exists.
@@ -558,6 +636,8 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Treating a spline, semantic strip, or PCG exclusion mask as interchangeable with a complete playable route.
 - Beginning rock and ground-cover generation without a `CONSIDERED` dependent-strata strategy decision, or treating the first available PCG graph as that decision.
 - Building the first cube or placing broad asset batches before a versioned Area Composition Plan and its gate status are recorded.
+- Automatically producing side/elevation profiles without first testing whether they retire a named vertical risk, or omitting them under `as appropriate` without a recorded sufficiency decision, user-facing explanation, and alternative-evidence mapping.
+- Treating floor plan, node map, top-down, side profile, and elevation as mandatory separate files instead of review functions and conditional evidence within one versioned Area Composition Plan package.
 - Treating Area Composition Plan `PASS` as permission to place prototype geometry before the Stage 2a source registry, quantitative zone contract, traceability map, tolerances, and explicit placement decision pass.
 - Translating visual references by memory, silently averaging conflicting sources, or recording only qualitative phrases such as “dense” without a bounded target and measurement basis.
 - Treating the concept as an object shopping list instead of extracting hero, structural, transition, contact, ordinary-repetition, gameplay, and atmosphere asset-family functions.
@@ -572,7 +652,7 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Using a high overview camera to approve player visibility, typology, landmark readability, or scale instead of the actual player tracking-camera height and FOV.
 - Precisely tuning player-view composition or detail during Stages 2–4 to a static height/FOV proxy, or treating that proxy as proof of boom, shoulder offset, pitch, SpringArm collision, or retraction behavior.
 - Reaching Stage 5 without the actual runtime camera rig, or judging Golden/Visual Feasibility Slice readability, asset density, or visual composition from a fixed proxy instead of that rig.
-- Replacing the default Landscape floor in an outdoor map level-design prototype without a specific user or stakeholder request; a flat cube or plane defers the highest-risk spatial assumptions until production.
+- Applying broad Landscape terrain before the Terrain Representation Review when the target version and project configuration support Mesh Terrain, or replacing the selected representation without recording the comparison, recommendation, owner, fallback, and rollback. A flat cube or plane still defers the highest-risk spatial assumptions until production.
 - Relying on visual memory, Outliner browsing, or production art alone to identify zones, or deleting zone markers as part of proxy replacement before the asset-placement gate passes.
 - Treating concept art as a complete level specification or treating user approval as a substitute for runtime evidence.
 - Choosing a concept that available assets cannot support.
@@ -592,6 +672,8 @@ These sources support the durable principles above without implying that one stu
 - [Epic Games: Project Setup and Level Blockout](https://dev.epicgames.com/documentation/en-us/unreal-engine/designer-01-project-setup-and-level-blockout-in-unreal-engine) — sketching, node maps, scale, blockout, sightlines, and early runtime testing.
 - [Epic Games: World Partition](https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition-in-unreal-engine?lang=en-US) — streaming sources, actor loading policy, HLOD, and large-world data management.
 - [Epic Games: World Partition - Data Layers](https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition---data-layers-in-unreal-engine?lang=en-US) — editor organization, runtime state, and Data Layer ownership.
+- [Epic Games: Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/mesh-terrain-in-unreal-engine) — the version-sensitive Mesh Terrain representation, its Experimental status, and support for terrain relationships that a heightfield cannot express; verify the target build.
+- [Epic Games: Crafting Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/crafting-mesh-terrain-in-unreal-engine) — World Partition, terrain scale, modifiers, priority, and production-context prerequisites; use it to inform the comparison, not as an editor procedure here.
 - [Epic Games: Level Design Content Examples](https://dev.epicgames.com/documentation/en-us/unreal-engine/level-design-content-examples?application_version=4.27) — an illustrative Prototype → Meshing → Lighting → Polish progression.
 - [GDC Vault: Invisible Intuition — Blockmesh and Lighting Tips](https://www.gdcvault.com/play/1025179/Level-Design-Workshop-Invisible-Intuition) — blockmesh, player guidance, lighting, and early playtest reasoning from Naughty Dog and NYU Game Center contributors.
 - [The Level Design Book: Blockout](https://book.leveldesignbook.com/process/blockout) and [Playtesting](https://book.leveldesignbook.com/process/blockout/playtesting) — massing, metrics, wayfinding, playable blockouts, and testing as the design experiment.

@@ -23,6 +23,49 @@ Use procedural generation for repeatable distribution, density gradients, ecolog
 7. Expose deterministic seeds, masks, density, scale, slope, height, distance, and platform constraints.
 8. Validate the isolated pattern, contact, unchanged scene context, and final role before broad promotion.
 
+### Procedural artifact lifetime and authorship mode
+
+Choose the lifetime and authority of the result before choosing the graph,
+node, or execution technology. This decision is independent from World
+Partition and runtime generation modes:
+
+| Authorship mode | Appropriate use | Required production contract |
+| --- | --- | --- |
+| Persistent parametric system | The result must be regenerated, tuned, inspected, shared, or updated when source data changes. | Preserve the rule asset, input and dependency versions, parameters, output ownership, regeneration trigger, save/source-control policy, override policy, and rollback path. |
+| Instant one-off generation | A bounded result is useful, but retaining a reusable graph would add no meaningful future control. | Record the request and source identity, exact generated outputs, owner, validation, persistence, cleanup, rollback, and the condition that would require promotion to a persistent system. |
+| Direct authored content | A unique focal result depends on deliberate human authorship more than repeatable generation. | Preserve authored ownership, dependencies, validation, and change history; do not present the result as reproducible automation. |
+
+Instant does not mean disposable, stateless, or automatically safe. Once a
+one-off result is saved, referenced, streamed, reviewed, or manually corrected,
+its ownership and recovery obligations are equivalent to other project
+content. If the team later needs parameter changes, regeneration, repeated use,
+or consistent variation, reclassify it as a persistent system rather than
+replaying an undocumented one-off operation. Direct authorship is preferable
+when the desired composition is singular and the cost of encoding a reusable
+rule exceeds its expected reuse.
+
+### AI-assisted spatial uncertainty
+
+AI-assisted placement and generation amplify familiar spatial errors; they do
+not create a new category of geometric truth. Before scaling, classify and test
+the representative batch for:
+
+- pivot or origin assumptions;
+- local-axis and orientation conventions;
+- final transformed mesh bounds rather than Actor centers;
+- overlap and minimum separation;
+- terrain contact and multi-point grounding;
+- gameplay, navigation, camera, and maintenance clearance.
+
+Use the final generated identity, transform, asset bounds, contact samples, and
+clearance envelope as structural evidence. A plausible screenshot, point
+count, or successful graph call cannot prove occluded overlap, back-side
+contact, collision, navigation, save persistence, or regeneration safety. If a
+person rotates, moves, deletes, or replaces an AI-generated result, record the
+change as an approved authored exception or a cause-level correction to the
+generator. Manual repair is valuable design input, not retrospective evidence
+that the original generation passed.
+
 ### Spatial authority and route-coupled generation
 
 When a generator depends on circulation, boundaries, or buildable space, identify the authoritative spatial source before generating content. A route graph or spline may drive review geometry, playable-surface planning, and exclusion masks, but those outputs remain separate responsibilities with separate validation. Do not let a debug line, semantic strip, or exclusion mask stand in for a complete traversable route.
@@ -45,6 +88,47 @@ For partitioned or hierarchical generation, choose grid sizes from the generated
 Treat Data Layer and HLOD assignment as part of the output contract. Each spawn or target branch should define whether generated actors inherit the source layer, use a referenced layer, or intentionally remain outside runtime layer changes. The same decision applies to HLOD ownership. A graph is not production-ready if it produces the right count of actors but loses the world's streaming, visibility, or review boundaries.
 
 Runtime generation also needs a source and cleanup policy: identify which players, editor views, World Partition sources, or explicit components can trigger generation; define increasing generation radii by grid scale; set a cleanup radius that prevents thrashing; and measure scheduler work, pooling, cache use, and frame-time contribution under movement and teleportation. Validate the transitions, not only the final generated image.
+
+### Bidirectional terrain and PCG data flow
+
+When a procedural system both reads terrain or partition data and writes a
+terrain or mesh result back into that same world, treat the relationship as a
+versioned data-flow contract rather than as a convenient graph connection. The
+terrain source, the query/read layer, the generated or modified write layer,
+and the published result must each have an owner, identity, precedence, and
+validation responsibility.
+
+Define the generation boundary explicitly:
+
+1. capture an immutable source snapshot or declared source revision;
+2. query only the approved source layer and record its revision, priority, and
+   sub-priority where those affect the result; keep the declared query/write
+   priority pair aligned unless an iteration contract explicitly says why it
+   differs;
+3. generate or modify a separate write layer while preserving original source
+   positions or equivalent immutable source attributes when point or element
+   correspondence affects the write;
+4. publish the result only after checking topology, bounds, collision,
+   navigation, material, and partition contracts;
+5. make the next run consume the declared published revision, not an
+   accidentally self-inclusive intermediate result.
+
+Do not let a write layer become the query source for the same generation
+without an explicit iteration contract. A query that includes its own writes
+can create a feedback loop, drift on every regeneration, duplicate changes, or
+make a successful graph execution look correct while the result is not
+idempotent. If iterative refinement is intentional, record the iteration
+limit, convergence or stopping test, source revision, precedence rules, and
+rollback to the last accepted revision. Otherwise fail closed when layer
+authority, priority, source identity, or mapping is ambiguous.
+
+For terrain and mesh-terrain workflows, validate repeated generation from the
+same snapshot, cross-partition seams, save/reopen persistence, packaged or
+runtime parity, PCG consumer behavior, performance and memory, and recovery
+after a partial write. Reopen the contract when terrain topology, modifier or
+graph version, priority ordering, partition layout, target platform, or
+fallback changes. The graph's success state is execution evidence only; it is
+not proof that the world state is correct or safe to promote.
 
 ### Dependent-strata strategy gate
 
@@ -105,6 +189,8 @@ Expose one candidate at a time. Disable superseded generations and verify which 
 
 Keep the procedural base and manual exceptions as separate layers with one declared authority. Use an exception for a focal composition, sightline, traversal requirement, story beat, ecological transition, or other approved design intent—not to hide a broken rule or an unvalidated source asset.
 
+UE 5.8's PCG Manual Edit and Data Override System are a version-specific implementation of this contract: they allow selected generated data to be excluded or modified non-destructively and restored while exposing applied overrides for inspection. Treat these changes as a delta layer over a versioned procedural base, not as a replacement source of truth. Before promotion, record the generating graph and input snapshot, stable target identity or mapping policy, scope, intent, owner, approval, and rollback or revalidation condition. During regeneration, reapply an override only when the base remains compatible; classify missing or ambiguous mappings as orphaned or conflicting rather than silently baking, erasing, or duplicating them. Because the UE 5.8 Data Override System and PCG Editor Mode are version-sensitive and Experimental, validate persistence, regeneration, source-control behavior, performance, and fallback under the project's target build before making them a production dependency.
+
 For every accepted exception, record the source generation identity, seed or input snapshot, graph version, target scope, intent, owner, approval, priority, expiration or revalidation condition, and rollback action. A manual change that cannot be traced back to the generated baseline is a future regeneration failure waiting to happen.
 
 Regeneration must preserve valid overrides, report orphaned or conflicting overrides, and never silently erase or duplicate them. A graph change, asset replacement, World Partition change, or changed exclusion rule reopens validation for affected exceptions. Keep temporary exploration visibly distinct from a promoted exception, and review exceptions as a growing maintenance budget rather than allowing them to become a second hidden generator.
@@ -119,6 +205,9 @@ Regeneration must preserve valid overrides, report orphaned or conflicting overr
 
 - Deterministic regeneration under recorded inputs.
 - Clear responsibility, hierarchy, exclusions, and ownership.
+- Artifact lifetime and authorship mode are declared, with output ownership, persistence, cleanup, rollback, and reclassification conditions.
+- AI-assisted spatial batches verify pivot, orientation, final transformed bounds, overlap, grounding, and clearance on a representative sample before scaling.
+- Bidirectional terrain/PCG flows have an immutable source revision, separate query and write layers, explicit priority or sub-priority, feedback-loop protection, and a published-result validation boundary.
 - For dependent strata, the source footprint authority, clearance or transition band, units, dependency order, and stale-source behavior are recorded.
 - A single declared spatial authority for route-coupled masks, with route version, width or clearance inputs, branch ownership, and regeneration dependencies recorded.
 - Counts, coverage, contact, minimum separation after final transforms, collision, navigation, warnings, and regeneration time.
@@ -138,12 +227,17 @@ Regeneration must preserve valid overrides, report orphaned or conflicting overr
 ## Common mistakes
 
 - Baking manual changes into generated output and losing their provenance.
+- Treating an instant one-off result as ownerless or replayable after it becomes saved project content.
+- Retaining a procedural graph for a singular authored composition without a credible regeneration or reuse need.
+- Scaling an AI-generated placement after checking only Actor centers, point counts, or a favorable screenshot.
+- Counting a manual correction as evidence that the original generated candidate passed instead of recording an exception or fixing the responsible rule.
 - Treating every exception as proof that the graph is wrong, or every graph failure as something to conceal with overrides.
 - Allowing overrides to accumulate until they form a second, undocumented generator.
 - Regenerating after a graph or asset change without checking orphaned, conflicting, or stale exceptions.
 - Copying a distance threshold from a tutorial without recording units, source scale, bounds policy, and target viewing distance.
 - Measuring distance between source centers while the rendered source meshes have materially different bounds or rotations.
 - Assuming Nanite automatically replaces distance culling, streaming policy, instance budgeting, or target-platform profiling.
+- Letting a terrain write feed the same generation's query implicitly, or treating a successful graph run as proof that repeated generation, partition seams, persistence, runtime parity, and rollback are safe.
 
 ## Research basis and further reading
 
@@ -156,12 +250,15 @@ The following sources document current Unreal Engine applications of these durab
 
 Additional current context:
 
+- [Epic Games: Working with PCG and LLMs Using Unreal MCP](https://dev.epicgames.com/documentation/unreal-engine/working-with-pcg-and-llms-using-unreal-mcp-in-unreal-engine?lang=en-US) - a dated example of reference-driven procedural assistance, example reuse, and incremental supervision.
+- [Epic Games: `RunPCGInstantGraph`](https://dev.epicgames.com/documentation/unreal-engine/API/Plugins/PCGToolset/UPCGSpatialToolset/RunPCGInstantGraph?lang=en-US) - a version-sensitive implementation example of one-off graph execution; it does not define the durable lifetime contract.
 - [Epic Games: PCG Node Reference](https://dev.epicgames.com/documentation/en-us/unreal-engine/procedural-content-generation-framework-node-reference-in-unreal-engine) - Distance, Surface Sampler, Get Landscape Data, and Static Mesh Spawner semantics; verify node options against the target engine version.
 - [Epic Games: Nanite Virtualized Geometry](https://dev.epicgames.com/documentation/en-us/unreal-engine/nanite-virtualized-geometry) - Nanite streaming, supported features, and version-sensitive rendering limitations.
 - [Epic Games: Cull Distance Volumes](https://dev.epicgames.com/documentation/en-us/unreal-engine/cull-distance-volumes-in-unreal-engine) - distance-cull configuration and popping checks for supported actor representations.
 - [Epic Games: PCG Development Guides](https://dev.epicgames.com/documentation/en-us/unreal-engine/pcg-development-guides) — current PCG authoring and workflow context; verify feature names and maturity against the target engine version.
 - [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-8-release-notes) — dated evidence for the Manual Edit tool, Data Overrides Panel, and experimental Data Override System; use these as implementations of the override contract, not as the durable principle itself.
+- [Epic Games: PCG and Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/pcg-and-mesh-terrain-in-unreal-engine) — version-sensitive query/write layers, priority and sub-priority, and feedback-loop considerations for PCG with Mesh Terrain; use the data-flow contract above rather than copying a node recipe.
 
 ## Related topics
 
-World & Level Design; Automation & Python; Performance & Scalability; Production Pipeline; Validation, Testing & Debugging.
+World & Level Design; Automation & Python; Performance & Scalability; Production Pipeline; Validation, Testing & Debugging; AI-Assisted Development.

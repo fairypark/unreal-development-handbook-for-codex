@@ -20,6 +20,24 @@ Upstream feature maturity is a prioritization signal, not a project guarantee. A
 
 The UE 5.8 release is a useful example of why this distinction matters: Epic reports improvements to shader compilation, shader deduplication, and PSO pre-caching, while also changing the maturity of features such as MegaLights and Lumen Lite. Those engine improvements should lead to new cold-start, warm-start, shader hitch, fallback-rendering, and target-platform measurements—not to the assumption that every project inherits the same result.
 
+## Target identity beyond platform name
+
+Treat a target as a structured identity, not only as a device or operating
+system label. Record the engine/build and renderer configuration together with
+the packaged runtime architecture (for example x64, ARM64, or ARM64EC),
+authoring and build-host architecture, compiler and toolchain, SDK/GDK,
+plugin or middleware ABI, hardware/device revision, scalability settings, and
+content or streaming configuration. Keep runtime-target evidence separate from
+Editor and build-host evidence: a project may package for one architecture
+while authoring, cooking, or validating on another, and those environments do
+not share the same performance, compatibility, or failure assumptions.
+
+Re-establish CPU, GPU, memory, shader, I/O, streaming, startup, and hitch
+baselines when any part of that identity changes. Record architecture-specific
+fallbacks and plugin compatibility before treating a result as portable. A
+performance improvement on one architecture or host is a hypothesis for the
+next target, not transferable proof.
+
 ## Measurement workflow
 
 1. Reproduce the target workload and configuration.
@@ -45,6 +63,7 @@ Define which qualities may change by tier and which preserve design intent. Prot
 - CPU, GPU, memory, streaming, load, and frame-pacing evidence as relevant.
 - LOD, Nanite, instancing, HLOD, World Partition, and cook behavior.
 - Engine and feature version identity, maturity, platform prerequisites, fallback behavior, and regression thresholds are attached to the baseline.
+- Target identity includes runtime and authoring/build-host architecture, compiler/toolchain, SDK/GDK, plugin or middleware ABI, and renderer/scalability configuration—not only the platform name.
 - No visual, traversal, authority, or persistence regression.
 - Regression thresholds and owners for future changes.
 
@@ -56,12 +75,14 @@ Define which qualities may change by tier and which preserve design intent. Prot
 - Lowering all quality instead of repairing the bottleneck.
 - Treating editor performance as packaged runtime evidence.
 - Reusing a performance result after changing the engine, renderer, streaming mode, or feature maturity without re-establishing the baseline.
+- Reusing a result across x64, ARM64, or ARM64EC, or between a packaged runtime and an Editor/build host, without architecture, toolchain, SDK/GDK, plugin-ABI, and fallback evidence.
 
 ## Research basis and further reading
 
 - [Epic Games: State of Unreal 2026](https://www.unrealengine.com/news/state-of-unreal-2026-top-news) — UE 5.8 shader compilation, PSO pre-caching, and feature-maturity context.
 - [Epic Games: Introduction to Performance Profiling and Configuration](https://dev.epicgames.com/documentation/en-us/unreal-engine/introduction-to-performance-profiling-and-configuration) — frame-time, CPU/GPU, memory, and target-device profiling principles.
 - [Epic Games: Guidelines for Optimizing Rendering for Real-Time](https://dev.epicgames.com/documentation/en-us/unreal-engine/guidelines-for-optimizing-rendering-for-real-time-in-unreal-engine?lang=en-US) — performance budgets, packaging considerations, and repeatable measurement.
+- [Epic Games: Windows ARM64 Support in Unreal Engine 5.8](https://dev.epicgames.com/documentation/unreal-engine/windows-arm64-support-in-unreal-engine-5-8) — a dated example of architecture-specific feature maturity, Editor/build constraints, GDK, and compiler limitations; verify the target release and project dependencies.
 
 ## Related topics
 

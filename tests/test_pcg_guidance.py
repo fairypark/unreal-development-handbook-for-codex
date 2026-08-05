@@ -69,6 +69,17 @@ class PcgGuidanceTests(unittest.TestCase):
         ):
             self.assertIn(required, self.chapter)
 
+    def test_chapter_connects_ue58_manual_edit_to_override_lifecycle(self):
+        for required in (
+            "UE 5.8's PCG Manual Edit and Data Override System",
+            "delta layer over a versioned procedural base",
+            "stable target identity or mapping policy",
+            "orphaned or conflicting",
+            "source-control behavior",
+            "Experimental",
+        ):
+            self.assertIn(required, self.chapter)
+
     def test_level_work_routes_dependent_strata_before_first_mutation(self):
         for text in (self.world_skill, self.world_chapter):
             self.assertIn("Dependent-Strata Strategy Gate", text)
