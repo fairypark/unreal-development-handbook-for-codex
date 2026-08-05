@@ -16,12 +16,26 @@ Define source inputs, generated outputs, configuration, target platforms, owners
 
 Make engine and feature identity part of the production artifact contract. For every release-relevant engine, plugin, renderer, replication system, procedural system, or capture feature, record:
 
-- engine version, branch or build, plugin versions, project configuration, and target platforms;
+- engine version, branch or build, plugin versions, project configuration, target platforms, runtime architecture, authoring/build-host architecture, compiler and toolchain, SDK/GDK, and plugin or middleware ABI;
 - upstream maturity (`Experimental`, `Beta`, or `Production Ready`) and the date of the assessment;
 - hardware or platform prerequisites, known limitations, and affected content or systems;
 - baseline evidence, fallback behavior, migration cost, owner, and rollback target.
 
 Keep one current version matrix with the release evidence rather than scattering unqualified feature claims through the handbook. A feature can be production-ready upstream and still fail a project's visual, performance, packaging, licensing, or recovery gates. When a version change or maturity change affects a contract, reopen the relevant validation gate and preserve the previous accepted baseline for comparison.
+
+### Architecture-specific target note — UE 5.8, 2026-08-05
+
+Epic's Windows ARM64 documentation for Unreal Engine 5.8 labels the support
+Experimental. It describes ARM64, ARM64EC, and combined game-target options,
+while the Editor is not supported for that target; it also calls out an April
+2026 GDK requirement and lack of Clang support. Treat those statements as a
+dated release contract, not a general Windows rule. Record the packaged
+runtime architecture separately from the authoring/build host, then validate
+compiler/toolchain, SDK/GDK, plugin and middleware ABI, cook/package, startup,
+runtime performance, and recovery for the exact project target. A host that
+can author or build the project is not evidence that the packaged target can
+run it, and a combined target is not evidence that every dependency supports
+both architectures.
 
 ### UE 5.8 snapshot — 2026-08-01
 
@@ -99,6 +113,7 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - Promotion state, evidence, approver, retention, and rollback target are recorded for each major level milestone.
 - Fun thesis, POI inventory, experience-unit evidence, density/tension rationale, and intentional quiet sections are recorded for level milestones.
 - Engine, plugin, feature-maturity, target-platform, fallback, and migration state are recorded for release-relevant changes.
+- Runtime architecture, authoring/build-host architecture, compiler/toolchain, SDK/GDK, plugin or middleware ABI, and architecture-specific fallback are recorded separately.
 - Audience, license or distribution scope, and source date are recorded when different official materials assign different maturity labels.
 - Clean-environment installation and startup.
 - Representative runtime, performance, persistence, and recovery checks.
@@ -110,6 +125,7 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - Treating `Production Ready` as a substitute for project-level acceptance.
 - Updating the engine or a render/capture path without preserving a comparable baseline and a rollback target.
 - Recording a feature name without its engine version, maturity, target platform, fallback, or evidence date.
+- Treating Windows ARM64/ARM64EC support in the UE 5.8 dated note as proof of Editor support or dependency compatibility, or collapsing runtime architecture and build-host architecture into one target label.
 - Copying an upstream maturity label without recording its audience, license or distribution scope, and compatibility constraints.
 
 ## Research basis and further reading
@@ -117,6 +133,7 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - [Epic Games: State of Unreal 2026](https://www.unrealengine.com/news/state-of-unreal-2026-top-news) — UE 5.8 feature maturity, shader compilation, shader deduplication, and PSO pre-caching context.
 - [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-8-release-notes) — version-specific release and production-status details.
 - [Epic Games: Transitioning to Movie Render Graph from Movie Render Queue](https://dev.epicgames.com/documentation/en-us/unreal-engine/transitioning-to-the-movie-render-graph-from-movie-render-queue-in-unreal-engine) — migration considerations for the capture pipeline.
+- [Epic Games: Windows ARM64 Support in Unreal Engine 5.8](https://dev.epicgames.com/documentation/unreal-engine/windows-arm64-support-in-unreal-engine-5-8) — dated ARM64/ARM64EC game-target maturity, Editor, GDK, compiler, and architecture-boundary constraints.
 
 Additional current context:
 

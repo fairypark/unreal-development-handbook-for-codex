@@ -19,9 +19,10 @@ When the relevant Handbook chapter defines an explicit workflow, treat its stage
 
 1. State the agent's role, allowed mutations, decision authority, and stop conditions.
 2. Provide goals, constraints, project context, success criteria, and production concerns without leaking a desired verdict.
-3. Separate builder, reviewer, and approval authority when independence matters.
-4. Keep evaluators read-only and give them raw artifacts, neutral facts, and the applicable rubric.
-5. Require human approval for materially destructive, external, high-risk, or policy-sensitive actions.
+3. For complex graph or data work, establish a reference-grounded context set before mutation: approved examples, source authority and version, bounded context slices, unresolved unknowns, and reviewer questions.
+4. Separate builder, reviewer, and approval authority when independence matters.
+5. Keep evaluators read-only and give them raw artifacts, neutral facts, and the applicable rubric.
+6. Require human approval for materially destructive, external, high-risk, or policy-sensitive actions.
 
 ## Protect reliability
 
@@ -30,6 +31,7 @@ When the relevant Handbook chapter defines an explicit workflow, treat its stage
 - After every composition-changing level batch, lock the next broad batch until the Stage 2a contract records same-condition reference/plan/prototype deviations and resolves every out-of-tolerance result or reopens the responsible stage.
 - Treat a marketplace search hit as discovery, an authenticated library match as ownership evidence, a staged package as acquisition evidence, and representative or production approval as separate validation states. Never infer purchase, download, install, migration, plugin enablement, outsourcing, upload, or payment authority from a design request or readiness gate.
 - Preserve failed attempts and factual change scope.
+- Treat reference retrieval, semantic matching, or context truncation as context preparation—not as evidence; plan before mutation and execute complex work in incremental reviewable batches.
 - Prevent the builder from manufacturing or rewriting approval evidence.
 - Use deterministic scripts for fragile repeated mechanics while keeping contextual judgment explicit.
 - Label self-review honestly when independent review is unavailable.

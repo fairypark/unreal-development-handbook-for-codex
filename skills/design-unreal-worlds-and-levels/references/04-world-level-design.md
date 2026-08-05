@@ -95,10 +95,54 @@ Record the actual height above local ground and FOV of the project's player trac
 
 Keep two related loops distinct:
 
-- **Exploration:** use disposable primitives, temporary materials, and placeholder cues to discover whether the space is fun, readable, and in scope. For an **outdoor map level-design prototype**, make a minimal **Landscape terrain** the actual playable floor by default, even when buildings, cover, route furniture, and other masses remain primitive. Do not replace it with a flat cube or plane merely to move faster: the early prototype must expose elevation, slopes, drainage, terrain transitions, grounding, and terrain contacts. Use another floor only when a specific user or stakeholder request explicitly overrides this default. Diverge from the plan when playtest evidence disproves an assumption.
+- **Exploration:** use disposable primitives, temporary materials, and placeholder cues to discover whether the space is fun, readable, and in scope. For an **outdoor map level-design prototype**, make a minimal **Landscape terrain** the actual playable floor by default after the terrain-representation review below, even when buildings, cover, route furniture, and other masses remain primitive. Do not replace it with a flat cube or plane merely to move faster: the early prototype must expose elevation, slopes, drainage, terrain transitions, grounding, and terrain contacts. If the target version and project configuration support Mesh Terrain, do not apply Landscape broadly before comparing the two representations and explaining the recommendation to the user or designated approver. If that review finds Mesh Terrain unsupported or unsuitable, Landscape remains the default. Diverge from the plan when playtest evidence disproves an assumption.
 - **Production:** use explicit review gates, approved asset and material rules, owned dependencies, representative performance conditions, and retained evidence to scale a pattern that has already been proved.
 
 The transition is not triggered by an attractive screenshot or personal confidence. Promote only when a representative slice demonstrates that the intended experience, visual language, asset families, production method, and technical budget can work together. A short segment can be production-ready while the rest of the level remains exploratory.
+
+### Terrain representation review before broad terrain mutation
+
+Landscape is a useful design default, not an unexamined mandate. Before a
+broad terrain mutation, determine support in the actual project engine version,
+build, and configuration. “The version supports Mesh Terrain” is not by itself
+evidence that the project can use it: record feature maturity, prerequisites,
+World Partition or streaming assumptions, target platforms, and the evidence
+date. If Mesh Terrain is supported in that target context, the review is a
+blocking sub-gate before broad Landscape application.
+
+Compare the representations against the requirement that the terrain must
+carry:
+
+- topology: a heightfield is sufficient, or overhangs, tunnels, caves, and
+  other genuinely three-dimensional relationships are required;
+- world scale, partitioning, streaming ownership, editing scope, and source-
+  control or collaboration cost;
+- collision, navigation, water and drainage, material, route, and PCG
+  dependencies;
+- target-platform CPU/GPU/memory/streaming budgets, cook and package risk,
+  and runtime evidence;
+- feature maturity, team familiarity, fallback quality, rollback cost, and
+  likely migration cost.
+
+Record a `terrain_representation_review` before the first broad mutation. At
+minimum it contains the engine/build and project configuration, feature status,
+evidence date, terrain requirements, Landscape and Mesh Terrain fit/risk
+findings, the evidence IDs used, the decision owner, the fallback, rollback,
+and revalidation triggers. Use explicit recommendation states:
+`PENDING_EVIDENCE`, `NOT_SUPPORTED`, `LANDSCAPE_RECOMMENDED`,
+`MESH_TERRAIN_RECOMMENDED`, or `USER_DECISION_REQUIRED`.
+Keep the recommendation state separate from the gate status: `PASS` means the
+evidence is complete and the user or designated approver has recorded the
+representation decision; it does not mean that Mesh Terrain was selected.
+
+Support alone never selects Mesh Terrain. When the evidence favors Landscape,
+explain why Mesh Terrain is not appropriate and keep Landscape as the default.
+When the evidence favors Mesh Terrain, propose it and explain the experimental
+or integration risks, the bounded comparison slice, and the fallback; keep
+broad Landscape and Mesh Terrain mutation locked until the user or designated
+approver records the decision. A local `BOUNDED_PROTO_EDIT` on already accepted
+terrain does not reopen this review unless it changes the representation
+assumption or protected terrain scope.
 
 ### Bounded level-prototype iteration
 
@@ -220,6 +264,7 @@ The numbered stages are always represented in the record. A small or disposable 
 | 1. Concept and intent review | Decision-ready brief, non-goals, constraints, unresolved questions, and recorded intent feedback. |
 | 2. Area Composition Plan review | A versioned, recorded area plan with zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, and a risk-covering set of fixed `DIAGNOSTIC_ONLY` overview cameras with stable IDs. The set covers required arrival, reverse, lateral, waterway/axis, elevation, and project-specific relationships without imposing a universal count. It also records the player-camera height/FOV proxy and planned runtime-rig source. No prototype geometry or broad asset placement is authorized before this gate passes. |
 | 2a. Reference-to-Prototype Translation Gate | A machine-readable source registry and authority order, zone-level quantitative composition contracts, a planned traceability map for every prototype array/proxy group/route/terrain or water change, camera-specific comparison rules, tolerance and hard-failure rules, and an explicit broad-placement decision. Stage 2 `PASS` alone never authorizes prototype placement. |
+| 2t. Terrain Representation Review | A versioned comparison of Landscape and Mesh Terrain when the target context supports Mesh Terrain, including topology, streaming, collision/navigation, PCG, target-platform, maturity, fallback, rollback, and owner evidence. Broad terrain mutation remains locked until the recommendation and user/designated-approver decision are recorded. |
 | 2b. Concept-to-Asset Readiness Plan | A machine-readable demand registry traced to the approved concept, zones, and Stage 2a requirements; project and ownership-confirmed inventory findings; candidate, acquisition, authoring, procedural, outsourcing, fallback, and concept-revision routes; license, compatibility, dependency, cost, and authority risks; and an `ASSET_PLAN_READY` decision. This plan may release cheap prototype work, but it never authorizes a purchase, download, install, migration, Visual Slice, or production dressing. |
 | 3. Experience prototype | Runtime evidence for one POI or encounter unit, including approach, player question, choice or verb, payoff, next hook, and the live zone marker that identifies its area. |
 | 4. Terrain and macro blockout | The fixed overview set proves whole-area composition, terrain relief, axes, water/bridge relationships, and risk coverage; auxiliary static player-height/FOV views reject gross scale, width, slope, and occlusion failures without claiming exact runtime-rig or fine-composition authority. |
@@ -394,7 +439,16 @@ Build the terrain and large spatial masses first: height bands, ridges, valleys,
 
 After each composition-changing batch, complete the Stage 2a post-mutation audit before the next broad batch. Verify realized member inventories against the traceability map and compare zone distribution, density, footprint, frontage, gaps, height bands, routes, water and bridge relationships, preserved shade and voids, hierarchy, and prohibited silhouettes against the recorded tolerances. A whole-map Actor total or an attractive overview cannot close this audit.
 
-For an outdoor map level-design prototype, the ground in this stage is a minimal Landscape terrain by default, not a flat cube or plane. Keep its extent, resolution, material, and detail deliberately cheap, but use it as the source of truth for the playable height field, route elevation, slopes, grounding, and terrain contacts. Place temporary architecture and other blockout volumes on top of it. Use another floor only when a specific user or stakeholder request explicitly overrides the default, and record the reason in the brief.
+After the `PASS`ed Terrain Representation Review, use the selected terrain
+representation for this stage. If the review selects Landscape, keep its
+extent, resolution, material, and detail deliberately cheap and use it as the
+source of truth for the playable height field, route elevation, slopes,
+grounding, and terrain contacts. If the review selects Mesh Terrain, use the
+approved bounded representation and validate its partition, compiled/runtime
+surface, collision, navigation, and PCG contracts before broad expansion. In
+both cases, place temporary architecture and other blockout volumes on the
+approved surface; a flat cube or plane is not a substitute for the terrain
+assumptions being tested.
 
 Use the fixed overview set as the primary Stage 4 evidence. Compare its stable arrival, reverse, lateral, waterway/axis, elevation, and project-specific views to verify the whole-area arrangement, terrain relief, route hierarchy, bridge and water relationships, major occlusion, and risk coverage. Add or reposition a camera when the coverage matrix exposes a blind spot; do not force a fixed camera count, and do not accept a single hero overview merely because it is attractive.
 
@@ -417,13 +471,13 @@ Validate a route as a continuous corridor rather than only at its endpoints. Sam
 
 ### 5. Playable blockout and feedback gate
 
-Translate the approved Area Composition Plan and Stage 2a translation contract into a playable rough draft made from a minimal Landscape terrain as the ground, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the perceived distance, enclosure, occlusion, route continuity, scale, visibility, readability, and typology observations that depend on it. Add these runtime results to the translation contract's post-mutation deviation records; overview metrics remain macro diagnostics. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
+Translate the approved Area Composition Plan and Stage 2a translation contract into a playable rough draft made from the approved terrain representation, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the perceived distance, enclosure, occlusion, route continuity, scale, visibility, readability, and typology observations that depend on it. Add these runtime results to the translation contract's post-mutation deviation records; overview metrics remain macro diagnostics. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
 
 Play in the runtime, not only by flying an editor camera. Test at least:
 
 - scale, capsule and camera clearance, slopes, jumps, climbs, cover, and traversal transitions;
 - runtime camera distance and offsets, pitch behavior, SpringArm collision or retraction, shoulder-side assumptions, and representative near-wall, doorway, slope, and occlusion cases;
-- movement, grounding, collision, route grade, and terrain contacts on the Landscape surface that will carry the prototype's outdoor traversal;
+- movement, grounding, collision, route grade, and terrain contacts on the approved terrain surface that will carry the prototype's outdoor traversal;
 - primary route, optional loops, wrong turns, objective readability, pacing, and recovery after failure;
 - landmark recognition, sightlines, occlusion, reveal timing, boundaries, unreachable shortcuts, and reverse views;
 - POI-unit flow from approach and question through reveal or refusal, player choice, interaction, outcome or reward, and the next hook;
@@ -572,7 +626,7 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Using a high overview camera to approve player visibility, typology, landmark readability, or scale instead of the actual player tracking-camera height and FOV.
 - Precisely tuning player-view composition or detail during Stages 2–4 to a static height/FOV proxy, or treating that proxy as proof of boom, shoulder offset, pitch, SpringArm collision, or retraction behavior.
 - Reaching Stage 5 without the actual runtime camera rig, or judging Golden/Visual Feasibility Slice readability, asset density, or visual composition from a fixed proxy instead of that rig.
-- Replacing the default Landscape floor in an outdoor map level-design prototype without a specific user or stakeholder request; a flat cube or plane defers the highest-risk spatial assumptions until production.
+- Applying broad Landscape terrain before the Terrain Representation Review when the target version and project configuration support Mesh Terrain, or replacing the selected representation without recording the comparison, recommendation, owner, fallback, and rollback. A flat cube or plane still defers the highest-risk spatial assumptions until production.
 - Relying on visual memory, Outliner browsing, or production art alone to identify zones, or deleting zone markers as part of proxy replacement before the asset-placement gate passes.
 - Treating concept art as a complete level specification or treating user approval as a substitute for runtime evidence.
 - Choosing a concept that available assets cannot support.
@@ -592,6 +646,8 @@ These sources support the durable principles above without implying that one stu
 - [Epic Games: Project Setup and Level Blockout](https://dev.epicgames.com/documentation/en-us/unreal-engine/designer-01-project-setup-and-level-blockout-in-unreal-engine) — sketching, node maps, scale, blockout, sightlines, and early runtime testing.
 - [Epic Games: World Partition](https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition-in-unreal-engine?lang=en-US) — streaming sources, actor loading policy, HLOD, and large-world data management.
 - [Epic Games: World Partition - Data Layers](https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition---data-layers-in-unreal-engine?lang=en-US) — editor organization, runtime state, and Data Layer ownership.
+- [Epic Games: Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/mesh-terrain-in-unreal-engine) — the version-sensitive Mesh Terrain representation, its Experimental status, and support for terrain relationships that a heightfield cannot express; verify the target build.
+- [Epic Games: Crafting Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/crafting-mesh-terrain-in-unreal-engine) — World Partition, terrain scale, modifiers, priority, and production-context prerequisites; use it to inform the comparison, not as an editor procedure here.
 - [Epic Games: Level Design Content Examples](https://dev.epicgames.com/documentation/en-us/unreal-engine/level-design-content-examples?application_version=4.27) — an illustrative Prototype → Meshing → Lighting → Polish progression.
 - [GDC Vault: Invisible Intuition — Blockmesh and Lighting Tips](https://www.gdcvault.com/play/1025179/Level-Design-Workshop-Invisible-Intuition) — blockmesh, player guidance, lighting, and early playtest reasoning from Naughty Dog and NYU Game Center contributors.
 - [The Level Design Book: Blockout](https://book.leveldesignbook.com/process/blockout) and [Playtesting](https://book.leveldesignbook.com/process/blockout/playtesting) — massing, metrics, wayfinding, playable blockouts, and testing as the design experiment.

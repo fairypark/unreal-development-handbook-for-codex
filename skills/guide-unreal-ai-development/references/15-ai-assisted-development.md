@@ -18,6 +18,25 @@ Provide goals, project state, requirements, assumptions, constraints, success cr
 
 Keep reusable principles free of private paths, map coordinates, asset-pack anecdotes, credentials, model-specific orchestration, and temporary workarounds.
 
+## Reference-grounded context for complex procedural work
+
+For graph-, attribute-, and data-rich work, establish a reference set before
+planning mutation. Prefer approved project examples, the current graph or
+asset authority, the target engine/build documentation, and a known-good
+baseline over a first-principles reconstruction from memory. Record
+`reference_ids`, version and authority scope, why each reference was selected,
+the relevant context slice, unresolved unknowns, and the questions a reviewer
+must answer.
+
+Large graphs and datasets should be supplied as bounded, structured summaries
+with the identities and relationships needed for the current decision. Do not
+let truncation, a semantic search hit, or context-retrieval success stand in
+for evidence. Before mutation, state the intended changes, postconditions,
+risks, and rollback target; execute in incremental, reviewable batches and
+stop when no relevant reference exists or the remaining context is ambiguous.
+The durable rule is reference-grounded planning and supervision, not a
+particular model, prompt, Editor integration, or transport.
+
 ## Bounded AI task contract and latency guard
 
 Before a prototype or Editor mutation, the agent must write down a compact
@@ -101,6 +120,8 @@ Expose small typed composable operations rather than mirroring Unreal internals.
 - Stateful editor mutations are serialized and verified before the next dependent mutation.
 - The builder cannot rewrite or self-approve required evidence.
 - The applicable domain workflow is loaded, the current stage is explicit, and no downstream stage began before its predecessor gate passed.
+- Complex graph or data work has a recorded reference set, authority/version scope, bounded context selection, and reviewer questions before mutation.
+- The plan names intended changes, postconditions, risks, and rollback before mutation; execution is incremental and stops on ambiguous or missing context.
 - For level composition, Stage 2a passed before the first content-bearing prototype mutation; source authority, quantitative zone contracts, prototype trace IDs, comparison conditions, tolerances, and the placement decision are machine-readable and versioned.
 - For concept-led asset supply, `ASSET_PLAN_READY`, `VISUAL_SLICE_READY`, and `PRODUCTION_DRESSING_READY` are independently scoped and versioned; demand, ownership or provenance, acquisition authority, license, compatibility, dependencies, total cost, exact candidates, evidence, fallback, and rollback remain inspectable.
 - Each composition-changing batch has a same-condition deviation audit, and the builder cannot use aggregate Actor count or overview-only player claims to self-approve drift.
@@ -117,6 +138,8 @@ Expose small typed composable operations rather than mirroring Unreal internals.
 - Treating Area Composition Plan approval as prototype-placement authority, or reconstructing the missing Stage 2a translation contract after broad placement.
 - Treating a listing as ownership, an entitlement or download as compatibility, a staged package as representative proof, a Visual Slice as production authority, or a design gate as permission for an external acquisition.
 - Treating a sandbox as approval, or treating a successful tool response as proof of the intended result.
+- Building a complex PCG graph from memory without approved project references, or treating a search hit, truncated context, or semantic match as sufficient evidence.
+- Sending an entire graph or dataset without a bounded structured context slice, then allowing missing relationships or ambiguous authority to be hidden by automation.
 - Allowing overlapping stateful editor mutations that make ordering and recovery ambiguous.
 - Merging generated assets or configuration without preserving their source, version, owner, and validation evidence.
 

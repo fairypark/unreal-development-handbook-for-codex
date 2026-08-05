@@ -46,6 +46,47 @@ Treat Data Layer and HLOD assignment as part of the output contract. Each spawn 
 
 Runtime generation also needs a source and cleanup policy: identify which players, editor views, World Partition sources, or explicit components can trigger generation; define increasing generation radii by grid scale; set a cleanup radius that prevents thrashing; and measure scheduler work, pooling, cache use, and frame-time contribution under movement and teleportation. Validate the transitions, not only the final generated image.
 
+### Bidirectional terrain and PCG data flow
+
+When a procedural system both reads terrain or partition data and writes a
+terrain or mesh result back into that same world, treat the relationship as a
+versioned data-flow contract rather than as a convenient graph connection. The
+terrain source, the query/read layer, the generated or modified write layer,
+and the published result must each have an owner, identity, precedence, and
+validation responsibility.
+
+Define the generation boundary explicitly:
+
+1. capture an immutable source snapshot or declared source revision;
+2. query only the approved source layer and record its revision, priority, and
+   sub-priority where those affect the result; keep the declared query/write
+   priority pair aligned unless an iteration contract explicitly says why it
+   differs;
+3. generate or modify a separate write layer while preserving original source
+   positions or equivalent immutable source attributes when point or element
+   correspondence affects the write;
+4. publish the result only after checking topology, bounds, collision,
+   navigation, material, and partition contracts;
+5. make the next run consume the declared published revision, not an
+   accidentally self-inclusive intermediate result.
+
+Do not let a write layer become the query source for the same generation
+without an explicit iteration contract. A query that includes its own writes
+can create a feedback loop, drift on every regeneration, duplicate changes, or
+make a successful graph execution look correct while the result is not
+idempotent. If iterative refinement is intentional, record the iteration
+limit, convergence or stopping test, source revision, precedence rules, and
+rollback to the last accepted revision. Otherwise fail closed when layer
+authority, priority, source identity, or mapping is ambiguous.
+
+For terrain and mesh-terrain workflows, validate repeated generation from the
+same snapshot, cross-partition seams, save/reopen persistence, packaged or
+runtime parity, PCG consumer behavior, performance and memory, and recovery
+after a partial write. Reopen the contract when terrain topology, modifier or
+graph version, priority ordering, partition layout, target platform, or
+fallback changes. The graph's success state is execution evidence only; it is
+not proof that the world state is correct or safe to promote.
+
 ### Dependent-strata strategy gate
 
 When a placement request contains a source stratum and a dependent stratum—for example, rocks or stone hardscape followed by grass or other ground cover—run this conditional sub-gate of Stage 2a before the first content-bearing generator, Foliage, or batch-placement mutation. The gate is required even when the final choice is manual placement. Its purpose is to prove that the AI considered the video-style distance/exclusion method and selected a method for stated spatial reasons rather than inheriting an implementation from a tutorial or from the first tool that happens to be available.
@@ -121,6 +162,7 @@ Regeneration must preserve valid overrides, report orphaned or conflicting overr
 
 - Deterministic regeneration under recorded inputs.
 - Clear responsibility, hierarchy, exclusions, and ownership.
+- Bidirectional terrain/PCG flows have an immutable source revision, separate query and write layers, explicit priority or sub-priority, feedback-loop protection, and a published-result validation boundary.
 - For dependent strata, the source footprint authority, clearance or transition band, units, dependency order, and stale-source behavior are recorded.
 - A single declared spatial authority for route-coupled masks, with route version, width or clearance inputs, branch ownership, and regeneration dependencies recorded.
 - Counts, coverage, contact, minimum separation after final transforms, collision, navigation, warnings, and regeneration time.
@@ -146,6 +188,7 @@ Regeneration must preserve valid overrides, report orphaned or conflicting overr
 - Copying a distance threshold from a tutorial without recording units, source scale, bounds policy, and target viewing distance.
 - Measuring distance between source centers while the rendered source meshes have materially different bounds or rotations.
 - Assuming Nanite automatically replaces distance culling, streaming policy, instance budgeting, or target-platform profiling.
+- Letting a terrain write feed the same generation's query implicitly, or treating a successful graph run as proof that repeated generation, partition seams, persistence, runtime parity, and rollback are safe.
 
 ## Research basis and further reading
 
@@ -163,6 +206,7 @@ Additional current context:
 - [Epic Games: Cull Distance Volumes](https://dev.epicgames.com/documentation/en-us/unreal-engine/cull-distance-volumes-in-unreal-engine) - distance-cull configuration and popping checks for supported actor representations.
 - [Epic Games: PCG Development Guides](https://dev.epicgames.com/documentation/en-us/unreal-engine/pcg-development-guides) — current PCG authoring and workflow context; verify feature names and maturity against the target engine version.
 - [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-8-release-notes) — dated evidence for the Manual Edit tool, Data Overrides Panel, and experimental Data Override System; use these as implementations of the override contract, not as the durable principle itself.
+- [Epic Games: PCG and Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/pcg-and-mesh-terrain-in-unreal-engine) — version-sensitive query/write layers, priority and sub-priority, and feedback-loop considerations for PCG with Mesh Terrain; use the data-flow contract above rather than copying a node recipe.
 
 ## Related topics
 
