@@ -10,6 +10,56 @@ def read(relative: str) -> str:
 
 
 class HandbookImprovementTests(unittest.TestCase):
+    def test_stage_2_vertical_profiles_are_risk_based_and_communicated(self):
+        chapter = read(
+            "skills/design-unreal-worlds-and-levels/references/04-world-level-design.md"
+        )
+        entry_points = (
+            chapter,
+            read("skills/design-unreal-worlds-and-levels/SKILL.md"),
+            read("skills/validate-unreal-production/SKILL.md"),
+            read(
+                "skills/validate-unreal-production/references/12-validation-testing-debugging.md"
+            ),
+            read("skills/guide-unreal-ai-development/SKILL.md"),
+            read(
+                "skills/guide-unreal-ai-development/references/15-ai-assisted-development.md"
+            ),
+        )
+
+        for text in entry_points:
+            for phrase in (
+                "vertical_information_assessment",
+                "SUFFICIENT",
+                "INSUFFICIENT",
+                "PENDING_EVIDENCE",
+                "user or designated approver",
+            ):
+                self.assertIn(phrase, text)
+
+        for risk in (
+            "terrain high/low relationships",
+            "multi-level circulation",
+            "cliffs, overhangs, tunnels, caves, bridges",
+            "sightline, reveal, and occlusion",
+            "vertical relationship between architecture and terrain",
+        ):
+            self.assertIn(risk, chapter)
+
+        self.assertIn("does not require one file per view type", chapter)
+        self.assertIn("omission reason", chapter)
+        self.assertIn("alternative-evidence mapping", chapter)
+        self.assertNotIn("side or elevation profile as appropriate", chapter)
+        self.assertLess(
+            chapter.index("After the plan-view functions are inspectable"),
+            chapter.index("After the assessment and communication are recorded"),
+        )
+        self.assertIn("A plan `PASS` releases work only to Stage 2a", chapter)
+        self.assertIn(
+            "does not satisfy or bypass Stage 2t **Terrain Representation Review**",
+            chapter,
+        )
+
     def test_mesh_terrain_review_precedes_broad_landscape_guidance(self):
         chapter = read(
             "skills/design-unreal-worlds-and-levels/references/04-world-level-design.md"
