@@ -78,6 +78,16 @@ produce an actionable error rather than being silently discarded. Schema
 negotiation reduces dispatch overhead but never waives protected-scope or
 postcondition checks.
 
+Discover capabilities progressively. Begin with the smallest stable catalog
+needed to identify the responsible domain, then load only the selected
+operation schemas and reference material. Eagerly loading every tool and schema
+increases context cost and stale assumptions without improving authority.
+Invalidate cached descriptions when the engine, plugin, project capability, or
+session boundary changes, and treat a discovery result as availability evidence
+rather than proof that the operation is safe or appropriate. A particular tool
+registry or search command is one implementation of this rule, not the rule
+itself.
+
 Measure `setup_seconds`, `classification_seconds`, `discovery_seconds`,
 `inspect_seconds`, `wait_seconds`, `mutation_seconds`, `verification_seconds`,
 `save_seconds`, `persistence_seconds`, `background_seconds`, `tool_calls`,
@@ -121,6 +131,7 @@ For a spatial batch, keep the iteration's observable invariant separate from the
 - Treating a bounded edit's explicit delete as permission for wildcard cleanup or a broad reset.
 - Adding image capture, full-world inventory, or promotion review to a local Transform edit without a scope change.
 - Treating a compact response or omitted optional schema field as permission to omit a required postcondition.
+- Loading an entire capability inventory for every request, or reusing a cached schema after its version or capability scope changed.
 - Executing arbitrary in-editor Python without treating it as privileged code.
 - Hard-coding private paths or current Tool names into durable knowledge.
 

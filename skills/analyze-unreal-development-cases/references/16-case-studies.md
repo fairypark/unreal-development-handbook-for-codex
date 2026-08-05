@@ -312,6 +312,110 @@ These lessons apply to dense environment layout, route-coupled PCG, editor autom
 
 Validate a reusable route contract across at least one additional environment and compare spline, typed segment graph, and authored module representations for stairs, switchbacks, branching, mask generation, runtime traversal, and fixed-camera review. Keep this case pending until those results and the missing visual and runtime evidence are available.
 
+## Investigation note: layered AI-assisted world building demonstration
+
+**Status:** `PENDING_EVIDENCE` candidate case based on a public capability
+demonstration. It is not a completed production case, a comparative benchmark,
+or evidence that AI-generated world building reduced total project cost.
+
+### Problem and intent
+
+The demonstration explored whether an AI assistant could shorten Unreal world
+building iteration while a technical artist retained intent, correction, and
+approval authority. The interesting design question is not whether the agent
+could invoke an Editor operation. It is whether operational interfaces,
+reusable procedural units, project examples, and durable guidance could be
+combined without hiding authorship, state, failure, or maintenance cost.
+
+### Observed scope and evidence
+
+The video showed several capability slices: furnishing a small interior from
+described intent and retrieved assets; assembling a larger city-and-park result
+through a retained procedural graph; producing bounded one-off procedural
+results; applying reusable biome and lighting guidance; and using captured
+images to identify and correct visible output. It also discussed extending the
+agent-facing surface through grouped capabilities and reusable guidance.
+
+These observations support only that the demonstrated workflow produced and
+iterated visible Editor results under the shown conditions. They do not expose
+a stable baseline, complete operation trace, reproducible test package, or
+production acceptance record. The demonstrated implementation terminology is
+version-sensitive; the durable candidate model is the separation of Toolset or
+capability surface, primitive, approved example, and Skill responsibilities.
+
+### Candidate decisions and trade-offs
+
+Two decisions deserve controlled follow-up rather than immediate adoption:
+
+1. Acquire context from explicit targets and approved project examples before
+   semantic search, bounded discovery, or temporary inspection scripts. This
+   may reduce reconstruction error and orchestration cost, but it could also
+   reproduce stale example assumptions unless authority and version scope are
+   checked.
+2. Choose persistent parametric, instant one-off, or direct-authored output
+   from the expected regeneration and ownership need. A retained graph may
+   improve tuning and repeatability but add maintenance; a one-off result may
+   reduce setup but still creates provenance, cleanup, and rollback debt once
+   saved.
+
+The video's image-guided correction loop is best treated as builder
+self-inspection. It may reduce obvious visible defects before review, but it
+does not provide independent visual approval or structural, runtime,
+persistence, performance, and regeneration evidence.
+
+### Observed failure signals
+
+The interior sequence exposed placement errors that required human correction,
+including orientation, overlap, and spatial-fit problems. Those symptoms are
+consistent with unresolved pivot, local-axis, final-bounds, grounding, and
+clearance assumptions, but the available evidence does not establish one root
+cause or a failure rate. The corrections demonstrate the value of a short
+human-in-the-loop feedback cycle; they do not retroactively validate the
+original generated candidates.
+
+### Evidence gaps
+
+Promotion to a completed case requires, at minimum:
+
+- a versioned baseline, exact task contracts, selected context, operation
+  schemas, model/client/integration configuration, and complete tool traces;
+- repeated-run success, failure, retry, cancellation, and recovery rates,
+  including ambiguous or partial-state audits;
+- comparable manual and assisted authoring time, review time, dispatch count,
+  token or context cost, compute cost, and maintenance effort;
+- exact changed assets and outputs, save/reopen persistence, source-control
+  behavior, ownership, cleanup, rollback, and security boundary evidence;
+- persistent-graph regeneration after source and parameter changes, plus
+  one-off output deletion, orphan detection, and manual-override behavior;
+- final transformed-bounds, grounding, collision, navigation, camera,
+  streaming, memory, frame-time, and packaged/runtime validation;
+- independent visual and gameplay review under stable comparable conditions;
+- team outcomes such as handoff clarity, review burden, defect escape,
+  reproducibility, and long-term update cost.
+
+### Candidate lessons, applicability, and follow-up
+
+The evidence justifies hypotheses, not universal lessons: layered responsibility
+may make agent behavior easier to extend and inspect; approved examples may be
+better operational ground truth than reconstruction from memory; explicit
+artifact lifetime may prevent one-off output from becoming ownerless debt; and
+builder self-checks may shorten the correction loop when kept separate from
+acceptance.
+
+Test these hypotheses on one bounded interior task and one persistent
+procedural task using the same baseline, acceptance rubric, and runtime build.
+Compare a manual workflow, an example-grounded assisted workflow, and an
+assisted workflow without a compatible example. Preserve failed candidates and
+measure total decision-loop cost rather than only generation time. Keep this
+case `PENDING_EVIDENCE` until repeatability, persistence, performance,
+independent review, and maintenance evidence close the gaps above.
+
+### Sources
+
+- [AI-assisted Unreal world-building demonstration](https://www.youtube.com/watch?v=lDf_y-YPELo) - observed capability and workflow source.
+- [Epic Games: Unreal MCP](https://dev.epicgames.com/documentation/unreal-engine/unreal-mcp-in-unreal-editor) - dated implementation context for capability discovery, grouped tool interfaces, execution boundaries, and structured results.
+- [Epic Games: Working with PCG and LLMs Using Unreal MCP](https://dev.epicgames.com/documentation/unreal-engine/working-with-pcg-and-llms-using-unreal-mcp-in-unreal-engine?lang=en-US) - dated guidance for reference-grounded PCG assistance and incremental supervision.
+
 ## Evidence discipline
 
 Separate facts from interpretation and confidence. Do not infer causality from chronology alone. Remove credentials, private paths, user data, proprietary asset names, and exact project coordinates unless essential and explicitly authorized.

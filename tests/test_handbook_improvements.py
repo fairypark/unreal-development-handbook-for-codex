@@ -98,6 +98,83 @@ class HandbookImprovementTests(unittest.TestCase):
             self.assertIn(phrase, pipeline)
         self.assertIn("Chapter 04's Terrain Representation Review", validation_skill)
 
+    def test_agent_facing_architecture_preserves_observation_and_error_semantics(self):
+        architecture = read(
+            "skills/reason-about-unreal-development/references/02-project-system-architecture.md"
+        )
+        automation = read(
+            "skills/design-unreal-automation-and-pcg/references/08-automation-python.md"
+        )
+        for phrase in (
+            "get, list, or inspect",
+            "valid empty result",
+            "partial completion",
+            "whether retry is safe",
+            "Observation parity",
+        ):
+            self.assertIn(phrase, architecture)
+        for phrase in (
+            "Discover capabilities progressively",
+            "smallest stable catalog",
+            "availability evidence",
+            "version or capability scope changed",
+        ):
+            self.assertIn(phrase, automation)
+
+    def test_procedural_guidance_declares_artifact_lifetime_and_spatial_uncertainty(self):
+        chapter = read(
+            "skills/design-unreal-automation-and-pcg/references/09-procedural-systems-pcg.md"
+        )
+        for phrase in (
+            "Procedural artifact lifetime and authorship mode",
+            "Persistent parametric system",
+            "Instant one-off generation",
+            "Direct authored content",
+            "pivot or origin assumptions",
+            "final transformed mesh bounds",
+            "Manual repair is valuable design input",
+        ):
+            self.assertIn(phrase, chapter)
+
+    def test_ai_builder_self_check_does_not_become_acceptance(self):
+        ai = read(
+            "skills/guide-unreal-ai-development/references/15-ai-assisted-development.md"
+        )
+        validation = read(
+            "skills/validate-unreal-production/references/12-validation-testing-debugging.md"
+        )
+        for phrase in (
+            "Acquire context through a bounded ladder",
+            "Toolset or capability surface",
+            "Primitive",
+            "Example",
+            "Skill",
+            "Builder self-check feedback loop",
+            "construction quality control, not an acceptance gate",
+        ):
+            self.assertIn(phrase, ai)
+        for phrase in (
+            "Builder self-inspection is an inner quality loop",
+            "Screenshot-guided correction",
+            "representative batch before scaling",
+            "cannot retroactively pass the original candidate",
+        ):
+            self.assertIn(phrase, validation)
+
+    def test_world_building_demo_remains_a_candidate_case(self):
+        cases = read(
+            "skills/analyze-unreal-development-cases/references/16-case-studies.md"
+        )
+        for phrase in (
+            "layered AI-assisted world building demonstration",
+            "`PENDING_EVIDENCE` candidate case",
+            "not a completed production case",
+            "exact changed assets and outputs",
+            "independent visual and gameplay review",
+            "team outcomes",
+        ):
+            self.assertIn(phrase, cases)
+
 
 if __name__ == "__main__":
     unittest.main()

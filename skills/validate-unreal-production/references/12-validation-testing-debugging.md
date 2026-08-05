@@ -156,6 +156,47 @@ Hard failures include a POI with no discernible purpose or payoff, repeated iden
 - Performance and scalability measurements under representative load.
 - Cook, package, clean-environment, migration, and recovery checks.
 
+## Builder self-inspection and AI-assisted spatial evidence
+
+Builder self-inspection is an inner quality loop, not an acceptance role:
+
+`mutate -> re-read changed state -> inspect -> correct -> repeat postconditions`
+
+The builder may use a screenshot, viewport capture, log, count, bounds query,
+warning scan, or targeted runtime check to find visible and structural defects
+before review. Bind each artifact to its capture conditions and the exact
+changed state. Record corrections and repeat the failed check; do not silently
+replace the first candidate with a cleaner image. When independent acceptance
+is required, the evaluator remains read-only and receives the raw before,
+failed, corrected, and final evidence without the builder's intended verdict.
+When independence is unavailable, label the result as self-review and leave the
+dependent promotion pending.
+
+A screenshot can support only what is visible from that viewpoint and state.
+It cannot alone prove occluded geometry, back-side contact, collision,
+navigation, save/reopen persistence, regeneration, packaged behavior,
+performance, or viewpoints it did not capture. Screenshot-guided correction is
+therefore construction evidence rather than production approval.
+
+For AI-assisted placement or procedural generation, validate one
+representative batch before scaling and classify at least these spatial failure
+signatures:
+
+- pivot or origin mismatch;
+- local-axis or orientation mismatch;
+- overlap or insufficient separation under final transformed mesh bounds;
+- incomplete terrain contact or grounding;
+- gameplay, navigation, camera, or maintenance-clearance violation.
+
+Use stable output identity, final Transform, resolved asset bounds, contact
+samples, and declared clearance envelopes as structural evidence. Center-point
+distance, aggregate count, semantic search confidence, and a favorable image
+are not equivalent substitutes. A human move, rotation, deletion, or
+replacement becomes a tracked authored exception or a correction to the
+responsible generator; it cannot retroactively pass the original candidate.
+Chapter 09 owns the generation-lifetime, regeneration, and override-provenance
+contract.
+
 ## Evidence integrity
 
 Use stable, comparable conditions and preserve baseline, candidate, and accepted evidence separately. Bind evidence to the relevant world, configuration, viewpoint, time, version, camera ID, evidence class, and stage authority. For Stages 2–4, preserve the overview-set coverage matrix and bind auxiliary player-height checks to the recorded height above local ground and FOV; accept those static proxies only as gross plausibility checks. At Stage 5 and later, bind gameplay-camera evidence to the representative player controller, actual runtime camera-rig asset or class, configuration version, and project-relevant boom, offset, pitch, collision, and retraction state. From Visual Feasibility onward, accept player readability, asset-density, and visual-composition decisions only from that runtime rig. Reject stale, undersized, overlay-contaminated, unsettled, mismatched, silently overwritten, or authority-mismatched evidence. Overview-only evidence is always invalid as player visibility, scale, readability, or typology proof, even though the overview set is the primary macro-composition diagnostic during prototyping.
@@ -203,6 +244,9 @@ Require functional correctness, maintainability, production readiness, performan
 - Treating an early static player-height/FOV proxy as an exact runtime rig, fine-tuning prototype detail to it, or carrying its approval authority into Stage 5 or the Visual Feasibility Slice.
 - Treating test transport success as test outcome success.
 - Treating a command, graph, or batch completion message as proof that the intended state and postconditions exist.
+- Treating a builder screenshot, screenshot-guided correction, or self-review as independent acceptance.
+- Scaling AI-assisted spatial output after checking only centers, counts, or one favorable view instead of final transformed bounds, grounding, and clearance.
+- Silently baking a human correction into generated output and using the corrected result as evidence that the original candidate passed.
 - Treating `operation_verdict: PASS` as `promotion_verdict: PASS`, or treating `NOT_RUN_BY_CONTRACT` as hidden evidence.
 - Replaying the Area Composition Plan, fixed-camera, or PIE gates for an unchanged local prototype edit while failing to detect a route, bridge, zone, or Landscape touch.
 - Allowing an explicit target delete to expand into wildcard cleanup or a broad rebuild.
@@ -212,4 +256,4 @@ Require functional correctness, maintainability, production readiness, performan
 
 ## Related topics
 
-Development Process; Rendering; Performance & Scalability; Production Pipeline; AI-Assisted Development; Case Studies.
+Development Process; Procedural Systems & PCG; Rendering; Performance & Scalability; Production Pipeline; AI-Assisted Development; Case Studies.
