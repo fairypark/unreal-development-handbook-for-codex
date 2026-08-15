@@ -15,6 +15,12 @@ Define success before implementation and judge the final outcome against evidenc
 - Also read [13-production-pipeline.md](references/13-production-pipeline.md) for builds, cooking, packaging, deployment, distribution, or operational recovery.
 - Also read [14-team-collaboration-source-control.md](references/14-team-collaboration-source-control.md) for ownership, review, integration, handoff, asset conflicts, or source control.
 
+## Prepare Korean user-review versions
+
+For every artifact the user must inspect, approve, or retain as a decision record, deliver a clearly paired Korean-language version as a separate artifact whenever the original is not Korean. Apply this to concept images, floor plans and layout drawings, annotated diagrams, specifications, checklists, review reports, handoff documents, and comparable records. Preserve both versions, use paired identifiers or filenames, and keep decision-bearing content equivalent.
+
+Localize decision-bearing visual text such as labels, annotations, legends, captions, and callouts inside the Korean copy. For a text-free visual, provide a separate Korean review sheet containing the visual, Korean title and caption, review criteria, and decision notes. Do not mark the handoff complete until the Korean version is reviewable; disclose any element that cannot be translated or reproduced faithfully.
+
 ## Build the validation system
 
 1. Translate intent and requirements into observable success criteria.

@@ -28,6 +28,8 @@ This repository is also a Codex plugin. The canonical chapter files live in each
 | `guide-unreal-ai-development` | Chapter 15: AI roles, oversight, evidence, reproducibility, and failure containment. |
 | `analyze-unreal-development-cases` | Chapter 16: evidence-backed cases, failures, outcomes, and transferable lessons. |
 
+Every bundled Skill requires a separate Korean version of any non-Korean artifact that the user must inspect, approve, or retain as a decision record. This includes concept images, floor plans, annotated diagrams, specifications, checklists, review reports, and handoff documents. Decision-bearing visual text is localized inside the Korean copy; text-free visuals are paired with a separate Korean review sheet containing the visual, review criteria, and decision notes.
+
 World and level workflows also include a machine-readable [Reference-to-Prototype Translation Contract schema](skills/design-unreal-worlds-and-levels/references/reference-to-prototype-translation.schema.json) and [starter template](skills/design-unreal-worlds-and-levels/references/reference-to-prototype-translation.template.json). They implement the blocking Stage 2a handoff between an approved Area Composition Plan and the first content-bearing prototype placement; project-specific formats may replace them only when they preserve the same identifiers, authority, traceability, evidence, and reopening semantics.
 
 For a local change to an already accepted prototype, use `BOUNDED_PROTO_EDIT` as the non-promotional fast operation mode described in Chapters 01 and 04. It narrows validation to the declared scope while preserving protected-system exit rules and the full promotion gates.

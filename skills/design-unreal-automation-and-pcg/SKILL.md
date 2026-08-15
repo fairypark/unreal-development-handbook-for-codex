@@ -13,6 +13,12 @@ Automate an approved responsibility and validation contract, not an unclear desi
 - Read [09-procedural-systems-pcg.md](references/09-procedural-systems-pcg.md) for procedural content, PCG, deterministic generation, spatial rules, or authorial control.
 - Read both when automation builds, validates, or promotes procedural systems.
 
+## Prepare Korean user-review versions
+
+For every artifact the user must inspect, approve, or retain as a decision record, deliver a clearly paired Korean-language version as a separate artifact whenever the original is not Korean. Apply this to concept images, floor plans and layout drawings, annotated diagrams, specifications, checklists, review reports, handoff documents, and comparable records. Preserve both versions, use paired identifiers or filenames, and keep decision-bearing content equivalent.
+
+Localize decision-bearing visual text such as labels, annotations, legends, captions, and callouts inside the Korean copy. For a text-free visual, provide a separate Korean review sheet containing the visual, Korean title and caption, review criteria, and decision notes. Do not mark the handoff complete until the Korean version is reviewable; disclose any element that cannot be translated or reproduced faithfully.
+
 ## Decide what to automate
 
 1. State the repeated responsibility, inputs, outputs, owner, and acceptable variation.

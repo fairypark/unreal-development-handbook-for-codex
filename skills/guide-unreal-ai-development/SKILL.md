@@ -11,6 +11,12 @@ Use AI as a bounded development participant whose decisions and outputs remain i
 
 Read [15-ai-assisted-development.md](references/15-ai-assisted-development.md) before defining agent roles, context, mutation authority, evidence, evaluation, approval, or failure containment.
 
+## Prepare Korean user-review versions
+
+For every artifact the user must inspect, approve, or retain as a decision record, deliver a clearly paired Korean-language version as a separate artifact whenever the original is not Korean. Apply this to concept images, floor plans and layout drawings, annotated diagrams, specifications, checklists, review reports, handoff documents, and comparable records. Preserve both versions, use paired identifiers or filenames, and keep decision-bearing content equivalent.
+
+Localize decision-bearing visual text such as labels, annotations, legends, captions, and callouts inside the Korean copy. For a text-free visual, provide a separate Korean review sheet containing the visual, Korean title and caption, review criteria, and decision notes. Do not mark the handoff complete until the Korean version is reviewable; disclose any element that cannot be translated or reproduced faithfully.
+
 ## Enforce domain workflows
 
 When the relevant Handbook chapter defines an explicit workflow, treat its stages and gates as part of the mutation contract. For level or world creation, load Chapter 04 and require its ordered workflow record, stage evidence, promotion decision, stop conditions, and rollback behavior; never let a Tool result or agent confidence replace a required gate. Area Composition Plan `PASS` advances only to Stage 2a Reference-to-Prototype Translation. Do not authorize content-bearing prototype placement until the machine-readable source registry, quantitative zone contracts, traceability map, comparison tolerances, and explicit placement decision pass. Then require Stage 2b Concept-to-Asset Readiness: `ASSET_PLAN_READY` before the Experience Prototype, `VISUAL_SLICE_READY` before the representative slice, and `PRODUCTION_DRESSING_READY` before production meshing or dressing.
