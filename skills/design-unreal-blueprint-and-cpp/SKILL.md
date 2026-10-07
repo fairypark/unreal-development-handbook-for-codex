@@ -13,6 +13,12 @@ Choose implementation technology after defining responsibility, lifecycle, and i
 - Read [07-cpp.md](references/07-cpp.md) when native code owns or may own any responsibility.
 - Read both for hybrid boundaries or migrations between Blueprint and C++.
 
+## Prepare Korean user-review versions
+
+For every artifact the user must inspect, approve, or retain as a decision record, deliver a clearly paired Korean-language version as a separate artifact whenever the original is not Korean. Apply this to concept images, floor plans and layout drawings, annotated diagrams, specifications, checklists, review reports, handoff documents, and comparable records. Preserve both versions, use paired identifiers or filenames, and keep decision-bearing content equivalent.
+
+Localize decision-bearing visual text such as labels, annotations, legends, captions, and callouts inside the Korean copy. For a text-free visual, provide a separate Korean review sheet containing the visual, Korean title and caption, review criteria, and decision notes. Do not mark the handoff complete until the Korean version is reviewable; disclose any element that cannot be translated or reproduced faithfully.
+
 ## Design the system first
 
 1. State the behavior, invariants, owners, callers, and observable outcomes.

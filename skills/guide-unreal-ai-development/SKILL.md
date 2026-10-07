@@ -11,6 +11,16 @@ Use AI as a bounded development participant whose decisions and outputs remain i
 
 Read [15-ai-assisted-development.md](references/15-ai-assisted-development.md) before defining agent roles, context, mutation authority, evidence, evaluation, approval, or failure containment.
 
+## Elicit requirements and suggest directions
+
+Apply Chapter 15's **Requirements elicitation and direction-setting** when the requested outcome needs clarification. Reuse known intent, ask the next consequential questions in the requester's language, and explain concrete alternatives and a recommendation before exposing implementation choices. Preserve the distinction between confirmed decisions, proposals, reversible assumptions, and unresolved decisions; an unanswered question does not grant approval. For environment-specific questions, use Chapter 04's dialogue guidance through `design-unreal-worlds-and-levels` when available. Keep a clear local task local and preserve existing authorization.
+
+## Prepare Korean user-review versions
+
+For every artifact the user must inspect, approve, or retain as a decision record, deliver a clearly paired Korean-language version as a separate artifact whenever the original is not Korean. Apply this to concept images, floor plans and layout drawings, annotated diagrams, specifications, checklists, review reports, handoff documents, and comparable records. Preserve both versions, use paired identifiers or filenames, and keep decision-bearing content equivalent.
+
+Localize decision-bearing visual text such as labels, annotations, legends, captions, and callouts inside the Korean copy. For a text-free visual, provide a separate Korean review sheet containing the visual, Korean title and caption, review criteria, and decision notes. Do not mark the handoff complete until the Korean version is reviewable; disclose any element that cannot be translated or reproduced faithfully.
+
 ## Enforce domain workflows
 
 Once the Stage 2 plan-view evidence is inspectable and before producing side/elevation profiles or finalizing package scope, the agent must record a `vertical_information_assessment` over terrain relief, multi-level circulation, cliffs/overhangs/tunnels/bridges, sightline occlusion, and architecture-terrain vertical relationships. It must explain the `SUFFICIENT`, `INSUFFICIENT`, or `PENDING_EVIDENCE` result and its basis to the user or designated approver before profile production: require named side/elevation profiles only for `INSUFFICIENT`, record omission reasons and risk-by-risk alternative evidence for `SUFFICIENT`, and stop on `PENDING_EVIDENCE`. Treat the Area Composition Plan as a versioned review package; integrated pages/layers and separately linked artifacts are both valid, so do not manufacture one file per plan-view label. This decision does not replace Stage 2 feedback, Stage 2a, or the Terrain Representation Review.

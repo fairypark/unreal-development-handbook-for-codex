@@ -83,6 +83,147 @@ class HandbookImprovementTests(unittest.TestCase):
         self.assertIn("support is evidence for comparison, not permission to select it", skill)
         self.assertIn("Broad terrain mutation remains locked", chapter)
 
+    def test_blank_level_lighting_waits_for_concept_and_floor_plan(self):
+        chapter = read(
+            "skills/design-unreal-worlds-and-levels/references/04-world-level-design.md"
+        )
+        skill = read("skills/design-unreal-worlds-and-levels/SKILL.md")
+        process = read(
+            "skills/reason-about-unreal-development/references/01-development-process.md"
+        )
+
+        for phrase in (
+            "Post-Design Blank-Level Observation Baseline Gate",
+            "observation lighting remains mutation-locked",
+            "Stage 1 Concept and Intent",
+            "Stage 2 Area Composition Plan",
+            "before the first content-bearing primitive",
+        ):
+            self.assertIn(phrase, chapter)
+
+        for phrase in (
+            "The blank world may be",
+            "inspected read-only earlier",
+            "do not install or modify",
+            "concept or floor-plan design is unresolved",
+        ):
+            self.assertIn(phrase, skill)
+
+        self.assertLess(
+            chapter.index("### 1. Concept and intent review"),
+            chapter.index("### 2. Area Composition Plan review"),
+        )
+        self.assertLess(
+            chapter.index("### 2. Area Composition Plan review"),
+            chapter.index("### 2c. Post-Design Blank-Level Observation Baseline Gate"),
+        )
+        self.assertLess(
+            process.index("| Spatial plan |"),
+            process.index("| Post-design blank-level observation baseline |"),
+        )
+        self.assertLess(
+            process.index("| Post-design blank-level observation baseline |"),
+            process.index("| Experience prototype |"),
+        )
+
+    def test_approved_floor_plan_spatially_locks_blockout(self):
+        chapter = read(
+            "skills/design-unreal-worlds-and-levels/references/04-world-level-design.md"
+        )
+        skill = read("skills/design-unreal-worlds-and-levels/SKILL.md")
+
+        for phrase in (
+            "Floor-plan spatial lock during blockout",
+            "authoritative spatial baseline",
+            "Unmapped or freehand blockout placement is prohibited",
+            "stop the next blockout mutation",
+            "Do not revise the plan retrospectively",
+        ):
+            self.assertIn(phrase, chapter)
+
+        for phrase in (
+            "exact plan version becomes a spatial mutation lock",
+            "plan feature ID",
+            "Stop subsequent placement",
+            "never backfit the plan",
+        ):
+            self.assertIn(phrase, skill)
+
+        self.assertLess(
+            chapter.index("#### Floor-plan spatial lock during blockout"),
+            chapter.index("### 3. Experience prototype before full blockout"),
+        )
+
+    def test_blockout_requires_independent_reference_fidelity_iteration(self):
+        chapter = read(
+            "skills/design-unreal-worlds-and-levels/references/04-world-level-design.md"
+        )
+        skill = read("skills/design-unreal-worlds-and-levels/SKILL.md")
+
+        for phrase in (
+            "Independent blockout reference-fidelity supervision",
+            "read-only and separate from the builder",
+            "BLOCKOUT_REFERENCE_FIDELITY_REVIEW",
+            "Sufficiently convincing",
+            "Repeat the repair-capture-review loop",
+            "DESIGN_REVIEW_REQUIRED",
+            "root-cause analysis",
+            "report the delay immediately",
+            "Immediate reporting does not authorize skipping",
+        ):
+            self.assertIn(phrase, chapter)
+
+        for phrase in (
+            "mandatory independent read-only supervisor",
+            "builder cannot self-approve",
+            "Stage 6 and every downstream stage remain locked",
+            "If materially distinct attempts do not converge",
+            "Report supervisor, evidence, tool, asset",
+        ):
+            self.assertIn(phrase, skill)
+
+        self.assertLess(
+            chapter.index("#### Independent blockout reference-fidelity supervision"),
+            chapter.index("### 6. Visual feasibility slice before map-wide assets"),
+        )
+
+    def test_blockout_cubes_cannot_be_promoted_by_material_assignment(self):
+        chapter = read(
+            "skills/design-unreal-worlds-and-levels/references/04-world-level-design.md"
+        )
+        skill = read("skills/design-unreal-worlds-and-levels/SKILL.md")
+
+        for phrase in (
+            "Blockout-cube visual-retirement gate",
+            "`REPLACE`, `RETIRE`, or `RETAIN_INTERNAL_SKELETON`",
+            "fully enclosed by production geometry or non-rendering",
+            "assigning a production material to an exposed primitive",
+            "A single visible or material-finished blockout primitive is a hard failure",
+            "BLOCKOUT_CUBE_VISUAL_RETIREMENT=PASS",
+            "Stage 6 and every downstream stage locked",
+        ):
+            self.assertIn(phrase, chapter)
+
+        for phrase in (
+            "inventory every blockout cube and primitive",
+            "`RETAIN_INTERNAL_SKELETON`",
+            "has no production visual authority",
+            "Never expose one of its faces",
+            "assign it a production finish material",
+            "Any visible or material-finished blockout cube is a hard failure",
+            "seams, z-fighting, shadows, reflections, silhouettes",
+        ):
+            self.assertIn(phrase, skill)
+
+        self.assertLess(
+            chapter.index("#### Independent blockout reference-fidelity supervision"),
+            chapter.index("#### Blockout-cube visual-retirement gate"),
+        )
+        self.assertLess(
+            chapter.index("#### Blockout-cube visual-retirement gate"),
+            chapter.index("### 6. Visual feasibility slice before map-wide assets"),
+        )
+
     def test_bidirectional_terrain_pcg_contract_is_routed(self):
         chapter = read(
             "skills/design-unreal-automation-and-pcg/references/09-procedural-systems-pcg.md"

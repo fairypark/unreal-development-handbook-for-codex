@@ -16,6 +16,9 @@ Thumbs.db
 
 # Local tooling output
 .cache/
+.codex/environments/
+__pycache__/
+*.pyc
 tmp/
 temp/
 *.log

@@ -91,6 +91,32 @@ Record the fun thesis, core verbs, intended emotional rhythm, POI hierarchy, exp
 
 Record the actual height above local ground and FOV of the project's player tracking camera in the initial brief, and identify the intended runtime camera rig and configuration source when known. The height/FOV record supports a comparable static player-height proxy during early prototyping; it does not claim that boom length, socket or shoulder offset, pitch, SpringArm collision or retraction, or other runtime behavior has been matched. Exact rig authority begins at Stage 5 Playable Blockout. Do not substitute a convenient editor or overview camera for evidence reserved to the player camera.
 
+### Collaborative requirements dialogue
+
+Use a collaborative dialogue when a new environment, broad redesign, or visual-quality recovery request leaves important experience or image decisions open. Help the requester express what matters without requiring environment-art vocabulary or a complete specification. For an accepted local edit, inherit the existing brief and ask only about an unresolved choice that changes that edit's scope or result.
+
+First extract explicit requirements from the request, approved references, existing brief, and relevant evidence. Keep confirmed decisions, proposed directions, reversible assumptions, and unresolved decisions distinguishable. Do not ask for information already supplied, replace an explicit preference with the agent's taste, or interpret a reference as authority for every object and unseen side.
+
+Choose the next questions by their effect on the current decision. Ask a small batch of consequential questions, then adapt to the answers; do not present the entire brief as a mandatory questionnaire. Describe visible or playable consequences before asking for numerical settings or implementation choices.
+
+| Decision to clarify when relevant | Plain-language question | Useful directions to explain |
+| --- | --- | --- |
+| Experience and emotional tone | What should the player feel and do on entering this place? | A calm route toward a reveal, an exposed tense crossing, or a sheltered gathering place; explain the route and visibility consequences. |
+| Reference authority | Which part of the reference matters most: composition, materials, vegetation, atmosphere, or the subject? What should be avoided? | Separate the primary quality target from supporting references and prohibited readings; identify conflicts instead of averaging them. |
+| View and focal hierarchy | What should attract attention first, and from which arrival or gameplay view? | An open landmark silhouette, a gradual reveal through foreground framing, or a broad panorama; preserve applicable runtime-camera authority. |
+| Density and ecology | Should the route feel enclosed by vegetation or open with distinct clusters? Where should the image breathe? | Dense local colonies with clear gaps, layered edge growth, or a deliberately managed garden; relate strata and negative space to the focal point. |
+| Surface and contact character | Should the path read as worn earth, loose gravel, wet stone, or another surface? Which close-up contacts matter? | Explain material scale, edge transitions, roots, debris, and support rather than treating the answer as a material-name request. |
+| Asset feasibility and control | Must the result reproduce a particular shape, or can the direction adapt to available assets? Which parts should remain directly authored? | Explain kit adaptation, authored focal assemblies, and repeatable procedural areas; keep ownership, availability, and representative approval separate. |
+| Scope and completion | Is the immediate target a concept, playable blockout, representative visual slice, or a wider production pass? Which constraints are fixed? | State the evidence and cost of each relevant scope; reuse existing platform, schedule, asset, and performance constraints. |
+
+When the requester cannot yet choose, offer a small set of concrete alternatives and recommend one. Tie the recommendation to their stated intent, available evidence, and asset feasibility. For each alternative, explain its visible or playable result, main trade-off, and the observation that would test it. Use reference crops, diagrams, or small comparison concepts when they clarify the decision, with the required Korean review counterpart. Label unverified feasibility as unknown. Do not equate a detailed prompt, attractive concept, or recommended option with implementation or approval.
+
+Translate the answer into an observable target in the existing brief: the intended reading, affected view or route, priority, protected requirements, applicable evidence, and remaining uncertainty. For example, "natural vegetation" can become "irregular colonies around rocks and tree shade, a readable route corridor, and deliberate openings toward the landmark." Derive numeric ranges later from scale, references, and representative trials; do not invent precision before the image or experience intent is understood.
+
+If a missing decision would materially change the approved design, mutation authority, or required stage evidence, keep dependent work pending and continue only unaffected authorized work. For optional preferences, state a reversible assumption or proposed baseline and proceed within existing authority when appropriate; an unanswered question is not approval. When the requester delegates a routine choice, make and explain it without repeatedly requesting the same permission. Reopen an existing decision only when new evidence or changed intent invalidates its assumptions.
+
+The dialogue should end with a brief the requester can recognize and a clear next decision or authorized experiment. Reuse the current stage record rather than introducing a new approval gate or one artifact per question. Verify that the selected direction has observable acceptance criteria and that proposals, assumptions, and missing evidence have not become confirmed facts. A Korean review version of this guidance is [environment-requirements-dialogue.ko.md](environment-requirements-dialogue.ko.md).
+
 ## Exploration and production modes
 
 Keep two related loops distinct:
@@ -244,6 +270,8 @@ Before the first mutation, the agent must create or update an inspectable workfl
 - required artifacts, evidence conditions, hard failures, owner or approver, and rollback target;
 - allowed mutations and the exact version or change set that the next gate will review;
 - for level composition work, the Stage 2a translation-contract identifier and version, its broad-placement lock state, the conditional dependent-strata strategy decision when source and dependent layers are in scope, and the source, plan, prototype, camera, and deviation-record versions currently in force;
+- for blockout promotion, the independent reference-fidelity review state, reviewer identity and separation from the builder, evidence-packet version, applicable rubric and hard failures, iteration history, elapsed and remaining budget, reported delay issues, and the exact downstream-stage lock state;
+- for blockout-cube retirement, every cube or primitive's stable identity, plan and trace IDs, disposition (`REPLACE`, `RETIRE`, or `RETAIN_INTERNAL_SKELETON`), visual authority, retained support or collision duty, enclosure or render state, verification evidence, and downstream-stage lock state;
 - for concept-led content work, the Stage 2b Concept-to-Asset Readiness Contract identifier and version, the `ASSET_PLAN_READY`, `VISUAL_SLICE_READY`, and `PRODUCTION_DRESSING_READY` lock states, unresolved blocking demands, acquisition authority, and the exact selected candidate versions currently in force.
 
 The agent must start at Stage 1, or resume at a later stage only when an existing artifact and approval record prove that every predecessor gate passed. Existing level content without stage evidence is not proof of completion and must be audited or reconstructed before further promotion.
@@ -263,13 +291,15 @@ The numbered stages are always represented in the record. A small or disposable 
 | --- | --- |
 | 1. Concept and intent review | Decision-ready brief, non-goals, constraints, unresolved questions, and recorded intent feedback. |
 | 2. Area Composition Plan review | A versioned, recorded plan package exposes floor-plan/footprint, node/connectivity, and annotated top-down functions without requiring one file per view type. Once those plan-view functions are inspectable, but before any side/elevation profile is produced or the package scope is finalized, a recorded `vertical_information_assessment` decides whether top-down evidence is sufficient for terrain relief, multi-level circulation, cliffs/overhangs/tunnels/bridges, sightline occlusion, and architecture-terrain vertical relationships, and communicates the result and basis to the user or designated approver. `INSUFFICIENT` makes named side/elevation profiles required package components; `SUFFICIENT` records the omission reason and alternative evidence; `PENDING_EVIDENCE` keeps the gate locked. The package also records zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, a risk-covering stable-ID `DIAGNOSTIC_ONLY` overview set, the player-camera height/FOV proxy, and the planned runtime-rig source. No prototype geometry or broad asset placement is authorized before this gate passes. |
-| 2a. Reference-to-Prototype Translation Gate | A machine-readable source registry and authority order, zone-level quantitative composition contracts, a planned traceability map for every prototype array/proxy group/route/terrain or water change, camera-specific comparison rules, tolerance and hard-failure rules, and an explicit broad-placement decision. Stage 2 `PASS` alone never authorizes prototype placement. |
+| 2a. Reference-to-Prototype Translation Gate | A machine-readable source registry and authority order, zone-level quantitative composition contracts, a planned traceability map for every prototype array/proxy group/route/terrain or water change, an explicit floor-plan spatial lock, camera-specific comparison rules, tolerance and hard-failure rules, and an explicit broad-placement decision. Stage 2 `PASS` alone never authorizes prototype placement. |
 | 2t. Terrain Representation Review | A versioned comparison of Landscape and Mesh Terrain when the target context supports Mesh Terrain, including topology, streaming, collision/navigation, PCG, target-platform, maturity, fallback, rollback, and owner evidence. Broad terrain mutation remains locked until the recommendation and user/designated-approver decision are recorded. |
 | 2b. Concept-to-Asset Readiness Plan | A machine-readable demand registry traced to the approved concept, zones, and Stage 2a requirements; project and ownership-confirmed inventory findings; candidate, acquisition, authoring, procedural, outsourcing, fallback, and concept-revision routes; license, compatibility, dependency, cost, and authority risks; and an `ASSET_PLAN_READY` decision. This plan may release cheap prototype work, but it never authorizes a purchase, download, install, migration, Visual Slice, or production dressing. |
+| 2c. Post-Design Blank-Level Observation Baseline | Stage 1 Concept and Intent, Stage 2 Area Composition Plan, Stage 2a translation, and the applicable Stage 2b asset-plan decision are `PASS` before any blank-level lighting, sky, atmosphere, fog, exposure, or post-process mutation. The verified diagnostic baseline then makes the first geometry comparable and readable without claiming final lighting approval. |
 | 3. Experience prototype | Runtime evidence for one POI or encounter unit, including approach, player question, choice or verb, payoff, next hook, and the live zone marker that identifies its area. |
 | 4. Terrain and macro blockout | The fixed overview set proves whole-area composition, terrain relief, axes, water/bridge relationships, and risk coverage; auxiliary static player-height/FOV views reject gross scale, width, slope, and occlusion failures without claiming exact runtime-rig or fine-composition authority. |
 | 4a. Route authority and corridor contract | Inspectable route source of truth, ownership, surface provider, clearance, grade, and corridor validation. |
-| 5. Playable blockout and feedback gate | Playtest evidence from the representative player controller and actual runtime camera rig for traversal, authoritative camera behavior, scale, readability, pacing, collision, boundaries, POI flow, and recovery. |
+| 5. Playable blockout and feedback gate | Playtest evidence from the representative player controller and actual runtime camera rig for traversal, authoritative camera behavior, scale, readability, pacing, collision, boundaries, POI flow, and recovery, followed by a `PASS` from the separate independent blockout reference-fidelity supervisor. Stage 6 remains locked until both the concept-art and floor-plan fidelity review and the playable evidence pass. |
+| 5a. Blockout-cube visual-retirement gate | A complete disposition inventory proves that every blockout cube or primitive is replaced, retired, or retained only as a fully hidden non-visual skeleton with an explicit support or collision duty. Any exposed face or production-material promotion is a hard failure and keeps Stage 6 locked. |
 | 6. Visual feasibility slice | A `VISUAL_SLICE_READY` decision plus representative visual and experience evidence captured through the actual runtime camera rig, with the exact staged or project-native asset versions, asset density, composition, material, lighting, collision, streaming, and budget evidence. |
 | 7. Production meshing and dressing | A `PRODUCTION_DRESSING_READY` decision for the exact zones and asset families, approved substitutions, preserved spatial contracts, chunk evidence, deviation records, and a complete zone-marker inventory proving every production area remained identifiable through final placement. |
 | 8. Layered lighting and audio integration | Functional and final integration evidence for navigation, mood, interaction feedback, and propagation or occlusion risks. |
@@ -283,6 +313,9 @@ Treat concept art as a direction hypothesis and an intent contract, not as a com
 - the fun thesis, repeated player verbs, intended emotional rhythm, and the evidence that would disprove them;
 - focal hierarchy, silhouette language, palette, material response, depth layers, and the views that must work;
 - what the player must notice, what may remain ambiguous, and which visual readings are prohibited;
+- during concept and plan work, the lighting direction expressed through concept
+  artifacts and written lighting intent rather than installed or tuned blank-level
+  lighting Actors;
 - rough scale cues, asset or technology constraints, construction provenance, and unresolved questions.
 
 Pause for user or stakeholder feedback here. The review question is not merely “is the image beautiful?” but “does this written interpretation preserve the intended experience, priorities, and limits?” Record corrections before layout work begins.
@@ -386,6 +419,16 @@ The traceability map connects the source artifact to a normalized requirement, t
 
 For outdoor prototypes, keep the minimal Landscape as the playable floor and trace terrain height, terrace, bank, and route-surface changes to their source requirements. A cube-only architecture-proxy policy applies to building and roof masses, not to the ground: it does not authorize replacing the Landscape with a cube plane. Persistent zone markers are evidence infrastructure, not architecture proxies; retain their stable IDs and lifecycle independently and never consume or delete them during array replacement.
 
+#### Floor-plan spatial lock during blockout
+
+Once an Area Composition Plan or floor plan passes, treat that exact approved version as the authoritative spatial baseline for every Experience Prototype, Terrain and Macro Blockout, and Playable Blockout mutation until a replacement version is formally approved. The Stage 2a contract must preserve the plan coordinate frame, origin, axes, units, and scale together with stable feature and zone IDs; planned bounds, anchors, orientations, footprints, entrances, route centerlines and widths, terrain height bands, water and bridge positions, required open or negative spaces, and declared sightline, occlusion, sequence, and hierarchy relationships. If the plan does not provide enough spatial information or tolerance to test a requested blockout element, keep placement locked and repair Stage 2 or Stage 2a first.
+
+Before each content-bearing blockout mutation, bind every requested element or deterministic group to its plan feature ID, zone ID, trace entry, planned bounds or anchor, orientation or route rule, and allowed deviation. Unmapped or freehand blockout placement is prohibited, including placement described as temporary, exploratory, or convenient. Exploration may use a different candidate plan version, but it may not bypass plan ownership or mix unapproved spatial assumptions into the accepted blockout.
+
+After each serialized mutation batch, re-query the realized Actors, components, splines, Landscape or terrain data, and generated members. Compare stable transforms, bounds, footprints, entrances and orientations, spline control points and widths, surface elevations, zone containment, required void occupancy, and recorded spatial relationships with the approved plan and its tolerances. A batch passes only when every content-bearing result is mapped and every applicable spatial check passes; Actor count, tool success, or an attractive camera view cannot substitute for plan conformance.
+
+If any element is unmapped, placed in the wrong zone, or outside the approved tolerance or relationship, mark the batch `FAIL`, set `broad_placement_authorized` to false, preserve the last accepted baseline and failed candidate, and stop the next blockout mutation. Repair or revert the implementation to the approved plan, or formally reopen Stage 2 and Stage 2a, approve a new plan version, and regenerate every affected trace and dependent check before continuing. Do not revise the plan retrospectively to make already-built geometry appear compliant. Playtest evidence may justify a plan change, but it must pass that change-control path before more blockout placement.
+
 #### Conditional dependent-strata strategy gate
 
 When the approved scope includes two spatially dependent strata, such as rocks or hardscape plus grass or ground cover, complete a `Dependent-Strata Strategy Gate` as part of Stage 2a before the first relevant generator, Foliage, or batch-placement mutation. The gate must record `CONSIDERED`, the selected mode (`VIDEO_DISTANCE_EXCLUSION`, `MASK_OTHER`, `DIRECT_AUTHORED`, or `PENDING_EVIDENCE`), the decision reason, source authority, dependency order, units, clearance, transition band, validation method, and status. If the strata are not in scope, record `NOT_APPLICABLE` rather than silently omitting the consideration.
@@ -447,9 +490,79 @@ Use three separate decisions so asset uncertainty is retired at the right cost:
 
 Approval of a plan is not approval to purchase, download, install, migrate, enable a plugin, outsource work, or upload content. Those external or state-changing actions require separate explicit authority and recovery conditions. Likewise, `VISUAL_SLICE_READY` does not imply map-wide dressing. Reopen Stage 2b when the concept, plan, source authority, target platform, engine or rendering context, selected candidate version, license, dependency graph, acquisition authority, budget, or representative evidence changes. If no viable family can preserve a blocking concept requirement, return to Stage 1 or 2 rather than accepting an immediately available but structurally wrong substitute.
 
+### 2c. Post-Design Blank-Level Observation Baseline Gate
+
+Treat the installation or modification of key lights, sky contribution,
+atmosphere, fog, exposure, and post-process state as implementation mutation,
+not as a substitute for deciding the level concept or floor plan. A newly
+created blank world may be created, saved, and inspected read-only before the
+design is complete, but its observation lighting remains mutation-locked.
+
+Release that lock only after Stage 1 Concept and Intent and the Stage 2 Area
+Composition Plan have `PASS`, and after Stage 2a and the applicable Stage 2b
+decision pass. Then, before the first content-bearing primitive, terrain, route,
+architecture, or dressing mutation, establish a readable observation baseline.
+This is not a demand for decorative or final lighting. It is a shared measurement
+condition that must make player scale, silhouettes, foreground/midground/
+background separation, contacts, seams, depth, and open-versus-closed
+boundaries judgeable before geometry begins.
+
+Inventory the current key light, ambient or sky contribution, atmosphere, fog,
+exposure or post-process, diagnostic camera and FOV, viewport or render mode,
+scalability and weather state, and approved human-scale reference. Preserve and
+record an intentional, task-approved authored setup rather than replacing it
+merely because the level is new. Otherwise create the smallest observation rig
+that can provide the required readability: normally a key light, ambient or sky
+contribution, locked exposure, a fixed player-height camera, and the scale
+reference. Add atmosphere, fog, or local fill only when it is required for
+diagnosis. Store project-specific values in the Visual Recipe or workflow
+record; the Handbook does not prescribe universal lighting numbers.
+
+Capture and inspect one player-height diagnostic frame. Actor creation does not
+pass this gate. Re-read the effective light, exposure, camera, and saved-world
+state, and keep geometry mutation blocked when clipped whites, crushed blacks,
+or flat gray washout prevents the reviewer from separating floor, walls,
+ceiling, depth layers, contacts, seams, or enclosure. Record the inventory,
+property readback, scale-reference identity, camera and render state, frame
+evidence, decision, approver, and rollback target.
+
+For A/B experiments or repeated variants, treat the observation baseline as a
+common controlled condition rather than an independent variable. Freeze the
+same light classes, counts, transforms, intensity and color, sky, atmosphere,
+fog, exposure, post-process, camera transform and FOV, aspect ratio, show flags,
+scalability, weather, settlement state, and scale-reference treatment. A local
+fill is allowed only when it is symmetric, recorded, and unable to hide gaps,
+leaks, exposed proxies, floating contacts, or world void. Exclude baseline
+setup time, calls, and Actor count from the variant construction timers and
+report them as common overhead. If the baseline changes, invalidate and
+recapture both conditions from the same cameras.
+
+An intentionally dark authored target may retain its final mood setup while a
+separate, clearly labeled `DIAGNOSTIC_ONLY` observation pass tests structural
+readability; that pass cannot approve beauty or release quality. A declared
+lighting-neutral or unlit structural audit may use an Unlit or false-color view
+with locked exposure instead of adding lights. Record the purpose, scope,
+approver, evidence class, camera and render mode, and restore target for either
+exception. No exception permits fog, darkness, highlight clipping, or a changed
+camera to conceal a structural failure.
+
+For quantitative evidence, record the baseline Actor inventory and property
+readback, exposure state, camera/FOV/aspect and render-state equality, common
+setup elapsed time/calls/count, and project-defined luminance percentiles or
+clipping ratios when available. For qualitative evidence, judge human scale,
+surface separation, depth layers, silhouettes, contact shadows, rear closure,
+seams, world void, floating contact, and whether fog conceals defects. Missing
+baseline evidence, auto exposure that is not controlled, asymmetric variant
+lighting, a one-sided fill, changed camera or aspect, a crushed or clipped
+frame, or Actor creation claimed as proof is a blocking failure. If geometry
+already exists, mark only the pre-baseline visual evidence `INVALID_EVIDENCE`,
+establish the baseline, and repeat the affected visual stage; preserve timing
+only when its independence from the baseline is explicitly bounded and
+reported.
+
 ### 3. Experience prototype before full blockout
 
-Only after the recorded Area Composition Plan, Stage 2a translation gate, and Stage 2b `ASSET_PLAN_READY` decision pass, select one representative POI or encounter and build the cheapest playable version of its experience unit: approach, question or reveal, refusal or occlusion, player choice or repeated verb, interaction, outcome or reward, and exit or next hook. Use boxes, semantic materials, temporary effects, and placeholder behavior. Create or verify the persistent zone marker before adding the first prototype geometry, keep it visible in the review evidence, and bind every new proxy group, path, or terrain change to its planned trace entry. Asset-plan approval does not require final assets here; unresolved supply work remains visible while the prototype tests experience and space cheaply.
+Only after the recorded Area Composition Plan, Stage 2a translation gate, Stage 2b `ASSET_PLAN_READY` decision, and Stage 2c post-design observation baseline pass, select one representative POI or encounter and build the cheapest playable version of its experience unit: approach, question or reveal, refusal or occlusion, player choice or repeated verb, interaction, outcome or reward, and exit or next hook. Use boxes, semantic materials, temporary effects, and placeholder behavior. Create or verify the persistent zone marker before adding the first prototype geometry, keep it visible in the review evidence, and bind every new proxy group, path, or terrain change to its planned trace entry and approved floor-plan feature. Asset-plan approval does not require final assets here; unresolved supply work remains visible while the prototype tests experience and space cheaply.
 
 Test the fun thesis, not only the geometry. Observe whether players understand what they are curious about, choose to approach or defer, experience anticipation or tension, receive a worthwhile payoff, and know what to do next. Record time to meaningful change and the role of any intentional quiet section. If the unit is weak, revise the thesis or spatial plan before building the whole route. For a small level, this gate may be combined with the next blockout step, but its evidence and approval question should remain explicit.
 
@@ -457,7 +570,7 @@ Pause for user or designated approver feedback after the unit has runtime eviden
 
 ### 4. Terrain and macro blockout
 
-Build the terrain and large spatial masses first: height bands, ridges, valleys, terraces, drainage, route transitions, skyline, boundaries, and major volumes. Use simple materials or semantic colors only when they communicate function, threat, ownership, or navigation. Do not use final props to compensate for a weak macro structure.
+Build the terrain and large spatial masses first: height bands, ridges, valleys, terraces, drainage, route transitions, skyline, boundaries, and major volumes. The approved floor-plan spatial lock governs their zone, bounds, orientation, route, height-band, water, crossing, and negative-space relationships; blockout is the implementation and test of that layout, not permission to improvise a different one. Use simple materials or semantic colors only when they communicate function, threat, ownership, or navigation. Do not use final props to compensate for a weak macro structure.
 
 After each composition-changing batch, complete the Stage 2a post-mutation audit before the next broad batch. Verify realized member inventories against the traceability map and compare zone distribution, density, footprint, frontage, gaps, height bands, routes, water and bridge relationships, preserved shade and voids, hierarchy, and prohibited silhouettes against the recorded tolerances. A whole-map Actor total or an attractive overview cannot close this audit.
 
@@ -493,7 +606,7 @@ Validate a route as a continuous corridor rather than only at its endpoints. Sam
 
 ### 5. Playable blockout and feedback gate
 
-Translate the approved Area Composition Plan and Stage 2a translation contract into a playable rough draft made from the approved terrain representation, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the perceived distance, enclosure, occlusion, route continuity, scale, visibility, readability, and typology observations that depend on it. Add these runtime results to the translation contract's post-mutation deviation records; overview metrics remain macro diagnostics. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
+Translate the approved Area Composition Plan and Stage 2a translation contract into a playable rough draft made from the approved terrain representation, simple boxes, temporary ramps, doors, cover, obstacles, encounter placeholders, and other functional volumes. Keep every content-bearing element under the approved floor-plan spatial lock and reject unmapped or out-of-tolerance placement before playtest. Use the representative player controller and actual runtime camera rig—for example, `BP_ThirdPersonCharacter` and its `FollowCamera`/SpringArm chain—plus representative gravity, speed, and collision. Record the rig asset or class and configuration version and verify project-relevant behavior such as boom length, socket or shoulder offset, pitch, and SpringArm collision or retraction. This is the first gate with authority to approve exact gameplay-camera behavior and the perceived distance, enclosure, occlusion, route continuity, scale, visibility, readability, and typology observations that depend on it. Add these runtime results to the translation contract's post-mutation deviation records; overview metrics remain macro diagnostics. The blockout may include rough lighting, shape or color language, and functional audio cues, but it should not be burdened with decorative detail.
 
 Play in the runtime, not only by flying an editor camera. Test at least:
 
@@ -508,9 +621,43 @@ Play in the runtime, not only by flying an editor camera. Test at least:
 
 Use self-playtests for fast correction, informed critique for design diagnosis, and fresh-player tests for wayfinding and expectation. Pause for user or designated approver feedback only after the evidence package is complete. Approval should state which blockout version is accepted, which decisions are frozen, and which risks remain. A failed gate returns to the plan or blockout; it does not advance to final dressing.
 
+#### Independent blockout reference-fidelity supervision (blocking)
+
+Before Stage 6 or any later production stage, submit the completed Stage 4 and Stage 5 blockout to a separate independent supervisor that is read-only and separate from the builder. The builder may prepare factual evidence but may not write the supervisor's verdict, reveal a desired score, defend the implementation inside the review packet, or self-approve a failed result. If an independent supervisor is unavailable, keep `BLOCKOUT_REFERENCE_FIDELITY_REVIEW` at `PENDING_EVIDENCE`, report the delay immediately, and do not substitute a self-review for promotion.
+
+Give the supervisor the exact approved concept-art and Area Composition Plan versions, source authority and translation contract, floor-plan conformance and deviation records, fixed overview captures, Stage 5 runtime-camera captures and route samples, the applicable rubric and hard failures, the previous equivalent packet, and the factual change scope. Ask it to judge both forms of fidelity:
+
+- **Concept-art fidelity:** major massing, silhouette, focal hierarchy, foreground/midground/background structure, reveal and occlusion, scale relationships, negative space, dominant terrain and architecture rhythms, and every prohibited visual reading that blockout can credibly test;
+- **Floor-plan fidelity:** zone position and bounds, footprint and orientation, entrances, circulation and route widths, height bands, water and crossings, preserved voids, spatial sequence and hierarchy, and every declared tolerance or relationship;
+- **Playable fidelity:** whether the runtime camera and traversal preserve the intended distance, enclosure, choice, pacing, readability, recovery, and POI flow rather than merely matching a top-down diagram.
+
+“Sufficiently convincing” is not builder confidence, a high aggregate score, or one attractive view. It means the independent supervisor records an explicit `PASS` for the exact blockout and evidence versions, every applicable rubric category meets its predeclared floor, every hard failure is absent, reference conflicts are resolved, and the fixed overview and runtime-camera evidence agree with the plan-conformance record. Any `FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE` keeps Stage 6 and all downstream placement locked.
+
+On `FAIL`, require an evidence-grounded defect list, the weakest visual or spatial system, regressions, and one bounded next change. The builder repairs that system, changes one major variable per pass, preserves the failed candidate, recaptures the same cameras and runtime samples, and sends a new neutral packet to the independent supervisor. Repeat the repair-capture-review loop until the independent result is `PASS`; neither elapsed effort nor improvement relative to a weak predecessor is promotion evidence.
+
+When repeated materially distinct repairs do not remove the same blocking defect or the evidence shows no credible convergence, suspend further broad mutation and perform a root-cause analysis. Separate implementation drift, builder capability, asset or proxy limits, terrain or route representation, tool or capture failure, invalid evaluator behavior, and platform or budget constraints from contradictory, underspecified, or infeasible concept-art and floor-plan requirements. If the sources are the responsible constraint, record `DESIGN_REVIEW_REQUIRED`, preserve the attempt history, and reopen Stage 1, Stage 2, and Stage 2a as applicable to review a concept-art or floor-plan redesign. Do not weaken the rubric or rewrite the plan merely to turn the current geometry into a pass. If implementation is responsible, retain the approved sources and repair the implementation path instead.
+
+Before the loop, record an iteration and time budget plus expected capture and review latency. Report any material delay to the user or designated owner immediately when discovered, without waiting for the budget to expire: supervisor unavailability, tool timeout or unstable Editor state, stale or invalid evidence, broken camera comparability, unresolved reference conflict, missing asset or representation capability, repeated no-improvement verdicts, or a forecast that the agreed budget will be exceeded. The report must state the cause, impact, current gate and lock state, elapsed time and attempts, safe work that can continue, recovery options, and any decision required. Immediate reporting does not authorize skipping the independent gate.
+
+#### Blockout-cube visual-retirement gate (blocking)
+
+Blockout cubes and other primitives are design instruments, not a cheap production art kit. They may remain in the level only when they continue to serve as an internal spatial skeleton or an explicitly recorded support or collision proxy. Their survival in the Actor hierarchy does not give them visual authority, and assigning a production material to an exposed primitive does not convert it into a production-ready surface.
+
+Before Stage 6, inventory every blockout cube and primitive by stable Actor or component identity, owning zone, plan feature, Stage 2a trace entry, current visual and collision state, and intended production duty. Assign exactly one disposition:
+
+- **`REPLACE`:** transfer the approved footprint, bounds, orientation, route clearance, and trace identity to a production-approved visual asset or authored system, then remove or disable the superseded visual proxy;
+- **`RETIRE`:** remove or disable the primitive after proving that it no longer owns required spatial, collision, navigation, support, measurement, or traceability responsibilities;
+- **`RETAIN_INTERNAL_SKELETON`:** keep the primitive only as a non-visual internal skeleton, support, or collision proxy. Record the retained duty and owner, and keep the primitive fully enclosed by production geometry or non-rendering in every declared runtime state.
+
+`RETAIN_INTERNAL_SKELETON` never authorizes an exposed face, a production finish material, a decal-bearing final surface, a visible silhouette, or reliance on the cube's shading as part of the intended image. Do not disguise unfinished production meshing by assigning stone, plaster, metal, wood, terrain, or other finish materials to blockout geometry. The production visual surface must come from the approved asset family or authored visual system, while any retained cube remains only hidden structure.
+
+Validate the disposition from the Stage 5 runtime camera, the fixed overview set, required reverse and contact views, and representative streaming, LOD or HLOD, visibility, occlusion, and variant states. Inspect the boundary between production geometry and retained skeletons for exposed corners, gaps, seams, z-fighting, unexpected shadows or reflections, and silhouette contribution. A single visible or material-finished blockout primitive is a hard failure. Keep `BLOCKOUT_CUBE_VISUAL_RETIREMENT=FAIL`, `PENDING_EVIDENCE`, or `INVALID_EVIDENCE`, and keep Stage 6 and every downstream stage locked until the exact candidate records `PASS`.
+
+When replacement would break the floor-plan lock or a needed proxy duty, preserve the accepted blockout and repair the replacement plan rather than exposing the cube as a shortcut. Carry the original plan feature and trace IDs into the replacement or retained skeleton record so later collision, navigation, support, and cleanup work cannot silently delete spatial intent. If the intended production look truly depends on primitive exposed surfaces, return to concept and asset planning; do not reinterpret existing blockout geometry as final art after implementation has begun.
+
 ### 6. Visual feasibility slice before map-wide assets
 
-Before committing the broad asset budget, require a Stage 2b `VISUAL_SLICE_READY` decision for the exact demand IDs, candidate versions, and zones that the slice will test. Then build a small **visual feasibility slice** (also called a golden or representative slice). It should contain the route transition, focal landmark, foreground/midground/background structure, boundary or reverse view, contact conditions, and the asset families that will dominate the final level. Use the exact project-native or staged candidate versions named by the readiness contract, real or representative materials, lighting, collision, target platform settings, and the Stage 5-approved runtime camera rig. Include enough repetition to expose kit weakness, not only a hero asset. A placeholder may clarify a remaining boundary, but it cannot supply readiness evidence for the demand it replaces.
+Before committing the broad asset budget, require both `BLOCKOUT_REFERENCE_FIDELITY_REVIEW=PASS` and `BLOCKOUT_CUBE_VISUAL_RETIREMENT=PASS` for the exact candidate, plus a Stage 2b `VISUAL_SLICE_READY` decision for the exact demand IDs, candidate versions, and zones that the slice will test. Then build a small **visual feasibility slice** (also called a golden or representative slice). It should contain the route transition, focal landmark, foreground/midground/background structure, boundary or reverse view, contact conditions, and the asset families that will dominate the final level. Use the exact project-native or staged candidate versions named by the readiness contract, real or representative materials, lighting, collision, target platform settings, and the Stage 5-approved runtime camera rig. Include enough repetition to expose kit weakness, not only a hero asset. A placeholder may clarify a remaining boundary, but it cannot supply readiness evidence for the demand it replaces.
 
 The slice must also preserve one representative experience unit: an approach, a question or reveal, a player verb or choice, an outcome or reward, and a next hook. A slice that looks convincing but does not demonstrate the fun thesis has only retired visual risk, not level-design risk.
 
@@ -518,7 +665,7 @@ This slice answers a different question from the graybox: can the team reproduce
 
 ### 7. Production meshing and dressing
 
-Do not begin production meshing or dressing until Stage 2b records `PRODUCTION_DRESSING_READY` for the exact contract version, zones, demand IDs, and selected candidate versions. Replace approved proxies with those production-approved asset families while preserving the spatial contract: zone distribution, footprint, density ranges, frontage and gaps, shade and intentional voids, hierarchy, route width and continuity, floor height, sightlines, landmark position, camera clearance, collision intent, and boundary behavior. Keep both the Stage 2a traceability IDs and Stage 2b demand/candidate IDs through substitution, and record deliberate deviations instead of allowing them to accumulate invisibly. Use procedural systems for repeatable placement and hand authorship for hero composition, transitions, exceptions, and story detail.
+Do not begin production meshing or dressing until Stage 2b records `PRODUCTION_DRESSING_READY` for the exact contract version, zones, demand IDs, and selected candidate versions. Replace approved proxies with those production-approved asset families while preserving the spatial contract: zone distribution, footprint, density ranges, frontage and gaps, shade and intentional voids, hierarchy, route width and continuity, floor height, sightlines, landmark position, camera clearance, collision intent, and boundary behavior. Keep both the Stage 2a traceability IDs and Stage 2b demand/candidate IDs through substitution, and record deliberate deviations instead of allowing them to accumulate invisibly. Do not expose or material-finish a retained blockout cube as a shortcut during substitution; `RETAIN_INTERNAL_SKELETON` remains non-visual through every production batch. Use procedural systems for repeatable placement and hand authorship for hero composition, transitions, exceptions, and story detail.
 
 Promote in zones or representative chunks. Place large POIs and their route relationships first, then medium and small POIs according to the approved beat sheet and density hypothesis. Each chunk should be checked for demand coverage, selected candidate versions, contacts, transitions, repetition, reverse views, route readability, meaningful-change timing, POI payoffs, dependencies, and budget drift before the next chunk multiplies the same pattern. When a real asset reveals a structural or supply problem, return to the blockout, kit rule, readiness contract, or source plan instead of hiding it with local props.
 
@@ -528,7 +675,7 @@ Keep the persistent zone markers and stable zone IDs throughout every replacemen
 
 Do not postpone all sound until the end. Use a functional audio scaffold during blockout when footsteps, interaction feedback, spatial cues, ambience, or a landmark signal affect navigation or pacing. If audio is a core mechanic, it belongs in the first playable slice. Add final sound effects, ambience, music, and mixing after the layout and art are stable enough that placement and context will not be discarded.
 
-Likewise, use rough lighting and contrast early enough to test readability and mood, then perform final lighting after the asset and material pass. Lighting and audio may guide the player, but neither should be used to conceal a blockout that cannot guide the player through its geometry and spatial language.
+Likewise, after the concept, floor plan, translation, and applicable asset-plan gates pass, use the Stage 2c diagnostic baseline and later rough lighting to test readability and mood; perform final lighting after the asset and material pass. Lighting and audio may guide the player, but neither should be used to conceal a blockout that cannot guide the player through its geometry and spatial language.
 
 ### 9. Collision, polish, and release validation
 
@@ -578,7 +725,8 @@ User feedback is most useful when the question is narrow enough to answer and th
 - **Translation pause:** Have the approved references been converted into zone-level ranges, hierarchy and negative-space rules, traceable prototype groups, fixed comparison conditions, and an explicit placement decision without unresolved authority conflicts?
 - **Asset-plan pause:** Have concept requirements been converted into functional asset-family demands, and does every demand have an owned, acquired, authored, procedural, outsourced, fallback, or concept-revision route with explicit authority, risk, owner, and due stage?
 - **Experience pause:** Does a cheap POI unit produce the intended question, choice, tension, payoff, and next hook with placeholders?
-- **Blockout pause:** Does movement through the space produce the intended direction, pacing, recognition, choice, and interaction?
+- **Blockout pause:** Has a separate read-only independent supervisor found the blockout sufficiently faithful to the approved concept art and floor plan, with no hard failure, after reviewing the fixed overview and runtime-camera evidence? If not, which single system must the builder repair before the same-condition review repeats?
+- **Blockout-cube retirement pause:** Does the complete disposition inventory prove that every cube is replaced, retired, or retained only as a fully hidden non-visual skeleton, with no production-material shortcut or exposed face in any declared view or runtime state?
 - **Visual-slice pause:** Do the exact staged asset candidates reproduce the representative quality bar and POI experience, expose enough ordinary repetition and kit transitions, and remain affordable and repeatable?
 - **Production review:** Are the production-approved asset families, deviations, dependencies, license scope, integration cost, and remaining risks still within the approved contracts?
 
@@ -597,11 +745,19 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - No world voids, exposed reserve edges, placeholders, uniform scatter, or unfinished reverse sides.
 - Material scale, lighting hierarchy, cultural and biome coherence.
 - Concept, Area Composition Plan, Reference-to-Prototype Translation, Concept-to-Asset Readiness, blockout, and visual-slice gates have explicit evidence, approvers, and rollback targets; the spatial plan and translation contract existed and passed before the first content-bearing cube, and the asset plan passed before the Experience Prototype.
+- In every newly created blank level, lighting, sky, atmosphere, fog, exposure, and post-process mutation remained locked until the concept, floor plan, translation contract, and applicable asset-plan gates passed; the Stage 2c observation baseline then passed before the first content-bearing geometry.
 - The Area Composition Plan is a versioned package whose component inventory exposes footprint/floor-plan, node/connectivity, and annotated top-down functions without requiring separate files for each label; each component has a stable identifier or cross-reference.
 - After plan-view evidence is inspectable and before side/elevation production or package-scope finalization, the workflow records and communicates a `vertical_information_assessment` with per-risk sources, questions, measurement bases, ambiguity, and evidence IDs. `INSUFFICIENT` includes the named, scoped side/elevation profiles; `SUFFICIENT` includes an omission reason and alternative-evidence mapping for every applicable vertical risk; `PENDING_EVIDENCE` blocks Stage 2.
 - The Area Composition Plan records zone boundaries and stable IDs, terrain elevations and steps, primary circulation, rivers and bridges, building footprints and typology hierarchy, the source-artifact inventory and authority order, a stable-ID `DIAGNOSTIC_ONLY` overview-camera set, its relationship/risk coverage matrix, auxiliary player-height/FOV proxies, and the planned runtime-rig source.
 - The Stage 2a contract validates against the bundled schema or a documented equivalent and records source IDs, versions, approval and authority scopes; the dependent-strata strategy consideration and selection when applicable; zone-level density, mass-count, typology, occupancy, frontage, gap, route-width, elevation, water/bridge, shade/void, hierarchy, and prohibited-silhouette requirements; measurement bases; tolerances; and hard failures.
 - Every prototype array, repeated set, architecture proxy group, route, water or bridge proxy, reserved shade or void, and Landscape change has a stable trace from source requirement through plan feature to realized inventory; no orphan requirement or unmapped broad placement exists.
+- The exact approved floor-plan version remains the authoritative spatial baseline through blockout; every content-bearing batch records plan feature and zone IDs, compares realized transforms, bounds, routes, terrain, voids, and relationships with declared tolerances, and stops subsequent placement on any unmapped or out-of-tolerance result.
+- The Stage 4 and Stage 5 candidate has an independent `BLOCKOUT_REFERENCE_FIDELITY_REVIEW` result from a read-only supervisor separate from the builder; only an explicit `PASS` for the exact concept, plan, blockout, camera, and evidence versions unlocks Stage 6.
+- Every failed blockout review preserves the candidate, records the weakest system and one bounded next change, repeats same-condition capture and independent review, and keeps all downstream stages locked until the reference-fidelity gate passes.
+- Repeated non-converging repairs have a root-cause analysis that distinguishes implementation, asset, tool, capture, evaluator, platform, and budget failures from contradictory or infeasible source design; any source-design cause records `DESIGN_REVIEW_REQUIRED` and reopens the responsible concept, plan, and translation gates.
+- Material delay issues are reported immediately with cause, impact, current lock state, elapsed time and attempts, safe parallel work, recovery options, and required decisions; no silent retry loop consumes the remaining budget.
+- Every blockout cube or primitive has a stable `REPLACE`, `RETIRE`, or `RETAIN_INTERNAL_SKELETON` disposition linked to its plan and trace IDs; retained skeletons have an explicit non-visual support or collision duty and remain fully enclosed or non-rendering.
+- `BLOCKOUT_CUBE_VISUAL_RETIREMENT=PASS` is recorded for the exact candidate before Stage 6. Runtime, fixed overview, reverse, contact, streaming, LOD or HLOD, visibility, and variant evidence contains no exposed cube face, production-finish material on a blockout primitive, seam, z-fighting, shadow, reflection, or silhouette contribution.
 - Every asset demand traces to approved source-requirement and zone IDs and records role, priority, family completeness, variation, scale, contacts, reverse sides, visual and technical constraints, acceptance evidence, fallback, owner, and due stage.
 - Project-native and ownership-confirmed library content was considered before new acquisition; discovery, entitlement, staging, representative approval, and production approval remain distinct; external purchases, downloads, installs, migrations, plugin enablement, and outsourcing have separate explicit authorization.
 - `VISUAL_SLICE_READY` covers every asset family required by the declared slice, and `PRODUCTION_DRESSING_READY` covers every production-blocking demand with exact selected versions, license, compatibility, dependencies, cost, performance, cook, collaboration, replacement, and rollback evidence or an approved concept/scope waiver.
@@ -636,9 +792,14 @@ Do not ask a late visual review to decide an unresolved spatial question. If a l
 - Treating a spline, semantic strip, or PCG exclusion mask as interchangeable with a complete playable route.
 - Beginning rock and ground-cover generation without a `CONSIDERED` dependent-strata strategy decision, or treating the first available PCG graph as that decision.
 - Building the first cube or placing broad asset batches before a versioned Area Composition Plan and its gate status are recorded.
+- Installing or tuning blank-level lighting before the concept and floor plan are approved, then letting that implementation state drive or conceal unresolved spatial design.
 - Automatically producing side/elevation profiles without first testing whether they retire a named vertical risk, or omitting them under `as appropriate` without a recorded sufficiency decision, user-facing explanation, and alternative-evidence mapping.
 - Treating floor plan, node map, top-down, side profile, and elevation as mandatory separate files instead of review functions and conditional evidence within one versioned Area Composition Plan package.
 - Treating Area Composition Plan `PASS` as permission to place prototype geometry before the Stage 2a source registry, quantitative zone contract, traceability map, tolerances, and explicit placement decision pass.
+- Treating an approved floor plan as a loose visual suggestion, placing temporary blockout geometry freehand, or editing the plan afterward to legitimize drift instead of stopping placement and reopening Stage 2 or Stage 2a.
+- Letting the builder self-approve blockout fidelity, advancing on relative improvement without an independent `PASS`, changing comparison cameras between retries, or hiding repeated failure until the time budget is exhausted.
+- Keeping a blockout cube visibly exposed and assigning it a stone, plaster, metal, wood, terrain, or other production finish material instead of replacing or retiring it; a retained cube is an internal non-visual skeleton, not final art.
+- Responding to non-converging blockout repairs by weakening the rubric or retrofitting the concept and floor plan, instead of separating implementation failure from a genuine `DESIGN_REVIEW_REQUIRED` source-design problem.
 - Translating visual references by memory, silently averaging conflicting sources, or recording only qualitative phrases such as “dense” without a bounded target and measurement basis.
 - Treating the concept as an object shopping list instead of extracting hero, structural, transition, contact, ordinary-repetition, gameplay, and atmosphere asset-family functions.
 - Searching public listings before project-native and ownership-confirmed content, or reporting a listing, search hit, remembered purchase, or download option as proof of ownership.
