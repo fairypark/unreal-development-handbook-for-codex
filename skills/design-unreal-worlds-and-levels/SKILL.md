@@ -11,6 +11,10 @@ Design a playable place rather than a camera-facing diorama. Convert the request
 
 Read [04-world-level-design.md](references/04-world-level-design.md) for every world, level, or environment design or review. Use its brief, concept translation, asset-readiness, representative-slice, terrain, contact, 360-degree continuity, and validation guidance before handing work to an Editor execution layer. For concept-led asset inventory, acquisition planning, licensing, dependencies, or promotion, also use `design-unreal-content-architecture` and read its Chapter 05.
 
+## Help the requester shape the brief
+
+For an underspecified new environment, broad redesign, or quality-recovery request, use Chapter 04's **Collaborative requirements dialogue**. Reuse known decisions, ask only the next consequential questions in plain language, and offer concrete directions with a recommendation, trade-offs, and observable outcomes when the requester needs help choosing. Translate answers into the existing brief while distinguishing confirmed intent, proposals, assumptions, and unresolved decisions. Inherit accepted intent for a bounded local edit; do not restart the full questionnaire. The paired [Korean review guidance](references/environment-requirements-dialogue.ko.md) includes question examples and decision handoff criteria.
+
 ## Prepare Korean user-review versions
 
 For every artifact the user must inspect, approve, or retain as a decision record, deliver a clearly paired Korean-language version as a separate artifact whenever the original is not Korean. Apply this to concept images, floor plans and layout drawings, annotated diagrams, specifications, checklists, review reports, handoff documents, and comparable records. Preserve both versions, use paired identifiers or filenames, and keep decision-bearing content equivalent.

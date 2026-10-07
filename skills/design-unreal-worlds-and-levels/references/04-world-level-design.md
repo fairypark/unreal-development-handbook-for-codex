@@ -91,6 +91,32 @@ Record the fun thesis, core verbs, intended emotional rhythm, POI hierarchy, exp
 
 Record the actual height above local ground and FOV of the project's player tracking camera in the initial brief, and identify the intended runtime camera rig and configuration source when known. The height/FOV record supports a comparable static player-height proxy during early prototyping; it does not claim that boom length, socket or shoulder offset, pitch, SpringArm collision or retraction, or other runtime behavior has been matched. Exact rig authority begins at Stage 5 Playable Blockout. Do not substitute a convenient editor or overview camera for evidence reserved to the player camera.
 
+### Collaborative requirements dialogue
+
+Use a collaborative dialogue when a new environment, broad redesign, or visual-quality recovery request leaves important experience or image decisions open. Help the requester express what matters without requiring environment-art vocabulary or a complete specification. For an accepted local edit, inherit the existing brief and ask only about an unresolved choice that changes that edit's scope or result.
+
+First extract explicit requirements from the request, approved references, existing brief, and relevant evidence. Keep confirmed decisions, proposed directions, reversible assumptions, and unresolved decisions distinguishable. Do not ask for information already supplied, replace an explicit preference with the agent's taste, or interpret a reference as authority for every object and unseen side.
+
+Choose the next questions by their effect on the current decision. Ask a small batch of consequential questions, then adapt to the answers; do not present the entire brief as a mandatory questionnaire. Describe visible or playable consequences before asking for numerical settings or implementation choices.
+
+| Decision to clarify when relevant | Plain-language question | Useful directions to explain |
+| --- | --- | --- |
+| Experience and emotional tone | What should the player feel and do on entering this place? | A calm route toward a reveal, an exposed tense crossing, or a sheltered gathering place; explain the route and visibility consequences. |
+| Reference authority | Which part of the reference matters most: composition, materials, vegetation, atmosphere, or the subject? What should be avoided? | Separate the primary quality target from supporting references and prohibited readings; identify conflicts instead of averaging them. |
+| View and focal hierarchy | What should attract attention first, and from which arrival or gameplay view? | An open landmark silhouette, a gradual reveal through foreground framing, or a broad panorama; preserve applicable runtime-camera authority. |
+| Density and ecology | Should the route feel enclosed by vegetation or open with distinct clusters? Where should the image breathe? | Dense local colonies with clear gaps, layered edge growth, or a deliberately managed garden; relate strata and negative space to the focal point. |
+| Surface and contact character | Should the path read as worn earth, loose gravel, wet stone, or another surface? Which close-up contacts matter? | Explain material scale, edge transitions, roots, debris, and support rather than treating the answer as a material-name request. |
+| Asset feasibility and control | Must the result reproduce a particular shape, or can the direction adapt to available assets? Which parts should remain directly authored? | Explain kit adaptation, authored focal assemblies, and repeatable procedural areas; keep ownership, availability, and representative approval separate. |
+| Scope and completion | Is the immediate target a concept, playable blockout, representative visual slice, or a wider production pass? Which constraints are fixed? | State the evidence and cost of each relevant scope; reuse existing platform, schedule, asset, and performance constraints. |
+
+When the requester cannot yet choose, offer a small set of concrete alternatives and recommend one. Tie the recommendation to their stated intent, available evidence, and asset feasibility. For each alternative, explain its visible or playable result, main trade-off, and the observation that would test it. Use reference crops, diagrams, or small comparison concepts when they clarify the decision, with the required Korean review counterpart. Label unverified feasibility as unknown. Do not equate a detailed prompt, attractive concept, or recommended option with implementation or approval.
+
+Translate the answer into an observable target in the existing brief: the intended reading, affected view or route, priority, protected requirements, applicable evidence, and remaining uncertainty. For example, "natural vegetation" can become "irregular colonies around rocks and tree shade, a readable route corridor, and deliberate openings toward the landmark." Derive numeric ranges later from scale, references, and representative trials; do not invent precision before the image or experience intent is understood.
+
+If a missing decision would materially change the approved design, mutation authority, or required stage evidence, keep dependent work pending and continue only unaffected authorized work. For optional preferences, state a reversible assumption or proposed baseline and proceed within existing authority when appropriate; an unanswered question is not approval. When the requester delegates a routine choice, make and explain it without repeatedly requesting the same permission. Reopen an existing decision only when new evidence or changed intent invalidates its assumptions.
+
+The dialogue should end with a brief the requester can recognize and a clear next decision or authorized experiment. Reuse the current stage record rather than introducing a new approval gate or one artifact per question. Verify that the selected direction has observable acceptance criteria and that proposals, assumptions, and missing evidence have not become confirmed facts. A Korean review version of this guidance is [environment-requirements-dialogue.ko.md](environment-requirements-dialogue.ko.md).
+
 ## Exploration and production modes
 
 Keep two related loops distinct:

@@ -18,6 +18,14 @@ Provide goals, project state, requirements, assumptions, constraints, success cr
 
 Keep reusable principles free of private paths, map coordinates, asset-pack anecdotes, credentials, model-specific orchestration, and temporary workarounds.
 
+### Requirements elicitation and direction-setting
+
+Help the requester form a decision-ready requirement when their desired outcome is underspecified. Reuse explicit instructions, accepted decisions, and relevant evidence before asking questions. Ask about the most consequential unknowns in terms the requester can judge; offer concrete alternatives and a reasoned recommendation when they cannot yet specify a direction. Explain the resulting behavior or image and its trade-offs before asking them to select tools or tune implementation parameters.
+
+Distinguish confirmed requirements, proposals, reversible assumptions, and unresolved decisions in the task's existing record. A recommended or preselected option and an unanswered question are not approval. Continue unaffected authorized work while a consequential decision is pending, preserve previously granted authority, and resolve delegated routine choices without repeated confirmation. Do not make a complete questionnaire a prerequisite for a clear local task or reopen accepted design without a material change.
+
+For environments, use Chapter 04's [Collaborative requirements dialogue](../../design-unreal-worlds-and-levels/references/04-world-level-design.md#collaborative-requirements-dialogue) to connect questions to experience, reference authority, focal hierarchy, ecology, surface character, feasibility, and scope. Its [Korean review guidance](../../design-unreal-worlds-and-levels/references/environment-requirements-dialogue.ko.md) also covers this shared interaction rule. The dialogue clarifies intent; it does not replace the applicable design, mutation, evidence, or independent-promotion contract.
+
 ## Reference-grounded context for complex procedural work
 
 For graph-, attribute-, and data-rich work, establish a reference set before

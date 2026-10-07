@@ -11,6 +11,10 @@ Use AI as a bounded development participant whose decisions and outputs remain i
 
 Read [15-ai-assisted-development.md](references/15-ai-assisted-development.md) before defining agent roles, context, mutation authority, evidence, evaluation, approval, or failure containment.
 
+## Elicit requirements and suggest directions
+
+Apply Chapter 15's **Requirements elicitation and direction-setting** when the requested outcome needs clarification. Reuse known intent, ask the next consequential questions in the requester's language, and explain concrete alternatives and a recommendation before exposing implementation choices. Preserve the distinction between confirmed decisions, proposals, reversible assumptions, and unresolved decisions; an unanswered question does not grant approval. For environment-specific questions, use Chapter 04's dialogue guidance through `design-unreal-worlds-and-levels` when available. Keep a clear local task local and preserve existing authorization.
+
 ## Prepare Korean user-review versions
 
 For every artifact the user must inspect, approve, or retain as a decision record, deliver a clearly paired Korean-language version as a separate artifact whenever the original is not Korean. Apply this to concept images, floor plans and layout drawings, annotated diagrams, specifications, checklists, review reports, handoff documents, and comparable records. Preserve both versions, use paired identifiers or filenames, and keep decision-bearing content equivalent.
