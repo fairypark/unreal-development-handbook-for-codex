@@ -181,6 +181,16 @@ For broad PCG coverage, choose non-partitioned, partitioned, hierarchical, or ru
 
 Build canopy, understory, shrubs, ground cover, deadfall, and contact debris as distinct strata. Use gradients, clusters, transitions, and intentional gaps rather than uniform scatter or perimeter rings. Validate broad assets across their visual footprint; a center hit or grounded point count does not prove believable support.
 
+### Couple substrate and vegetation through shared spatial data
+
+When the intended environment requires visible continuity between ground cover and its substrate, give material coverage and placement a common, versioned spatial authority. A colony field can drive both placement probability and the grass-to-bare-ground blend through different response curves. Shared authority does not require identical masks or a plant at every green pixel. Intentional bare ground, shade, moisture, and authored exceptions remain part of the design.
+
+Record the coordinate frame, units, origin policy, extent, seed or immutable samples, field version, authored accents, consumer mappings, and regeneration dependencies. Route, water, and hardscape exclusions retain their own declared authority and precedence; a habitat field cannot override traversal clearance. Validate open intervals, colony edges, terrain contacts, and ordinary repetition alongside the focal view.
+
+Equivalent formulas in different execution paths do not establish equivalent output. Sampling, floating-point precision, coordinate transforms, and texture addressing can make an offline placement field differ from its rendered material. Compare samples at shared positions, including negative coordinates and cell boundaries, under a predeclared tolerance. Prefer shared immutable field data when separate implementations cannot demonstrate agreement. Keep numerical parity, visible continuity, and final visual approval as distinct results.
+
+Use this coupling only where it serves the concept. Authored gardens, stylized surfaces, seasonal transitions, or intentionally sparse vegetation may require different relationships. Reuse the data contract and validation method; retune the field, mix, scale, and material values in the new context.
+
 ## Comparative iteration
 
 Expose one candidate at a time. Disable superseded generations and verify which components contribute to the frame before comparison. Overlapping candidates invalidate the result even when every graph reports success.

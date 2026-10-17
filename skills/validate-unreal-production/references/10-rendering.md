@@ -29,11 +29,19 @@ For example, the UE 5.8 status snapshot dated 2026-08-01 lists MegaLights as Pro
 - Keep material scale, roughness, normal response, variation, and platform cost coherent across assets and Landscape.
 - Choose rendering features from the visual requirement and target budget, not because the Editor exposes them.
 
+## Diagnose vegetation and layered surfaces
+
+For a vegetation defect, isolate source shape, saved normal response, front/back surface behavior, material reflectance or transmission, and distribution before changing the scene's exposure. Inspect low and reverse views as well as the favorable front. Freeze the admitted geometry and positions during a material comparison, then repeat the affected scene views. If only the material changed, reuse valid geometry evidence while recording the dependency boundary.
+
+For layered ground, apply a layer's tint or other surface-specific correction before blending with an unrelated layer when that is the intended material model. A global green multiplier after a grass/dirt blend can also tint exposed dirt. Validate pure-layer regions and transition regions separately; the correct mixing model still depends on the art direction and renderer. Neither a particular two-sided-normal correction nor one transmission value is a universal vegetation recipe.
+
 ## Evidence strategy
 
 Compare fixed persistent viewpoints with equivalent FOV, exposure, aspect ratio, scalability, weather, streaming, and temporal settlement. Reject first-frame or unsettled temporal evidence when Lumen, virtual textures, particles, fog, or similar systems are still converging.
 
 Use beauty evidence for final visual judgment and diagnostic passes for diagnosis. Object IDs, wireframes, bounds, or technical overlays cannot substitute for the final rendered result.
+
+When a capture path itself prevents comparable temporal history, distinguish capture failure from content failure. A replacement path needs a recorded reason, authority, preserved camera and render conditions, original frames, freshness and integrity checks, and measured settlement. Classify the alternative evidence honestly; a diagnostic health receipt from another camera cannot authenticate or approve the replacement images. A substitute is unavailable when the controlling project contract requires an evidence property it cannot provide. Detailed capture adapters and verification procedures belong in Editor Skills.
 
 ## Validation checklist
 
