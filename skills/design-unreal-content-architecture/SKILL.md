@@ -48,6 +48,8 @@ Approval of any design gate does not authorize a purchase, download, install, mi
 
 ## Design for reuse and migration
 
+For repeated environment quality failures, use Chapter 05's source-shape, source-surface, and in-context capability checks within the existing readiness gates. For an approved-source library, preserve originals, classify dependencies and map-specific inputs, and record copy verification separately from new-context approval.
+
 Distinguish:
 
 - project source libraries that may retain project-licensed dependencies;

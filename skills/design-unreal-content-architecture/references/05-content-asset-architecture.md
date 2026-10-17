@@ -142,6 +142,18 @@ A gate authorizes only its named scope. A representative asset may pass the Visu
 
 Reopen the earliest responsible decision when the concept, source authority, zone plan, target platform, engine version, rendering path, candidate version, license, dependencies, required plugin, acquisition authority, budget, or representative evidence changes. Preserve rejected candidates and the reason for rejection so the same mismatch is not rediscovered.
 
+### Diagnose source capability before repeated placement repair
+
+Within the existing candidate and Visual Slice checks, separate three questions:
+
+1. **Source shape:** can the asset support its assigned role at the intended scale, distance, and visible directions? Check the silhouette, underside and reverse surfaces, final footprint, and contact geometry. A backed cliff scan may be unsuitable as a freestanding landmark even when its front surface is excellent.
+2. **Source surface:** do the saved geometry, normals, material, and lighting response work together? Shape approval does not approve color, backface shading, transmission, or ordinary repetition.
+3. **In-context system:** do the admitted sources preserve hierarchy, ground contact, transitions, density variation, routes, and reverse views in a representative slice?
+
+Use this separation when repeated dressing or tint adjustments fail to remove the same defect. Inspect the responsible source before increasing density or reopening an otherwise valid concept. A source substitution reopens footprint, clearance, dependency, and affected visual checks. A material-only change can reuse unchanged shape evidence while repeating surface and in-context regression checks; record the unchanged inputs rather than repeating every test mechanically.
+
+This is a refinement of existing readiness decisions, not a new project-wide stage or a requirement to author custom geometry. Cards, curved blades, scans, and simplified meshes remain valid choices when their declared role and target budget are verified. Fixed counts, source mix ratios, normal tricks, and shading values from one scene are examples, not portable defaults.
+
 ## Reuse and distribution model
 
 Distinguish three layers:
@@ -151,6 +163,8 @@ Distinguish three layers:
 3. **Distributable content plugin:** actual assets whose complete dependency graph is declared, license-clean, and tested outside the source project.
 
 Previous approval does not transfer automatically. Default reused systems and purchased content to revalidation for the new scale, biome, platform, lighting, gameplay, content substitutions, license scope, and dependency context.
+
+For a collection extracted from a completed level, distinguish self-authored sources, project-dependent adaptations, and map-specific examples. Preserve the originals and create a separate versioned library; record source and destination identity, dependency closure, source evidence, copy verification, ownership, and replaceable inputs. A visually approved source can be archived without claiming that its copy has passed a new scene, clean-project migration, cook, or performance gate. Discoverability belongs in a collection index and catalog, not in a remembered folder name. Distribute dependency-free contracts separately from licensed project content.
 
 ## Recommended workflow
 

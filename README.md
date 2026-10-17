@@ -114,6 +114,8 @@ The handbook progresses from durable reasoning, through game and world design, i
 
 ### Part V — Applied Reasoning
 
+The [meadow production case](skills/analyze-unreal-development-cases/references/16-case-studies.md#case-recovering-a-meadow-through-source-capability-and-coupled-ground-cover) and its paired [Korean review](skills/analyze-unreal-development-cases/references/meadow-reuse-review.ko.md) connect source capability, shared habitat data, material diagnosis, and scoped reuse to retained Editor-level evidence. The case does not establish performance, packaging, or universal parameter defaults.
+
 | No. | Chapter | Responsibility |
 | --- | --- | --- |
 | 16 | [Case Studies](skills/analyze-unreal-development-cases/references/16-case-studies.md) | End-to-end decisions, alternatives, trade-offs, validation evidence, production outcomes, failures, and lessons learned. |

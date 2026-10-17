@@ -416,6 +416,41 @@ independent review, and maintenance evidence close the gaps above.
 - [Epic Games: Unreal MCP](https://dev.epicgames.com/documentation/unreal-engine/unreal-mcp-in-unreal-editor) - dated implementation context for capability discovery, grouped tool interfaces, execution boundaries, and structured results.
 - [Epic Games: Working with PCG and LLMs Using Unreal MCP](https://dev.epicgames.com/documentation/unreal-engine/working-with-pcg-and-llms-using-unreal-mcp-in-unreal-engine?lang=en-US) - dated guidance for reference-grounded PCG assistance and incremental supervision.
 
+## Case: recovering a meadow through source capability and coupled ground cover
+
+**Status:** completed within an Editor-level environment scope in UE 5.8. Independent visual review, saved-state checks, and one local PIE route were recorded. Cook, packaged runtime, target-platform performance, wind, and clean-project reuse were not established. The source project retains the raw images and engine records; they are not bundled with this Handbook. See the paired [Korean review](meadow-reuse-review.ko.md).
+
+### Intent, initial state, and alternatives
+
+A meadow with a freestanding rock landmark, shallow creek, open paths, and layered vegetation needed coherent close-range surfaces and readable depth. Early grass read as repeated catalog clumps or flat strands, exposed ground read as a green sheet, and a cliff-oriented rock source revealed open reverse surfaces when tilted into a freestanding role.
+
+Increasing density, repeatedly adjusting color, or concealing the defects with lighting would preserve the source-role mismatch. Reopening the entire concept would discard already accepted terrain, routes, and water relationships. The selected approach isolated the failing source or visual system while freezing accepted systems and comparison cameras.
+
+### Decisions and implementation scope
+
+- Replace the incompatible landmark source with a closed source that supports the required reverse views, then revalidate its assembly and footprint.
+- Test three task-authored curved grass sources at the intended scale range and multiple directions, then test surface response on a small set of existing positions before converting the representative slices.
+- Connect substrate blending and vegetation placement to a common colony-field definition, preserving route, water, and hardscape exclusions. Correct a tint operation that also affected exposed dirt. Numerical parity between the offline and shader implementations was not independently established.
+- Separate shape and material findings. After geometry passed, change only material response on the same small trial and repeat relevant scene views.
+- After broad expansion revealed evenly spaced tree rows, change only the broad tree distribution into asymmetric groups and accents. Preserve the accepted ground cover and other visual systems.
+
+### Evidence and outcome
+
+| Retained record | Observation | Supported conclusion |
+| --- | --- | --- |
+| Source review v9 → v10 | Shape remained suitable; material was initially 2/5. A material-only comparison at the same 36 positions later met the applicable 4/5 floor. | Shape and surface approval need separate scopes; accepted shape evidence can be reused for a surface-only repair. |
+| Combined representative slices v12 | The slices passed all applicable visual categories at 4/5 or above. The total of 2,762 ecology instances was retained across repair, although source geometry, placement distribution, and some root positions changed. | Instance-count growth was not required for this result; equal counts do not establish equal geometry cost or isolate a single cause. |
+| Broad review v13 → v14 | Tree distribution scored 2/5 and distance depth 3/5. After a bounded repair of 57 trees, both met 4/5. Other approved visual systems were frozen. | A local slice does not retire whole-level repetition risk; the failure needed composition repair. |
+| Final review v15 | Visual regression and saved reload passed; a 17-waypoint local walk recorded 336 samples with no falling samples. | The declared Editor-level result passed; this does not establish package, platform, or performance readiness. |
+
+The source records are summarized as observations, not a controlled benchmark. In particular, the combined ground-cover repair changed several inputs over successive passes; its individual causal contributions and total time savings were not measured.
+
+### Transferable decisions and limits
+
+Use source capability checks to stop an unproductive placement loop; couple substrate and placement through explicit spatial data when the concept needs continuity; narrow revalidation to the affected dependency scope while retaining scene regression; and inspect repetition again after expansion. Archive approved sources with their dependency class and evidence so future work can start from inspectable candidates.
+
+Do not standardize the scene's blend ratios, transmission values, light settings, mesh representation, or capture workaround. The generated blades have no validated wind behavior or target-platform cost. A reusable collection needs a separate dependency and copy audit, and every new scene still needs its own visual comparison. These lessons refine Chapters 05, 09, and 10; they do not add a universal production gate or authorize asset redistribution.
+
 ## Evidence discipline
 
 Separate facts from interpretation and confidence. Do not infer causality from chronology alone. Remove credentials, private paths, user data, proprietary asset names, and exact project coordinates unless essential and explicitly authorized.
