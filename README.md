@@ -14,7 +14,7 @@ The handbook preserves durable development principles with the supporting rule:
 
 ## Start here
 
-When considering UE 5.9, start with the [MegaJam Preview review](skills/validate-unreal-production/references/13-production-pipeline.md#ue-59-megajam-preview) or its [Korean edition](skills/validate-unreal-production/references/ue-5-9-preview.ko.md). It identifies the retained 5.8 cases, the Blueprint edit checked on a specific 5.9 build, and the project checks that remain open.
+When considering UE 5.9, start with the [MegaJam Preview review](skills/validate-unreal-production/references/13-production-pipeline.md#ue-59-megajam-preview) or its [Korean edition](skills/validate-unreal-production/references/ue-5-9-preview.ko.md). It records the 5.8 cases and the UE5_9 project runs, including the conditions under which each result can guide adoption.
 
 The [PCG learning-fixture case](skills/analyze-unreal-development-cases/references/16-case-studies.md#case-an-inspectable-pcg-learning-fixture-is-not-a-production-starter)
 and its [Korean review](skills/analyze-unreal-development-cases/references/pcg-learning-reuse.ko.md)

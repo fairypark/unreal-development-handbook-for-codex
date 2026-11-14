@@ -11,17 +11,36 @@
 
 두 사례에서 가져갈 것은 확인 방법이다. 신규 빌드의 저장·재생성 결과는 그 빌드에서 다시 관찰해야 한다. 11장과 13장의 Horde 인용은 당시 문서를 다시 읽을 수 있도록 5.8판에 연결했다. [Epic Horde Automation Hub 5.8](https://dev.epicgames.com/documentation/en-us/unreal-engine/horde-automation-hub-for-unreal-engine?application_version=5.8)
 
-## 이번에 5.9 프리뷰에서 직접 확인한 한 가지
+## 이전 릴리즈의 5.9 빈 프로젝트 시험
 
 Windows의 **UE 5.9.0 CL 60351404**에서 별도 빈 프로젝트를 만들었다. 명령줄 에디터에서 Python으로 Actor Blueprint를 복제하고 복제본에 빈 함수 그래프 하나를 추가해 컴파일·저장했다. 첫 프로세스를 종료하고 새 에디터 프로세스에서 두 에셋을 열었다. **함수는 복제본에만 남았고 다시 컴파일됐다.** 이 시험은 직접 Python으로 편집한 그래프의 저장 범위를 확인했다. MCP를 통한 편집, 루트 컴포넌트 교체, 게임 플레이는 시험하지 않았다. [6장 원문](../../design-unreal-blueprint-and-cpp/references/06-blueprint.md#scripted-graph-edits-in-ue-59-preview)
 
-## Epic이 공지한 변화와 아직 실행하지 않은 프로젝트 시험
+## UE5_9 프로젝트에서 직접 확인한 결과
 
-| 판단할 문제 | Epic이 문서화한 내용 | 프로젝트에서 해 볼 가장 작은 확인 |
+Windows의 UE 5.9.0 CL 60351404에서 기존 1인칭 C++ 프로젝트와 프로젝트 안의 전용 시험 맵을 사용했다. GPU는 RTX 4090, 드라이버는 621.14, 렌더링 경로는 D3D12/SM6였다.
+
+| 결정 | 실제로 확인한 결과 | 적용 범위와 남은 한계 |
 | --- | --- | --- |
-| **AI 화면으로 실제 숲의 밀도를 판단할 수 있을까?** | 5.9 프리뷰에는 뷰포트 화면을 AI로 실시간 가공하는 기능이 있다. [프리뷰 릴리즈 노트](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-9-release-notes?application_version=5.9) | 같은 장면·게임 카메라로 AI 가공을 끈 원본을 함께 찍는다. 가공본은 원하는 분위기를 고를 때 쓰고, 나무 사이의 실제 빈틈은 원본에서 확인한다. [10장](10-rendering.md#evidence-strategy) · [12장](12-validation-testing-debugging.md#evidence-integrity) |
-| **에이전트가 이 Blueprint를 편집할 수 있을까?** | Preview 1의 새 프로젝트에서는 MCP 연결이 성공해도 편집 도구가 빠질 수 있다(UE-412135). Python으로 Blueprint 루트 컴포넌트를 바꿀 때 충돌할 수 있다는 보고도 있다(UE-411502). [Epic 알려진 문제](https://forums.unrealengine.com/t/unreal-engine-5-9-megajam-preview/2852840/3) | 연결한 에디터가 맞는지, 필요한 도구가 실제로 보이는지, 요청에서 해당 편집을 허용했는지 확인한다. 그 경로로 복제본 하나를 편집하고 컴파일·저장·다시 열기를 확인한 뒤 일괄 적용을 판단한다. [8장](../../design-unreal-automation-and-pcg/references/08-automation-python.md#python-as-an-option) · [15장](../../guide-unreal-ai-development/references/15-ai-assisted-development.md#evidence-and-independent-evaluation) |
-| **Lumen 조명과 성능이 달라진 원인은 무엇일까?** | 새 World Cache는 기본값이 꺼져 있고 Lumen 하드웨어 레이 트레이싱에서 쓴다. 장면을 실행하는 동안 조명 정보를 채운다. [Epic World Cache 문서](https://dev.epicgames.com/documentation/en-us/unreal-engine/lumen-world-cache-in-unreal-engine?application_version=5.9) | 같은 5.9 빌드·GPU·해상도·조명·카메라 동선에서 캐시만 끄고 켠다. 처음 진입한 화면과 조명이 안정된 화면, 각각의 GPU 프레임 시간을 비교한다. 5.8 장면과 새 장면만 비교하면 캐시 효과를 분리하기 어렵다. [11장](11-performance-scalability.md#comparing-lumen-world-cache-in-ue-59-preview) |
-| **웹 게임이 새로고침 뒤에도 진행도를 유지할까?** | Preview 1의 Launcher 기반 C++ 웹 게임에서 새로고침 후 저장·설정이 사라지는 문제(UE-412003)가 보고됐다. [Epic 알려진 문제](https://forums.unrealengine.com/t/unreal-engine-5-9-megajam-preview/2852840/3) | 시험용 저장 슬롯으로 등대에 도착해 보상을 받고 저장한다. 같은 브라우저 프로필과 사이트 주소에서 새로고침한다. 등대에서 이어지고 보상을 두 번 받을 수 없는지 확인한다. [13장](13-production-pipeline.md#can-players-keep-progress-made-after-an-update) |
-| **Mesh Terrain이나 Nanite를 쓰면 식생 비용까지 줄어들까?** | 5.9에서 Mesh Partition과 PCG 연동이 개선됐다. Mesh Terrain은 실험 기능이며, Nanite의 내부 가시성 계산 개선과 별개로 문서는 뷰별 거리 컬링을 미지원으로 표기한다. [Mesh Terrain](https://dev.epicgames.com/documentation/en-us/unreal-engine/crafting-mesh-terrain-in-unreal-engine?application_version=5.9) · [Nanite](https://dev.epicgames.com/documentation/en-us/unreal-engine/nanite-virtualized-geometry-in-unreal-engine?application_version=5.9#rendering) | 돌출 지형이 필요하면 한 구간에서 아래쪽 보행과 위·아래 식생의 접지를 확인한다. 단순한 언덕이라면 기존 Landscape로도 충분할 수 있다. 같은 식생 동선에서 화면에 보이는 변화, 실제 생성 수, 메모리와 프레임 시간을 각각 본다. [4장](../../design-unreal-worlds-and-levels/references/04-world-level-design.md#terrain-representation-review-before-broad-terrain-mutation) · [9장](../../design-unreal-automation-and-pcg/references/09-procedural-systems-pcg.md#version-sensitive-rendering-and-culling-decisions) |
-| **PCG Paint가 칠하는 즉시 갱신될까?** | 5.8.4에는 한 번 칠한 결과가 즉시 보이지 않는 문제(UE-401568)가 있었다. 검토한 5.9 프리뷰 노트에서 수정 여부는 확인되지 않았다. [5.8.4 공지](https://forums.unrealengine.com/t/5-8-4-hotfix-released/2842775) · [5.9 프리뷰 노트](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-9-release-notes?application_version=5.9) | 복사한 장면에 한 번 칠하고 다른 조작을 하기 전에 출력이 바뀌는지 본다. 재생성 및 저장 후 다시 열어서 배치가 남는지도 따로 확인한다. |
+| **Blueprint 편집을 일괄 적용해도 될까?** | 이 프로젝트의 MCP 편집 도구로 1인칭 GameMode 복제본에 함수 하나를 추가하고 경고를 오류로 처리해 컴파일·저장했다. 새 프로세스에서 원본과 복제본을 다시 컴파일했고 함수는 복제본에만 있었다. | 도구가 활성화된 프로젝트에서 확인했다. 새 프로젝트의 기본 도구 구성, 루트 컴포넌트 교체, 함수의 플레이 중 실행은 별도 시험이 필요하다. [6장](../../design-unreal-blueprint-and-cpp/references/06-blueprint.md#scripted-graph-edits-in-ue-59-preview) |
+| **겹친 지형의 아래로 걸으면서 위·아래에 따로 배치할 수 있을까?** | World Partition 맵에 Mesh Partition 사각면 두 장을 4m 간격으로 놓았다. 1인칭 캐릭터는 위쪽 면 아래를 통과했고 이동 표본 39개가 모두 보행 상태였다. 같은 수평 위치에서 높이 9m와 3m부터 아래로 쏜 충돌 검사는 각각 4m와 0m의 면을 맞혔다. PCG 그래프도 두 수평 위치에서 시작 높이를 달리해 네 점을 의도한 면에 놓았다. | 위에서 한 번만 쏘면 아래층을 놓친다. 이 결과는 두 사각면과 직선 경로에 해당한다. 자연 동굴의 복잡한 모양, 셀을 넘는 스트리밍, 배포 빌드에서의 보행은 미검증이다. |
+| **PCG Paint가 칠한 결과를 바로 보여 줄까?** | Place Tool에 나무 메시를 지정하고 나무 한 그루가 있는 상태에서 뷰포트를 한 번 칠했다. 클릭 반환 후 0.015초에는 입력점 2개와 나무 1개였고, 추가 조작 없이 0.281초에는 나무도 2개였다. 재생성 뒤에도 2개였고 새 프로세스에서 저장된 액터를 열었을 때 나무 두 그루의 좌표가 입력점과 일치했다. | 한 브러시·그래프·메시 조합의 결과다. 다른 그래프와 입력 장치에서 5.8.4의 지연 문제가 해소됐는지는 열려 있다. [Epic 이슈 기록](https://forums.unrealengine.com/t/5-8-4-hotfix-released/2842775) |
+| **Lumen World Cache를 켜면 빨라질까?** | 1인칭 카메라를 고정하고 캐시를 끔 → 켬 → 끔 순서로 바꿨다. 각 구간은 225프레임이었다. GPU 시간 중앙값은 초반에 4.76 / 3.75 / 4.04ms, 후반에 3.95 / 3.61 / 3.93ms였다. 샘플 번호는 0부터 세어 8–31과 140–174를 사용했다. 별도 GPU 프로파일에서 캐시를 켰을 때만 관련 패스를 확인했고 1503 × 847 게임 화면도 기록했다. | 이미 로드된 장면에서 설정을 전환했다. 새 실행으로 처음 들어갈 때의 조명, 이동 중 화면이 안정되는 시점, 다른 GPU와 배포 빌드의 비용은 측정하지 않았다. [Epic World Cache](https://dev.epicgames.com/documentation/en-us/unreal-engine/lumen-world-cache-in-unreal-engine?application_version=5.9) |
+| **Nanite를 켜면 생성한 식생 수도 줄어들까?** | 기존 PCG 식생 맵에서 같은 경로를 세 번 이동했다. 둥근 나무 메시만 원본 → Nanite 복제본 → 원본으로 바꿔도 둥근 나무 71개와 전체 인스턴스 25,838개가 매번 그대로였다. | 아래 측정 기록을 함께 읽어야 한다. |
+
+
+**식생 비용을 읽는 법.** 원본 / Nanite / 원본 순으로 210프레임씩 기록했다. 각 구간의 20–194번 표본에서 전체 프레임 시간 중앙값은 10.76 / 13.45 / 25.14ms, 로컬 GPU 메모리는 5,044 / 5,013 / 5,012MB였다. 세 구간 모두 같은 컴포넌트를 이동 가능 상태로 두었다. 마지막 구간에 다른 에디터가 시작됐고 같은 원본의 두 측정값도 벌어졌다. 생성 수는 비교할 수 있지만, 속도 우열이나 나무 한 종류의 메모리 비용은 이 숫자로 판단할 수 없다. 화면에서 실제 그린 Nanite 클러스터 수도 별도 측정이 필요하다.
+
+### 웹 체크포인트와 일회성 보상
+
+UE5_9를 Emscripten 6.0.10으로 Wasm Shipping 패키징하고 로컬 HTTP 주소에서 Chrome 157.0.8103.78(헤드리스, WebGPU, 포워드 렌더러)으로 실행했다. 시험 코드는 실제 플레이어를 표식으로 이동시켜 체크포인트와 보상 1회 수령 기록을 Unreal 저장 슬롯에 썼다. 새로고침 뒤 저장값이 맞아야 플레이어를 표식으로 복원하고 보상을 다시 청구하도록 했다.
+
+| 같은 빌드에서 바꾼 조건 | 최초 수령·저장 | 같은 프로필·주소에서 새로고침한 결과 |
+| --- | --- | --- |
+| 기본 페이지 인자 | 표식 도착, 보상 1개, 저장 성공 | 슬롯을 읽지 못해 표식을 복원하지 못했다. 재청구 단계에 도달하지 못했다. |
+| 기존 인자에 `-project=../../../UE5_9/UE5_9.uproject` 추가 | 새 시험 프로필에서 표식 도착, 보상 1개, 저장 성공 | 슬롯을 읽고 체크포인트 내용과 표식 위치를 확인했다. 다시 청구했을 때 추가 보상은 0개였다. |
+
+이 빌드에서는 **저장 성공 뒤에도 새로고침으로 진행도가 사라졌고, Epic의 경로 인자를 적용하면 복원됐다.** 모바일, 다른 브라우저, 이전 버전의 저장 파일 이전은 별도 시험이 필요하다. [Epic UE-412003 공지와 우회 방법](https://forums.unrealengine.com/t/unreal-engine-5-9-megajam-preview/2852840/3)
+
+### AI 가공 화면은 어디까지 확인했나?
+
+1인칭 게임 카메라에서 1503 × 847 원본을 캡처했다. UE5_9를 별도로 열어 Unreal Canvas Bridge를 활성화하고 Canvas v0.21.0을 시작했다. 실제 에디터 뷰포트 스트림에서 512 × 268 RGBA 프레임(548,864바이트)을 받았다. Canvas의 기본 로컬 ComfyUI 주소는 시험 시 연결되지 않았다. 같은 게임 카메라 입력을 AI 모델이 가공한 결과는 확보하지 못했다. 숲의 빈 공간이나 실제 배치를 판단할 때 쓸 수 있는 증거는 게임 원본까지다. [Epic 프리뷰 기능 설명](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-9-release-notes) · [10장](10-rendering.md#evidence-strategy)
