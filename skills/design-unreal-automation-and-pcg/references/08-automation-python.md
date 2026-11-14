@@ -141,6 +141,8 @@ claiming that the reusable reference reduced total authoring time.
 
 Prefer Python when the required Unreal API is exposed, rapid iteration matters, and deployment can reliably load and reload the package. Prefer C++ or another supported surface when coverage, lifecycle, performance, distribution, or testing requirements are not met. Stop and report an API gap rather than emulating unsupported behavior unsafely.
 
+In UE 5.9 Preview, an MCP connection can succeed while a new project exposes no level-editing tools (Epic issue UE-412135). Inspect the tools offered by the intended Editor instance and the requested scope of work before planning a batch. If the operation is available and authorized, try the [single-copy Blueprint check](../../design-unreal-blueprint-and-cpp/references/06-blueprint.md#scripted-graph-edits-in-ue-59-preview). A direct Python test exercises a different entry point from an agent calling an MCP tool. [Epic's Preview 1 issue report](https://forums.unrealengine.com/t/unreal-engine-5-9-megajam-preview/2852840/3)
+
 ## Recommended workflow
 
 1. Prove the responsibility manually or with a small benchmark.

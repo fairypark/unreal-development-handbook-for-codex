@@ -43,6 +43,12 @@ Do not choose Blueprint by default when the work requires unsupported engine acc
 6. Validate runtime behavior, serialization, replication, and teardown as applicable.
 7. Profile before moving work to C++ for performance.
 
+### Scripted graph edits in UE 5.9 Preview
+
+Before applying a scripted Blueprint change to many assets, try the intended edit on one duplicate. Compile it, save, close the Editor and reopen the copy. Check the changed graph and confirm the source still has its original structure. Epic expanded Blueprint graph scripting in this Preview and reported a crash when Python replaces a Blueprint root component (UE-411502). A successful function-graph edit covers that operation only. Assess a root change separately if the design actually needs it. [Preview notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-9-release-notes?application_version=5.9) · [Preview 1 issues](https://forums.unrealengine.com/t/unreal-engine-5-9-megajam-preview/2852840/3)
+
+**Observed on Windows, 2026-11-14.** On UE 5.9.0 CL 60351404, a headless Editor running Python duplicated an Actor Blueprint, added one empty function graph to the copy, compiled and saved it. A fresh Editor process found the graph only in the copy and compiled it again. This verifies graph persistence through this Python entry point. MCP access, changing a component root and gameplay execution were outside the test.
+
 ## Validation checklist
 
 - No unresolved compile errors or unexplained warnings.

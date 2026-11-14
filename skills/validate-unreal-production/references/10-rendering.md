@@ -57,6 +57,8 @@ Use beauty evidence for final visual judgment and diagnostic passes for diagnosi
 
 When a capture path itself prevents comparable temporal history, distinguish capture failure from content failure. A replacement path needs a recorded reason, authority, preserved camera and render conditions, original frames, freshness and integrity checks, and measured settlement. Classify the alternative evidence honestly; a diagnostic health receipt from another camera cannot authenticate or approve the replacement images. A substitute is unavailable when the controlling project contract requires an evidence property it cannot provide. Detailed capture adapters and verification procedures belong in Editor Skills.
 
+UE 5.9 Preview can display a live AI-processed viewport. A preview that fills gaps in a tree line can help choose an art direction. To judge the built level, capture the same scene through the target game camera with AI processing off. Keep both frames labeled and record which path produced each. If the game frame is missing, the density decision is still open. For changes in indirect lighting, compare the [two Lumen cache paths](11-performance-scalability.md#comparing-lumen-world-cache-in-ue-59-preview). [Epic's Preview notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-9-release-notes?application_version=5.9)
+
 ## Validation checklist
 
 - Primary and secondary subjects remain readable under target exposure.
@@ -79,8 +81,8 @@ When a capture path itself prevents comparable temporal history, distinguish cap
 
 ## Research basis and further reading
 
-- [Epic Games: State of Unreal 2026](https://www.unrealengine.com/news/state-of-unreal-2026-top-news) — UE 5.8 feature maturity, Lumen Lite, Mesh Terrain, shader compilation, and PSO pre-caching context.
-- [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-8-release-notes) — version-specific rendering changes and production status notes.
+- [Epic Games: State of Unreal 2026](https://www.unrealengine.com/news/state-of-unreal-2026-top-news-from-the-show) — UE 5.8 feature maturity, Lumen Lite, Mesh Terrain, shader compilation, and PSO pre-caching context.
+- [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-8-release-notes?application_version=5.8) — version-specific rendering changes and production status notes.
 - [Epic Games: MegaLights](https://dev.epicgames.com/documentation/en-us/unreal-engine/megalights-in-unreal-engine) — lighting trade-offs, hardware ray tracing, HLOD far field, sampling, and scalability implications.
 
 ## Related topics

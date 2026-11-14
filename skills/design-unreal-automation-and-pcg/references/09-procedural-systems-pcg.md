@@ -221,6 +221,10 @@ For any version-sensitive rendering or visibility feature, record the engine bui
 
 For broad PCG coverage, choose non-partitioned, partitioned, hierarchical, or runtime generation from ownership and time-to-screen requirements. Validate grid ownership, source and cleanup radii, Data Layer and HLOD behavior, scheduler work, and transitions while moving or teleporting. The choice is a production contract, not a post-hoc optimization toggle.
 
+**UE 5.9 Preview comparison.** Epic describes faster internal Nanite culling. Its geometry reference still lists view-specific distance culling as unsupported. For a forest with a distance budget, repeat one camera route and record visible transitions, generated instances, memory and frame time separately. [Preview notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-9-release-notes?application_version=5.9) · [Nanite rendering limitations](https://dev.epicgames.com/documentation/en-us/unreal-engine/nanite-virtualized-geometry-in-unreal-engine?application_version=5.9#rendering)
+
+PCG Paint has a separate authoring risk. Epic recorded delayed updates after a paint stroke in 5.8.4 (UE-401568). The reviewed Preview notes do not establish a fix. In a copy, paint one patch, inspect the output before any other action, then regenerate and reopen. Record immediate feedback and saved placement separately. [5.8.4 issue report](https://forums.unrealengine.com/t/5-8-4-hotfix-released/2842775)
+
 ## Ecology and placement
 
 Build canopy, understory, shrubs, ground cover, deadfall, and contact debris as distinct strata. Use gradients, clusters, transitions, and intentional gaps rather than uniform scatter or perimeter rings. Validate broad assets across their visual footprint; a center hit or grounded point count does not prove believable support.
@@ -307,10 +311,10 @@ Additional current context:
 - [Epic Games: Working with PCG and LLMs Using Unreal MCP](https://dev.epicgames.com/documentation/unreal-engine/working-with-pcg-and-llms-using-unreal-mcp-in-unreal-engine?lang=en-US) - a dated example of reference-driven procedural assistance, example reuse, and incremental supervision.
 - [Epic Games: `RunPCGInstantGraph`](https://dev.epicgames.com/documentation/unreal-engine/API/Plugins/PCGToolset/UPCGSpatialToolset/RunPCGInstantGraph?lang=en-US) - a version-sensitive implementation example of one-off graph execution; it does not define the durable lifetime contract.
 - [Epic Games: PCG Node Reference](https://dev.epicgames.com/documentation/en-us/unreal-engine/procedural-content-generation-framework-node-reference-in-unreal-engine) - Distance, Surface Sampler, Get Landscape Data, and Static Mesh Spawner semantics; verify node options against the target engine version.
-- [Epic Games: Nanite Virtualized Geometry](https://dev.epicgames.com/documentation/en-us/unreal-engine/nanite-virtualized-geometry) - Nanite streaming, supported features, and version-sensitive rendering limitations.
+- [Epic Games: Nanite Virtualized Geometry](https://dev.epicgames.com/documentation/en-us/unreal-engine/nanite-virtualized-geometry-in-unreal-engine?application_version=5.8) - Nanite streaming, supported features, and version-sensitive rendering limitations.
 - [Epic Games: Cull Distance Volumes](https://dev.epicgames.com/documentation/en-us/unreal-engine/cull-distance-volumes-in-unreal-engine) - distance-cull configuration and popping checks for supported actor representations.
 - [Epic Games: PCG Development Guides](https://dev.epicgames.com/documentation/en-us/unreal-engine/pcg-development-guides) — current PCG authoring and workflow context; verify feature names and maturity against the target engine version.
-- [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-8-release-notes) — dated evidence for the Manual Edit tool, Data Overrides Panel, and experimental Data Override System; use these as implementations of the override contract, not as the durable principle itself.
+- [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-8-release-notes?application_version=5.8) — dated evidence for the Manual Edit tool, Data Overrides Panel, and experimental Data Override System; use these as implementations of the override contract, not as the durable principle itself.
 - [Epic Games: PCG and Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/pcg-and-mesh-terrain-in-unreal-engine) — version-sensitive query/write layers, priority and sub-priority, and feedback-loop considerations for PCG with Mesh Terrain; use the data-flow contract above rather than copying a node recipe.
 
 ## Related topics
