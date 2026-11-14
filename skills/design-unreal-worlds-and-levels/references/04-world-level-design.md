@@ -186,6 +186,8 @@ approver records the decision. A local `BOUNDED_PROTO_EDIT` on already accepted
 terrain does not reopen this review unless it changes the representation
 assumption or protected terrain scope.
 
+UE 5.9 Preview improves how Mesh Partition works with PCG. Epic still classifies Mesh Terrain as Experimental. For an overhang the player must pass beneath, try one section in a copy of the level. Generate its gameplay geometry, walk under it in PIE and inspect where the PCG output lands above and below the ledge. An ordinary hillside already served by Landscape gives little reason to change representation. This comparison remains a project test. [Preview notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-9-release-notes?application_version=5.9) · [Mesh Terrain gameplay requirements](https://dev.epicgames.com/documentation/en-us/unreal-engine/crafting-mesh-terrain-in-unreal-engine?application_version=5.9)
+
 ### Bounded level-prototype iteration
 
 Within the exploration loop, keep ordinary edits on a fast, reversible path.
@@ -850,7 +852,7 @@ These sources support the durable principles above without implying that one stu
 - [Epic Games: World Partition](https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition-in-unreal-engine?lang=en-US) — streaming sources, actor loading policy, HLOD, and large-world data management.
 - [Epic Games: World Partition - Data Layers](https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition---data-layers-in-unreal-engine?lang=en-US) — editor organization, runtime state, and Data Layer ownership.
 - [Epic Games: Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/mesh-terrain-in-unreal-engine) — the version-sensitive Mesh Terrain representation, its Experimental status, and support for terrain relationships that a heightfield cannot express; verify the target build.
-- [Epic Games: Crafting Mesh Terrain](https://dev.epicgames.com/documentation/unreal-engine/crafting-mesh-terrain-in-unreal-engine) — World Partition, terrain scale, modifiers, priority, and production-context prerequisites; use it to inform the comparison, not as an editor procedure here.
+- [Epic Games: Crafting Mesh Terrain](https://dev.epicgames.com/documentation/en-us/unreal-engine/crafting-mesh-terrain-in-unreal-engine?application_version=5.9) — World Partition, terrain scale, modifiers, priority, and production-context prerequisites; use it to inform the comparison, not as an editor procedure here.
 - [Epic Games: Level Design Content Examples](https://dev.epicgames.com/documentation/en-us/unreal-engine/level-design-content-examples?application_version=4.27) — an illustrative Prototype → Meshing → Lighting → Polish progression.
 - [GDC Vault: Invisible Intuition — Blockmesh and Lighting Tips](https://www.gdcvault.com/play/1025179/Level-Design-Workshop-Invisible-Intuition) — blockmesh, player guidance, lighting, and early playtest reasoning from Naughty Dog and NYU Game Center contributors.
 - [The Level Design Book: Blockout](https://book.leveldesignbook.com/process/blockout) and [Playtesting](https://book.leveldesignbook.com/process/blockout/playtesting) — massing, metrics, wayfinding, playable blockouts, and testing as the design experiment.

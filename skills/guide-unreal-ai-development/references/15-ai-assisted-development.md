@@ -170,6 +170,8 @@ Give evaluators raw artifacts, the applicable rubric, previous comparable eviden
 
 If independent review is unavailable, perform a separate self-review pass and label it honestly. Do not claim equivalent independence.
 
+UE 5.9 Preview makes two boundaries visible in one workflow. Inspect the selected Editor's tool inventory and the user's authorized action before directing an agent to edit. During review, identify whether the evaluator received an AI-processed viewport or a capture of the actual game. A richer preview can justify trying a composition. A matching game-camera capture can show whether the scene delivers it. [Automation capability check](../../design-unreal-automation-and-pcg/references/08-automation-python.md#python-as-an-option) · [Capture evidence](../../validate-unreal-production/references/10-rendering.md#evidence-strategy)
+
 ## Failure containment
 
 - Use reversible increments and source-control checkpoints.
@@ -263,7 +265,7 @@ source of approval authority.
 - [Epic Games: `UAgentSkill`](https://dev.epicgames.com/documentation/unreal-engine/API/Plugins/ToolsetRegistry/UAgentSkill?lang=en-US) - a version-sensitive implementation example for registering agent guidance; inheritance and API details are not the durable Skill contract.
 - [Epic Games: Unreal MCP](https://dev.epicgames.com/documentation/unreal-engine/unreal-mcp-in-unreal-editor) — current editor-agent integration guidance; availability, APIs, and data formats are version-dependent, so use it as an example of a control boundary rather than a permanent contract.
 - [Epic Games: Working with PCG and LLMs Using Unreal MCP](https://dev.epicgames.com/documentation/unreal-engine/working-with-pcg-and-llms-using-unreal-mcp-in-unreal-engine?lang=en-US) — grounds agent context in project references and favors planning, review, and incremental supervision.
-- [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-8-release-notes) — describes Sandbox workspaces as isolated areas whose changes can be selectively persisted; treat this as a dated feature reference, not a replacement for project review and source control.
+- [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-8-release-notes?application_version=5.8) — describes Sandbox workspaces as isolated areas whose changes can be selectively persisted; treat this as a dated feature reference, not a replacement for project review and source control.
 
 ## Related topics
 

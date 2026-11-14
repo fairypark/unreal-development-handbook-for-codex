@@ -253,6 +253,8 @@ Bind reference-to-prototype evidence additionally to the source artifact and cro
 
 When independent acceptance matters, keep the evaluator read-only and withhold the builder's intended verdict or persuasive self-assessment. A focused target pass closes only that target; unresolved hard failures continue to block full acceptance.
 
+A 5.9 Preview viewport may include a generative pass. For a level-density review, keep the [original game-camera frame and its processed counterpart](10-rendering.md#evidence-strategy) identifiable. If only the processed image survives, it can inform concept review while player-facing density remains unverified. For a browser release, a successful launch answers a different question from [retaining a checkpoint after reloading](13-production-pipeline.md#can-players-keep-progress-made-after-an-update).
+
 ### Archive validity and diagnostic readability are separate claims
 
 Rechecking stored evidence may confirm file integrity, repeatability, and the
