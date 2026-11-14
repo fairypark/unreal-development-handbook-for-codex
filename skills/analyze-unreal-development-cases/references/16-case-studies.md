@@ -4,6 +4,18 @@
 
 Convert real Unreal outcomes, failures, migrations, optimizations, and production incidents into evidence-backed applied reasoning without turning anecdotes into universal recipes.
 
+## Decision contrast: A useful lesson needs a supported mechanism and a limit
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A before/after scene improves after geometry, materials, distribution, and lighting all change. A second small trial changes only one material under comparable conditions.
+
+**Choice and reason.** The broad result can support a scoped outcome and several causal hypotheses. The narrower trial can support a more specific material explanation within its conditions. Retain both, with their evidence classes and uncertainty.
+
+**When the choice changes.** Even a controlled local comparison does not prove whole-project performance or universal parameter values. A well-explained failed experiment can teach a better decision than a flattering but untraceable success story.
+
+**Smallest useful test.** Separate observation from interpretation, name competing causes, and propose a counterexample. Test the extracted decision on a changed-context exercise before turning it into general guidance.
+
 ## Admission criteria
 
 A case belongs here only when it records:
@@ -33,6 +45,10 @@ If evidence is missing, publish an investigation note or candidate case rather t
 10. **Lessons** — cause-level rules, applicability, and non-applicability.
 
 ## Candidate patterns requiring evidence
+
+Use retained cases alongside the decision contrasts at the start of each domain chapter. Before reading a case's decision, ask what matters, which alternative seems appropriate, and what evidence would change that choice. After reading, compare the reasoning rather than memorize the selected implementation. Change one important condition and explain whether the recommendation still applies.
+
+An observed failure can be useful before its recovery is proved. Keep the failed outcome, causal hypotheses, proposed repair, and verified recovery separate. A constructed contrast can teach an option that has not been executed, but must remain labeled as a teaching scenario. Neither status grants production authority.
 
 The migrated Editor guidance suggests useful future cases, but these remain candidates until source artifacts are preserved:
 
@@ -450,6 +466,130 @@ The source records are summarized as observations, not a controlled benchmark. I
 Use source capability checks to stop an unproductive placement loop; couple substrate and placement through explicit spatial data when the concept needs continuity; narrow revalidation to the affected dependency scope while retaining scene regression; and inspect repetition again after expansion. Archive approved sources with their dependency class and evidence so future work can start from inspectable candidates.
 
 Do not standardize the scene's blend ratios, transmission values, light settings, mesh representation, or capture workaround. The generated blades have no validated wind behavior or target-platform cost. A reusable collection needs a separate dependency and copy audit, and every new scene still needs its own visual comparison. These lessons refine Chapters 05, 09, and 10; they do not add a universal production gate or authorize asset redistribution.
+
+## Investigation note: local verification without a convincing whole world
+
+**Status:** observed failure with an untested recovery direction. The operator retained the user-provided whole-world panorama, local capture packets, save records, and failed visual reviews. Those project records are not bundled or redistributed with this Handbook. This note reports the qualitative failure; it is not a controlled comparison or a completed recovery case. See the paired [Korean case review](sparse-world-judgment-review.ko.md).
+
+### Intent and observed result
+
+The request was to use a large existing map for an environment explored and appreciated on foot. Actual assets were placed in several small areas, with substantial effort spent on local grounding, supports, material edges, and fixed-view review. The whole-world panorama still showed a small central settlement, tiny remote groups, broad empty travel space, and little intermediate structure. The requester rejected the result and questioned whether the blockout had been meaningfully completed.
+
+Local save and contact evidence existed. Several visual candidates also remained explicitly failed. Neither the successful local checks nor the existence of blockout proxies established that the global layout, perceived travel distance, settlement hierarchy, or connected walking experience had passed. The observed failure belongs to the delivered scope even when no whole-world success was formally claimed.
+
+The retained records also include a prior blockout-stage `PASS` and limited actual-player route checks. That approval authorized only bounded visual slices and explicitly withheld broad dressing and whole-level approval. It would therefore be inaccurate to record that no blockout or review ever occurred. The failure concerns the adequacy and scope of the observation, the interpretation of that approval, and the later decision to keep repairing local systems while the intended global result remained weak. The record does not establish that all earlier evidence was invalid or that the reviewer acted dishonestly.
+
+### Explanations and alternatives
+
+The evidence is consistent with a mismatch between world scale and authored experience, insufficient macro-layout validation, and prolonged local repair at the wrong decision scale. It does not isolate their individual contribution or prove that the Handbook alone caused the behavior. The relevant principles were already present; applying and testing them was also a failure.
+
+Three possible responses have different purposes:
+
+- More small props can improve local detail once the larger place works, but do not by themselves establish destination hierarchy or shorten unintentional empty travel.
+- Better materials and support geometry can fix visible local defects, but cannot determine whether several distant places form a coherent journey.
+- Reopening macro composition and the playable blockout can compare substantial destination groups, terrain framing, intermediate experiences, and intentional quiet at the requested scale. This was the proposed recovery direction; its success had not been established.
+
+### Why the proposed recovery is worth testing
+
+The next experiment should act on the relationships that the rejected overview and walking intent put in doubt. Preserve useful work and compare reversible macro alternatives under ordinary whole-world and player views. Ask whether the destination promises, approach choices, meaningful changes, and arrival payoffs become legible before committing more art. The original full-map request does not imply filling every surface, reducing the world without agreement, or imposing one fixed encounter interval.
+
+A quiet desert, a vehicle route, and a compact walking settlement can need very different distributions. A successful repair would need evidence from this intended experience; the proposed choice is not a universal instruction to make all worlds denser.
+
+### Transferable lesson and unresolved proof
+
+Use local evidence for local claims and whole-system evidence for whole-system decisions. When local repairs repeatedly leave the main failure unchanged, reopen diagnosis at the scale of that failure rather than make another procedural requirement. A Handbook contribution should help the next reader identify that priority and explain its mechanism and limits.
+
+The case does not establish a recovered level, optimal density, a preferred terrain representation, quantified improvement, or causal superiority of a new editorial approach. Test the proposed teaching through unfamiliar [judgment exercises](../../validate-unreal-production/references/judgment-evaluation.md) and the eventual level through its own blockout and production evidence.
+
+## Case: An inspectable PCG learning fixture is not a production starter
+
+**Evidence class and scope:** observed Editor learning diagnostic, with retained
+technical snapshots and a scoped independent visual recovery. The operator
+retained the source evidence on 2026-10-25; those project records and images are
+not bundled or redistributed here. This is not a controlled speed benchmark,
+runtime test, or production-environment approval. The paired
+[Korean review](pcg-learning-reuse.ko.md) covers the case and chapter additions.
+
+### Intent, context, and alternatives
+
+The requester prioritized understanding Electric Dreams-inspired PCG
+relationships over a finished jungle. An accepted four-cell distribution and
+exclusion comparison was preserved while a new non-partitioned fixture added
+hierarchy, aim, and multi-point support comparisons. The target Editor build
+was UE 5.8.3; primitive meshes and explicit query-source surfaces kept the
+mechanisms inspectable.
+
+Rebuilding the whole sample would have introduced unrelated content and
+dependencies. Immediately dressing a forest would have made rule errors hard
+to separate from art direction. The selected approach reconstructed only the
+needed relationships, isolated an owned support-filter copy, validated data
+before spawning, and required fixed-view teaching clarity afterward. This
+traded production realism for cheaper discriminating observations; the fixture
+could not retire a real environment's scene or runtime risks.
+
+### Observations and recovery
+
+| Observation | Decision supported | Limit |
+| --- | --- | --- |
+| Parent variation changed descendant transforms; removing a required parent reduced visible members from 9 to 6. | Preserve explicit relative-transform and dependency semantics rather than scatter related parts independently. | The tested primitive assembly was not a production asset family. |
+| Eight control glyphs and eight target-driven glyphs used a declared local axis; target variation changed both the aim and marker. | Declare mesh-axis and coordinate conventions before choosing an orientation operation. | Another mesh may require another axis; this does not choose a universal look-at operation. |
+| Center samples admitted three support cases while four-corner sampling admitted only flat and ramp cases. The step had a 60 cm residual against a 5 cm fixture threshold. Permissive height tolerance or shorter sample spacing admitted it again. | Match samples and tolerance to the support footprint; retain a known failure to expose under-sampling. | These fixture dimensions and thresholds are not reusable defaults or complete proof for arbitrary shapes. |
+| A query produced three records with invalid density/hit identity and unprojected height. Inspecting the target build's query semantics and matching the source filter restored valid hits. | Inspect actual hit state and consumer semantics, not count alone; change the failing query before changing known surfaces. | The engine-specific filter correction is not a rule for every trace or engine version. |
+| Intended material overrides existed for thirteen spawners, but seven generated components lacked them. After a bounded output-configuration refresh, the colors appeared while instance matrices stayed unchanged. | Compare intended configuration with actual generated resources before repairing lighting or geometry. | Cache reuse is a plausible explanation, not an isolated causal result; the incidental refresh action is not a universal invalidation recipe. |
+| The first visual review scored hierarchy and aim 2/5, support 3/5, and annotation 1/5. The intentional center-only failure could look like a success. | A diagnostic must visibly explain its contrast, even when its mathematics is correct. | Debug colors and explanatory signs are appropriate to the learning role, not an art-direction prescription. |
+
+The repair changed the owned diagnostic presentation while preserving points,
+source fixtures, lights, and eight comparison cameras. Hierarchy groups,
+control/aimed/target roles, center-only false positive, and corner-hit markers
+became legible. The independent reviewer then scored every applicable visual
+category at least 4/5 for the Editor learning scope. Distant overview text and
+some edge text remained nonblocking limitations covered by local fixed views.
+
+### Technical evidence and unresolved scope
+
+Thirteen managed resources contained 232 instances: 227 main outputs including
+one target marker, plus five separate diagnostic objects. Actual world matrices
+matched validated data across two generations and a real saved reopen, both
+before and after presentation repair. The reopened state was retained before
+regeneration. Generated outputs had no collision, navigation influence, or
+overlap events; only the declared source fixtures provided query collision.
+Protected original content was unchanged in the retained checks.
+
+The operator's evidence set includes `S1-data-validation.json`,
+`S2-output-validation.json`, failed and accepted `independent-S2-review`
+records, raw generation/reopen snapshots, and eight fixed-camera images with
+capture and handoff-verification records. The repeated world-matrix digest was
+`8a9a4947149777242f2c24fa71cd0fc961f4f1a66999bf60c5330adfe3fc6063`.
+The Handbook reports the retained observations; it does not independently
+re-run the Editor or distribute those project assets.
+
+Whole-sample Blueprint implementation equivalence, PIE, runtime scheduling,
+performance, packaging, integration with real environment assets, and total
+authoring-time savings were not established. Reference branches had not been
+extracted into a general production subgraph library.
+
+### Transferable decisions and changed-context checks
+
+Reuse the relation, expected variation, failure signal, and verification
+boundary. Replace context-specific axes, footprints, sources, parameters, and
+ownership. Keep historical builders distinct from safe next-task operations;
+keep archive rechecks non-destructive and distinct from new approval. Existing
+automation, procedural, and evidence principles already cover these choices;
+the case does not introduce another mandatory gate or document.
+
+Before generalizing, use two constructed questions: would a mesh with a
+different forward axis still satisfy the aim contract, and would a valid center
+with one unsupported corner satisfy this support responsibility? Change the
+recommendation when the responsibility changes—for example, a narrow anchor
+may not require the broad support test. These questions discriminate the rule
+from memorized settings; no held-out judgment improvement or speed gain has
+been measured.
+
+### Connections
+
+[Automation reuse](../../design-unreal-automation-and-pcg/references/08-automation-python.md#reuse-a-validation-contract-without-replaying-historical-mutations),
+[procedural transfer](../../design-unreal-automation-and-pcg/references/09-procedural-systems-pcg.md#reuse-a-proved-relationship-not-a-fixture-configuration),
+and [evidence claims](../../validate-unreal-production/references/12-validation-testing-debugging.md#archive-validity-and-diagnostic-readability-are-separate-claims).
 
 ## Evidence discipline
 

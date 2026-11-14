@@ -7,6 +7,12 @@ description: Turn an Unreal project outcome, failure, experiment, migration, opt
 
 Reconstruct the decision and its evidence before extracting lessons. Treat the case as applied reasoning, not a recipe.
 
+## First priority: contextual judgment from cases
+
+Apply the [first Handbook principle](../reason-about-unreal-development/references/00-philosophy.md#learn-judgment-from-cases-first) before selecting implementation or adding procedure. Start with the relevant chapter's decision contrast and, when useful, a retained evidence-backed case. Focus on observed outcomes, competing causes, transfer conditions, and counterexamples. Explain the mechanism that transfers, a context difference that could change the choice, and the smallest discriminating test.
+
+Keep this reasoning in the existing brief or review record. Do not add a new gate, mandatory literature search, or form to a routine task. Constructed teaching scenarios are not production evidence; existing source, safety, authorization, and promotion requirements remain in force. If a local repair cannot address the observed failure, reopen the diagnosis at the appropriate scale.
+
 ## Load the Handbook chapter
 
 Read [16-case-studies.md](references/16-case-studies.md) before admitting, structuring, or generalizing a case. Keep candidate cases explicitly pending when source evidence is incomplete.

@@ -4,11 +4,29 @@
 
 Define a shared quality system that distinguishes successful execution, correct behavior, production readiness, and trustworthy evidence.
 
+## Decision contrast: Validate the claim that matters
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A level passes many asset, collision, and save checks, but its player route remains monotonous and its main destination has no readable promise.
+
+**Choice and reason.** Keep the technical passes within their claim and test the missing experience directly. More structural checks cannot answer whether the route creates orientation, anticipation, and payoff.
+
+**When the choice changes.** When the disputed claim is a corrupted save or a broken joint, the relevant structural or persistence test is exactly the right evidence. Subjective approval cannot replace those checks either.
+
+**Smallest useful test.** Name the disputed outcome and the observation that could falsify it. Keep document integrity, operation success, player evidence, and promotion decisions distinct without creating redundant proof for unrelated claims.
+
 ## Intent
+
+Compare the [bounded-edit evidence case](../../analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-gate-narrowing-for-a-bounded-edit-on-an-accepted-prototype) with the [sparse-world failure](../../analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-local-verification-without-a-convincing-whole-world). A local postcondition can be sufficient for a local operation and insufficient for whole-level acceptance. The difference is the claim being tested, not the number of checks collected.
 
 Make success falsifiable before implementation. Diagnose failures by cause and preserve enough evidence to compare, recover, and prevent regression.
 
 ## Validation strategy
+
+### Evaluate the handbook's effect on judgment
+
+Keep structural document checks, contextual decision quality, and actual production outcomes as different claims. A valid schema, correct link, or quoted principle can detect a defect in the teaching package but cannot show that a reader chooses better in an unfamiliar situation. Use the [judgment evaluation procedure](judgment-evaluation.md), its paired [Korean review](judgment-evaluation.ko.md), and calibration scenarios for contextual assessment. Keep actual behavior improvement unverified until comparable responses and outcome-relevant review exist.
 
 1. Convert intent and requirements into observable criteria.
 2. Define test conditions, configuration, data, platform, and baseline.
@@ -16,6 +34,33 @@ Make success falsifiable before implementation. Diagnose failures by cause and p
 4. Assign who produces evidence, who reviews it, and who approves promotion.
 5. Define gate states such as `PASS`, `FAIL`, `PENDING_EVIDENCE`, and `INVALID_EVIDENCE`.
 6. Require topic-specific checks in addition to the shared validation system.
+
+### Test isolation and state hygiene
+
+An automation result is comparable only when the test's starting state and
+side effects are controlled. Epic's [Automation Test Framework guidance](https://dev.epicgames.com/documentation/en-us/unreal-engine/automation-test-framework-in-unreal-engine)
+explicitly warns that tests may run out of order or in parallel and should not
+assume the game or Editor state. The [Gauntlet overview](https://dev.epicgames.com/documentation/unreal-engine/gauntlet-automation-framework-overview-in-unreal-engine?lang=en-US)
+also treats sequential, parallel, and dependent execution as distinct cases.
+
+For each test or performance scenario, record the initial-state or fixture
+contract, reset or setup responsibility, per-attempt output and resource
+namespace, and cleanup or rollback result. A test that intentionally shares
+state must declare the dependency and serialize the affected scope; otherwise
+it must be safe to run after a failed predecessor, in another order, or beside
+another attempt. Verify cleanup and close state before admitting the result to a
+baseline. Residual files, mutated project state, resource collisions, or an
+unknown cleanup result make the evidence `PENDING_EVIDENCE` or
+`INVALID_EVIDENCE`, even when the test assertion itself reports success.
+
+Chapter 11's run identity binds artifacts to one attempt; it does not prove
+that the attempt began from an uncontaminated fixture. Chapter 13's
+clean-environment check likewise does not replace per-test state isolation.
+Neither does isolation prove that the test consumed the intended build. For a
+build or release claim, use Chapter 13's build-to-test admission contract to
+bind the source snapshot, build recipe, exact consumed artifact, and test
+session; a valid test pass with an unknown artifact link remains
+`PENDING_EVIDENCE` or `INVALID_EVIDENCE` for that claim.
 
 ## Operation health and gate-state semantics
 
@@ -154,6 +199,7 @@ Hard failures include a POI with no discernible purpose or payoff, repeated iden
 - Iteration records distinguish symptoms, causes or hypotheses, false assumptions, changed invariants, new checks, same-condition evidence, and recurrence status.
 - Spatial audits classify active, unapproved, hidden-recoverable, and retired content separately rather than merging their results.
 - Performance and scalability measurements under representative load.
+- Tests are order- and parallel-safe, or their declared shared-state dependency is serialized; fixture/reset, per-attempt output namespace, cleanup, and close-state evidence are retained.
 - Cook, package, clean-environment, migration, and recovery checks.
 
 ## Builder self-inspection and AI-assisted spatial evidence
@@ -207,6 +253,23 @@ Bind reference-to-prototype evidence additionally to the source artifact and cro
 
 When independent acceptance matters, keep the evaluator read-only and withhold the builder's intended verdict or persuasive self-assessment. A focused target pass closes only that target; unresolved hard failures continue to block full acceptance.
 
+### Archive validity and diagnostic readability are separate claims
+
+Rechecking stored evidence may confirm file integrity, repeatability, and the
+scope of an existing review. It does not reobserve current consumers or issue
+approval for a new scene. Keep that report distinct from the accepted record;
+do not let a read-only checker overwrite evidence or silently change promotion.
+When persistence matters, retain the reopened state before a regeneration that
+could reconstruct missing output.
+
+In a teaching or diagnostic comparison, an intentional failure must remain
+distinguishable from success in the decision view. Correct counts cannot
+compensate for an unreadable negative-control label or an invisible target.
+Repair the explanation or actual output under comparable conditions, then
+recheck the unchanged technical invariant. This scoped lesson from the
+[PCG fixture case](../../analyze-unreal-development-cases/references/16-case-studies.md#case-an-inspectable-pcg-learning-fixture-is-not-a-production-starter)
+does not require production scenes to retain diagnostic colors or signs.
+
 ## Cause-based debugging
 
 Name the weakest observable system, form a testable cause hypothesis, change one major variable or one coherent cause family, repeat the same test, and keep or revert based on evidence. Fix invalid evidence before changing the product. After repeated failure of one architecture or composition, require a documented reset rather than cosmetic iteration. A cause family may require coordinated changes—for example, moving several blockers that share one route-clearance failure—but unrelated systems should not be changed in the same iteration.
@@ -246,6 +309,8 @@ Require functional correctness, maintainability, production readiness, performan
 - Comparing a changed prototype from a new camera, omitting the reference or plan version, or overwriting the last accepted same-condition deviation record.
 - Treating an early static player-height/FOV proxy as an exact runtime rig, fine-tuning prototype detail to it, or carrying its approval authority into Stage 5 or the Visual Feasibility Slice.
 - Treating test transport success as test outcome success.
+- Assuming a clean Editor, project, device, output directory, or external resource, or relying on test order to establish it.
+- Accepting a successful assertion after cleanup, reset, or resource-release failure without classifying the evidence as pending or invalid.
 - Treating a command, graph, or batch completion message as proof that the intended state and postconditions exist.
 - Treating a builder screenshot, screenshot-guided correction, or self-review as independent acceptance.
 - Scaling AI-assisted spatial output after checking only centers, counts, or one favorable view instead of final transformed bounds, grounding, and clearance.

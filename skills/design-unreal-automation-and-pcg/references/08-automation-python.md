@@ -4,7 +4,21 @@
 
 Make repeated Unreal work reproducible, observable, reversible, and safe across projects and production stages. Treat Python as one implementation option rather than the durable center of automation design.
 
+## Decision contrast: Automate a known experiment rather than multiply uncertainty
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A designer needs either one uncertain placement decision or a repeatable change to many already classified objects.
+
+**Choice and reason.** Keep the uncertain trial small enough to inspect directly. Once the rule and recovery boundary are understood, a bounded batch can amortize dispatch cost and make the repeated work consistent.
+
+**When the choice changes.** Automation can multiply a wrong rule faster. A huge batch without per-target postconditions is not justified by fewer calls; manually repeating a proved deterministic operation can also waste the iteration budget.
+
+**Smallest useful test.** Test one representative and one edge case, then verify the bounded batch and protected state. Include discovery, waiting, verification, and recovery in the cost comparison.
+
 ## When to automate
+
+The retained [dispatch-amplification investigation](../../analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-unbounded-prototype-loops-and-dispatch-amplification) explains why batching and bounded responsibilities were selected. Its evidence concerns workflow behavior and does not promote the unfinished level or prove a universal batching threshold.
 
 Automate when the responsibility is repeated, the inputs and outputs are defined, the manual result is understood, and objective postconditions can detect partial or incorrect execution. Keep high-judgment aesthetic or architectural approval outside deterministic builder automation.
 
@@ -104,6 +118,24 @@ Treat a successful tool call as transport evidence, not as proof that the intend
 An empty result, a missing Actor, an unexpected point count, or a partial batch is a failed postcondition even when the command returned without an error. Stop and inspect the input schema, ownership, and partial state before retrying. Retrying a timed-out or ambiguous mutation without a state audit can create duplicates, overlapping candidates, or a false comparison baseline.
 
 Record whether a postcondition is confirmed, contradicted, or not yet tested. That distinction prevents an unobserved state from being reported as a successful iteration and makes interruption and recovery part of the automation contract.
+
+### Reuse a validation contract without replaying historical mutations
+
+A retained experiment can save discovery and setup work, but its builder may
+assume an empty map, exact object identities, or unused output paths. Reuse the
+intent, preconditions, postconditions, and evidence mapping first. Adapt only
+the required operation to the new owned scope; a readable historical script is
+not evidence that replay is safe.
+
+Keep archive inspection non-destructive. A recheck should print its result or
+create a distinct report rather than replace accepted evidence or reset a
+stored promotion verdict. Preserve the state observed immediately after reopen
+before regenerating, so recovery cannot be confused with persistence. An
+archive check proves only the retained inputs and outputs it actually reads;
+it does not observe the current Editor. The
+[PCG learning-fixture case](../../analyze-unreal-development-cases/references/16-case-studies.md#case-an-inspectable-pcg-learning-fixture-is-not-a-production-starter)
+illustrates this boundary. Measure the complete next decision loop before
+claiming that the reusable reference reduced total authoring time.
 
 ## Python as an option
 

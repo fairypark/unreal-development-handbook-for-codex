@@ -4,11 +4,27 @@
 
 Design playable spaces whose spatial composition, traversal, terrain, content, atmosphere, and production constraints support one coherent player experience.
 
+## Decision contrast: World coverage versus a connected walking experience
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A large walking environment contains small settlements spread across its extent. An overview shows broad unused gaps even though each settlement has grounded buildings.
+
+**Choice and reason.** Compare a hierarchy of substantial destinations, intermediate route experiences, terrain framing, and intentional quiet against the scattered layout. Judge usable space through approach, reveal, choice, and payoff; local building counts do not explain those relationships.
+
+**When the choice changes.** Vehicle traversal, deliberate isolation, or a long panoramic approach can justify much larger gaps. More density everywhere can destroy orientation and release. Keep the requested world envelope unless a scope change is explicitly chosen.
+
+**Smallest useful test.** Before dressing, test contrasting macro layouts in a playable blockout at the intended movement speed and camera. Use both whole-world views and ordinary route samples; measure meaningful change rather than adopt a universal time or distance rule.
+
 ## Intent
 
 Build a place that works from movement and multiple viewpoints, not a hero-camera diorama. Turn subjective direction into observable spatial and visual targets before layout.
 
 ## Fun model and experience density
+
+The [sparse-world investigation](../../analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-local-verification-without-a-convincing-whole-world) illustrates why these principles must change the next action. The rejected whole-world result was not rescued by existing local save and contact evidence; its proposed macro repair remained untested. Use the case to diagnose scale and priorities, not to copy a density value.
+
+For broad work, inspect the ordinary whole-world view and the representative player experience before extending detail. The overview can expose missing macro relationships; it cannot establish perceived walking distance or payoff. A convincing local slice cannot establish the whole-world composition. Repeated local improvement without movement in the main outcome reopens the responsible design question within the existing workflow.
 
 Level design is the design of a player's journey through space, not only the construction of a map. A level may be readable, beautiful, and technically correct yet still feel empty if it does not create meaningful questions, choices, actions, consequences, and rewards. Define the experience hypothesis before committing to broad spatial or asset production.
 

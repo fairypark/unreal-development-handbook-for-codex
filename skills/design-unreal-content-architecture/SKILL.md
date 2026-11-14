@@ -7,6 +7,12 @@ description: Design or review Unreal content and asset architecture, including c
 
 Treat content as versioned production data with ownership and lifecycle, not as a collection of convenient files or marketplace search results.
 
+## First priority: contextual judgment from cases
+
+Apply the [first Handbook principle](../reason-about-unreal-development/references/00-philosophy.md#learn-judgment-from-cases-first) before selecting implementation or adding procedure. Start with the relevant chapter's decision contrast and, when useful, a retained evidence-backed case. Focus on asset role, source capability, dependencies, and total adaptation cost. Explain the mechanism that transfers, a context difference that could change the choice, and the smallest discriminating test.
+
+Keep this reasoning in the existing brief or review record. Do not add a new gate, mandatory literature search, or form to a routine task. Constructed teaching scenarios are not production evidence; existing source, safety, authorization, and promotion requirements remain in force. If a local repair cannot address the observed failure, reopen the diagnosis at the appropriate scale.
+
 ## Load the Handbook chapter
 
 Read [05-content-asset-architecture.md](references/05-content-asset-architecture.md) before deriving assets from a concept, planning acquisition, reorganizing, reusing, migrating, or distributing content. Apply its ownership, demand, candidate, acquisition-authority, dependency, provenance, promotion, licensing, and revalidation contracts.

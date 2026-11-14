@@ -2,6 +2,14 @@
 
 These instructions apply to every task and document in this project. Read [PROJECT_CHARTER.md](PROJECT_CHARTER.md) before creating, revising, reviewing, or researching handbook content. The charter is the authoritative statement of the project's mission, philosophy, scope, and quality standard. Preserve its meaning when extending this file or introducing more local guidance.
 
+## First priority: improve judgment through cases
+
+Apply the charter's first priority before adding procedures or implementation detail. For substantive work, identify the consequential decision, use a relevant chapter contrast or evidence-backed case, explain which mechanism transfers and which context differences may invalidate it, and choose the smallest discriminating check. Reuse the current brief and evidence record; this is reasoning within the existing workflow, not a new gate or a demand for one more document.
+
+Every chapter should teach a contextual choice near its beginning. Observed outcomes, causal hypotheses, constructed teaching scenarios, and untested repairs must remain distinct. Never invent a successful counterpart to a recorded failure. Do not copy scene density, numerical settings, architecture, or tool choices without checking their assumptions.
+
+When revising the handbook, preserve useful safeguards and remove contradictory or redundant prescriptions. Do not turn every incident into a universal prohibition. A new rule must name the decision it improves, the failure it addresses, its trade-off, and its scope. Evaluate changed-context decision quality separately from tests that check document or contract structure.
+
 ## Required reasoning sequence
 
 Think before implementing. Work in this order:
@@ -82,7 +90,7 @@ For each topic, use this order where applicable:
 9. Common Mistakes
 10. Related Topics
 
-Do not open a technical topic with an API, command, or tool tutorial. Establish intent, context, trade-offs, process, and validation first. Examples come after the reasoning and should not present one implementation method as universally correct.
+Do not open a technical topic with an API, command, or tool tutorial. Establish intent, context, trade-offs, process, and validation first. Implementation examples come after the reasoning and should not present one implementation method as universally correct. Concrete decision contrasts come early and teach the reasoning itself; the two kinds of example have different purposes.
 
 Validation must consider functional correctness, maintainability, production readiness, performance, edge cases, and failure recovery. State how success is measured, what must be tested, which warnings are acceptable, which warnings expose a design problem, and how failure or rollback is handled when relevant.
 

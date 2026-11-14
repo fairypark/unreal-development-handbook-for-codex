@@ -1,5 +1,17 @@
 # Unreal Development Handbook for Codex — Project Charter
 
+## First priority: learn judgment from cases
+
+The handbook's highest priority is to teach a reader or AI to recognize what matters in a situation, explain why a direction fits the intended outcome, and revise that choice when context or evidence changes. Learn this judgment through evidence-backed cases and clearly labeled teaching contrasts. This priority governs the writing, organization, use, and evaluation of every chapter.
+
+A contribution should make a consequential decision easier to understand: compare plausible alternatives, explain the mechanism and trade-offs, identify where the analogy stops applying, and show the cheapest observation that could disprove the recommendation. A successful example is not a universal recipe. A plausible explanation is not established causality.
+
+Judge the handbook by whether it helps someone make better decisions in unfamiliar situations. Document length, rule count, completed forms, cited principles, and successful tool calls are not substitutes for that outcome. Repeated failures should first reopen the diagnosis and the existing guidance; do not automatically add another mandatory rule.
+
+Use the existing brief and review record for this reasoning. This principle introduces no new approval stage, research ritual, or document requirement for routine work. Existing safety, scope, evidence, and promotion constraints remain binding.
+
+The paired [Korean revision review](skills/reason-about-unreal-development/references/case-based-judgment.ko.md) explains the priority and its chapter-level application.
+
 ## Project Mission
 
 This project is a living handbook that teaches Codex how experienced Unreal Engine developers think, design, validate, and implement professional Unreal projects.
@@ -62,7 +74,7 @@ Every topic and implementation should say how success will be measured, what mus
 
 ## Writing Principles
 
-Every handbook topic should answer, in an appropriate order:
+Begin each topic's substantive teaching with a consequential decision and a concrete contrast appropriate to its domain. Clearly distinguish an observed case from a constructed teaching scenario. Connect that contrast to the following questions, in an appropriate order:
 
 1. **Purpose** — Why does this technology or practice exist? What problem does it solve?
 2. **Intent** — What is the developer actually trying to achieve?
@@ -71,11 +83,11 @@ Every handbook topic should answer, in an appropriate order:
 5. **Design Considerations** — Scalability, maintainability, performance, collaboration, production risk, and extensibility.
 6. **Recommended Workflow** — Requirements → Planning → Architecture → Validation Plan → Implementation → Verification → Optimization.
 7. **Validation Checklist** — Objective evidence that the result works and is production-appropriate.
-8. **Implementation Examples** — Only after the preceding sections; multiple approaches are encouraged.
+8. **Implementation Examples** — Concrete implementation follows the design reasoning; decision cases belong earlier, where they teach that reasoning. Multiple approaches are encouraged.
 9. **Common Mistakes** — Why they happen, how to detect them, and how to prevent them.
 10. **Related Topics** — Connect the handbook as a knowledge graph rather than isolated articles.
 
-Do not begin a new technical topic with an API, command, or tool tutorial. Explain intent, context, trade-offs, process, and validation first. No single implementation method should be treated as universally correct.
+Do not begin a new technical topic with an API, command, or tool tutorial. Explain intent, context, trade-offs, process, and validation first. No single implementation method should be treated as universally correct. For every important recommendation, include a boundary condition or counterexample that would change the decision. Keep procedures proportional to the uncertainty and consequence they address.
 
 ## AI Behavior
 
@@ -121,6 +133,8 @@ The Handbook is the theory/reasoning layer; Editor Skills is the execution/pract
 
 ## Research Mindset
 
+Select research by the decision it can improve. Prefer a source that explains an outcome, a failure mechanism, or a meaningful comparison over another general list of practices. Retrieve only the relevant case and its limitations; do not require a literature survey for every task. When no applicable case exists, state the uncertainty and design a small reversible experiment rather than inventing precedent.
+
 Do not merely summarize documentation. For each subject, investigate and explain:
 
 - Why was it designed this way?
@@ -136,7 +150,7 @@ Separate durable principles from version-specific facts and implementation detai
 
 The final objective is not an Unreal Engine manual. It is a durable handbook that teaches AI to think like an experienced Unreal Engine developer.
 
-A reader or AI that studies the handbook should make better design decisions even if the implementation technology changes completely. Over time, the project should become a coherent, cross-linked knowledge system for professional Unreal development rather than a loose collection of prompts, recipes, or command references.
+A reader or AI that studies the handbook should make better design decisions even if the implementation technology changes completely. Test this with unfamiliar decision scenarios, changed constraints, and outcome-relevant explanations; keep document validation separate from demonstrated judgment or production improvement. Over time, the project should become a coherent, cross-linked knowledge system for professional Unreal development rather than a loose collection of prompts, recipes, or command references.
 
 ## Charter Governance
 

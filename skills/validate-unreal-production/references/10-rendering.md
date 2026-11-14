@@ -4,7 +4,21 @@
 
 Translate visual intent into a coherent rendering strategy that respects content, platform, performance, and verification constraints.
 
+## Decision contrast: Diagnose the failing visual system before changing the whole image
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A meadow appears artificial because grass highlights and repeated clump silhouettes stand out, while the surrounding soil and lighting remain plausible.
+
+**Choice and reason.** Separate geometry, normals, surface response, and distribution before changing exposure or the global light. A local source or material comparison can distinguish a surface failure from a composition failure while keeping the scene comparison meaningful.
+
+**When the choice changes.** If the entire observation baseline is unreadable, correcting that baseline is a different justified action. Do not freeze incorrect lighting forever, or assume every visual defect is a material defect.
+
+**Smallest useful test.** Inspect pure source layers and their transition under comparable views. Change one likely cause where feasible, preserve unaffected systems, and check the representative player image again.
+
 ## Intent
+
+The retained [meadow material comparison](../../analyze-unreal-development-cases/references/16-case-studies.md#case-recovering-a-meadow-through-source-capability-and-coupled-ground-cover) reports a local material-only repair after geometry was accepted. It supports separating shape and surface claims under comparable conditions; it does not establish universal shader values or target-platform performance.
 
 Judge rendering as part of the experience and production system, not as a final polish layer or a collection of enabled features.
 

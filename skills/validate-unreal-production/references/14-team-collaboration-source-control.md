@@ -4,6 +4,18 @@
 
 Coordinate people, agents, assets, code, reviews, and integration so ownership and recovery remain clear as an Unreal project scales.
 
+## Decision contrast: Choose collaboration boundaries around contention
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** Two contributors need to change a shared binary source asset while others depend on it; another change touches independent text-owned modules.
+
+**Choice and reason.** Coordinate ownership and integration of the shared asset before concurrent mutation. Independent modules can proceed with explicit interfaces and review; the collaboration boundary follows the resource that can actually conflict.
+
+**When the choice changes.** An exclusive lock on every small text change can serialize useful work. Unlimited parallel editing of a shared binary source can lose intent even when the repository appears clean.
+
+**Smallest useful test.** Walk through concurrent edits, integration, dependent content, and recovery. Check that the selected ownership and source-control policy prevents the named conflict without blocking unrelated work.
+
 ## Intent
 
 Reduce hidden work, conflicting authority, asset contention, irreversible edits, and review ambiguity without replacing communication with process overhead.

@@ -7,6 +7,12 @@ description: Design or review AI-assisted Unreal development workflows through r
 
 Use AI as a bounded development participant whose decisions and outputs remain inspectable, reproducible, and subject to evidence.
 
+## First priority: contextual judgment from cases
+
+Apply the [first Handbook principle](../reason-about-unreal-development/references/00-philosophy.md#learn-judgment-from-cases-first) before selecting implementation or adding procedure. Start with the relevant chapter's decision contrast and, when useful, a retained evidence-backed case. Focus on the consequential judgment, role independence, and evidence of the intended outcome. Explain the mechanism that transfers, a context difference that could change the choice, and the smallest discriminating test.
+
+Keep this reasoning in the existing brief or review record. Do not add a new gate, mandatory literature search, or form to a routine task. Constructed teaching scenarios are not production evidence; existing source, safety, authorization, and promotion requirements remain in force. If a local repair cannot address the observed failure, reopen the diagnosis at the appropriate scale.
+
 ## Load the Handbook chapter
 
 Read [15-ai-assisted-development.md](references/15-ai-assisted-development.md) before defining agent roles, context, mutation authority, evidence, evaluation, approval, or failure containment.
