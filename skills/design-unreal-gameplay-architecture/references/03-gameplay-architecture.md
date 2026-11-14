@@ -4,6 +4,18 @@
 
 Organize gameplay rules, state, input, persistence, networking, and presentation into responsibilities that remain correct across runtime transitions and project growth.
 
+## Decision contrast: Distinguish feedback from authoritative gameplay
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A door should react promptly to interaction. In one design a local effect opens the door; in another the same local effect also awards a persistent multiplayer reward.
+
+**Choice and reason.** Keep responsive presentation separate from the authority that validates and commits the reward. Otherwise a repeated or rejected interaction can appear to create progression that the owning system never accepted.
+
+**When the choice changes.** A purely cosmetic local prop does not require a replicated progression system. The required authority follows the consequence, not the fact that both examples use a door.
+
+**Smallest useful test.** Exercise acceptance, rejection, repeated input, and late observation. Check presentation and authoritative state separately, including recovery when the local anticipation was wrong.
+
 ## Intent
 
 Design from the player experience and authority model rather than from a catalog of Gameplay Framework classes.
@@ -27,6 +39,20 @@ Design from the player experience and authority model rather than from a catalog
 - Prefer explicit events or interfaces over repeated casts and hidden searches.
 - Make server authority, client prediction, reconciliation, and late-join behavior deliberate when networking applies.
 - Give save data a versioned contract rather than serializing incidental runtime structure.
+
+### Identity readiness and storage conflict
+
+A save operation has two separate decisions: which user and state authority it addresses, and which storage capability can commit it. Keep gameplay-state ownership separate from local platform saves, per-user cloud-file transport, and server-authoritative state. Do not infer a universal cloud or conflict policy from a successful save call.
+
+Before save, load, or synchronization, record the capability contract at the boundary that can change the outcome:
+
+- **Identity readiness:** stable local-platform-user and online-account mapping, state or slot scope, login and user-switch timing, and whether the selected storage supports the required user multiplicity. An integer user index or implicit login is not a portable identity guarantee.
+- **Authority and revision:** the selected source of truth (local, cloud, server, or an explicit hybrid), backend or source revision, optional hash or timestamp, and the rule for stale data.
+- **Operation lineage:** request and attempt identity, ordering, cancellation, retry and idempotence behavior, and whether completion means locally accepted, remotely acknowledged, or durably committed.
+- **Storage capabilities:** atomicity scope, lock or exclusive ownership, conditional-write or merge behavior, offline and reconnect behavior, quotas, retention, and deletion or export semantics. If the service does not expose a capability, classify it as unknown and define project-owned behavior.
+- **Conflict and recovery:** missing, unsupported, unavailable, corrupt, stale, concurrent, partial, and unknown states; the project or platform owner of selection or merge policy; preservation of both candidates and the original; and the invariant and recovery checks required before accepting the chosen state.
+
+Test user switch during I/O, stale local/cloud data, concurrent or repeated writes, offline and reconnect, ambiguous acknowledgement, lock loss or another device, and crash or interruption between local commit and remote acknowledgement. Chapter 12 and Chapter 13 separately own transport, payload/runtime, migration, release, and rollback verdicts; Chapter 14 owns the responsible owner and approval boundary.
 
 ## Replication strategy is an architecture decision
 
@@ -70,6 +96,11 @@ Treat Iris as an implementation option that must pass the project's architecture
 - [Epic Games: Networking Overview](https://dev.epicgames.com/documentation/unreal-engine/networking-overview-for-unreal-engine?lang=en-US) — identifies Generic Replication, Replication Graph, and Iris as separate replication systems and recommends choosing deliberately from their trade-offs.
 - [Epic Games: Replication Graph](https://dev.epicgames.com/documentation/unreal-engine/replication-graph-in-unreal-engine?lang=en-US) — describes persistent, shared actor-list routing for large numbers of actors and connections; use the production fit and CPU claims as hypotheses to measure in the project.
 - [Epic Games: Introduction to Iris](https://dev.epicgames.com/documentation/unreal-engine/introduction-to-iris-in-unreal-engine) — documents Iris as opt-in and explains its authority, state, filtering, prioritization, and migration context.
+- [Epic Games: USaveGame](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Engine/USaveGame) — project-defined save-state objects and slot-based persistence; it does not define cloud conflict resolution.
+- [Epic Games: ISaveGameSystem](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/ISaveGameSystem?lang=en-US) — platform or generic save-system boundary, user capability, and asynchronous completion; storage-specific ownership and merge semantics remain outside the common interface.
+- [Epic Games: User File Interface](https://dev.epicgames.com/documentation/unreal-engine/user-file-interface-in-unreal-engine) — UE 5.8 per-user backend file operations, including create-or-overwrite behavior; this Beta interface does not establish a universal conditional-write or conflict policy.
+- [Epic Games: Auth Interface](https://dev.epicgames.com/documentation/unreal-engine/auth-interface-in-unreal-engine?lang=en-US) — separates `PlatformUserId`, online `AccountId`, and login status; identity readiness is distinct from save authority.
+- [Microsoft: XGameSave API overview](https://learn.microsoft.com/en-us/gaming/gdk/docs/features/common/game-save/xgamesave?view=gdk-2604) — a platform-specific example of locks, atomic updates, offline mode, and user-facing conflict resolution; do not generalize its semantics to every Unreal storage path.
 
 ## Related topics
 

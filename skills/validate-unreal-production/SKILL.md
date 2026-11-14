@@ -7,6 +7,12 @@ description: Define, execute conceptually, or review Unreal production validatio
 
 Define success before implementation and judge the final outcome against evidence rather than effort or command success.
 
+## First priority: contextual judgment from cases
+
+Apply the [first Handbook principle](../reason-about-unreal-development/references/00-philosophy.md#learn-judgment-from-cases-first) before selecting implementation or adding procedure. Start with the relevant chapter's decision contrast and, when useful, a retained evidence-backed case. Focus on the disputed outcome and the evidence capable of establishing it. Explain the mechanism that transfers, a context difference that could change the choice, and the smallest discriminating test.
+
+Keep this reasoning in the existing brief or review record. Do not add a new gate, mandatory literature search, or form to a routine task. Constructed teaching scenarios are not production evidence; existing source, safety, authorization, and promotion requirements remain in force. If a local repair cannot address the observed failure, reopen the diagnosis at the appropriate scale.
+
 ## Load only the relevant Handbook chapters
 
 - Read [12-validation-testing-debugging.md](references/12-validation-testing-debugging.md) for every validation or production-readiness request.
@@ -14,6 +20,7 @@ Define success before implementation and judge the final outcome against evidenc
 - Also read [11-performance-scalability.md](references/11-performance-scalability.md) for budgets, profiling, streaming, memory, frame time, load, or scalability.
 - Also read [13-production-pipeline.md](references/13-production-pipeline.md) for builds, cooking, packaging, deployment, distribution, or operational recovery.
 - Also read [14-team-collaboration-source-control.md](references/14-team-collaboration-source-control.md) for ownership, review, integration, handoff, asset conflicts, or source control.
+- For a study of how readers apply the handbook, use the [judgment exercises and assessment guide](references/judgment-evaluation.md) or its [Korean edition](references/judgment-evaluation.ko.md).
 
 ## Prepare Korean user-review versions
 

@@ -4,6 +4,18 @@
 
 Provide stable native contracts, engine integration, performance-critical implementation, and reusable systems while preserving clear ownership and safe Blueprint extension.
 
+## Decision contrast: Move a measured responsibility, not an entire feature by habit
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A feature combines a few designer-authored decisions with a repeated numerical operation suspected of dominating its cost.
+
+**Choice and reason.** Profile the representative workload. If the repeated operation is the limiting cost, move that responsibility behind a narrow C++ interface while preserving useful authored behavior and an observable lifecycle.
+
+**When the choice changes.** If rendering, streaming, or a low-frequency event is the actual issue, rewriting the feature in C++ may add build and integration cost without improving the outcome. A prototype may value iteration speed more.
+
+**Smallest useful test.** Compare behavior parity and the identified cost before and after the smallest change, under the same workload and target. Retain a recovery path and inspect boundary-crossing overhead.
+
 ## When to use
 
 Prefer C++ when the system needs native-only APIs, a stable shared abstraction, precise lifecycle or memory control, strong automated testing, broad reuse, or measured performance that Blueprint cannot meet within the target budget.

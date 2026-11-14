@@ -4,7 +4,21 @@
 
 Turn an Unreal request into a traceable sequence of decisions, implementation, verification, and learning.
 
+## Decision contrast: Choose the scale of the failing decision
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A broad world review fails while several contact repairs and saved-state checks pass. The next request is to make the world feel inhabited.
+
+**Choice and reason.** Return to the macro layout and a cheap playable blockout. Comparing settlement clusters and connecting routes tests the failing design earlier than another detailed foundation pass. Carry forward valid local evidence without promoting it to world evidence.
+
+**When the choice changes.** When the accepted layout has one named floating doorway, a bounded contact repair is appropriate. A broad restart would add risk and latency without testing a disputed design assumption.
+
+**Smallest useful test.** Declare which hypothesis the next reversible change separates and which earlier evidence remains valid. Review a full overview and a player approach for a macro edit; inspect the named joint for a local repair.
+
 ## Recommended workflow
+
+The [prototype-loop investigation](../../analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-unbounded-prototype-loops-and-dispatch-amplification) records a workflow correction while level promotion remained pending. The [sparse-world failure](../../analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-local-verification-without-a-convincing-whole-world) shows why even valid local checks do not settle the original experience. Use the cases to choose the next decision's scale, not to manufacture a completed recovery.
 
 1. **Intent:** State the desired experience or production outcome.
 2. **Context:** Inspect the current project, existing systems, content, platform, and team state.
@@ -16,6 +30,8 @@ Turn an Unreal request into a traceable sequence of decisions, implementation, v
 8. **Verification:** Compare actual evidence with the original intent and record remaining risks.
 
 ## Iteration and commitment
+
+Choose the next experiment by the consequence it can explain, not by how easily it can be automated. If a whole-world or player-experience failure persists while local contact work succeeds, reopen the spatial hypothesis. If the accepted design has one isolated defect, keep the repair local. Preserve useful evidence at its original scope. This diagnosis belongs in the current iteration record and does not introduce another stage.
 
 Iteration should be fastest where uncertainty is high and changes are reversible. Commitment should slow down when a change becomes expensive to undo. This is not a rigid waterfall: it is a sequence of evidence gates around an expanding commitment ladder.
 

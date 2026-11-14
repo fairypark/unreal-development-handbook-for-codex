@@ -2,11 +2,22 @@
 
 A living handbook for teaching Codex—and its human readers—how experienced Unreal Engine developers reason about intent, design, architecture, validation, implementation, and verification.
 
-This project preserves durable development principles rather than collecting prompts, commands, or tool-specific recipes. Its central rule is:
+The first priority is **learning from cases to make better decisions in unfamiliar situations**: recognize the important problem, explain why a direction fits, compare alternatives, and test the choice when constraints change.
+
+Each chapter starts its substantive teaching with a contextual decision contrast. These are labeled teaching scenarios, not invented production evidence. Retained real cases provide observed outcomes and limits. Read the relevant contrast, the domain reasoning, and the smallest applicable test before increasing implementation commitment; use the existing stage and evidence record.
+
+The paired [Korean revision review](skills/reason-about-unreal-development/references/case-based-judgment.ko.md) covers the full editorial change. [Judgment evaluation](skills/validate-unreal-production/references/judgment-evaluation.md) explains how to test transfer separately from document checks.
+
+The handbook preserves durable development principles with the supporting rule:
 
 > Development principles remain. Tools evolve.
 
 ## Start here
+
+The [PCG learning-fixture case](skills/analyze-unreal-development-cases/references/16-case-studies.md#case-an-inspectable-pcg-learning-fixture-is-not-a-production-starter)
+and its [Korean review](skills/analyze-unreal-development-cases/references/pcg-learning-reuse.ko.md)
+show how to reuse verified relationships while separating intended settings,
+actual generated output, diagnostic readability, and new-context approval.
 
 - [Project Charter](PROJECT_CHARTER.md) — the authoritative mission, philosophy, writing principles, AI behavior, project boundary, research mindset, and long-term goal.
 - [Project Guidance](AGENTS.md) — the operational rules every future Codex task and handbook contribution must follow.
@@ -113,6 +124,8 @@ The handbook progresses from durable reasoning, through game and world design, i
 | 15 | [AI-Assisted Development](skills/guide-unreal-ai-development/references/15-ai-assisted-development.md) | Appropriate AI roles, context and constraint management, human oversight, evidence, validation, reproducibility, and failure containment. |
 
 ### Part V — Applied Reasoning
+
+Case-based reasoning is used throughout Parts I–IV. Chapter 16 retains the full cases, source limits, and cross-chapter transfer; it is not the only place where a reader practices judgment. The [sparse-world investigation](skills/analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-local-verification-without-a-convincing-whole-world) records an observed failure and an untested recovery direction without presenting either as a universal density rule.
 
 The [meadow production case](skills/analyze-unreal-development-cases/references/16-case-studies.md#case-recovering-a-meadow-through-source-capability-and-coupled-ground-cover) and its paired [Korean review](skills/analyze-unreal-development-cases/references/meadow-reuse-review.ko.md) connect source capability, shared habitat data, material diagnosis, and scoped reuse to retained Editor-level evidence. The case does not establish performance, packaging, or universal parameter defaults.
 

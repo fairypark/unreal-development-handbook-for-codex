@@ -4,6 +4,18 @@
 
 Use visual scripting for fast, observable, designer-accessible composition without allowing graphs to become unowned collections of state and side effects.
 
+## Decision contrast: Choose update behavior from the behavior being modeled
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** An interaction changes only when state changes, while a nearby camera effect must respond continuously to motion.
+
+**Choice and reason.** Use explicit state changes for the interaction and a suitable continuous update for the moving effect. Updating every object every frame obscures causality and can add unnecessary work; removing all continuous updates can break the intended motion.
+
+**When the choice changes.** Event-driven is not a universal ban on Tick, and a working graph is not proof of maintainable ownership. The right design follows frequency, lifetime, observability, and measured cost.
+
+**Smallest useful test.** Exercise the state transition and continuous motion independently, inspect who owns each update, and measure representative cost before restructuring the graph.
+
 ## When to use
 
 Prefer Blueprint when the primary value is rapid iteration, designer ownership, asset composition, data-driven variation, event wiring, or project-specific behavior built on stable engine or native contracts.

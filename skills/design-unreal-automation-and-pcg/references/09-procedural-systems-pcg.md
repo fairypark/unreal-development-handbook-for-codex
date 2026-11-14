@@ -4,7 +4,21 @@
 
 Encode repeatable spatial or content logic while preserving determinism, authorial control, performance budgets, and evidence-based validation.
 
+## Decision contrast: Distribution must express a relationship
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** Two procedural passes place the same number of objects: a uniform scatter across a region and a distribution shaped by substrate, paths, exclusions, and authored landmarks.
+
+**Choice and reason.** When the concept depends on ecological or spatial continuity, compare the second distribution because it encodes why objects occur together and why some ground stays open. Share the necessary spatial authority without forcing every consumer to use an identical response.
+
+**When the choice changes.** A uniform field can be suitable for a sampling test or an intentionally regular cultivated system. Shared data cannot repair a source whose visible shape is unsuitable, and determinism alone does not make a distribution convincing.
+
+**Smallest useful test.** Hold seed, source, and view conditions stable while testing distribution. Inspect transitions, negative space, reverse views, and the ordinary repetition that appears after expansion.
+
 ## Intent
+
+The retained [meadow distribution case](../../analyze-unreal-development-cases/references/16-case-studies.md#case-recovering-a-meadow-through-source-capability-and-coupled-ground-cover) connects substrate and placement, then records repetition after expansion. Several inputs changed across the recovery, so it supports scoped lessons and further tests rather than isolating one generator as the cause or prescribing one parameter set.
 
 Use procedural systems to scale a proven rule, not to compensate for unsuitable source content, unclear composition, or missing ownership.
 
@@ -22,6 +36,36 @@ Use procedural generation for repeatable distribution, density gradients, ecolog
 6. Separate generators by responsibility and use one orchestration authority for exclusions and final composition.
 7. Expose deterministic seeds, masks, density, scale, slope, height, distance, and platform constraints.
 8. Validate the isolated pattern, contact, unchanged scene context, and final role before broad promotion.
+
+### Reuse a proved relationship, not a fixture configuration
+
+A small procedural learning fixture can prove a relationship before suitable
+production assets exist: parent changes propagate to descendants, filtering a
+required parent removes its children, an explicitly declared local axis aims at
+a target, or several support samples reject a placement that its center accepts.
+The [retained PCG diagnostic case](../../analyze-unreal-development-cases/references/16-case-studies.md#case-an-inspectable-pcg-learning-fixture-is-not-a-production-starter)
+records such results and a failed visual explanation repaired under unchanged
+comparison cameras. It does not prove that the assembly, scene, or runtime mode
+is ready for a different environment.
+
+For a new candidate, keep the relationship and replace its context: semantic
+root and parent keys, coordinate frame and mesh axis, final transformed
+footprint, query-source authority, thresholds with units, and expected failure
+behavior. Use the smallest parameter change or negative control that could
+disprove that relationship. A center hit with a missing corner is useful as a
+deliberate counterexample, but its failure meaning must be legible in the view
+used to teach or accept the comparison. A smaller sampling distance can miss
+a discontinuity; more permissive thresholds can admit it. Neither is a repair
+unless that change matches the new support responsibility.
+
+Inspect the consumer as well as its configuration. Correct point counts and
+descriptor values do not establish actual world transforms, effective
+collision, materials, or current source hits. If a query returns points with
+invalid hit state, inspect its semantics and source filtering before changing
+terrain. If output differs from the descriptor, distinguish the current
+generated resource from the intended configuration before blaming lighting or
+establishing a universal cache workaround. Treat engine-specific fixes as
+version-bounded observations, not copied defaults.
 
 ### Procedural artifact lifetime and authorship mode
 

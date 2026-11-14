@@ -4,13 +4,226 @@
 
 Move Unreal content and code from authored source through validation, build, cook, package, deployment, and recovery with explicit ownership and reproducible state.
 
+## Decision contrast: Release evidence must reach the destination
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** An Editor session succeeds and the build pipeline is green, but the intended recipient has not yet exercised the delivered artifact and its required content.
+
+**Choice and reason.** Treat build success as one pipeline result. Verify the actual artifact, destination dependencies, launch path, representative behavior, and recovery relevant to the release claim.
+
+**When the choice changes.** An explicitly Editor-only prototype can finish without package qualification when reported in that scope. It must not inherit a release claim; equally, a local experiment need not run an unrelated distribution pipeline.
+
+**Smallest useful test.** Exercise the candidate artifact under the declared recipient conditions and retain its identity. Separate product failure, incomplete evidence transport, and untested recovery rather than infer one from another.
+
 ## Intent
+
+The retained [prototype-workflow investigation](../../analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-unbounded-prototype-loops-and-dispatch-amplification) reports workflow qualification while the level stayed pending. Transfer the distinction between pipeline success and the destination product's evidence; do not infer that every Editor prototype requires a shipped build.
 
 Treat production flow as a system with contracts and failure states, not as a final sequence of buttons after development is complete.
 
 ## Pipeline boundaries
 
 Define source inputs, generated outputs, configuration, target platforms, ownership, caches, artifacts, promotion states, retention, and rollback. Separate deterministic mechanics from contextual approval and keep environment-specific configuration outside reusable logic.
+
+### Derived-output provenance and consumer admission
+
+A generated or transformed result is a separate production artifact, not automatically a release artifact. For every persistent generated output, disposable cache, cooked snapshot, staged container, runtime stream, or platform-specific derived artifact that can affect a consumer, preserve the chain:
+
+`parent inputs → producer or transform → derived output → consumer admission or fallback`
+
+Record, at the scope that can change the result:
+
+- **Parent identity:** source, build, cook, configuration, target, and content revision; input fingerprint; and separate build-time versus runtime dependencies.
+- **Producer scope:** engine, plugin, tool, and changelist identity; graph, partition, Data Layer, target, ABI, or driver scope where applicable; expected and actual inventory or coverage; and errors or omissions.
+- **Lifetime and lineage:** whether the result is persistent generated content, disposable derived data or cache, cooked/deployment output, or runtime-generated state; its storage or snapshot/descriptor identity; base lineage; retention and garbage-collection owner; and reconstruction path.
+- **Consumer admission:** compatibility keys, freshness and invalidation state, and explicit `COMPLETE`, `PARTIAL`, `FAILED`, `STALE`, `INAPPLICABLE`, or `UNKNOWN` classification. File presence, a successful builder, descriptor transport, or cache retrieval is not admission proof.
+- **Verification and recovery:** generated-versus-consumed-versus-fallback verdicts, clean rebuild or package/runtime evidence, performance or coverage evidence where relevant, rebuild triggers, and rollback or safe fallback.
+
+UE 5.8 examples (reviewed 2026-10-26) make the boundary concrete without defining universal tool requirements: HLOD output is rebuilt after changes to source Actors, meshes, materials, or textures; the World Partition PCG builder waits for asynchronous work and fails its job on generation errors by default; and Advanced Shader Delivery creates an SODB from a cooked Windows D3D12 SM6 build, then a GPU/driver-specific PSDB, while unsupported consumers fall back to runtime compilation. Keep this contract separate from **Release Artifact Lineage, Integrity Scope, and Rollback**: derived-output provenance explains how an artifact was produced and admitted, while the release contract proves distribution integrity, installation, replacement, and rollback.
+
+### Build-to-test admission and source snapshot
+
+A passing test report belongs to the executable and content it actually
+consumed, not merely to a test name, timestamp, or green pipeline job. For a
+result that can influence promotion, preserve the chain:
+
+`source snapshot → build recipe and inputs → produced artifact → test session → promotion decision`
+
+Record the identity at the boundary that can change the claim:
+
+- **Source snapshot:** branch and revision or changelist, submitted versus
+  shelved/presubmit state, relevant file scope, and whether the workspace was a
+  clean sync or carried local state.
+- **Build identity:** engine/build version, `BuildId` or compatible-build
+  identity where relevant, target/configuration/RHI, toolchain and SDK, and the
+  build recipe and parameters that produced the artifact.
+- **Workspace and cache state:** pristine versus incremental execution,
+  reused intermediates or derived data, dependency/invalidation coverage, and
+  any reason a clean rebuild or equivalent recook was not performed.
+- **Consumed artifact:** exact executable/content/package/container or other
+  tested output, its manifest or digest, and the parent lineage that connects it
+  to the source and build record.
+- **Test linkage:** run/session/attempt identity, suite and configuration,
+  target device or agent, report and raw-artifact references, and the exact
+  artifact consumed by the test.
+- **Admission scope:** whether the result applies only to a presubmit,
+  incremental, branch, or exact artifact scope. A passing shelved change does
+  not prove the submitted revision or release artifact; a cache hit or test
+  report does not prove source/artifact equivalence.
+
+If the source-to-artifact or artifact-to-test link is unknown, classify the
+result as `PENDING_EVIDENCE` or `INVALID_EVIDENCE` for the affected promotion
+claim. Keep test correctness, artifact integrity, runtime readiness, and
+release approval as separate verdicts. This contract complements Chapter 12's
+test isolation and run identity: a clean fixture and stable run can still test
+the wrong build.
+
+Epic's UE 5.8 material gives dated examples for this boundary: Horde's
+Automation Hub exposes platforms and changelists linked to CI job steps;
+Horde Build Automation syncs source-control workspaces and transfers
+intermediate and final artifacts; and the build tutorial distinguishes
+incremental workspaces, pristine packaged builds, and shelved-changelist
+presubmit tests. UE's versioning guidance also records changelist, branch,
+`BuildId`, compatible changelist, and promoted clean-sync state. These are
+evidence for the contract, not requirements to adopt Horde, Perforce, or a
+particular BuildGraph/UAT workflow.
+
+### Release-artifact lineage, integrity, installation, and rollback
+
+A release or update artifact has a different proof boundary from a generated
+or tested artifact. For a distribution claim, preserve the applicable chain:
+
+`authorized release → exact artifact and manifest → integrity verified → installed or updated → mounted and content-resolvable → runtime-ready → rollback-ready`
+
+This is a project evidence contract, not a universal Unreal state machine.
+Record only the verdicts and transitions that the selected distribution path
+actually exposes, while keeping these concerns separate:
+
+- **Release identity and scope:** base release, current release, target update
+  or patch identity; platform, runtime architecture, configuration, package or
+  container format, manifest version, chunk or bundle inventory, and transitive
+  dependency closure.
+- **Authorization and trust boundary:** release owner, entitlement or locale
+  scope when applicable, manifest freshness and base compatibility, the
+  non-secret trust-root or key identifier, and the owner and recovery policy for
+  key rotation or revocation. Do not place key material or credentials in the
+  evidence record.
+- **Integrity:** expected file or container identity, size, digest or version
+  check, package/container signature verification, and encryption policy. A
+  transport success, size/version match, or encryption result is not by itself
+  signature, manifest authorization, freshness, or runtime-readiness proof.
+  Record verification coverage and method separately (for example, all files
+  versus patch-touched files, and cryptographic hash/signature versus
+  existence/size). A narrow check supports only that narrower claim; it is not
+  whole-install integrity evidence.
+- **Destination transition:** clean install, replacement, update, removal, or
+  resume; staging and final destination; prerequisite and free-space result;
+  partial or mixed-base state; and whether the previously accepted release was
+  retained until the new one passed its checks.
+- **Consumer proof and recovery:** installed-file and manifest inventory,
+  mount/content resolution, startup and representative runtime evidence, and
+  the exact rollback target. Exercise or classify interruption/offline retry,
+  stale or wrong-base/replayed manifest, missing or invalid signature,
+  partial/corrupt/tampered data, missing parent or dependency,
+  entitlement/locale/prerequisite failure, mount or startup failure,
+  replacement/uninstall, and rollback. Do not claim a successful update when
+  the destination contains an unknown mixture of base and update content.
+
+For a release claim, missing identity, trust, integrity, destination, consumer,
+or rollback evidence is `PENDING_EVIDENCE`; a mismatched base, invalid signature,
+tampered output, or unrecoverable partial state is `INVALID_EVIDENCE`. Keep the
+release verdict separate from test correctness, artifact provenance, and
+runtime behavior. The last accepted release must remain an identifiable and
+recoverable target, not merely a file that happens to remain on disk.
+
+UE 5.8 documentation supplies dated examples for this boundary: platform-
+agnostic patching compares post-cook content with the released cooked base,
+requires retained base content and locked serialization paths, and mounts the
+patch above the base; Project Settings documents separate pak encryption and
+signing; pak signature loading rejects missing or invalid signature data; and
+ChunkDownloader separates manifest build/file identity, cached-file version
+validation, download, and mount. These examples justify the distinctions but
+do not define a universal manifest-authentication, replay-protection,
+entitlement, or key-rotation policy. Keep patch, chunk, bundle, signing,
+encryption, CDN, store, and platform SDK procedures in execution or project
+pipeline documentation rather than this Handbook.
+
+UE 5.8's BuildPatchServices provides a dated example of the same evidence
+boundary: verification can cover all files or only files touched by the
+install/patch, and can use SHA or file-size checks, while missing, open, hash,
+and size failures remain distinct. Record the selected coverage and failure
+class without making BuildPatchServices or its API choices a Handbook
+requirement.
+
+### Persistent-state compatibility and migration
+
+A release can install, mount, and start while invalidating an existing
+player's, session's, or service's durable state. For any release or update
+that reads or rewrites SaveGame, profile, settings, progression, world state,
+replay, or other persistent data, preserve the applicable chain:
+
+`accepted prior state → compatibility decision → migration or fixup → post-migration invariant → new-state write → rollback or fallback`
+
+Keep this state contract separate from package compatibility and release
+artifact integrity. Record, at the boundary that can change the claim:
+
+- **State identity and scope:** schema or data version, state owner and scope
+  (user, world, match, or service), source release/build/configuration/content,
+  and platform or user identity where applicable.
+- **Compatibility decision:** supported old and current versions; behavior for
+  missing, unknown/newer, corrupt, partial, or mixed state; one-way or
+  bidirectional support; and whether an engine, content, configuration, or
+  service change alters interpretation.
+- **Migration behavior:** the explicit converter or fixup, ordering and
+  dependencies, default/drop/reset decisions, idempotence, atomicity or
+  write-after-read policy, retained original or backup, and the observed
+  outcome. A successful load does not prove that the intended progression or
+  invariants survived.
+- **Validation and recovery:** representative fixtures for current, previous
+  supported, missing, corrupt, partial, and interrupted states; load before and
+  after the update; save after migration; progression and invariant checks;
+  multi-user or platform cases when relevant; and retry or rollback evidence.
+  Retain the prior state until the migrated state passes its checks and name a
+  safe read-only, default, or operator-assisted fallback where applicable.
+
+For a release claim, missing compatibility, migration, post-migration, or
+recovery evidence is `PENDING_EVIDENCE`. Data loss, silent reset, mixed-schema
+interpretation, non-idempotent corruption, or an unrecoverable migration is
+`INVALID_EVIDENCE`. Startup success, package compatibility, or installation
+integrity alone does not prove persistent-state continuity. Chapter 03 owns
+the gameplay state model and versioned data contract; Chapter 13 owns the
+release admission and recovery evidence for changing that state in production.
+
+UE 5.8 documentation gives dated implementation examples without requiring a
+particular API: `USaveGame` defines project-specific durable state, while
+`ULocalPlayerSaveGame` exposes game-specific latest/saved data versions and
+post-load, pre-save, reset, and save-result hooks. UE's asset/package
+versioning guidance separately distinguishes Engine Version, Serialization
+Version, and Build ID, and warns that newer serialized data is not safely
+opened and resaved by older versions. Treat these as evidence for explicit
+compatibility and migration decisions, not as a universal save format or
+automatic migration guarantee.
+
+#### Can players keep progress made after an update?
+
+In this constructed example, a player updates at the harbor checkpoint, then
+reaches the lighthouse and collects its reward. The team needs the option to
+restore the previous game build while preserving play since the update.
+
+- If the previous build supports the updated save, try the rollback with a
+  copy of the **lighthouse** slot. Resume, confirm the checkpoint, and revisit
+  the reward to check that it stays collected. This exercises both the reader
+  and the gameplay meaning of the saved fields.
+- If the update writes a format the previous build cannot read, keep the
+  lighthouse copy intact. Restoring the pre-update backup would return the
+  player to the harbor. A fix in the current build can preserve later progress.
+  If the team proposes a reverse conversion, test it on a copy against the
+  same checkpoint and reward before relying on it.
+
+The two recovery paths have different costs. Reverting the executable may
+restore service quickly. Reverting the slot also gives up everything earned
+after that backup. Report the last progress the tested path can recover.
 
 ## Version and feature release contract
 
@@ -118,6 +331,11 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - Clean-environment installation and startup.
 - Representative runtime, performance, persistence, and recovery checks.
 - Engine or feature changes include cold/warm, capture, packaging, and rollback evidence where relevant.
+- Derived outputs have parent-input fingerprints, producer scope, expected/actual coverage, lifetime and lineage, consumer-admission state, fallback, and rebuild or rollback evidence; cache, descriptor, transport, or builder success alone is not sufficient.
+- Promotion-relevant test results are bound to the exact source snapshot, build recipe and artifact consumed; clean versus incremental or presubmit scope is explicit, and an unknown link is `PENDING_EVIDENCE` or `INVALID_EVIDENCE`.
+- Release or update evidence separates authorization, manifest/base identity, package integrity, destination transition, content resolution, runtime readiness, and rollback; verification coverage and method are explicit, and encryption, transport, size/version checks, or mount success alone do not prove the full chain.
+- Patch/update validation retains the accepted base and verifies interruption, stale or wrong-base input, partial/corrupt content, dependency or prerequisite failure, replacement, and rollback without leaving mixed or unknown destination state.
+- Persistent-state claims record prior-state identity, supported versions, migration or fixup, post-migration invariants, retained original/backup, and rollback/fallback evidence; startup or package compatibility alone is insufficient.
 - Traceable artifact, approval, rollback, and retention policy.
 
 ## Common mistakes
@@ -127,6 +345,8 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - Recording a feature name without its engine version, maturity, target platform, fallback, or evidence date.
 - Treating Windows ARM64/ARM64EC support in the UE 5.8 dated note as proof of Editor support or dependency compatibility, or collapsing runtime architecture and build-host architecture into one target label.
 - Copying an upstream maturity label without recording its audience, license or distribution scope, and compatibility constraints.
+- Treating an install, mount, startup, or package-compatibility pass as proof that existing user or session state remains valid after an update.
+- Rewriting or resetting old persistent data before the migrated state has passed its invariants and recovery checks.
 
 ## Research basis and further reading
 
@@ -134,6 +354,28 @@ Audit direct and transitive dependencies, licensing, engine compatibility, priva
 - [Epic Games: Unreal Engine 5.8 Release Notes](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-8-release-notes) — version-specific release and production-status details.
 - [Epic Games: Transitioning to Movie Render Graph from Movie Render Queue](https://dev.epicgames.com/documentation/en-us/unreal-engine/transitioning-to-the-movie-render-graph-from-movie-render-queue-in-unreal-engine) — migration considerations for the capture pipeline.
 - [Epic Games: Windows ARM64 Support in Unreal Engine 5.8](https://dev.epicgames.com/documentation/unreal-engine/windows-arm64-support-in-unreal-engine-5-8) — dated ARM64/ARM64EC game-target maturity, Editor, GDK, compiler, and architecture-boundary constraints.
+- [Epic Games: World Partition Builder Commandlet Reference](https://dev.epicgames.com/documentation/unreal-engine/world-partition-builder-commandlet-reference?lang=en-US) — UE 5.8 HLOD, PCG, navigation, and RVT generated-output boundaries; use as version-specific evidence, not a procedure to copy into this chapter.
+- [Epic Games: World Partition HLOD](https://dev.epicgames.com/documentation/unreal-engine/world-partition---hierarchical-level-of-detail-in-unreal-engine) — source-change conditions for rebuilding HLOD output.
+- [Epic Games: Cooked Data Snapshots with Zen Storage Server](https://dev.epicgames.com/documentation/en-us/unreal-engine/cooked-data-snapshots-with-zen-storage-server-for-unreal-engine) — snapshot descriptors, base lineage, storage identity, and destination-equivalence expectations.
+- [Epic Games: Generating a State Object Database for Advanced Shader Delivery](https://dev.epicgames.com/documentation/unreal-engine/generating-a-state-object-database-for-advanced-shader-delivery?lang=en-US) — UE 5.8 cooked-build inputs, SODB/PSDB consumer identity, coverage, and runtime fallback.
+- [Epic Games: 5.8.4 Hotfix Released](https://forums.unrealengine.com/t/5-8-4-hotfix-released/2842775) — dated UE 5.8.4 ASD additions for SODB generation and local testing workflow.
+- [Epic Games: Horde Automation Hub for Unreal Engine 5.8](https://dev.epicgames.com/documentation/unreal-engine/horde-automation-hub-for-unreal-engine?lang=en-US) — dated test metadata, changelist linkage, CI job-step investigation, and historical comparison.
+- [Epic Games: Horde Build Automation for Unreal Engine 5.8](https://dev.epicgames.com/documentation/en-us/unreal-engine/horde-build-automation-for-unreal-engine) — source-control workspace sync plus intermediate and final artifact tracking/transfer.
+- [Epic Games: Horde Build Automation Tutorial for Unreal Engine 5.8](https://dev.epicgames.com/documentation/en-us/unreal-engine/horde-build-automation-tutorial-for-unreal-engine) — dated distinction between incremental, pristine packaged, and shelved-changelist presubmit jobs.
+- [Epic Games: Review Test Results in Unreal Engine 5.8](https://dev.epicgames.com/documentation/unreal-engine/review-test-results-in-unreal-engine) — report fields and device/test evidence; a report remains separate from source/artifact admission.
+- [Epic Games: Versioning of Assets and Packages in Unreal Engine 5.8](https://dev.epicgames.com/documentation/unreal-engine/versioning-of-assets-and-packages-in-unreal-engine) — engine changelist, branch, `BuildId`, compatible-changelist, and promoted-build identity.
+- [Epic Games: FBuildVersion API in Unreal Engine 5.8](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Core/FBuildVersion?lang=en-US) — build metadata fields including optional build URL, changelist, compatibility, and promoted-build state.
+
+- [Epic Games: How To Create a Patch (Platform-Agnostic)](https://dev.epicgames.com/documentation/en-us/unreal-engine/how-to-create-a-patch-in-unreal-engine?lang=en-US) — retained released cooked base, serialization-path stability, patch comparison, and mount priority.
+- [Epic Games: Updating Unreal Engine Projects With Patches After Release](https://dev.epicgames.com/documentation/en-us/unreal-engine/updating-unreal-engine-projects-with-patches-after-release) — patch identity and platform-specific distribution boundary.
+- [Epic Games: Project Section of the Unreal Engine Project Settings](https://dev.epicgames.com/documentation/en-us/unreal-engine/project-section-of-the-unreal-engine-project-settings) — separate pak encryption and signing settings; use as version-scoped evidence, not a key-management procedure.
+- [Epic Games: FPakPlatformFile::GetPakSignatureFile](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/PakFile/FPakPlatformFile/GetPakSignatureFile) — missing or invalid pak signature handling.
+- [Epic Games: FChunkDownloader](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Plugins/ChunkDownloader/FChunkDownloader) — dated manifest, cache-version validation, download, and mount lifecycle evidence.
+- [Epic Games: BuildPatchServices::EVerifyMode](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/BuildPatchServices/BuildPatchServices__EVerifyMode) — UE 5.8 full-versus-touched and SHA-versus-file-size verification scope.
+- [Epic Games: BuildPatchServices::EVerifyError](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/BuildPatchServices/BuildPatchServices__EVerifyError?lang=en-US) — missing, open, hash, and file-size verification failure classes.
+- [Epic Games: Saving and Loading Your Game](https://dev.epicgames.com/documentation/en-us/unreal-engine/saving-and-loading-your-game-in-unreal-engine) — project-defined SaveGame state, slots, loading, and platform-dependent persistence.
+- [Epic Games: ULocalPlayerSaveGame](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Engine/ULocalPlayerSaveGame) — UE 5.8 game-specific data versions and lifecycle hooks for local-player save state.
+- [Epic Games: Updating Projects to Newer Versions of Unreal Engine](https://dev.epicgames.com/documentation/en-us/unreal-engine/updating-projects-to-newer-versions-of-unreal-engine?lang=en-US) — copy-first project conversion and the risk of irreversible data loss; this is separate from user-save migration.
 
 Additional current context:
 

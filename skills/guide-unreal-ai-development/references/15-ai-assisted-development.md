@@ -4,7 +4,21 @@
 
 Use AI agents as bounded development participants whose reasoning, mutations, evidence, and approvals remain inspectable and recoverable.
 
+## Decision contrast: Agent agreement is not independent outcome evidence
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** Several agents report successful local operations while the user's whole-world view still lacks a coherent experience.
+
+**Choice and reason.** Give the review role the intended outcome, raw comparable evidence, and the freedom to identify the wrong problem scale. Reopen macro design when local fixes do not affect the failure; agreement and tool receipts cannot override the visible result.
+
+**When the choice changes.** A known local defect can still be repaired within its bounded contract. Independent review adds value when it tests a real disputed claim, not when more agents repeat the builder explanation or ritualize every edit.
+
+**Smallest useful test.** Inspect an ordinary whole-system view and a player route without revealing a desired verdict. Ask which hypothesis the next action tests and stop an unproductive loop within its declared budget.
+
 ## Intent
+
+The observed [sparse-world failure](../../analyze-unreal-development-cases/references/16-case-studies.md#investigation-note-local-verification-without-a-convincing-whole-world) is a case of locally verified work failing the requested whole-world result. It motivates testing problem selection and priority, while leaving the proposed recovery and any causal claim about a Handbook revision unverified.
 
 Gain speed and coverage without allowing automation confidence, Tool success, hidden context, or self-approval to replace professional engineering judgment.
 
@@ -13,6 +27,14 @@ Gain speed and coverage without allowing automation confidence, Tool success, hi
 Define each agent's objective, allowed reads and mutations, decision authority, stop conditions, required evidence, and escalation boundary. Separate builder, read-only evaluator, and final approver when independence matters. Keep human approval for destructive, external, high-risk, legal, financial, security, or policy-sensitive actions.
 
 ## Context and constraints
+
+### Retrieve cases by mechanism and test transfer
+
+Provide the relevant decision contrast, the closest retained case, its evidence class, and the differences from the current request. Let the agent explain which relationship transfers and what condition would reverse its recommendation. Similar asset names, scenery, or tool stacks are weak grounds for analogy. If no case fits, a small reversible experiment is more honest than invented precedent.
+
+Do not respond to every failure by appending another mandatory instruction. Inspect whether the existing principle was retrieved, understood, prioritized, and tested against the user outcome. Clarify, integrate, or retire redundant guidance where justified while preserving safety and promotion responsibilities. Repeated agreement among agents is not evidence that a hypothesis improved the result.
+
+Evaluate unfamiliar tasks under comparable context and resource budgets, with neutral review of responses and changed-context alternatives. The [judgment evaluation](../../validate-unreal-production/references/judgment-evaluation.md) distinguishes calibration from held-out transfer and document validation from demonstrated improvement. Case retrieval and a persuasive explanation remain preparation until the relevant outcome is observed.
 
 Provide goals, project state, requirements, assumptions, constraints, success criteria, and production concerns. Prefer project-owned durable knowledge for naming, folders, ownership, setup, and canonical workflows. Avoid fixed Tool inventories when runtime discovery can provide them.
 

@@ -7,6 +7,12 @@ description: Design or review Unreal gameplay architecture, including Gameplay F
 
 Design responsibilities and data flow before choosing classes, Blueprints, or C++ implementations.
 
+## First priority: contextual judgment from cases
+
+Apply the [first Handbook principle](../reason-about-unreal-development/references/00-philosophy.md#learn-judgment-from-cases-first) before selecting implementation or adding procedure. Start with the relevant chapter's decision contrast and, when useful, a retained evidence-backed case. Focus on gameplay consequence, authority, state, and lifecycle. Explain the mechanism that transfers, a context difference that could change the choice, and the smallest discriminating test.
+
+Keep this reasoning in the existing brief or review record. Do not add a new gate, mandatory literature search, or form to a routine task. Constructed teaching scenarios are not production evidence; existing source, safety, authorization, and promotion requirements remain in force. If a local repair cannot address the observed failure, reopen the diagnosis at the appropriate scale.
+
 ## Load the Handbook chapter
 
 Read [03-gameplay-architecture.md](references/03-gameplay-architecture.md) before designing or reviewing the system. Apply its ownership, lifecycle, authority, persistence, networking, and validation boundaries rather than reducing the request to framework-class selection.

@@ -3,6 +3,7 @@
 ## Contents
 
 - [Purpose](#purpose)
+- [Decision contrast](#decision-contrast-an-asset-role-is-more-specific-than-its-catalog-name)
 - [Intent](#intent)
 - [When to use](#when-to-use)
 - [When NOT to use](#when-not-to-use)
@@ -22,7 +23,21 @@
 
 Give Unreal content explicit ownership, dependency direction, provenance, lifecycle, and reuse boundaries so projects can source, integrate, migrate, cook, collaborate, and distribute safely.
 
+## Decision contrast: An asset role is more specific than its catalog name
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A cliff mesh looks suitable in a catalog thumbnail, but the new scene needs a freestanding landmark seen from every side.
+
+**Choice and reason.** Inspect the role-critical silhouette, back, underside, contact, and material in a small trial. A source designed to join a cliff may need a different orientation, a complementary source, local authoring, or replacement for the freestanding role.
+
+**When the choice changes.** The same mesh may remain suitable when its open side is deliberately enclosed in a cliff assembly. Do not reject an entire pack or mandate custom modeling because one role was mismatched.
+
+**Smallest useful test.** Check the actual source from the required player and reverse directions before broad placement. Compare total adaptation cost and dependencies with a different candidate; ownership and availability do not settle suitability.
+
 ## Intent
+
+The retained [meadow source-capability case](../../analyze-unreal-development-cases/references/16-case-studies.md#case-recovering-a-meadow-through-source-capability-and-coupled-ground-cover) provides observed examples of a role mismatch and scoped source replacement. Its Editor-level result does not establish clean-project reuse, wind, packaging, or target-platform cost; use those limits when transferring the decision.
 
 Treat assets as versioned production data rather than convenient files. Make their source, owner, consumers, dependencies, allowed mutations, acquisition authority, licensing evidence, intended use, and promotion state discoverable.
 

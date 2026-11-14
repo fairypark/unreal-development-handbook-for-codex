@@ -4,6 +4,18 @@
 
 Define stable responsibilities, boundaries, dependencies, and lifecycles so Unreal systems can evolve without hidden coupling or escalating maintenance cost.
 
+## Decision contrast: Separate responsibility where change actually propagates
+
+**Evidence class:** constructed teaching scenario; no measured production outcome is claimed.
+
+**Situation.** A small single-session prototype and a reusable multi-mode game both need to display and update an objective.
+
+**Choice and reason.** A local owner can be sufficient for the disposable prototype. Shared objective state with several lifetimes and consumers needs an explicit authority and narrow interfaces so that changing a widget does not redefine progression or persistence.
+
+**When the choice changes.** A subsystem for every temporary object increases indirection and debugging cost. Conversely, copying a convenient level-local owner into a persistent or networked feature hides lifecycle and authority problems.
+
+**Smallest useful test.** Trace one objective from creation through level change, UI replacement, completion, and reload as applicable. Choose the smallest boundary that keeps the required state and consumers correct.
+
 ## Intent
 
 Make it possible to answer who owns a decision, where state lives, how data moves, when objects exist, what may depend on what, and how the system fails and recovers.
