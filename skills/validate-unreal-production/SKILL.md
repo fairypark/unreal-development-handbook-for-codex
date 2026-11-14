@@ -21,7 +21,7 @@ Keep this reasoning in the existing brief or review record. Do not add a new gat
 - Also read [13-production-pipeline.md](references/13-production-pipeline.md) for builds, cooking, packaging, deployment, distribution, or operational recovery.
 - Also read [14-team-collaboration-source-control.md](references/14-team-collaboration-source-control.md) for ownership, review, integration, handoff, asset conflicts, or source control.
 - For a study of how readers apply the handbook, use the [judgment exercises and assessment guide](references/judgment-evaluation.md) or its [Korean edition](references/judgment-evaluation.ko.md).
-- For a UE 5.9 adoption review, compare the [5.8 cases and MegaJam Preview findings](references/13-production-pipeline.md#ue-59-megajam-preview) with the target project's evidence. The [Korean review](references/ue-5-9-preview.ko.md) includes the outstanding checks.
+- For a UE 5.9 adoption review, compare the [5.8 cases and MegaJam Preview findings](references/13-production-pipeline.md#ue-59-megajam-preview) with the target project's evidence. The [Korean review](references/ue-5-9-preview.ko.md) pairs the project observations with their remaining limits.
 
 ## Prepare Korean user-review versions
 
